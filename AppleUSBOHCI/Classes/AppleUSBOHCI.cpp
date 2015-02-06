@@ -397,7 +397,7 @@ AppleUSBOHCI::UIMInitialize(IOService * provider)
 			err = _hccaBuffer->prepare();
 			if (err)
 			{
-				USBError(1, "AppleUSBOHCI[%p]::UIMInitialize - _hccaBuffer->prepare failed with status(%p)", this, (void*)err);
+				USBError(1, "AppleUSBOHCI[%p]::UIMInitialize - _hccaBuffer->prepare failed with status(%p)", this, (void*)(UInt64)err);
 				break;
 			}
 			
@@ -406,7 +406,7 @@ AppleUSBOHCI::UIMInitialize(IOService * provider)
 			err = dmaCommand->setMemoryDescriptor(_hccaBuffer);
 			if (err)
 			{
-				USBError(1, "AppleUSBOHCI[%p]::UIMInitialize - setMemoryDescriptor returned err (%p)", this, (void*)err);
+				USBError(1, "AppleUSBOHCI[%p]::UIMInitialize - setMemoryDescriptor returned err (%p)", this, (void*)(UInt64)err);
 				break;
 			}
 			
@@ -418,7 +418,7 @@ AppleUSBOHCI::UIMInitialize(IOService * provider)
 			err = dmaCommand->gen32IOVMSegments(&offset, &segments, &numSegments);
 			if (err || (numSegments != 1) || (segments.fLength != kHCCAsize))
 			{
-				USBError(1, "AppleUSBOHCI[%p]::UIMInitialize - could not generate segments err (%p) numSegments (%d) fLength (%d)", this, (void*)err, (int)numSegments, (int)segments.fLength);
+				USBError(1, "AppleUSBOHCI[%p]::UIMInitialize - could not generate segments err (%p) numSegments (%d) fLength (%d)", this, (void*)(UInt64)err, (int)numSegments, (int)segments.fLength);
 				dmaCommand->clearMemoryDescriptor();
 				err = err ? err : kIOReturnInternalError;
 				break;
@@ -1196,7 +1196,7 @@ AppleUSBOHCI::RemoveTDs(AppleOHCIEndpointDescriptorPtr pED, bool clearToggle)
     if (GetEDType(pED) == kOHCIEDFormatGeneralTD)
     {
         //process and deallocate GTD's
-        pCurrentTD = (AppleOHCIGeneralTransferDescriptorPtr) (USBToHostLong(pED->pShared->tdQueueHeadPtr) & kOHCIHeadPMask);
+        pCurrentTD = (AppleOHCIGeneralTransferDescriptorPtr)(UInt64)(USBToHostLong(pED->pShared->tdQueueHeadPtr) & kOHCIHeadPMask);
         pCurrentTD = AppleUSBOHCIgtdMemoryBlock::GetGTDFromPhysical((IOPhysicalAddress) pCurrentTD);
 		
         lastTD = (AppleOHCIGeneralTransferDescriptorPtr) pED->pLogicalTailP;

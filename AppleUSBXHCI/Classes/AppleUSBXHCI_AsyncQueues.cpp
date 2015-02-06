@@ -1067,14 +1067,14 @@ AppleXHCIAsyncEndpoint::Complete(IOReturn status)
                     
                     
                     _xhciUIM->_UIMDiagnostics.totalBytes += done;
-                    if( (gUSBStackDebugFlags & kUSBEnableErrorLogMask) != 0)
+                    /*if( (gUSBStackDebugFlags & kUSBEnableErrorLogMask) != 0)
                     {
                         // Only do per port count if error log mask is set
                         // Its a rather involved operation
                         int port;
                         port = pDoneATD->_endpoint->_xhciUIM->getRootPortNumber(pDoneATD->_endpoint->_ring->slotID)-1;
                         pDoneATD->_endpoint->_xhciUIM->_UIMDiagnostics.portCounts[port].totalBytes += done;
-                    }
+                    }*/
 
                     _xhciUIM->Complete(completion, status, (UInt32)shortfall);
                     pDoneATD->shortfall = 0;

@@ -190,9 +190,9 @@
 		3E99F0CF152B6A1D00F97A0C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED3F25204F3CD99001BF1E8 /* Security.framework */; };
 		3E99F115152B7A7600F97A0C /* usbtracer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 301DB0930EF8920B009BF777 /* usbtracer */; };
 		3E99F116152B7C8100F97A0C /* reenumerate in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EB33C211330EAF700688D55 /* reenumerate */; };
-		3E99F119152B7D5600F97A0C /* reenumerate in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EB33C211330EAF700688D55 /* reenumerate */; };
-		3E99F11A152B7DA700F97A0C /* KLog.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EAF8B180B5D42870029974F /* KLog.kext */; };
-		3E99F11B152B7DA700F97A0C /* usbtracer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 301DB0930EF8920B009BF777 /* usbtracer */; };
+		3E99F119152B7D5600F97A0C /* reenumerate in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EB33C211330EAF700688D55 /* reenumerate */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		3E99F11A152B7DA700F97A0C /* KLog.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EAF8B180B5D42870029974F /* KLog.kext */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		3E99F11B152B7DA700F97A0C /* usbtracer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 301DB0930EF8920B009BF777 /* usbtracer */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		3E9EABF90F545CE000522032 /* libutil.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9EABF80F545CE000522032 /* libutil.dylib */; };
 		3EA78B2615504B7F003BD04D /* USB Prober.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E99F0D6152B6A1D00F97A0C /* USB Prober.app */; };
 		3EAF89BE0B5D42860029974F /* IOUSBRootHubDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 0179BA3DFFBA18947F000001 /* IOUSBRootHubDevice.h */; settings = {ATTRIBUTES = (); }; };
@@ -336,16 +336,16 @@
 		3EAF8B0D0B5D42870029974F /* KLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E03401704F5D97A00AA223D /* KLog.cpp */; };
 		3EAF8B0E0B5D42870029974F /* KLogClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E03401904F5D97A00AA223D /* KLogClient.cpp */; };
 		3EAF8B100B5D42870029974F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E03401D04F5D97A00AA223D /* InfoPlist.strings */; };
-		3EAF8B8E0B5D42870029974F /* AppleUSBEHCI.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EAF8A630B5D42860029974F /* AppleUSBEHCI.kext */; };
-		3EAF8B8F0B5D42870029974F /* AppleUSBOHCI.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EAF8A410B5D42860029974F /* AppleUSBOHCI.kext */; };
-		3EAF8B900B5D42870029974F /* AppleUSBOpticalMouse.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EAF8ABA0B5D42870029974F /* AppleUSBOpticalMouse.kext */; };
-		3EAF8B910B5D42870029974F /* AppleUSBHub.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EAF8A910B5D42860029974F /* AppleUSBHub.kext */; };
-		3EAF8B920B5D42870029974F /* IOUSBCompositeDriver.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EAF8AC80B5D42870029974F /* IOUSBCompositeDriver.kext */; };
-		3EAF8B930B5D42870029974F /* AppleUSBMergeNub.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EAF8AAB0B5D42860029974F /* AppleUSBMergeNub.kext */; };
-		3EAF8B940B5D42870029974F /* IOUSBHIDDriverSafeBoot.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EAF8A9D0B5D42860029974F /* IOUSBHIDDriverSafeBoot.kext */; };
-		3EAF8B950B5D42870029974F /* IOUSBHIDDriver.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EAF8AD60B5D42870029974F /* IOUSBHIDDriver.kext */; };
-		3EAF8B960B5D42870029974F /* AppleUSBUHCI.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EAF8A7F0B5D42860029974F /* AppleUSBUHCI.kext */; };
-		3EAF8B970B5D42870029974F /* IOUSBUserClient.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EAF8AE70B5D42870029974F /* IOUSBUserClient.kext */; };
+		3EAF8B8E0B5D42870029974F /* AppleUSBEHCI.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EAF8A630B5D42860029974F /* AppleUSBEHCI.kext */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		3EAF8B8F0B5D42870029974F /* AppleUSBOHCI.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EAF8A410B5D42860029974F /* AppleUSBOHCI.kext */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		3EAF8B900B5D42870029974F /* AppleUSBOpticalMouse.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EAF8ABA0B5D42870029974F /* AppleUSBOpticalMouse.kext */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		3EAF8B910B5D42870029974F /* AppleUSBHub.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EAF8A910B5D42860029974F /* AppleUSBHub.kext */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		3EAF8B920B5D42870029974F /* IOUSBCompositeDriver.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EAF8AC80B5D42870029974F /* IOUSBCompositeDriver.kext */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		3EAF8B930B5D42870029974F /* AppleUSBMergeNub.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EAF8AAB0B5D42860029974F /* AppleUSBMergeNub.kext */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		3EAF8B940B5D42870029974F /* IOUSBHIDDriverSafeBoot.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EAF8A9D0B5D42860029974F /* IOUSBHIDDriverSafeBoot.kext */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		3EAF8B950B5D42870029974F /* IOUSBHIDDriver.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EAF8AD60B5D42870029974F /* IOUSBHIDDriver.kext */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		3EAF8B960B5D42870029974F /* AppleUSBUHCI.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EAF8A7F0B5D42860029974F /* AppleUSBUHCI.kext */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		3EAF8B970B5D42870029974F /* IOUSBUserClient.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EAF8AE70B5D42870029974F /* IOUSBUserClient.kext */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		3EB2F3AB0B8B5EE500738927 /* IOUSBUserClient.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 01E71EE4FFB8799F7F000001 /* IOUSBUserClient.h */; };
 		3EB2F3B90B8B5F3D00738927 /* IOUSBHubPolicyMaker.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EFE2F1C0B8B58ED00013454 /* IOUSBHubPolicyMaker.h */; };
 		3EB33C1B1330EAF700688D55 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED3F25104F3CD99001BF1E8 /* IOKit.framework */; };
@@ -373,7 +373,7 @@
 		3ED3855C16012986008B5CB3 /* AppleUSBXHCIUIM.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ED3854816012986008B5CB3 /* AppleUSBXHCIUIM.h */; };
 		3ED3855D16012986008B5CB3 /* XHCI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ED3854916012986008B5CB3 /* XHCI.h */; };
 		3ED3855F16012986008B5CB3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3ED3854D16012986008B5CB3 /* InfoPlist.strings */; };
-		3EE8224B16013050001F9A03 /* AppleUSBXHCI.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EBFD16A1601264400B85B43 /* AppleUSBXHCI.kext */; };
+		3EE8224B16013050001F9A03 /* AppleUSBXHCI.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EBFD16A1601264400B85B43 /* AppleUSBXHCI.kext */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		3EEFE80A14D7A2ED007E8A42 /* USBTracepoints.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 30C722520EF0558F003C241F /* USBTracepoints.h */; };
 		3EF4FF9D0B5D9B9E007E541E /* IOUSBFamilyInfoPlist.pch in Headers */ = {isa = PBXBuildFile; fileRef = 3EF4FF9C0B5D9B9E007E541E /* IOUSBFamilyInfoPlist.pch */; };
 		3EF545571642DF6200E53A75 /* AppleUSBDiagnostics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF545561642DF6200E53A75 /* AppleUSBDiagnostics.cpp */; };
@@ -2548,7 +2548,7 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0610;
 			};
 			buildConfigurationList = DDDEF9CB08886330003A7655 /* Build configuration list for PBXProject "IOUSBFamily" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -3408,7 +3408,6 @@
 		3E61613109B900A600D5A55A /* kprintf */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 5.6.1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3433,12 +3432,16 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)",
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = "";
 				INSTALL_GROUP = wheel;
 				INSTALL_OWNER = root;
 				MODULE_VERSION = 5.6.1;
 				RUN_CLANG_STATIC_ANALYZER = NO;
-				SDKROOT = macosx10.8;
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -3708,7 +3711,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Deployment;
@@ -3717,7 +3720,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Logging;
@@ -3726,7 +3729,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = kprintf;
@@ -3765,7 +3768,6 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
 				KERNEL_EXTENSION = YES;
 				KERNEL_MODULE = YES;
 				MODULE_IOKIT = YES;
@@ -3774,7 +3776,6 @@
 				OTHER_CFLAGS = (
 					"-W",
 					"-Wall",
-					"-fno-default-inline",
 				);
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
@@ -3802,7 +3803,6 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
 				KERNEL_EXTENSION = YES;
 				KERNEL_MODULE = YES;
 				MODULE_IOKIT = YES;
@@ -3811,7 +3811,6 @@
 				OTHER_CFLAGS = (
 					"-W",
 					"-Wall",
-					"-fno-default-inline",
 				);
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
@@ -3844,7 +3843,6 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
 				KERNEL_EXTENSION = YES;
 				KERNEL_MODULE = YES;
 				MODULE_IOKIT = YES;
@@ -3853,7 +3851,6 @@
 				OTHER_CFLAGS = (
 					"-W",
 					"-Wall",
-					"-fno-default-inline",
 				);
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
@@ -5395,7 +5392,6 @@
 		DDDEF9CC08886330003A7655 /* Logging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 5.6.1;
@@ -5419,13 +5415,17 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)",
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = "DEBUG_LEVEL=6";
 				INSTALL_GROUP = wheel;
 				INSTALL_OWNER = root;
 				MODULE_VERSION = 5.6.1;
 				OTHER_CFLAGS = "-DDEBUG_LEVEL=5";
 				RUN_CLANG_STATIC_ANALYZER = NO;
-				SDKROOT = macosx10.8;
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -5436,7 +5436,6 @@
 		DDDEF9CD08886330003A7655 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 5.6.1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -5461,12 +5460,16 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)",
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = "";
 				INSTALL_GROUP = wheel;
 				INSTALL_OWNER = root;
 				MODULE_VERSION = 5.6.1;
 				RUN_CLANG_STATIC_ANALYZER = NO;
-				SDKROOT = macosx10.8;
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";

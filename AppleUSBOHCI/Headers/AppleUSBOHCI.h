@@ -232,6 +232,7 @@ protected:
 
     // SleepFix key value
  	bool									_sleepFix;
+    bool                                    _hasPCIPwrMgmt;
 
     static void 				InterruptHandler(OSObject *owner,  IOInterruptEventSource * source, int count);
     static bool 				PrimaryInterruptFilter(OSObject *owner, IOFilterInterruptEventSource *source);

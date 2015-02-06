@@ -1761,7 +1761,7 @@ IOUSBControllerV2::WriteStream(UInt32 streamID, IOMemoryDescriptor *buffer, USBD
     return err;
 }
 
-OSMetaClassDefineReservedUnused(IOUSBControllerV2,  26);
+OSMetaClassDefineReservedUsed(IOUSBControllerV2,  26);
 OSMetaClassDefineReservedUnused(IOUSBControllerV2,  27);
 OSMetaClassDefineReservedUnused(IOUSBControllerV2,  28);
 OSMetaClassDefineReservedUnused(IOUSBControllerV2,  29);

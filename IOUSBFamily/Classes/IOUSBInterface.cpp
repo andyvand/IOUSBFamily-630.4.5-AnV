@@ -2535,9 +2535,9 @@ IOUSBInterface::GetEndpointPropertiesV3(IOUSBEndpointProperties *properties)
 }
 
 
-OSMetaClassDefineReservedUnused(IOUSBInterface,  7);
-OSMetaClassDefineReservedUnused(IOUSBInterface,  8);
-OSMetaClassDefineReservedUnused(IOUSBInterface,  9);
+OSMetaClassDefineReservedUsed(IOUSBInterface,  7);
+OSMetaClassDefineReservedUsed(IOUSBInterface,  8);
+OSMetaClassDefineReservedUsed(IOUSBInterface,  9);
 OSMetaClassDefineReservedUnused(IOUSBInterface,  10);
 OSMetaClassDefineReservedUnused(IOUSBInterface,  11);
 OSMetaClassDefineReservedUnused(IOUSBInterface,  12);

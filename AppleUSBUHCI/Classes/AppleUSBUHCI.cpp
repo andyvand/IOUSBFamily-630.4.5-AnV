@@ -362,7 +362,8 @@ AppleUSBUHCI::HardwareInit(void)
 
 }
 
-
+#define GetErrata64Bits GetErrataBits
+#define kUHCIIsochMaxBusStall 10000
 
 IOReturn
 AppleUSBUHCI::UIMInitialize(IOService * provider)
@@ -566,6 +567,7 @@ AppleUSBUHCI::message( UInt32 type, IOService * provider,  void * argument )
     return super::message( type, provider, argument );
 }
 
+#define kErratakUHCIResetAfterBabble 1
 
 void 
 AppleUSBUHCI::SetVendorInfo(void)

@@ -377,6 +377,7 @@ typedef struct IOUSBLowLatencyIsocCompletion {
 #define kIOUSBDeviceCountExceeded							iokit_usb_err(0x45)									// 0xe0004045  The device cannot be enumerated because the controller cannot support more devices
 #define kIOUSBStreamsNotSupported							iokit_usb_err(0x44)                                 // 0xe0004044  The request cannot be completed because the XHCI controller does not support streams
 #define kIOUSBInvalidSSEndpoint								iokit_usb_err(0x43)									// 0xe0004043  An endpoint found in a SuperSpeed device is invalid (usually because there is no Endpoint Companion Descriptor)
+#define kIOUSBTooManyTransactionsPending                    iokit_usb_err(0x42)
 
 /*!
 @defined IOUSBFamily hardware error codes

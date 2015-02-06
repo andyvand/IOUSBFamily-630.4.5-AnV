@@ -87,6 +87,7 @@ struct ringStruct
 	bool                        beingReturned;
 	bool                        beingDeleted;
     bool						needsDoorbell;
+    bool                        needsSetTRDQPtr;
 };
 typedef struct ringStruct
 XHCIRing,
@@ -274,6 +275,58 @@ class AppleUSBXHCI : public IOUSBControllerV3
 protected:
     // AnV - Stopping code
     bool                                    stopPending;
+
+    // AnV - Added missing code
+    enum{
+        kDiagMaxPorts = 32,
+        kXHCIMaxCompletionCodes = 256,
+        kXHCILinkStates = 16
+    };
+    typedef struct
+    {
+        UInt32          errorCount;
+        UInt32          xhciErrorCode[kXHCIMaxCompletionCodes];
+        UInt64			prevBytes;
+        UInt64			totalBytes;
+        UInt32			timeouts;
+        UInt32			prevTimeouts;
+        UInt32			prevResets;
+        UInt32			resets;
+        UInt32			enable;
+        UInt32			suspend;
+        UInt32			resume;
+        UInt32			warmReset;
+        UInt32			linkState[kXHCILinkStates];
+        UInt32			power;
+        UInt32			u1Timeout;
+        UInt32			u2Timeout;
+        UInt32			remoteWakeMask;
+    } UIMPortDiagnostics;
+
+    typedef struct
+    {
+        UInt64			lastNanosec;
+        UInt64			totalBytes;
+        UInt64			prevBytes;
+        UInt32			acessCount;
+        UInt32			totalErrors;
+        UInt32			prevErrors;
+        UInt32			timeouts;
+        UInt32			prevTimeouts;
+        UInt32			resets;
+        UInt32			prevResets;
+        UInt32			recoveredErrors;
+        UInt32			prevRecoveredErrors;
+        UInt32			errors2Strikes;
+        UInt32			prevErrors2Strikes;
+        UInt32			errors3Strikes;
+        UInt32			prevErrors3Strikes;
+        UInt32			controlBulkTxOut;
+        SInt32          numPorts;
+        UIMPortDiagnostics portCounts[kDiagMaxPorts];
+        UInt32          overFlowPortErrorCount;
+    } UIMDiagnostics;
+    UIMDiagnostics                          _UIMDiagnostics;
 
     IOMemoryMap								*_deviceBase;
     UInt16									_vendorID;
@@ -1038,6 +1091,9 @@ public:
     
     const char *TRBType(int type);
     const char *EndpointState(int state);
+
+    // Root hub port
+    UInt16 getRootPortNumber(UInt8 slot);
 
 	// Isoc management
 	IOReturn		ScavengeAnIsocTD(AppleXHCIIsochEndpoint *pEP,  AppleXHCIIsochTransferDescriptor *pTD);

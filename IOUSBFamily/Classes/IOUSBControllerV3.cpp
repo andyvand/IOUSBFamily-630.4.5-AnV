@@ -409,7 +409,7 @@ IOUSBControllerV3::powerStateWillChangeTo ( IOPMPowerFlags capabilities, unsigne
 	return super::powerStateWillChangeTo(capabilities, stateNumber, whatDevice);
 }
 
-
+#define kTPControllersetPowerState kTPControllerPowerState
 
 IOReturn
 IOUSBControllerV3::setPowerState( unsigned long powerStateOrdinal, IOService* whatDevice )
@@ -2063,8 +2063,8 @@ IOUSBControllerV3::AbortPipe(UInt32 streamID, USBDeviceAddress address, Endpoint
 		}
 	}
 
-	return _commandGate->runAction(DoAbortStream, (void *)streamID, (void *)(UInt32) address,
-								   (void *)(UInt32) endpoint->number, (void *)(UInt32) endpoint->direction);
+	return _commandGate->runAction(DoAbortStream, (void *)(UInt64)streamID, (void *)(UInt64) address,
+								   (void *)(UInt64) endpoint->number, (void *)(UInt64) endpoint->direction);
 
 }
 

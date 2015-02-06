@@ -97,6 +97,7 @@ class IOUSBControllerV3 : public IOUSBControllerV2
 		unsigned long					_numPowerStates;				// how many power states do I support (defaults to kUSBNumDefaultPowerStates)
 		IOPMPowerState					*_myPowerStates;				// my power state array (allocated on the fly)
 		IOPCIDevice						*_device;						// my PCI device
+        UInt64                          _errataBits;
 
 		// root hub support
 	    IOTimerEventSource					*_rootHubTimer;				// timer which fires at the rate of the root hub interrupt endpoint
@@ -121,6 +122,7 @@ class IOUSBControllerV3 : public IOUSBControllerV2
 			UInt8					_rootHubPortsSSStartRange;
 			IOUSBRootHubInterruptTransaction	_outstandingSSRHTrans[4];		// Transactions for the Root Hub.  We need 2, one for the current transaction and one for the next.  This is declared as 4 for binary compatibility
             bool					_wakingFromStandby;					// t when waking from S4 stanby
+            UInt64                  _errata64Bits;
 		};
 		V3ExpansionData *_v3ExpansionData;
 

@@ -34,7 +34,7 @@
 #include "../../IOUSBFamily/Headers/IOUSBRootHubDevice.h"
 
 #include "AppleUSBEHCI.h"
-#include "AppleUSBEHCIDiagnostics.h"
+//#include "AppleUSBEHCIDiagnostics.h"
 #include "AppleEHCIedMemoryBlock.h"
 #include "AppleEHCItdMemoryBlock.h"
 #include "AppleEHCIitdMemoryBlock.h"
@@ -526,12 +526,11 @@ AppleUSBEHCI::UIMInitialize(IOService * provider)
 		if (!gotTimerThreads)
 			continue;
 		
-		
-		_diagnostics = AppleUSBEHCIDiagnostics::createDiagnostics(this);
+		/*_diagnostics = AppleUSBEHCIDiagnostics::createDiagnostics(this);
 		if( _diagnostics )
 		{
 			setProperty( "Statistics", _diagnostics );
-		}
+		}*/
 		
 		_uimInitialized = true;
 
