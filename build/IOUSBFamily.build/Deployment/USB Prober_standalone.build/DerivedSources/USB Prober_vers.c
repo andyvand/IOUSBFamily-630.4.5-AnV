@@ -1,0 +1,1 @@
+ const unsigned char USB_ProberVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:USB Prober  PROJECT:IOUSBFamily-5.6.1" "\n"; const double USB_ProberVersionNumber __attribute__ ((used)) = (double)5.6;

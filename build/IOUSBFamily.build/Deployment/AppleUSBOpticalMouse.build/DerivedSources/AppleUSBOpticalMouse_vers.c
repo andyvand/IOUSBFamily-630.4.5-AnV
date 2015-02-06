@@ -1,0 +1,1 @@
+ const unsigned char AppleUSBOpticalMouseVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:AppleUSBOpticalMouse  PROJECT:IOUSBFamily-5.6.1" "\n"; const double AppleUSBOpticalMouseVersionNumber __attribute__ ((used)) = (double)5.6;

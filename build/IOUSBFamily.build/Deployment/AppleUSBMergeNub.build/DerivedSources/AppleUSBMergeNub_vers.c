@@ -1,0 +1,1 @@
+ const unsigned char AppleUSBMergeNubVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:AppleUSBMergeNub  PROJECT:IOUSBFamily-5.6.1" "\n"; const double AppleUSBMergeNubVersionNumber __attribute__ ((used)) = (double)5.6;

@@ -1,0 +1,1 @@
+ const unsigned char AppleUSBHubVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:AppleUSBHub  PROJECT:IOUSBFamily-5.6.1" "\n"; const double AppleUSBHubVersionNumber __attribute__ ((used)) = (double)5.6;

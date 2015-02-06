@@ -1,0 +1,1 @@
+ const unsigned char reenumerateVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:reenumerate  PROJECT:IOUSBFamily-5.6.1" "\n"; const double reenumerateVersionNumber __attribute__ ((used)) = (double)5.6;
