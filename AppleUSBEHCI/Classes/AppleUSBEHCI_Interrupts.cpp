@@ -24,6 +24,11 @@
 #include <libkern/OSByteOrder.h>
 
 #include "../../IOUSBFamily/Headers/IOUSBLog.h"
+#include "../../IOUSBFamily/Headers/USBSpec.h"
+#include "../../IOUSBFamily/Headers/USB.h"
+#include "../../IOUSBFamily/Headers/IOUSBControllerV2.h"
+#include "../../IOUSBFamily/Headers/IOUSBInterface.h"
+#include "../../IOUSBFamily/Headers/IOUSBDevice.h"
 #include "../../IOUSBFamily/Headers/IOUSBHubPolicyMaker.h"
 #include "../../IOUSBFamily/Headers/IOUSBRootHubDevice.h"
 
@@ -138,7 +143,7 @@ AppleUSBEHCI::PollInterrupts(IOUSBCompletionAction safeAction)
 void
 AppleUSBEHCI::InterruptHandler(OSObject *owner, IOInterruptEventSource * /*source*/, int /*count*/)
 {
-    register 	AppleUSBEHCI		*controller = (AppleUSBEHCI *) owner;
+    AppleUSBEHCI		*controller = (AppleUSBEHCI *) owner;
     static 	Boolean 		emitted;
 	
     if (!controller || controller->isInactive() || !controller->_controllerAvailable)
@@ -171,7 +176,7 @@ bool
 AppleUSBEHCI::PrimaryInterruptFilter(OSObject *owner, IOFilterInterruptEventSource *source)
 {
 #pragma unused (source)
-    register AppleUSBEHCI	*controller = (AppleUSBEHCI *)owner;
+     AppleUSBEHCI	*controller = (AppleUSBEHCI *)owner;
     bool					result = true;
 	
 //	USBTrace_Start( kUSBTEHCIInterrupts, kTPEHCIInterruptsPrimaryInterruptFilter, (uintptr_t)controller );
@@ -204,8 +209,8 @@ bool
 AppleUSBEHCI::FilterInterrupt(int index)
 {
 #pragma unused (index)
-    register UInt32			activeInterrupts;
-    register UInt32			enabledInterrupts;
+     UInt32			activeInterrupts;
+     UInt32			enabledInterrupts;
 	UInt32					statusClearBits = 0;
     Boolean					needSignal = false;
     uint64_t				timeStamp;

@@ -28,6 +28,14 @@
 #include "AppleUSBUHCI.h"
 #include "USBTracepoints.h"
 
+#ifndef AbsoluteTime_to_scalar
+#define AbsoluteTime_to_scalar(x)	(*(uint64_t *)(x))
+#endif
+
+#ifndef SUB_ABSOLUTETIME
+#define SUB_ABSOLUTETIME(t1, t2) (AbsoluteTime_to_scalar(t1) -=	AbsoluteTime_to_scalar(t2))
+#endif
+
 /* Convert USBLog to use kprintf debugging */
 #ifndef APPLEUHCIROOTHUB_USE_KPRINTF
 #define APPLEUHCIROOTHUB_USE_KPRINTF 0
@@ -274,12 +282,12 @@ AppleUSBUHCI::GetRootHubPortStatus(IOUSBHubPortStatus *status, UInt16 port)
 	// check to see if suspend is on and connect is off - if so, clear the suspend
 	if ((p_status & kUHCI_PORTSC_SUSPEND) && !(p_status & kUHCI_PORTSC_CCS))
 	{
-		USBLog(7, "AppleUSBUHCI[%p]::GetRootHubPortStatus - clearing suspend on disconnected port status[%p]", this, (void*)p_status);
+		USBLog(7, "AppleUSBUHCI[%p]::GetRootHubPortStatus - clearing suspend on disconnected port status[%p]", this, (void*)(UInt64)p_status);
 		p_status &= kUHCI_PORTSC_MASK;				// make sure not to clear the change bits
 		p_status &= ~kUHCI_PORTSC_SUSPEND;			// clear suspend
 		WritePortStatus(port, p_status);			// this does a sync and a delay
 		p_status = ReadPortStatus(port);			// reload
-		USBLog(7, "AppleUSBUHCI[%p]::GetRootHubPortStatus - new port status[%p]", this, (void*)p_status);
+		USBLog(7, "AppleUSBUHCI[%p]::GetRootHubPortStatus - new port status[%p]", this, (void*)(UInt64)p_status);
 	}
     
     /* Power is always turned on. */
@@ -823,7 +831,7 @@ AppleUSBUHCI::RHCheckStatus()
 						EnsureUsability();
 					USBLog(3, "AppleUSBUHCI[%p]::RHCheckStatus - resume detected on port %d, spawning thread to resume", this, i+1);
 					_rhPortBeingResumed[i] = true;
-					thread_call_enter1(_rhResumePortTimerThread[i], (void*)(i+1));
+					thread_call_enter1(_rhResumePortTimerThread[i], (void*)(UInt64)(i+1));
 				}
 				else
 				{
@@ -845,8 +853,8 @@ AppleUSBUHCI::RHEnablePort(int port, bool enable)
     port--; // convert 1-based to 0-based.
     value = ReadPortStatus(port) & kUHCI_PORTSC_MASK;
     USBLog(3, "AppleUSBUHCI[%p]::RHEnablePort port: %d enable: %d PortSC: 0x%x", this, port+1, enable, value);
-	USBLog(2, "AppleUSBUHCI[%p]::RHEnablePort  (CMD:%p STS:%p INTR:%p PORTSC1:%p PORTSC2:%p FRBASEADDR:%p FRNUM:%p, SOFMOD:%p, ConfigCMD:%p)", this, (void*)ioRead16(kUHCI_CMD), (void*)ioRead16(kUHCI_STS), (void*)ioRead16(kUHCI_INTR), (void*)ioRead16(kUHCI_PORTSC1), (void*)ioRead16(kUHCI_PORTSC2), (void*)ioRead32(kUHCI_FRBASEADDR),  
-		   (void*)ioRead32(kUHCI_FRNUM),  (void*)ioRead32(kUHCI_SOFMOD), (void*)_device->configRead16(kIOPCIConfigCommand));
+	USBLog(2, "AppleUSBUHCI[%p]::RHEnablePort  (CMD:%p STS:%p INTR:%p PORTSC1:%p PORTSC2:%p FRBASEADDR:%p FRNUM:%p, SOFMOD:%p, ConfigCMD:%p)", this, (void*)(UInt64)ioRead16(kUHCI_CMD), (void*)(UInt64)ioRead16(kUHCI_STS), (void*)(UInt64)ioRead16(kUHCI_INTR), (void*)(UInt64)ioRead16(kUHCI_PORTSC1), (void*)(UInt64)ioRead16(kUHCI_PORTSC2), (void*)(UInt64)ioRead32(kUHCI_FRBASEADDR),
+		   (void*)(UInt64)ioRead32(kUHCI_FRNUM),  (void*)(UInt64)ioRead32(kUHCI_SOFMOD), (void*)(UInt64)_device->configRead16(kIOPCIConfigCommand));
    if (enable) 
 	{
         value |= kUHCI_PORTSC_PED;
@@ -899,7 +907,7 @@ AppleUSBUHCI::RHSuspendPort(int port, bool suspended)
     // Always enable the port also.
     value |= kUHCI_PORTSC_PED;
 
-    USBLog(5, "AppleUSBUHCI[%p]::RHSuspendPort writing (%p) to port control", this, (void*)value);
+    USBLog(5, "AppleUSBUHCI[%p]::RHSuspendPort writing (%p) to port control", this, (void*)(UInt64)value);
     
     WritePortStatus(port, value);
     
@@ -916,7 +924,7 @@ AppleUSBUHCI::RHSuspendPort(int port, bool suspended)
         // Resuming
 		USBLog(5,"AppleUSBUHCI[%p]::RHSuspendPort - resuming port %d, calling out to timer", this, (int)port+1);
 		_rhPortBeingResumed[port] = true;
-		thread_call_enter1(_rhResumePortTimerThread[port], (void*)(port+1));
+		thread_call_enter1(_rhResumePortTimerThread[port], (void*)(UInt64)(port+1));
     }
 
     USBLog(5, "AppleUSBUHCI[%p]::RHSuspendPort %d (%s) calling UIMRootHubStatusChange", this, port+1, suspended ? "SUSPEND" : "RESUME");
@@ -1129,7 +1137,7 @@ AppleUSBUHCI::RHResumePortTimer(UInt32 port)
 	USBLog(6, "AppleUSBUHCI[%p]::RHResumePortTimer - Host controller resume about to finish - calling EnsureUsability", this);
 	EnsureUsability();		
 
-	_commandGate->runAction(RHResumePortCompletionEntry, (void*)port);
+	_commandGate->runAction(RHResumePortCompletionEntry, (void*)(UInt64)port);
 }
 
 
@@ -1172,7 +1180,7 @@ AppleUSBUHCI::RHResumePortCompletion(UInt32 port)
 	
 	value = ReadPortStatus(port-1) & kUHCI_PORTSC_MASK;
 	value &= ~(kUHCI_PORTSC_RD | kUHCI_PORTSC_SUSPEND);
-	USBLog(5, "AppleUSBUHCI[%p]: de-asserting resume signal by writing (%p)", this, (void*)value);
+	USBLog(5, "AppleUSBUHCI[%p]: de-asserting resume signal by writing (%p)", this, (void*)(UInt64)value);
 	WritePortStatus(port-1, value);
 	IOSync();
 	IOSleep(2);																	// allow it to kick in

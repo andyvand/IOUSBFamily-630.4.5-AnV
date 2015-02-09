@@ -24,18 +24,22 @@
 #ifndef _IOKIT_IOUSBWORKLOOP_H
 #define _IOKIT_IOUSBWORKLOOP_H
 
+#ifdef KERNEL
 #include <IOKit/IOWorkLoop.h>
 
-/*!
- @class IOUSBWorkLoop
- @abstract Subclass of IOWorkloop that allows the USB stack to more finely control sleep and wake.
- */
+/*
+ class IOUSBWorkLoop
+ Subclass of IOWorkloop that allows the USB stack to more finely control sleep and wake.
+*/
 class IOUSBWorkLoop : public IOWorkLoop
 {    
     OSDeclareDefaultStructors(IOUSBWorkLoop)
     
 protected:
     void *			fSleepToken;
+#ifndef __OPEN_SOURCE__
+	lck_grp_t *		fLockGroup;
+#endif
 	bool init ( const char * controllerLocation );
 	void free ( void );
 	
@@ -59,6 +63,9 @@ public:
     int SleepWithTimeout(void *token, UInt64 timeout);
     void Wakeup(void *token, bool oneThread);
 };
+#else /* ! KERNEL */
+#include <IOKit/IOKitLib.h>
+#endif /* KERNEL */
 
 #endif
 

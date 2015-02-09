@@ -579,8 +579,8 @@ IOUSBController::start( IOService * provider )
 		{
 			USBLog(2, "%s[%p]::start - calling CreateRootHubDevice for non V3 controller", getName(), this);
 			err = CreateRootHubDevice( _provider, &_rootHubDevice );
-			USBLog(2, "%s[%p]::start - called CreateRootHubDevice - return(%p)", getName(), this, (void*)err);
-			USBTrace( kUSBTController, kTPControllerStart, (uintptr_t)this, err, 0, 0);
+			USBLog(2, "%s[%p]::start - called CreateRootHubDevice - return(%p)", getName(), this, (void*)(UInt64)err);
+			USBTrace( kUSBTController, kTPControllerStart, (uintptr_t)(UInt64)this, err, 0, 0);
 			if ( err != kIOReturnSuccess )
 				break;
 			makeUsable();
@@ -902,13 +902,13 @@ IOUSBController::ControlTransaction(IOUSBCommand *command)
 				
 				if (dmaCommand && memDesc)
 				{
-					USBLog(2, "IOUSBController(%s)[%p]::ControlTransaction - phase 1 err(%p) - clearing memory descriptor (%p) from buffer dmaCommand (%p)", getName(), this, (void*)err, memDesc, dmaCommand);
+					USBLog(2, "IOUSBController(%s)[%p]::ControlTransaction - phase 1 err(%p) - clearing memory descriptor (%p) from buffer dmaCommand (%p)", getName(), this, (void*)(UInt64)err, memDesc, dmaCommand);
 					dmaCommand->clearMemoryDescriptor();
 				}
 				if (bufferCommand->GetSelector() == DEVICE_REQUEST)
 				{
 					// this is a memory descriptor that i created, so i need to release it
-					USBLog(2, "IOUSBController(%s)[%p]::ControlTransaction - phase 1 err(%p) - completing and releasing BufferMemoryDescriptor(%p)", getName(), this, (void*)err, bufferCommand->GetBufferMemoryDescriptor());
+					USBLog(2, "IOUSBController(%s)[%p]::ControlTransaction - phase 1 err(%p) - completing and releasing BufferMemoryDescriptor(%p)", getName(), this, (void*)(UInt64)err, bufferCommand->GetBufferMemoryDescriptor());
 					bufferCommand->GetBufferMemoryDescriptor()->complete();
 					bufferCommand->GetBufferMemoryDescriptor()->release();
 				}
@@ -921,10 +921,10 @@ IOUSBController::ControlTransaction(IOUSBCommand *command)
 				
 				if (dmaCommand && memDesc)
 				{
-					USBLog(2, "IOUSBController(%s)[%p]::ControlTransaction - phase 1 err(%p) - clearing memory descriptor (%p) from dmaCommand (%p)", getName(), this, (void*)err, memDesc, dmaCommand);
+					USBLog(2, "IOUSBController(%s)[%p]::ControlTransaction - phase 1 err(%p) - clearing memory descriptor (%p) from dmaCommand (%p)", getName(), this, (void*)(UInt64)err, memDesc, dmaCommand);
 					dmaCommand->clearMemoryDescriptor();
 				}
-				USBLog(2, "IOUSBController(%s)[%p]::ControlTransaction - phase 1 err(%p) - releasing RequestMemoryDescriptor(%p)", getName(), this, (void*)err, command->GetRequestMemoryDescriptor());
+				USBLog(2, "IOUSBController(%s)[%p]::ControlTransaction - phase 1 err(%p) - releasing RequestMemoryDescriptor(%p)", getName(), this, (void*)(UInt64)err, command->GetRequestMemoryDescriptor());
 				command->GetRequestMemoryDescriptor()->release();
 				command->SetRequestMemoryDescriptor(NULL);
 			}
@@ -1514,7 +1514,7 @@ IOUSBController::DoIsocTransfer(OSObject *owner, void *cmd, void *, void *, void
 			if (kr != THREAD_AWAKENED)
 			{
 				USBLog(3,"%s[%p]::DoIsocTransfer(Isoc) woke up: commandSleep returned with a result of:  %d (%s)", controller->getName(), controller, kr, kr == THREAD_INTERRUPTED ? "THREAD_INTERRUPTED" : "THREAD_XXXX");
-				IOReturn ret = commandGate->runAction(DoAbortEP, (void *)(UInt32) command->GetAddress(), (void *)(UInt32) command->GetEndpoint(), (void *)(UInt32) command->GetDirection());
+				IOReturn ret = commandGate->runAction(DoAbortEP, (void *)(UInt64)command->GetAddress(), (void *)(UInt64)command->GetEndpoint(), (void *)(UInt64) command->GetDirection());
 				USBLog(6,"%s[%p]::DoIsocTransfer DoAbortEP returned:  0x%x", controller->getName(), controller, ret);
 				ret = kIOReturnSuccess;
 			}
@@ -1641,7 +1641,7 @@ IOUSBController::IsocCompletionHandler(OSObject *target, void *parameter, IORetu
     IOUSBIsocCompletion completion = command->GetCompletion();
     if (completion.action)  
 	{
-		USBLog(7, "%s[%p]::IsocCompletionHandler - calling completion [%p], target (%p) parameter (%p) status (%p) pFrames (%p)", me->getName(), me, completion.action, completion.target, completion.parameter, (void*)status, pFrames);
+		USBLog(7, "%s[%p]::IsocCompletionHandler - calling completion [%p], target (%p) parameter (%p) status (%p) pFrames (%p)", me->getName(), me, completion.action, completion.target, completion.parameter, (void*)(UInt64)status, pFrames);
 		USBTrace( kUSBTController, kTPCompletionCall, (uintptr_t)me, (uintptr_t)(completion.action), status, 1 );
 		(*completion.action)(completion.target, completion.parameter, status, pFrames);
 	}
@@ -1760,7 +1760,7 @@ IOUSBController::DoIOTransfer(OSObject *owner, void *cmd, void *, void *, void *
 					if (err != THREAD_AWAKENED)
 					{
 						USBLog(3,"%s[%p]::DoIOTransfer(Interrupt) woke up: commandSleep returned with a result of:  %d (%s)", controller->getName(), controller, err, err == THREAD_INTERRUPTED ? "THREAD_INTERRUPTED" : "THREAD_XXXX");
-						IOReturn ret = commandGate->runAction(DoAbortEP, (void *)(UInt32) command->GetAddress(), (void *)(UInt32) command->GetEndpoint(), (void *)(UInt32) command->GetDirection());
+						IOReturn ret = commandGate->runAction(DoAbortEP, (void *)(UInt64) command->GetAddress(), (void *)(UInt64)command->GetEndpoint(), (void *)(UInt64)command->GetDirection());
 						USBLog(7,"%s[%p]::DoIOTransfer(Interrupt) DoAbortEP returned:  0x%x", controller->getName(), controller, ret);
 						ret = kIOReturnSuccess;
 					}
@@ -1785,7 +1785,7 @@ IOUSBController::DoIOTransfer(OSObject *owner, void *cmd, void *, void *, void *
 					if (err != THREAD_AWAKENED)
 					{
 						USBLog(3,"%s[%p]::DoIOTransfer(Bulk) woke up: commandSleep returned with a result of:  %d (%s)", controller->getName(), controller, err, err == THREAD_INTERRUPTED ? "THREAD_INTERRUPTED" : "THREAD_XXXX");
-						IOReturn ret = commandGate->runAction(DoAbortEP, (void *)(UInt32) command->GetAddress(), (void *)(UInt32) command->GetEndpoint(), (void *)(UInt32) command->GetDirection());
+						IOReturn ret = commandGate->runAction(DoAbortEP, (void *)(UInt64) command->GetAddress(), (void *)(UInt64)command->GetEndpoint(), (void *)(UInt64)command->GetDirection());
 						USBLog(7,"%s[%p]::DoIOTransfer(Bulk) DoAbortEP returned:  0x%x", controller->getName(), controller, ret);
 						ret = kIOReturnSuccess;
 					}
@@ -1914,7 +1914,7 @@ IOUSBController::DoControlTransfer(OSObject *owner, void *arg0, void *arg1, void
 			if (kr != THREAD_AWAKENED)
 			{
 				USBLog(3,"%s[%p]::DoControlTransfer woke up: commandSleep for returned with a result of:  %d (%s)", controller->getName(), controller, kr, kr == THREAD_INTERRUPTED ? "THREAD_INTERRUPTED" : "THREAD_XXXX");
-				IOReturn ret = commandGate->runAction(DoAbortEP, (void *)(UInt32) command->GetAddress(), (void *)(UInt32) command->GetEndpoint(), (void *)(UInt32) command->GetDirection());
+				IOReturn ret = commandGate->runAction(DoAbortEP, (void *)(UInt64)command->GetAddress(), (void *)(UInt64)command->GetEndpoint(), (void *)(UInt64)command->GetDirection());
 				USBLog(7,"%s[%p]::DoControlTransfer DoAbortEP returned:  0x%x", controller->getName(), controller, ret);
 				ret = kIOReturnSuccess;
 			}
@@ -2087,7 +2087,7 @@ IOUSBController::ProtectedDevZeroLock(OSObject *target, void* lock, void* arg2, 
 					break;
 					
 				default:
-					USBLog(3,"%s[%p]::ProtectedDevZeroLock woke up with unknown status %p",  me->getName(), me, (void*)kr);
+					USBLog(3,"%s[%p]::ProtectedDevZeroLock woke up with unknown status %p",  me->getName(), me, (void*)(UInt64)kr);
 					USBTrace( kUSBTController, kTPDevZeroLock, (uintptr_t)me, (uintptr_t)me->_devZeroLock, 0, 6 );
 					retVal = kIOReturnNotPermitted;
 			}
@@ -2926,7 +2926,7 @@ IOUSBController::DeviceRequest(IOUSBDevRequest *request, IOUSBCompletion *comple
 		err = requestMemoryDescriptor->prepare();
 		if (err != kIOReturnSuccess)
 		{
-			USBError(1,"%s[%p]::DeviceRequest - err (%p) trying to prepare request memory descriptor", getName(), this, (void*)err);
+			USBError(1,"%s[%p]::DeviceRequest - err (%p) trying to prepare request memory descriptor", getName(), this, (void*)(UInt64)err);
 			requestMemoryDescriptor->release();
 			requestMemoryDescriptor = NULL;
 			break;
@@ -2945,7 +2945,7 @@ IOUSBController::DeviceRequest(IOUSBDevRequest *request, IOUSBCompletion *comple
 			err = bufferMemoryDescriptor->prepare();
 			if (err != kIOReturnSuccess)
 			{
-				USBError(1,"%s[%p]::DeviceRequest - err (%p) trying to prepare bufferMemoryDescriptor", getName(), this, (void*)err);
+				USBError(1,"%s[%p]::DeviceRequest - err (%p) trying to prepare bufferMemoryDescriptor", getName(), this, (void*)(UInt64)err);
 				bufferMemoryDescriptor->release();
 				bufferMemoryDescriptor = NULL;
 				break;
@@ -3029,7 +3029,7 @@ IOUSBController::DeviceRequest(IOUSBDevRequest *request, IOUSBCompletion *comple
 		err = dmaCommand->setMemoryDescriptor(requestMemoryDescriptor);
 		if (err != kIOReturnSuccess)
 		{
-			USBError(1,"%s[%p]::DeviceRequest - err (%p) setting memory descriptor (%p) into dmaCommand (%p)", getName(), this, (void*)err, requestMemoryDescriptor, dmaCommand);
+			USBError(1,"%s[%p]::DeviceRequest - err (%p) setting memory descriptor (%p) into dmaCommand (%p)", getName(), this, (void*)(UInt64)err, requestMemoryDescriptor, dmaCommand);
 			break;
 		}
 		command->SetRequestMemoryDescriptor(requestMemoryDescriptor);
@@ -3058,7 +3058,7 @@ IOUSBController::DeviceRequest(IOUSBDevRequest *request, IOUSBCompletion *comple
 			err = bufferDMACommand->setMemoryDescriptor(bufferMemoryDescriptor);
 			if (err)
 			{
-				USBError(1,"%s[%p]::DeviceRequest - err (%p) setting buffer memory descriptor (%p) into buffer dmaCommand (%p)", getName(), this, (void*)err, bufferMemoryDescriptor, bufferDMACommand);
+				USBError(1,"%s[%p]::DeviceRequest - err (%p) setting buffer memory descriptor (%p) into buffer dmaCommand (%p)", getName(), this, (void*)(UInt64)err, bufferMemoryDescriptor, bufferDMACommand);
 				break;
 			}
 			bufferCommand->SetBufferMemoryDescriptor(bufferMemoryDescriptor);
@@ -3161,26 +3161,26 @@ IOUSBController::DeviceRequest(IOUSBDevRequest *request, IOUSBCompletion *comple
 		// these things will normally be done in the completion routines, so the logs are fairly low here
 		if (dmaCommand && dmaCommand->getMemoryDescriptor())
 		{
-			USBLog(2,"%s[%p]::DeviceRequest - clearing dmaCommand (err %p)", getName(), this, (void*)err);
+			USBLog(2,"%s[%p]::DeviceRequest - clearing dmaCommand (err %p)", getName(), this, (void*)(UInt64)err);
 			dmaCommand->clearMemoryDescriptor();
 		}
 		
 		if (bufferDMACommand && bufferDMACommand->getMemoryDescriptor())
 		{
-			USBLog(2,"%s[%p]::DeviceRequest - clearing bufferDMACommand (err %p)", getName(), this, (void*)err);
+			USBLog(2,"%s[%p]::DeviceRequest - clearing bufferDMACommand (err %p)", getName(), this, (void*)(UInt64)err);
 			bufferDMACommand->clearMemoryDescriptor();
 		}
 		
 		if (bufferMemoryDescriptor)
 		{
-			USBLog(2,"%s[%p]::DeviceRequest - clearing bufferMemoryDescriptor (err %p)", getName(), this, (void*)err);
+			USBLog(2,"%s[%p]::DeviceRequest - clearing bufferMemoryDescriptor (err %p)", getName(), this, (void*)(UInt64)err);
 			bufferMemoryDescriptor->complete();
 			bufferMemoryDescriptor->release();
 		}
 		
 		if (requestMemoryDescriptor)
 		{
-			USBLog(2,"%s[%p]::DeviceRequest - clearing requestMemoryDescriptor (err %p)", getName(), this, (void*)err);
+			USBLog(2,"%s[%p]::DeviceRequest - clearing requestMemoryDescriptor (err %p)", getName(), this, (void*)(UInt64)err);
 			requestMemoryDescriptor->complete();
 			requestMemoryDescriptor->release();
 		}
@@ -3253,7 +3253,7 @@ IOUSBController::DeviceRequest(IOUSBDevRequestDesc *request, IOUSBCompletion *co
 		err = requestMemoryDescriptor->prepare();
 		if (err != kIOReturnSuccess)
 		{
-			USBError(1,"%s[%p]::DeviceRequest - err (%p) trying to prepare request memory descriptor", getName(), this, (void*)err);
+			USBError(1,"%s[%p]::DeviceRequest - err (%p) trying to prepare request memory descriptor", getName(), this, (void*)(UInt64)err);
 			requestMemoryDescriptor->release();
 			requestMemoryDescriptor = NULL;
 			break;
@@ -3337,7 +3337,7 @@ IOUSBController::DeviceRequest(IOUSBDevRequestDesc *request, IOUSBCompletion *co
 		err = dmaCommand->setMemoryDescriptor(requestMemoryDescriptor);
 		if (err != kIOReturnSuccess)
 		{
-			USBError(1,"%s[%p]::DeviceRequest - err (%p) setting memory descriptor (%p) into dmaCommand (%p)", getName(), this, (void*)err, requestMemoryDescriptor, dmaCommand);
+			USBError(1,"%s[%p]::DeviceRequest - err (%p) setting memory descriptor (%p) into dmaCommand (%p)", getName(), this, (void*)(UInt64)err, requestMemoryDescriptor, dmaCommand);
 			break;
 		}
 		command->SetRequestMemoryDescriptor(requestMemoryDescriptor);
@@ -3380,7 +3380,7 @@ IOUSBController::DeviceRequest(IOUSBDevRequestDesc *request, IOUSBCompletion *co
 			err = bufferDMACommand->setMemoryDescriptor(request->pData);
 			if (err)
 			{
-				USBError(1,"%s[%p]::DeviceRequest - err (%p) setting buffer memory descriptor (%p) into buffer dmaCommand (%p)", getName(), this, (void*)err, request->pData, bufferDMACommand);
+				USBError(1,"%s[%p]::DeviceRequest - err (%p) setting buffer memory descriptor (%p) into buffer dmaCommand (%p)", getName(), this, (void*)(UInt64)err, request->pData, bufferDMACommand);
 				break;
 			}
 		}
@@ -4444,8 +4444,7 @@ IOUSBController::ExpressCardPort( IORegistryEntry* provider )
 	return(portNum);
 }
 
-
-bool       
+bool
 IOUSBController::GetInternalHubErrataBits(IORegistryEntry * provider, UInt32 portnum, UInt32 locationID, UInt32 *errataBits)
 {
     IOACPIPlatformDevice *	acpiDevice;

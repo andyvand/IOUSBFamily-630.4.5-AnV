@@ -24,17 +24,15 @@
 #ifndef _IOKIT_IOUSBINTERFACE_H
 #define _IOKIT_IOUSBINTERFACE_H
 
-#include <IOKit/IOService.h>
+#if 0
 #include <libkern/c++/OSData.h>
-
-#include "../../IOUSBFamily/Headers/USB.h"
-#include "../../IOUSBFamily/Headers/IOUSBNub.h"
-#include "../../IOUSBFamily/Headers/IOUSBDevice.h"
-
-#ifndef USB_EPP
-#define USB_EPP 1
 #endif
-	
+
+#include "USBSpec.h"
+#include "USB.h"
+#include "IOUSBNub.h"
+#include "IOUSBDevice.h"
+
 /*!
     @class IOUSBInterface
     @abstract The object representing an interface of a device on the USB bus.
@@ -74,6 +72,7 @@ protected:
 		IOLock *			_pipeObjLock;				// Deprecated
 		OSSet *				_openClients;
         UInt32              _RememberedStreams[kUSBMaxPipes];
+        bool                _openPending;
     };
     ExpansionData * _expansionData;
 
@@ -123,6 +122,7 @@ public:
     virtual void		stop(IOService *  provider);
     virtual bool		terminate( IOOptionBits options = 0 );
     virtual void		free();	
+	virtual void		joinPMtree ( IOService * driver );
 
 	// IOUSBInterface class methods
 	virtual bool		init(	const IOUSBConfigurationDescriptor *cfDesc,

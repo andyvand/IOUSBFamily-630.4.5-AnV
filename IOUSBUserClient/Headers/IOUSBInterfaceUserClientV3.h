@@ -50,7 +50,7 @@ private:
     struct IOUSBInterfaceUserClientV3ExpansionData
     {
     };
-    IOUSBInterfaceUserClientV3ExpansionData *		fIOUSBInterfaceUserV3ClientExpansionData;
+    IOUSBInterfaceUserClientV3ExpansionData * __unused fIOUSBInterfaceUserV3ClientExpansionData;
 	
 protected:
 	

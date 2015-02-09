@@ -31,6 +31,10 @@ g++ -W -Wall -I/System/Library/Frameworks/System.framework/PrivateHeaders -I/Sys
 //	Includes
 //-----------------------------------------------------------------------------
 
+#ifndef KERNEL_PRIVATE
+#define KERNEL_PRIVATE 1
+#endif /* KERNEL_PRIVATE */
+
 #include <errno.h>
 #include <getopt.h>
 #include <signal.h>
@@ -40,7 +44,10 @@ g++ -W -Wall -I/System/Library/Frameworks/System.framework/PrivateHeaders -I/Sys
 #include <stdint.h>
 #include <string.h>
 #include <unistd.h>
+
+#ifdef _HAVE_LIBUTIL
 #include <libutil.h>
+#endif /* _HAVE_LIBUTIL */
 
 #include <mach/clock_types.h>
 #include <mach/mach_time.h>
@@ -51,22 +58,124 @@ g++ -W -Wall -I/System/Library/Frameworks/System.framework/PrivateHeaders -I/Sys
 #include <sys/time.h>
 #include <sys/wait.h>
 
-#ifndef KERNEL_PRIVATE
-#define KERNEL_PRIVATE
 #include <sys/kdebug.h>
-#undef KERNEL_PRIVATE
-#else
-#include <sys/kdebug.h>
-#endif /*KERNEL_PRIVATE*/
 
+#if 0
 #include <IOKit/scsi/IOSCSIArchitectureModelFamilyDebugging.h>
+#endif /* 0 */
+
 #include <IOKit/scsi/SCSICommandOperationCodes.h>
 
-#include "../IOUSBMassStorageClassTimestamps.h"
+#include "IOUSBMassStorageClassTimestamps.h"
+#include "../IOUSBFamily/Headers/USB.h"
 
-#include <IOKit/usb/USB.h>
+#ifndef kd_buf
+struct kd_buf_t {
+    uint64_t	timestamp;
+    uintptr_t	arg1;
+    uintptr_t	arg2;
+    uintptr_t	arg3;
+    uintptr_t	arg4;
+    uintptr_t	arg5;       /* will hold current thread */
+    uint32_t	debugid;
+#if defined(__LP64__)
+    uint32_t	cpuid;
+    uintptr_t	unused;
+#endif
+};
 
-#define DEBUG 			0
+#define kd_buf struct kd_buf_t
+
+typedef struct {
+    unsigned int	type;
+    unsigned int	value1;
+    unsigned int	value2;
+    unsigned int	value3;
+    unsigned int	value4;
+    
+} kd_regtype;
+
+typedef struct
+{
+    int		nkdbufs;
+    int		nolog;
+    int		flags;
+    int		nkdthreads;
+    int		bufid;
+} kbufinfo_t;
+#endif
+
+#ifndef DEBUG
+#define DEBUG 0
+#endif /* DEBUG */
+
+#ifndef KDBG_INIT
+#define	KDBG_INIT 0x001
+#endif /* KDBG_INIT */
+
+#ifndef	KDBG_NOWRAP
+#define	KDBG_NOWRAP 0x002
+#endif /* KDBG_NOWRAP */
+
+#ifndef	KDBG_FREERUN
+#define	KDBG_FREERUN 0x004
+#endif /* KDBG_FREERUN */
+
+#ifndef KDBG_WRAPPED
+#define	KDBG_WRAPPED 0x008
+#endif /* KDBG_WRAPPED */
+
+#ifndef KDBG_USERFLAGS
+#define	KDBG_USERFLAGS (KDBG_FREERUN|KDBG_NOWRAP|KDBG_INIT)
+#endif /* KDBG_USERFLAGS */
+
+#ifndef KDBG_PIDCHECK
+#define KDBG_PIDCHECK 0x010
+#endif /* KDBG_PIDCHECK */
+
+#ifndef KDBG_MAPINIT
+#define KDBG_MAPINIT 0x020
+#endif /* KDBG_MAPINIT */
+
+#ifndef KDBG_PIDEXCLUDE
+#define KDBG_PIDEXCLUDE 0x040
+#endif /* KDBG_PIDEXCLUDE */
+
+#ifndef KDBG_LOCKINIT
+#define KDBG_LOCKINIT 0x080
+#endif /* KDBG_LOCKINIT */
+
+#ifndef KDBG_LP64
+#define KDBG_LP64 0x100
+#endif /* KDBG_LP64 */
+
+#ifndef KDBG_CLASSTYPE
+#define	KDBG_CLASSTYPE 0x10000
+#endif /* KDBG_CLASSTYPE */
+
+#ifndef KDBG_SUBCLSTYPE
+#define	KDBG_SUBCLSTYPE 0x20000
+#endif /* KDBG_SUBCLSTYPE */
+
+#ifndef KDBG_RANGETYPE
+#define	KDBG_RANGETYPE 0x40000
+#endif /* KDBG_RANGETYPE */
+
+#ifndef	KDBG_TYPENONE
+#define	KDBG_TYPENONE 0x80000
+#endif /* KDBG_TYPENONE */
+
+#ifndef KDBG_CKTYPES
+#define KDBG_CKTYPES 0xF0000
+#endif /* KDBG_CKTYPES */
+
+#ifndef KDBG_TIMESTAMP_MASK
+#if !defined(__LP64__)
+#define KDBG_TIMESTAMP_MASK 0x00ffffffffffffffULL
+#else /* 64 bit */
+#define KDBG_TIMESTAMP_MASK 0xffffffffffffffffULL
+#endif /* 32/64 bit */
+#endif /* KDBG_TIMESTAMP_MASK */
 
 //-----------------------------------------------------------------------------
 //	Structures
@@ -267,14 +376,14 @@ main ( int argc, const char * argv[] )
 	int				error;
 	
 	gProgramName = argv[0];
-	
-	if ( reexec_to_match_kernel ( ) != 0 )
+
+	/*if (reexec_to_match_kernel() != 0)
 	{
 		
 		fprintf ( stderr, "Could not re-execute to match kernel architecture, errno = %d\n", errno );
-		exit ( 1 );
+		exit(1);
 		
-	}
+	}*/
 	
 	if ( geteuid ( ) != 0 )
 	{
@@ -321,7 +430,7 @@ main ( int argc, const char * argv[] )
 	printf ( "gPrintfMask = 0x%08X\n", gPrintfMask );
 	printf ( "gVerbose = %s\n", gVerbose == TRUE ? "True" : "False" );
 	fflush ( stdout );
-#endif
+#endif /* DEBUG */
 	
 	// Set up signal handlers.
 	RegisterSignalHandlers ( );	
@@ -811,7 +920,7 @@ PrintSCSICommand ( void )
 			TRANSFER_LENGTH <<= 8;
 			TRANSFER_LENGTH  |= fullCDB [8];
 			
-			printf ( "kSCSICmd_READ_10, LBA = %p, length = %p\n", ( void * ) LOGICAL_BLOCK_ADDRESS, ( void * ) TRANSFER_LENGTH );
+			printf ( "kSCSICmd_READ_10, LBA = %p, length = %p\n", (void *)(UInt64)LOGICAL_BLOCK_ADDRESS, (void *)(UInt64)TRANSFER_LENGTH );
 			
 		}
 		break;
@@ -834,7 +943,7 @@ PrintSCSICommand ( void )
 			TRANSFER_LENGTH <<= 8;
 			TRANSFER_LENGTH  |= fullCDB [8];
 			
-			printf ( "kSCSICmd_WRITE_10, LBA = %p, length = %p\n", ( void * ) LOGICAL_BLOCK_ADDRESS, ( void * ) TRANSFER_LENGTH );
+			printf ( "kSCSICmd_WRITE_10, LBA = %p, length = %p\n", (void *)(UInt64)LOGICAL_BLOCK_ADDRESS, (void *)(UInt64)TRANSFER_LENGTH );
 			
 		}
 		break;
@@ -916,7 +1025,7 @@ CollectTrace ( void )
 	if ( sysctl ( mib, 3, gTraceBuffer, &needed, NULL, 0 ) < 0 )
 		Quit ( "trace facility failure, KERN_KDREADTR\n" );
 	
-	count = needed;
+	count = (int)needed;
 	
 	if ( bufinfo.flags & KDBG_WRAPPED )
 	{
@@ -1259,7 +1368,7 @@ ParseKernelTracePoint ( kd_buf inTracePoint )
         case kClearEndPointStallCode:
         {
             
-            errorString = StringFromReturnCode ( inTracePoint.arg2 );
+            errorString = StringFromReturnCode ( (int)inTracePoint.arg2 );
             printf ( "[%10p] ClearFeatureEndpointStall status=%s (0x%x), endpoint=%u\n",
                     ( void * ) inTracePoint.arg1, errorString, ( unsigned int ) inTracePoint.arg2, ( unsigned int ) inTracePoint.arg3 );
             
@@ -1269,7 +1378,7 @@ ParseKernelTracePoint ( kd_buf inTracePoint )
         case kGetEndPointStatusCode:
         {
             
-            errorString = StringFromReturnCode ( inTracePoint.arg2 );
+            errorString = StringFromReturnCode ( (int)inTracePoint.arg2 );
             printf ( "[%10p] GetEndpointStatus status=%s (0x%x), endpoint=%u\n",
                     ( void * ) inTracePoint.arg1, errorString, ( unsigned int ) inTracePoint.arg2, ( unsigned int ) inTracePoint.arg3 );
             
@@ -1311,7 +1420,7 @@ ParseKernelTracePoint ( kd_buf inTracePoint )
             
         case kDeviceInformationCode:
         {
-            errorString = StringFromReturnCode ( inTracePoint.arg2 );
+            errorString = StringFromReturnCode ( (int)inTracePoint.arg2 );
             printf ( "[%10p] Device Information status=%s DeviceInformation=0x%x\n", ( void * ) inTracePoint.arg1,
                     errorString, ( int ) inTracePoint.arg3 );
         }
@@ -1320,7 +1429,7 @@ ParseKernelTracePoint ( kd_buf inTracePoint )
         case kSuspendPortCode:
         {
             
-            errorString = StringFromReturnCode ( inTracePoint.arg2 );
+            errorString = StringFromReturnCode ( (int)inTracePoint.arg2 );
             if ( inTracePoint.arg3 == 0 )
             {
                 printf ( "[%10p] Suspend Port (RESUME) returned status=%s\n", ( void * ) inTracePoint.arg1, errorString );
@@ -1372,9 +1481,9 @@ ParseKernelTracePoint ( kd_buf inTracePoint )
         case kCBISendSCSICommandReturnedCode:
         {
             
-            errorString = StringFromReturnCode ( inTracePoint.arg3 );
+            errorString = StringFromReturnCode ( (unsigned int)(UInt64)inTracePoint.arg3 );
             printf ( "[%10p] CBI - SCSI Task %p was sent with status %s (0x%x)\n",
-                    ( void * ) inTracePoint.arg1, ( void * ) inTracePoint.arg2, errorString, ( unsigned int ) inTracePoint.arg3 );
+                    (void *)(UInt64)inTracePoint.arg1, (void *)(UInt64)inTracePoint.arg2, errorString, (unsigned int)(UInt64)inTracePoint.arg3 );
             
         }
         break;
@@ -1408,7 +1517,7 @@ ParseKernelTracePoint ( kd_buf inTracePoint )
         case kBOSendSCSICommandReturnedCode:
         {
             
-            errorString = StringFromReturnCode ( inTracePoint.arg3 );
+            errorString = StringFromReturnCode ( (int)inTracePoint.arg3 );
             printf ( "[%10p] BO - SCSI Task %p was sent with status %s (0x%x)\n",
                     ( void * ) inTracePoint.arg1, ( void * ) inTracePoint.arg2, errorString, ( unsigned int ) inTracePoint.arg3 );
             
@@ -1426,8 +1535,7 @@ ParseKernelTracePoint ( kd_buf inTracePoint )
 			
         case kBOGetMaxLUNReturnedCode:
         {
-            
-            errorString = StringFromReturnCode ( inTracePoint.arg2 );
+            errorString = StringFromReturnCode ( (int) inTracePoint.arg2 );
             printf ( "[%10p] BO - GetMaxLUN returned: %s (0x%x), triedReset=%u, MaxLun: %d\n",
                     ( void * ) inTracePoint.arg1, errorString, ( unsigned int ) inTracePoint.arg2, ( unsigned int ) inTracePoint.arg4, ( unsigned int ) inTracePoint.arg3 );
             
@@ -1446,7 +1554,7 @@ ParseKernelTracePoint ( kd_buf inTracePoint )
         case kBOCBWBulkOutWriteResultCode:
         {
             
-            errorString = StringFromReturnCode ( inTracePoint.arg2 );
+            errorString = StringFromReturnCode ( (int)inTracePoint.arg2 );
             printf ( "[%10p] BO - Request %p, LUN: %u, Bulk-Out Write Status: %s (0x%x)\n",
                     ( void * ) inTracePoint.arg1, ( void * ) inTracePoint.arg4, ( unsigned int ) inTracePoint.arg3, errorString, ( unsigned int ) inTracePoint.arg2 );
             
@@ -1471,11 +1579,10 @@ ParseKernelTracePoint ( kd_buf inTracePoint )
 			
         case kBOCompletionCode:
         {
-            
-            errorString = StringFromReturnCode ( inTracePoint.arg2 );
+            errorString = StringFromReturnCode ( (unsigned int)(UInt64)inTracePoint.arg2 );
             printf ( "[%10p] BO - Completion, State: %s, Status: %s (0x%x), for Request: %p\n",
-                    ( void * ) inTracePoint.arg1, kBulkOnlyStateNames [ (int) inTracePoint.arg3 ],
-                    errorString, ( unsigned int ) inTracePoint.arg2, ( void * ) inTracePoint.arg4 );
+                    ( void * )(UInt64)inTracePoint.arg1, kBulkOnlyStateNames [ (int)(UInt64)inTracePoint.arg3 ],
+                    errorString, (unsigned int)(UInt64)inTracePoint.arg2, (void *)(UInt64)inTracePoint.arg4 );
             
         }
         break;
@@ -1485,7 +1592,7 @@ ParseKernelTracePoint ( kd_buf inTracePoint )
             
             if ( ( type >= 0x05278800 ) && ( type <= 0x05278BFC ) )
             {
-                printf ( "[%10p] ??? - UNEXPECTED USB TRACE POINT - %p\n", ( void * ) inTracePoint.arg1, ( void * ) type );
+                printf ( "[%10p] ??? - UNEXPECTED USB TRACE POINT - %p\n", (void *)(UInt64)inTracePoint.arg1, (void *)(UInt64)type );
             }
             
         }
@@ -1588,96 +1695,96 @@ static const char *
 StringFromReturnCode ( unsigned int returnCode )
 {
 	
-	const char *	string = "UNKNOWN";
-	unsigned int	i;
+	const char *string = "UNKNOWN";
+	unsigned int i;
 	
-	static ReturnCodeSpec	sReturnCodeSpecs[] =
+	static ReturnCodeSpec sReturnCodeSpecs[] =
 	{
 		
 		//	USB Return codes
-		{ kIOUSBUnknownPipeErr,								"kIOUSBUnknownPipeErr" },
-		{ kIOUSBTooManyPipesErr,							"kIOUSBTooManyPipesErr" },
-		{ kIOUSBNoAsyncPortErr,								"kIOUSBNoAsyncPortErr" },
-		{ kIOUSBNotEnoughPipesErr,							"kIOUSBNotEnoughPipesErr" },
-		{ kIOUSBNotEnoughPowerErr,							"kIOUSBNotEnoughPowerErr" },
-		{ kIOUSBEndpointNotFound,							"kIOUSBEndpointNotFound" },
-		{ kIOUSBConfigNotFound,								"kIOUSBConfigNotFound" },
-		{ kIOUSBTransactionTimeout,							"kIOUSBTransactionTimeout" },
-		{ kIOUSBTransactionReturned,						"kIOUSBTransactionReturned" },
-		{ kIOUSBPipeStalled,								"kIOUSBPipeStalled" },
-		{ kIOUSBInterfaceNotFound,							"kIOUSBInterfaceNotFound" },
-		{ kIOUSBLowLatencyBufferNotPreviouslyAllocated,		"kIOUSBLowLatencyBufferNotPreviouslyAllocated" },
-		{ kIOUSBLowLatencyFrameListNotPreviouslyAllocated,	"kIOUSBLowLatencyFrameListNotPreviouslyAllocated" },
-		{ kIOUSBHighSpeedSplitError,						"kIOUSBHighSpeedSplitError" },
-		{ kIOUSBSyncRequestOnWLThread,						"kIOUSBSyncRequestOnWLThread" },
-		{ kIOUSBDeviceNotHighSpeed,							"kIOUSBDeviceNotHighSpeed" },
-		{ kIOUSBLinkErr,									"kIOUSBLinkErr" },
-		{ kIOUSBNotSent2Err,								"kIOUSBNotSent2Err" },
-		{ kIOUSBNotSent1Err,								"kIOUSBNotSent1Err" },
-		{ kIOUSBBufferUnderrunErr,							"kIOUSBBufferUnderrunErr" },
-		{ kIOUSBBufferOverrunErr,							"kIOUSBBufferOverrunErr" },
-		{ kIOUSBReserved2Err,								"kIOUSBReserved2Err" },
-		{ kIOUSBReserved1Err,								"kIOUSBReserved1Err" },
-		{ kIOUSBWrongPIDErr,								"kIOUSBWrongPIDErr" },
-		{ kIOUSBPIDCheckErr,								"kIOUSBPIDCheckErr" },
-		{ kIOUSBDataToggleErr,								"kIOUSBDataToggleErr" },
-		{ kIOUSBBitstufErr,									"kIOUSBBitstufErr" },
-		{ kIOUSBCRCErr,										"kIOUSBCRCErr" },
+		{ (unsigned int)kIOUSBUnknownPipeErr,								"kIOUSBUnknownPipeErr" },
+		{ (unsigned int)kIOUSBTooManyPipesErr,							"kIOUSBTooManyPipesErr" },
+		{ (unsigned int)kIOUSBNoAsyncPortErr,								"kIOUSBNoAsyncPortErr" },
+		{ (unsigned int)kIOUSBNotEnoughPipesErr,							"kIOUSBNotEnoughPipesErr" },
+		{ (unsigned int)kIOUSBNotEnoughPowerErr,							"kIOUSBNotEnoughPowerErr" },
+		{ (unsigned int)kIOUSBEndpointNotFound,							"kIOUSBEndpointNotFound" },
+		{ (unsigned int)kIOUSBConfigNotFound,								"kIOUSBConfigNotFound" },
+		{ (unsigned int)kIOUSBTransactionTimeout,							"kIOUSBTransactionTimeout" },
+		{ (unsigned int)kIOUSBTransactionReturned,						"kIOUSBTransactionReturned" },
+		{ (unsigned int)kIOUSBPipeStalled,								"kIOUSBPipeStalled" },
+		{ (unsigned int)kIOUSBInterfaceNotFound,							"kIOUSBInterfaceNotFound" },
+		{ (unsigned int)kIOUSBLowLatencyBufferNotPreviouslyAllocated,		"kIOUSBLowLatencyBufferNotPreviouslyAllocated" },
+		{ (unsigned int)kIOUSBLowLatencyFrameListNotPreviouslyAllocated,	"kIOUSBLowLatencyFrameListNotPreviouslyAllocated" },
+		{ (unsigned int)kIOUSBHighSpeedSplitError,						"kIOUSBHighSpeedSplitError" },
+		{ (unsigned int)kIOUSBSyncRequestOnWLThread,						"kIOUSBSyncRequestOnWLThread" },
+		{ (unsigned int)kIOUSBDeviceNotHighSpeed,							"kIOUSBDeviceNotHighSpeed" },
+		{ (unsigned int)kIOUSBLinkErr,									"kIOUSBLinkErr" },
+		{ (unsigned int)kIOUSBNotSent2Err,								"kIOUSBNotSent2Err" },
+		{ (unsigned int)kIOUSBNotSent1Err,								"kIOUSBNotSent1Err" },
+		{ (unsigned int)kIOUSBBufferUnderrunErr,							"kIOUSBBufferUnderrunErr" },
+		{ (unsigned int)kIOUSBBufferOverrunErr,							"kIOUSBBufferOverrunErr" },
+		{ (unsigned int)kIOUSBReserved2Err,								"kIOUSBReserved2Err" },
+		{ (unsigned int)kIOUSBReserved1Err,								"kIOUSBReserved1Err" },
+		{ (unsigned int)kIOUSBWrongPIDErr,								"kIOUSBWrongPIDErr" },
+		{ (unsigned int)kIOUSBPIDCheckErr,								"kIOUSBPIDCheckErr" },
+		{ (unsigned int)kIOUSBDataToggleErr,								"kIOUSBDataToggleErr" },
+		{ (unsigned int)kIOUSBBitstufErr,									"kIOUSBBitstufErr" },
+		{ (unsigned int)kIOUSBCRCErr,										"kIOUSBCRCErr" },
 		
 		//	IOReturn codes
-		{ kIOReturnSuccess,									"kIOReturnSuccess" },
-		{ kIOReturnError,									"kIOReturnError" },
-		{ kIOReturnNoMemory,								"kIOReturnNoMemory" },
-		{ kIOReturnNoResources,								"kIOReturnNoResources" },
-		{ kIOReturnIPCError,								"kIOReturnIPCError" },
-		{ kIOReturnNoDevice,								"kIOReturnNoDevice" },
-		{ kIOReturnNotPrivileged,							"kIOReturnNotPrivileged" },
-		{ kIOReturnBadArgument,								"kIOReturnBadArgument" },
-		{ kIOReturnLockedRead,								"kIOReturnLockedRead" },
-		{ kIOReturnLockedWrite,								"kIOReturnLockedWrite" },
-		{ kIOReturnExclusiveAccess,							"kIOReturnExclusiveAccess" },
-		{ kIOReturnBadMessageID,							"kIOReturnBadMessageID" },
-		{ kIOReturnUnsupported,								"kIOReturnUnsupported" },
-		{ kIOReturnVMError,									"kIOReturnVMError" },
-		{ kIOReturnInternalError,							"kIOReturnInternalError" },
-		{ kIOReturnIOError,									"kIOReturnIOError" },
-		{ kIOReturnCannotLock,								"kIOReturnCannotLock" },
-		{ kIOReturnNotOpen,									"kIOReturnNotOpen" },
-		{ kIOReturnNotReadable,								"kIOReturnNotReadable" },
-		{ kIOReturnNotWritable,								"kIOReturnNotWritable" },
-		{ kIOReturnNotAligned,								"kIOReturnNotAligned" },
-		{ kIOReturnBadMedia,								"kIOReturnBadMedia" },
-		{ kIOReturnStillOpen,								"kIOReturnStillOpen" },
-		{ kIOReturnRLDError,								"kIOReturnRLDError" },
-		{ kIOReturnDMAError,								"kIOReturnDMAError" },
-		{ kIOReturnBusy,									"kIOReturnBusy" },
-		{ kIOReturnTimeout,									"kIOReturnTimeout" },
-		{ kIOReturnOffline,									"kIOReturnOffline" },
-		{ kIOReturnNotReady,								"kIOReturnNotReady" },
-		{ kIOReturnNotAttached,								"kIOReturnNotAttached" },
-		{ kIOReturnNoChannels,								"kIOReturnNoChannels" },
-		{ kIOReturnNoSpace,									"kIOReturnNoSpace" },
-		{ kIOReturnPortExists,								"kIOReturnPortExists" },
-		{ kIOReturnCannotWire,								"kIOReturnCannotWire" },
-		{ kIOReturnNoInterrupt,								"kIOReturnNoInterrupt" },
-		{ kIOReturnNoFrames,								"kIOReturnNoFrames" },
-		{ kIOReturnMessageTooLarge,							"kIOReturnMessageTooLarge" },
-		{ kIOReturnNotPermitted,							"kIOReturnNotPermitted" },
-		{ kIOReturnNoPower,									"kIOReturnNoPower" },
-		{ kIOReturnNoMedia,									"kIOReturnNoMedia" },
-		{ kIOReturnUnformattedMedia,						"kIOReturnUnformattedMedia" },
-		{ kIOReturnUnsupportedMode,							"kIOReturnUnsupportedMode" },
-		{ kIOReturnUnderrun,								"kIOReturnUnderrun" },
-		{ kIOReturnOverrun,									"kIOReturnOverrun" },
-		{ kIOReturnDeviceError,								"kIOReturnDeviceError" },
-		{ kIOReturnNoCompletion,							"kIOReturnNoCompletion" },
-		{ kIOReturnAborted,									"kIOReturnAborted" },
-		{ kIOReturnNoBandwidth,								"kIOReturnNoBandwidth" },
-		{ kIOReturnNotResponding,							"kIOReturnNotResponding" },
-		{ kIOReturnIsoTooOld,								"kIOReturnIsoTooOld" },
-		{ kIOReturnIsoTooNew,								"kIOReturnIsoTooNew" },
-		{ kIOReturnNotFound,								"kIOReturnNotFound" },
-		{ kIOReturnInvalid,									"kIOReturnInvalid" }
+		{ (unsigned int)kIOReturnSuccess,									"kIOReturnSuccess" },
+		{ (unsigned int)kIOReturnError,									"kIOReturnError" },
+		{ (unsigned int)kIOReturnNoMemory,								"kIOReturnNoMemory" },
+		{ (unsigned int)kIOReturnNoResources,								"kIOReturnNoResources" },
+		{ (unsigned int)kIOReturnIPCError,								"kIOReturnIPCError" },
+		{ (unsigned int)kIOReturnNoDevice,								"kIOReturnNoDevice" },
+		{ (unsigned int)kIOReturnNotPrivileged,							"kIOReturnNotPrivileged" },
+		{ (unsigned int)kIOReturnBadArgument,								"kIOReturnBadArgument" },
+		{ (unsigned int)kIOReturnLockedRead,								"kIOReturnLockedRead" },
+		{ (unsigned int)kIOReturnLockedWrite,								"kIOReturnLockedWrite" },
+		{ (unsigned int)kIOReturnExclusiveAccess,							"kIOReturnExclusiveAccess" },
+		{ (unsigned int)kIOReturnBadMessageID,							"kIOReturnBadMessageID" },
+		{ (unsigned int)kIOReturnUnsupported,								"kIOReturnUnsupported" },
+		{ (unsigned int)kIOReturnVMError,									"kIOReturnVMError" },
+		{ (unsigned int)kIOReturnInternalError,							"kIOReturnInternalError" },
+		{ (unsigned int)kIOReturnIOError,									"kIOReturnIOError" },
+		{ (unsigned int)kIOReturnCannotLock,								"kIOReturnCannotLock" },
+		{ (unsigned int)kIOReturnNotOpen,									"kIOReturnNotOpen" },
+		{ (unsigned int)kIOReturnNotReadable,								"kIOReturnNotReadable" },
+		{ (unsigned int)kIOReturnNotWritable,								"kIOReturnNotWritable" },
+		{ (unsigned int)kIOReturnNotAligned,								"kIOReturnNotAligned" },
+		{ (unsigned int)kIOReturnBadMedia,								"kIOReturnBadMedia" },
+		{ (unsigned int)kIOReturnStillOpen,								"kIOReturnStillOpen" },
+		{ (unsigned int)kIOReturnRLDError,								"kIOReturnRLDError" },
+		{ (unsigned int)kIOReturnDMAError,								"kIOReturnDMAError" },
+		{ (unsigned int)kIOReturnBusy,									"kIOReturnBusy" },
+		{ (unsigned int)kIOReturnTimeout,									"kIOReturnTimeout" },
+		{ (unsigned int)kIOReturnOffline,									"kIOReturnOffline" },
+		{ (unsigned int)kIOReturnNotReady,								"kIOReturnNotReady" },
+		{ (unsigned int)kIOReturnNotAttached,								"kIOReturnNotAttached" },
+		{ (unsigned int)kIOReturnNoChannels,								"kIOReturnNoChannels" },
+		{ (unsigned int)kIOReturnNoSpace,									"kIOReturnNoSpace" },
+		{ (unsigned int)kIOReturnPortExists,								"kIOReturnPortExists" },
+		{ (unsigned int)kIOReturnCannotWire,								"kIOReturnCannotWire" },
+		{ (unsigned int)kIOReturnNoInterrupt,								"kIOReturnNoInterrupt" },
+		{ (unsigned int)kIOReturnNoFrames,								"kIOReturnNoFrames" },
+		{ (unsigned int)kIOReturnMessageTooLarge,							"kIOReturnMessageTooLarge" },
+		{ (unsigned int)kIOReturnNotPermitted,							"kIOReturnNotPermitted" },
+		{ (unsigned int)kIOReturnNoPower,									"kIOReturnNoPower" },
+		{ (unsigned int)kIOReturnNoMedia,									"kIOReturnNoMedia" },
+		{ (unsigned int)kIOReturnUnformattedMedia,						"kIOReturnUnformattedMedia" },
+		{ (unsigned int)kIOReturnUnsupportedMode,							"kIOReturnUnsupportedMode" },
+		{ (unsigned int)kIOReturnUnderrun,								"kIOReturnUnderrun" },
+		{ (unsigned int)kIOReturnOverrun,									"kIOReturnOverrun" },
+		{ (unsigned int)kIOReturnDeviceError,								"kIOReturnDeviceError" },
+		{ (unsigned int)kIOReturnNoCompletion,							"kIOReturnNoCompletion" },
+		{ (unsigned int)kIOReturnAborted,									"kIOReturnAborted" },
+		{ (unsigned int)kIOReturnNoBandwidth,								"kIOReturnNoBandwidth" },
+		{ (unsigned int)kIOReturnNotResponding,							"kIOReturnNotResponding" },
+		{ (unsigned int)kIOReturnIsoTooOld,								"kIOReturnIsoTooOld" },
+		{ (unsigned int)kIOReturnIsoTooNew,								"kIOReturnIsoTooNew" },
+		{ (unsigned int)kIOReturnNotFound,								"kIOReturnNotFound" },
+		{ (unsigned int)kIOReturnInvalid,									"kIOReturnInvalid" }
 	};
 	
 	for ( i = 0; i < ( sizeof ( sReturnCodeSpecs ) / sizeof ( sReturnCodeSpecs[0] ) ); i++ )

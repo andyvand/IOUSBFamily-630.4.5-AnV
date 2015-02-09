@@ -24,12 +24,16 @@
 #ifndef _IOKIT_IOUSBBUS_H
 #define _IOKIT_IOUSBBUS_H
 
+#ifdef KERNEL
 #include <IOKit/IOService.h>
 
 class IOUSBBus : public IOService
 {
     OSDeclareAbstractStructors(IOUSBBus)
 };
+#else /* ! KERNEL */
+#include <IOKit/IOKitLib.h>
+#endif /* KERNEL */
 
 #endif
 

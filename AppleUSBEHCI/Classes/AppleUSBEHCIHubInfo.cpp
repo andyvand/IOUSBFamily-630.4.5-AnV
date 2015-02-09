@@ -484,7 +484,7 @@ AppleUSBEHCITTInfo::AllocatePeriodicBandwidth(AppleUSBEHCISplitPeriodicEndpoint 
 	err = pSPE->FindStartFrameAndStartTime();
 	if (err)
 	{
-		USBLog(gEHCIBandwidthLogLevel, "AppleUSBEHCITTInfo[%p]::AllocatePeriodicBandwidth - pSPE->FindStartFrameAndStartTime returned err[%p]", this, (void*)err);
+		USBLog(gEHCIBandwidthLogLevel, "AppleUSBEHCITTInfo[%p]::AllocatePeriodicBandwidth - pSPE->FindStartFrameAndStartTime returned err[%p]", this, (void*)(UInt64)err);
 		return err;
 	}
 	
@@ -1027,7 +1027,7 @@ AppleUSBEHCISplitPeriodicEndpoint::print(int level)
 			}
 			
 	#if __LP64__
-			USBLog(level, "EHCISPE[%p]::print - _nextSPE[0x%8.8qx] EP(%d:%d)[%p] _myTT[%p] _epType[%d](%s) _startTime[%3.3d] _FSBytesUsed[%3.3d] _period[%2.2d] _startFrame[%d] _numSS[%d] _numCS[%d] _SSflags[%p] _CSflags[%p] _wraparound[%s]", this, (uint64_t)_nextSPE, functionNum, endpointNum, pEP, _myTT, (int)_epType, _epType == kUSBIsoc ? "Isoc" : "Interrupt", (int)_startTime, (int)_FSBytesUsed, (int)_period, (int)_startFrame, (int)_numSS, (int)_numCS, (void*)_SSflags, (void*)_CSflags, _wraparound ? "true" : "false");
+			USBLog(level, "EHCISPE[%p]::print - _nextSPE[0x%8.8qx] EP(%d:%d)[%p] _myTT[%p] _epType[%d](%s) _startTime[%3.3d] _FSBytesUsed[%3.3d] _period[%2.2d] _startFrame[%d] _numSS[%d] _numCS[%d] _SSflags[%p] _CSflags[%p] _wraparound[%s]", this, (uint64_t)_nextSPE, functionNum, endpointNum, pEP, _myTT, (int)_epType, _epType == kUSBIsoc ? "Isoc" : "Interrupt", (int)_startTime, (int)_FSBytesUsed, (int)_period, (int)_startFrame, (int)_numSS, (int)_numCS, (void*)(UInt64)_SSflags, (void*)(UInt64)_CSflags, _wraparound ? "true" : "false");
 	#else
 			USBLog(level, "EHCISPE[%p]::print - _nextSPE[0x%8.8x] EP(%d:%d)[%p] _myTT[%p] _epType[%d](%s) _startTime[%3.3d] _FSBytesUsed[%3.3d] _period[%2.2d] _startFrame[%d] _numSS[%d] _numCS[%d] _SSflags[%p] _CSflags[%p] _wraparound[%s]", this, (uint32_t)_nextSPE, functionNum, endpointNum, pEP,  _myTT, (int)_epType, _epType == kUSBIsoc ? "Isoc" : "Interrupt", (int)_startTime, (int)_FSBytesUsed, (int)_period, (int)_startFrame, (int)_numSS, (int)_numCS, (void*)_SSflags, (void*)_CSflags, _wraparound ? "true" : "false");
 	#endif
@@ -1250,7 +1250,7 @@ AppleUSBEHCISplitPeriodicEndpoint::CheckPlacementBefore(AppleUSBEHCISplitPeriodi
 
 	}
 
-	USBLog(gEHCIBandwidthLogLevel, "AppleUSBEHCISplitPeriodicEndpoint[%p]::CheckPlacementBefore - afterEP[%p] - returning[%p]", this, afterEP, (void*)result);
+	USBLog(gEHCIBandwidthLogLevel, "AppleUSBEHCISplitPeriodicEndpoint[%p]::CheckPlacementBefore - afterEP[%p] - returning[%p]", this, afterEP, (void*)(UInt64)result);
 	return result;
 }
 

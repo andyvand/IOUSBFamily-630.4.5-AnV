@@ -302,7 +302,7 @@ AppleUSBEHCI::GetRootHubPortStatus(IOUSBHubPortStatus *status, UInt16 port)
 	
 	if (portSC == kEHCIInvalidRegisterValue)
 	{
-		USBLog(2,"AppleUSBEHCI[%p]::GetRootHubPortStatus for port %d, invalid value: %p",  this, port+1, (void*)portSC );
+		USBLog(2,"AppleUSBEHCI[%p]::GetRootHubPortStatus for port %d, invalid value: %p",  this, port+1, (void*)(UInt64)portSC );
 		_controllerAvailable = false;
 		return kIOReturnNotResponding;
 	}
@@ -751,7 +751,7 @@ AppleUSBEHCI::EHCIRootHubResetPort (UInt16 port)
 			value |= kEHCIPortSC_Owner;
 			value &= ~kEHCIPortSC_WKDSCNNT_E;			// we need to clear this bit for some EHCI controllers
 			
-			USBLog(5, "AppleUSBEHCI[%p]::EHCIRootHubResetPort: LS device detected (portSC = %p) - writing value (%p) to release the device",  this, (void*)portSC, (void*)value);
+			USBLog(5, "AppleUSBEHCI[%p]::EHCIRootHubResetPort: LS device detected (portSC = %p) - writing value (%p) to release the device",  this, (void*)(UInt64)portSC, (void*)(UInt64)value);
 			USBTrace( kUSBTEnumeration,  kTPEnumerationLowSpeedDevice, (uintptr_t)this, portSC, 0, 0);
 			_pEHCIRegisters->PortSC[port-1] = HostToUSBLong(value);
 			IOSync();
@@ -836,7 +836,7 @@ AppleUSBEHCI::EHCIRootHubResetPort (UInt16 port)
     
     if ( portSC != USBToHostLong(_pEHCIRegisters->PortSC[port-1]) )
     {
-        USBLog(1, "AppleUSBEHCI[%p]::EHCIRootHubResetPort-  portSC is not equal to value of register! (%p)(%p)",  this, (void*)portSC, (void*)USBToHostLong(_pEHCIRegisters->PortSC[port-1]));
+        USBLog(1, "AppleUSBEHCI[%p]::EHCIRootHubResetPort-  portSC is not equal to value of register! (%p)(%p)",  this, (void*)(UInt64)portSC, (void*)(UInt64)USBToHostLong(_pEHCIRegisters->PortSC[port-1]));
 		USBTrace( kUSBTEHCI,  kTPEHCIRootHubResetPort, (uintptr_t)this, portSC, USBToHostLong(_pEHCIRegisters->PortSC[port-1]), 2 );
 
 		// use the updated value instead of the cached one
@@ -852,7 +852,7 @@ AppleUSBEHCI::EHCIRootHubResetPort (UInt16 port)
     {
 		// Have been disconnected or powered off, pretend reset never happened.
 		
-		USBLog(1, "AppleUSBEHCI[%p]::EHCIRootHubResetPort - Not resetting port 2, because device is unplugged or powered off (%p).",  this, (void*)portSC);
+		USBLog(1, "AppleUSBEHCI[%p]::EHCIRootHubResetPort - Not resetting port 2, because device is unplugged or powered off (%p).",  this, (void*)(UInt64)portSC);
 		USBTrace( kUSBTEHCI,  kTPEHCIRootHubResetPort, (uintptr_t)this, port, portSC, 3 );
 		return kIOReturnNotResponding;	
     }
@@ -1017,7 +1017,7 @@ AppleUSBEHCI::EHCIRootHubPortSuspend(UInt16 port, bool suspend)
 			USBTrace( kUSBTEHCI,  kTPEHCIRootHubPortSuspend, (uintptr_t)this, port, 0, 2 );
 		}
 		else
-			thread_call_enter1(_rhResumePortTimerThread[port-1], (void*)port);
+			thread_call_enter1(_rhResumePortTimerThread[port-1], (void*)(UInt64)port);
 	}
 	
     return kIOReturnSuccess;
@@ -1106,7 +1106,7 @@ AppleUSBEHCI::UIMRootHubStatusChange(void)
 	bool										overCurrentReported = false;
 	IOReturn									retStatus;
     
-	USBLog(7, "AppleUSBEHCI[%p]::UIMRootHubStatusChange - USBIntr[%p] _myPowerState[%d]", this, (void*)USBToHostLong(_pEHCIRegisters->USBIntr), (int)_myPowerState);
+	USBLog(7, "AppleUSBEHCI[%p]::UIMRootHubStatusChange - USBIntr[%p] _myPowerState[%d]", this, (void*)(UInt64)USBToHostLong(_pEHCIRegisters->USBIntr), (int)_myPowerState);
 	/*
      * Encode the status change bitmap.  The format of the bitmap:
      * bit0 = hub status changed
@@ -1142,7 +1142,7 @@ AppleUSBEHCI::UIMRootHubStatusChange(void)
 				retStatus = GetRootHubPortStatus(&portStatus, port);
 				if (retStatus != kIOReturnSuccess)
 				{
-					USBLog(5, "AppleUSBEHCI[%p]::UIMRootHubStatusChange - got status (%p) from GetRootHubPortStatus for port (%d) - skipping", this, (void*)retStatus, (int)port);
+					USBLog(5, "AppleUSBEHCI[%p]::UIMRootHubStatusChange - got status (%p) from GetRootHubPortStatus for port (%d) - skipping", this, (void*)(UInt64)retStatus, (int)port);
 					continue;
 				}
 				portStatus.changeFlags = USBToHostWord(portStatus.changeFlags);
@@ -1183,7 +1183,7 @@ AppleUSBEHCI::UIMRootHubStatusChange(void)
 	
 	if (statusChangedBitmap)
 	{
-		USBLog(3,"AppleUSBEHCI[%p]::UIMRootHubStatusChange got bitmap (%p)",  this, (void*)statusChangedBitmap);
+		USBLog(3,"AppleUSBEHCI[%p]::UIMRootHubStatusChange got bitmap (%p)",  this, (void*)(UInt64)statusChangedBitmap);
 	}
 	_rootHubStatusChangedBitmap = statusChangedBitmap;
 }
@@ -1365,7 +1365,7 @@ AppleUSBEHCI::RHResumePortTimer(UInt32 port)
 	IOSleep(20);								// wait 20 ms for the resume to complete
 	USBLog(6, "AppleUSBEHCI[%p]::RHResumePortTimer - Host controller resume about to finish - calling EnsureUsability", this);
 	EnsureUsability();		
-	_commandGate->runAction(RHResumePortCompletionEntry, (void*)port);
+	_commandGate->runAction(RHResumePortCompletionEntry, (void*)(UInt64)port);
 }
 
 
@@ -1545,7 +1545,7 @@ AppleUSBEHCI::RHCheckForPortResumes()
 			
 			if (portStatus == kEHCIInvalidRegisterValue)
 			{
-				USBLog(2, "AppleUSBEHCI[%p]::RHCheckForPortResumes port (%d) has an invalid portStatus (%p) - bailing", this, (int)port+1, (void*)portStatus);
+				USBLog(2, "AppleUSBEHCI[%p]::RHCheckForPortResumes port (%d) has an invalid portStatus (%p) - bailing", this, (int)port+1, (void*)(UInt64)portStatus);
 				_controllerAvailable = false;
 				return;
 			}
@@ -1559,7 +1559,7 @@ AppleUSBEHCI::RHCheckForPortResumes()
 					USBLog(1,"AppleUSBEHCI[%p]::RHCheckForPortResumes  port %d appears to be resuming from a remote wakeup, but the thread callout is NULL!", this, (uint32_t)port+1);
 				}
 				else
-					thread_call_enter1(_rhResumePortTimerThread[port], (void*)(port+1));
+					thread_call_enter1(_rhResumePortTimerThread[port], (void*)(UInt64)(port+1));
 			}
 		}
 	}

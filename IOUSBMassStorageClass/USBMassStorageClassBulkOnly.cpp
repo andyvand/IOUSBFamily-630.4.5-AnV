@@ -249,8 +249,8 @@ IOUSBMassStorageClass::BulkOnlySendCBWPacket (
 	GetCommandDescriptorBlock( boRequestBlock->request, &boRequestBlock->boCBW.cbwCDB );
 	
 	RecordUSBTimeStamp (	UMC_TRACE ( kBOCBWDescription ), 
-							( uintptr_t ) this, 
-							( uintptr_t ) boRequestBlock->request, 
+							(unsigned int)(UInt64)this,
+							(unsigned int)(UInt64)boRequestBlock->request,
 							( unsigned int ) boRequestBlock->boCBW.cbwLUN, 
 							( unsigned int ) boRequestBlock->boCBW.cbwTag );
 
@@ -270,8 +270,8 @@ IOUSBMassStorageClass::BulkOnlySendCBWPacket (
 										&boRequestBlock->boCompletion );
    	STATUS_LOG ( ( 5, "%s[%p]: BulkOnlySendCBWPacket returned %x", getName(), this, status ) );
 	
-	RecordUSBTimeStamp (	UMC_TRACE ( kBOCBWBulkOutWriteResult ), ( uintptr_t ) this, status, 
-							( uintptr_t ) boRequestBlock->boCBW.cbwLUN, ( uintptr_t ) boRequestBlock->request );
+	RecordUSBTimeStamp (	UMC_TRACE ( kBOCBWBulkOutWriteResult ), (unsigned int)(UInt64)this, status,
+							(unsigned int)(UInt64)boRequestBlock->boCBW.cbwLUN, (unsigned int)(UInt64)boRequestBlock->request );
 							
 	if ( status == kIOUSBPipeStalled )
     {
@@ -436,7 +436,7 @@ IOUSBMassStorageClass::BulkOnlyExecuteCommandCompletion (
 		// The request field is NULL, this appears to  be a double callback, do nothing.
         // OR the command was aborted earlier, do nothing.
 		STATUS_LOG ( ( 4, "%s[%p]: boRequestBlock->request is NULL, returned %x", getName(), this, resultingStatus ) );
-		RecordUSBTimeStamp ( UMC_TRACE ( kBODoubleCompleteion ), ( uintptr_t ) this, NULL, NULL, NULL );
+		RecordUSBTimeStamp ( UMC_TRACE ( kBODoubleCompleteion ), (unsigned int)(UInt64)this, NULL, NULL, NULL );
 		return;
 		
 	}
@@ -449,15 +449,15 @@ IOUSBMassStorageClass::BulkOnlyExecuteCommandCompletion (
 		// longer be executed.
 		
 		STATUS_LOG ( ( 4, "%s[%p]: Completion during termination", getName(), this ) );
-		RecordUSBTimeStamp ( UMC_TRACE ( kBOCompletionDuringTermination ), ( uintptr_t ) this, NULL, NULL, NULL );
+		RecordUSBTimeStamp ( UMC_TRACE ( kBOCompletionDuringTermination ), (unsigned int)(UInt64)this, NULL, NULL, NULL );
 		
 		goto Exit;
 		
 	}		
 
 	
-	RecordUSBTimeStamp (	UMC_TRACE ( kBOCompletion ), ( uintptr_t ) this, resultingStatus, 
-							( uintptr_t ) boRequestBlock->currentState, ( uintptr_t ) boRequestBlock->request );
+	RecordUSBTimeStamp (	UMC_TRACE ( kBOCompletion ), (unsigned int)(UInt64)this, resultingStatus,
+							(unsigned int)(UInt64)boRequestBlock->currentState, (unsigned int)(UInt64)boRequestBlock->request );
 	
 	if ( ( resultingStatus == kIOReturnNotResponding ) || ( resultingStatus == kIOReturnAborted ) )
 	{

@@ -33,7 +33,14 @@
 
 #import <IOKit/IOKitLib.h>
 
+#ifdef KERNEL
 #import "../IOUSBFamily/Headers/IOUSBLib.h"
+#else /* ! KERNEL */
+#import <IOKit/IOKitLib.h>
+#import <IOKit/usb/USBSpec.h>
+#import <IOKit/usb/USB.h>
+#import <IOKit/usb/IOUSBLib.h>
+#endif /* KERNEL */
 
 #import <IOKit/IODataQueueClient.h>
 #import <IOKit/IODataQueueShared.h>

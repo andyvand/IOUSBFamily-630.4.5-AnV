@@ -21,6 +21,8 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
+#define _NUM_VERSION_ 1
+
 #import "IORegInfoGatherer.h"
 
 void dumpIOUSBPlane(mach_port_t iokitPort, OutlineViewNode *rootNode, char * plane);

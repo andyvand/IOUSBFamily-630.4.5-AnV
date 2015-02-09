@@ -17,6 +17,7 @@
 			dependencies = (
 				3E99F039152B621100F97A0C /* PBXTargetDependency */,
 				3E99F03B152B621600F97A0C /* PBXTargetDependency */,
+				A9AFBB4E1A87F67D003C0BEF /* PBXTargetDependency */,
 				3E99F0DA152B6AF100F97A0C /* PBXTargetDependency */,
 			);
 			name = IOUSBFamily_executables;
@@ -188,8 +189,8 @@
 		3E99F0CD152B6A1D00F97A0C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED3F25004F3CD99001BF1E8 /* Foundation.framework */; };
 		3E99F0CE152B6A1D00F97A0C /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED3F25104F3CD99001BF1E8 /* IOKit.framework */; };
 		3E99F0CF152B6A1D00F97A0C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED3F25204F3CD99001BF1E8 /* Security.framework */; };
-		3E99F115152B7A7600F97A0C /* usbtracer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 301DB0930EF8920B009BF777 /* usbtracer */; };
-		3E99F116152B7C8100F97A0C /* reenumerate in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EB33C211330EAF700688D55 /* reenumerate */; };
+		3E99F115152B7A7600F97A0C /* usbtracer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 301DB0930EF8920B009BF777 /* usbtracer */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		3E99F116152B7C8100F97A0C /* reenumerate in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EB33C211330EAF700688D55 /* reenumerate */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		3E99F119152B7D5600F97A0C /* reenumerate in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EB33C211330EAF700688D55 /* reenumerate */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		3E99F11A152B7DA700F97A0C /* KLog.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EAF8B180B5D42870029974F /* KLog.kext */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		3E99F11B152B7DA700F97A0C /* usbtracer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 301DB0930EF8920B009BF777 /* usbtracer */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -350,7 +351,7 @@
 		3EB2F3B90B8B5F3D00738927 /* IOUSBHubPolicyMaker.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EFE2F1C0B8B58ED00013454 /* IOUSBHubPolicyMaker.h */; };
 		3EB33C1B1330EAF700688D55 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED3F25104F3CD99001BF1E8 /* IOKit.framework */; };
 		3EB33C1C1330EAF700688D55 /* libutil.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9EABF80F545CE000522032 /* libutil.dylib */; };
-		3EB33C4B1330EB6A00688D55 /* renumerate.c in Sources */ = {isa = PBXBuildFile; fileRef = 3EB33C4A1330EB6A00688D55 /* renumerate.c */; };
+		3EB33C4B1330EB6A00688D55 /* renumerate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB33C4A1330EB6A00688D55 /* renumerate.cpp */; };
 		3EB33C551330EBE700688D55 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EB33C541330EBE700688D55 /* CoreFoundation.framework */; };
 		3EC36A3715F1570E002A6780 /* IOUSBInterfaceUserClientV3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC36A3515F1570D002A6780 /* IOUSBInterfaceUserClientV3.cpp */; };
 		3EC36A3915F15843002A6780 /* IOUSBInterfaceUserClientV3.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EC36A3315F155A9002A6780 /* IOUSBInterfaceUserClientV3.h */; };
@@ -381,6 +382,22 @@
 		3EFE2F1B0B8B58A500013454 /* IOUSBHubPolicyMaker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EFE2F1A0B8B58A500013454 /* IOUSBHubPolicyMaker.cpp */; };
 		3EFE2F1D0B8B58ED00013454 /* IOUSBHubPolicyMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EFE2F1C0B8B58ED00013454 /* IOUSBHubPolicyMaker.h */; };
 		3EFE2F960B8B5DD300013454 /* IOUSBUserClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 01E71EE4FFB8799F7F000001 /* IOUSBUserClient.h */; };
+		A91767F01A885EF0003E5F43 /* libutil.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A91767EF1A885EF0003E5F43 /* libutil.dylib */; };
+		A97624661A86775D002AC2FD /* usbtracer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 301DB0930EF8920B009BF777 /* usbtracer */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		A97624671A867762002AC2FD /* reenumerate in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EB33C211330EAF700688D55 /* reenumerate */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		A97624681A86776A002AC2FD /* KLog.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EAF8B180B5D42870029974F /* KLog.kext */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A9AFBB4C1A87F5FE003C0BEF /* UMCLogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9AFBB4B1A87F5FE003C0BEF /* UMCLogger.cpp */; };
+		A9C14F171A87EB8700A642EB /* IOUSBMassStorageClass.h in Headers */ = {isa = PBXBuildFile; fileRef = A9C14F161A87EB8700A642EB /* IOUSBMassStorageClass.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9C14F221A87EBC200A642EB /* Debugging.h in Headers */ = {isa = PBXBuildFile; fileRef = A9C14F1E1A87EBC200A642EB /* Debugging.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9C14F231A87EBC200A642EB /* IOUFIStorageServices.h in Headers */ = {isa = PBXBuildFile; fileRef = A9C14F1F1A87EBC200A642EB /* IOUFIStorageServices.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9C14F241A87EBC200A642EB /* IOUSBMassStorageClassTimestamps.h in Headers */ = {isa = PBXBuildFile; fileRef = A9C14F201A87EBC200A642EB /* IOUSBMassStorageClassTimestamps.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9C14F251A87EBC200A642EB /* IOUSBMassStorageUFISubclass.h in Headers */ = {isa = PBXBuildFile; fileRef = A9C14F211A87EBC200A642EB /* IOUSBMassStorageUFISubclass.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9C14F2E1A87EC2700A642EB /* IOUFIStorageServices.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9C14F291A87EC2700A642EB /* IOUFIStorageServices.cpp */; };
+		A9C14F2F1A87EC2700A642EB /* IOUSBMassStorageClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9C14F2A1A87EC2700A642EB /* IOUSBMassStorageClass.cpp */; };
+		A9C14F301A87EC2700A642EB /* IOUSBMassStorageUFISubclass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9C14F2B1A87EC2700A642EB /* IOUSBMassStorageUFISubclass.cpp */; };
+		A9C14F311A87EC2700A642EB /* USBMassStorageClassBulkOnly.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9C14F2C1A87EC2700A642EB /* USBMassStorageClassBulkOnly.cpp */; };
+		A9C14F321A87EC2700A642EB /* USBMassStorageClassCBI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9C14F2D1A87EC2700A642EB /* USBMassStorageClassCBI.cpp */; };
+		A9CFF8B81A88266500393473 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9CFF8B71A88266500393473 /* IOKit.framework */; };
 		DDA42BA60BA0956C002C2F56 /* IOUSBControllerV3.h in Headers */ = {isa = PBXBuildFile; fileRef = DDA42BA50BA0956C002C2F56 /* IOUSBControllerV3.h */; };
 		DDA42BA70BA0956C002C2F56 /* IOUSBControllerV3.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDA42BA50BA0956C002C2F56 /* IOUSBControllerV3.h */; };
 		DDBF20230BA0A01B007CE86C /* IOUSBControllerV3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DDBF20220BA0A01B007CE86C /* IOUSBControllerV3.cpp */; };
@@ -555,6 +572,41 @@
 			remoteGlobalIDString = 3EBFD14A1601264400B85B43;
 			remoteInfo = AppleUSBXHCI;
 		};
+		A97624691A867771002AC2FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3EAF8B070B5D42870029974F;
+			remoteInfo = KLog;
+		};
+		A976246B1A867777002AC2FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3EB33C171330EAF700688D55;
+			remoteInfo = reenumerate_standalone;
+		};
+		A976246D1A86777C002AC2FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 301DB0920EF8920B009BF777;
+			remoteInfo = usbtracer_standalone;
+		};
+		A9AFBB4D1A87F67D003C0BEF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9AFBB421A87F5CE003C0BEF;
+			remoteInfo = UMCLogger;
+		};
+		A9C14F331A87EDA200A642EB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9C14F111A87EB8600A642EB;
+			remoteInfo = IOUSBMassStorageClass;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -686,6 +738,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		A97624651A867751002AC2FD /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				A97624681A86776A002AC2FD /* KLog.kext in CopyFiles */,
+				A97624671A867762002AC2FD /* reenumerate in CopyFiles */,
+				A97624661A86775D002AC2FD /* usbtracer in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9AFBB411A87F5CE003C0BEF /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -804,7 +877,7 @@
 		3EAF8B180B5D42870029974F /* KLog.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KLog.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EAF8B6F0B5D42870029974F /* USB_Prober.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = USB_Prober.plist; path = USBProberV2/USB_Prober.plist; sourceTree = "<group>"; };
 		3EB33C211330EAF700688D55 /* reenumerate */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = reenumerate; sourceTree = BUILT_PRODUCTS_DIR; };
-		3EB33C4A1330EB6A00688D55 /* renumerate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = renumerate.c; path = USBProberV2/reenumerate/renumerate.c; sourceTree = "<group>"; };
+		3EB33C4A1330EB6A00688D55 /* renumerate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = renumerate.cpp; path = USBProberV2/reenumerate/renumerate.cpp; sourceTree = "<group>"; };
 		3EB33C541330EBE700688D55 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
 		3EB4E83213280578000DD9C1 /* DecodeBOSDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DecodeBOSDescriptor.h; path = USBProberV2/DecodeBOSDescriptor.h; sourceTree = "<group>"; };
 		3EB4E83313280578000DD9C1 /* DecodeBOSDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DecodeBOSDescriptor.m; path = USBProberV2/DecodeBOSDescriptor.m; sourceTree = "<group>"; };
@@ -915,6 +988,37 @@
 		84AED1D81277891500751A4A /* PortStatusController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PortStatusController.m; path = USBProberV2/PortStatusController.m; sourceTree = "<group>"; };
 		84AED1D91277891500751A4A /* PortStatusGatherer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PortStatusGatherer.h; path = USBProberV2/PortStatusGatherer.h; sourceTree = "<group>"; };
 		84AED1DA1277891500751A4A /* PortStatusGatherer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PortStatusGatherer.m; path = USBProberV2/PortStatusGatherer.m; sourceTree = "<group>"; };
+		A91767EF1A885EF0003E5F43 /* libutil.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libutil.dylib; path = usr/lib/libutil.dylib; sourceTree = SDKROOT; };
+		A96FE6171A87E5190097B09B /* AppleUSBCDC.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; name = AppleUSBCDC.kext; path = ../../../System/Library/Extensions/IOUSBFamily.kext/Contents/PlugIns/AppleUSBCDC.kext; sourceTree = "<group>"; };
+		A96FE6191A87E5280097B09B /* AppleUSBCDCACMControl.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; name = AppleUSBCDCACMControl.kext; path = ../../../System/Library/Extensions/IOUSBFamily.kext/Contents/PlugIns/AppleUSBCDCACMControl.kext; sourceTree = "<group>"; };
+		A96FE61B1A87E54A0097B09B /* AppleUSBCDCACMData.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; name = AppleUSBCDCACMData.kext; path = ../../../System/Library/Extensions/IOUSBFamily.kext/Contents/PlugIns/AppleUSBCDCACMData.kext; sourceTree = "<group>"; };
+		A96FE61C1A87E54A0097B09B /* AppleUSBCDCDMM.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; name = AppleUSBCDCDMM.kext; path = ../../../System/Library/Extensions/IOUSBFamily.kext/Contents/PlugIns/AppleUSBCDCDMM.kext; sourceTree = "<group>"; };
+		A96FE61D1A87E54A0097B09B /* AppleUSBCDCECMControl.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; name = AppleUSBCDCECMControl.kext; path = ../../../System/Library/Extensions/IOUSBFamily.kext/Contents/PlugIns/AppleUSBCDCECMControl.kext; sourceTree = "<group>"; };
+		A96FE61E1A87E54A0097B09B /* AppleUSBCDCECMData.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; name = AppleUSBCDCECMData.kext; path = ../../../System/Library/Extensions/IOUSBFamily.kext/Contents/PlugIns/AppleUSBCDCECMData.kext; sourceTree = "<group>"; };
+		A96FE61F1A87E54A0097B09B /* AppleUSBCDCEEM.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; name = AppleUSBCDCEEM.kext; path = ../../../System/Library/Extensions/IOUSBFamily.kext/Contents/PlugIns/AppleUSBCDCEEM.kext; sourceTree = "<group>"; };
+		A96FE6201A87E54A0097B09B /* AppleUSBCDCWCM.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; name = AppleUSBCDCWCM.kext; path = ../../../System/Library/Extensions/IOUSBFamily.kext/Contents/PlugIns/AppleUSBCDCWCM.kext; sourceTree = "<group>"; };
+		A96FE6271A87E5640097B09B /* AppleUSBFTDI.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; name = AppleUSBFTDI.kext; path = ../../../System/Library/Extensions/IOUSBFamily.kext/Contents/PlugIns/AppleUSBFTDI.kext; sourceTree = "<group>"; };
+		A96FE6291A87E5790097B09B /* AppleUSBVideoSupport.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; name = AppleUSBVideoSupport.kext; path = ../../../System/Library/Extensions/IOUSBFamily.kext/Contents/PlugIns/AppleUSBVideoSupport.kext; sourceTree = "<group>"; };
+		A96FE62B1A87E5A50097B09B /* IOUSBHIDDriverPM.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; name = IOUSBHIDDriverPM.kext; path = ../../../System/Library/Extensions/IOUSBFamily.kext/Contents/PlugIns/IOUSBHIDDriverPM.kext; sourceTree = "<group>"; };
+		A9802F8A1A882B5300C71941 /* Kernel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kernel.framework; path = System/Library/Frameworks/Kernel.framework; sourceTree = SDKROOT; };
+		A9AFBB431A87F5CE003C0BEF /* UMCLogger */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = UMCLogger; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9AFBB4B1A87F5FE003C0BEF /* UMCLogger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UMCLogger.cpp; sourceTree = "<group>"; };
+		A9C14F0C1A87EA8300A642EB /* IOUSBFamilyInfoPlist.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IOUSBFamilyInfoPlist.pch; sourceTree = "<group>"; };
+		A9C14F121A87EB8600A642EB /* IOUSBMassStorageClass.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IOUSBMassStorageClass.kext; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9C14F151A87EB8700A642EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A9C14F161A87EB8700A642EB /* IOUSBMassStorageClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IOUSBMassStorageClass.h; sourceTree = "<group>"; };
+		A9C14F181A87EB8700A642EB /* IOUSBMassStorageClass.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IOUSBMassStorageClass.cpp; sourceTree = "<group>"; };
+		A9C14F1E1A87EBC200A642EB /* Debugging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Debugging.h; path = IOUSBMassStorageClass/Debugging.h; sourceTree = "<group>"; };
+		A9C14F1F1A87EBC200A642EB /* IOUFIStorageServices.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IOUFIStorageServices.h; path = IOUSBMassStorageClass/IOUFIStorageServices.h; sourceTree = "<group>"; };
+		A9C14F201A87EBC200A642EB /* IOUSBMassStorageClassTimestamps.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IOUSBMassStorageClassTimestamps.h; path = IOUSBMassStorageClass/IOUSBMassStorageClassTimestamps.h; sourceTree = "<group>"; };
+		A9C14F211A87EBC200A642EB /* IOUSBMassStorageUFISubclass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IOUSBMassStorageUFISubclass.h; path = IOUSBMassStorageClass/IOUSBMassStorageUFISubclass.h; sourceTree = "<group>"; };
+		A9C14F291A87EC2700A642EB /* IOUFIStorageServices.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IOUFIStorageServices.cpp; path = IOUSBMassStorageClass/IOUFIStorageServices.cpp; sourceTree = "<group>"; };
+		A9C14F2A1A87EC2700A642EB /* IOUSBMassStorageClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IOUSBMassStorageClass.cpp; path = IOUSBMassStorageClass/IOUSBMassStorageClass.cpp; sourceTree = "<group>"; };
+		A9C14F2B1A87EC2700A642EB /* IOUSBMassStorageUFISubclass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IOUSBMassStorageUFISubclass.cpp; path = IOUSBMassStorageClass/IOUSBMassStorageUFISubclass.cpp; sourceTree = "<group>"; };
+		A9C14F2C1A87EC2700A642EB /* USBMassStorageClassBulkOnly.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = USBMassStorageClassBulkOnly.cpp; path = IOUSBMassStorageClass/USBMassStorageClassBulkOnly.cpp; sourceTree = "<group>"; };
+		A9C14F2D1A87EC2700A642EB /* USBMassStorageClassCBI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = USBMassStorageClassCBI.cpp; path = IOUSBMassStorageClass/USBMassStorageClassCBI.cpp; sourceTree = "<group>"; };
+		A9C14F361A87EE0000A642EB /* IOUSBMassStorageClass.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = IOUSBMassStorageClass.plist; path = IOUSBMassStorageClass/IOUSBMassStorageClass.plist; sourceTree = "<group>"; };
+		A9CFF8B71A88266500393473 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		B50606DD1300DCE900C9FA9C /* usbmacro */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = usbmacro; path = USBProberV2/usbmacro; sourceTree = "<group>"; };
 		DD18E6300AC323A900FAE168 /* IOUSBHubDevice.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = IOUSBHubDevice.h; path = IOUSBFamily/Headers/IOUSBHubDevice.h; sourceTree = "<group>"; };
 		DD18E6360AC3262500FAE168 /* IOUSBHubDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = IOUSBHubDevice.cpp; path = IOUSBFamily/Classes/IOUSBHubDevice.cpp; sourceTree = "<group>"; };
@@ -1097,6 +1201,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3EBFD1641601264400B85B43 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9AFBB401A87F5CE003C0BEF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A91767F01A885EF0003E5F43 /* libutil.dylib in Frameworks */,
+				A9CFF8B81A88266500393473 /* IOKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9C14F0E1A87EB8600A642EB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1304,6 +1424,18 @@
 		089C166AFE841209C02AAC07 /* IOUSBFamily */ = {
 			isa = PBXGroup;
 			children = (
+				A96FE62B1A87E5A50097B09B /* IOUSBHIDDriverPM.kext */,
+				A96FE6291A87E5790097B09B /* AppleUSBVideoSupport.kext */,
+				A96FE6271A87E5640097B09B /* AppleUSBFTDI.kext */,
+				A96FE61B1A87E54A0097B09B /* AppleUSBCDCACMData.kext */,
+				A96FE61C1A87E54A0097B09B /* AppleUSBCDCDMM.kext */,
+				A96FE61D1A87E54A0097B09B /* AppleUSBCDCECMControl.kext */,
+				A96FE61E1A87E54A0097B09B /* AppleUSBCDCECMData.kext */,
+				A96FE61F1A87E54A0097B09B /* AppleUSBCDCEEM.kext */,
+				A96FE6201A87E54A0097B09B /* AppleUSBCDCWCM.kext */,
+				A96FE6191A87E5280097B09B /* AppleUSBCDCACMControl.kext */,
+				A96FE6171A87E5190097B09B /* AppleUSBCDC.kext */,
+				A9C14F261A87EBCD00A642EB /* IOUSBMassStorageClass */,
 				01840EB5FFB9FB147F000001 /* IOUSBFamily */,
 				3ED3853816012985008B5CB3 /* AppleUSBXHCI */,
 				F581406C04575F6D01000109 /* AppleUSBEHCI */,
@@ -1320,6 +1452,8 @@
 				3EC65AF404F3C9B8003F7360 /* USB Prober */,
 				3E033F6804F5D8C200AA223D /* KLog */,
 				3E61A7DC0B5D97AB0001A217 /* Plists */,
+				A9C14F131A87EB8600A642EB /* IOUSBMassStorageClass */,
+				A9AFBB441A87F5CE003C0BEF /* UMCLogger */,
 				3E9D8265033AC7C000000164 /* Frameworks */,
 				19C28FB6FE9D52B211CA2CBB /* Products */,
 			);
@@ -1417,6 +1551,8 @@
 				3E99F076152B66F900F97A0C /* IOUSBLib.bundle */,
 				3E99F0D6152B6A1D00F97A0C /* USB Prober.app */,
 				3EBFD16A1601264400B85B43 /* AppleUSBXHCI.kext */,
+				A9C14F121A87EB8600A642EB /* IOUSBMassStorageClass.kext */,
+				A9AFBB431A87F5CE003C0BEF /* UMCLogger */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1537,6 +1673,7 @@
 		3E2D4C82145EFA8700FA8FEF /* Private Headers */ = {
 			isa = PBXGroup;
 			children = (
+				A9C14F0C1A87EA8300A642EB /* IOUSBFamilyInfoPlist.pch */,
 				3EF545591642DF7F00E53A75 /* AppleUSBDiagnostics.h */,
 				3EB871C4041D183100000164 /* IOUSBAppleIDs.h */,
 				3EC47B73140D96FB00A30455 /* IOUSBPriv.h */,
@@ -1558,6 +1695,7 @@
 			isa = PBXGroup;
 			children = (
 				3EF4FF9C0B5D9B9E007E541E /* IOUSBFamilyInfoPlist.pch */,
+				A9C14F361A87EE0000A642EB /* IOUSBMassStorageClass.plist */,
 				3EAF8A010B5D42860029974F /* IOUSBFamily.plist */,
 				3EAF8A900B5D42860029974F /* AppleUSBHub.plist */,
 				3ED38569160129DD008B5CB3 /* AppleUSBXHCI.plist */,
@@ -1580,6 +1718,9 @@
 		3E9D8265033AC7C000000164 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A91767EF1A885EF0003E5F43 /* libutil.dylib */,
+				A9802F8A1A882B5300C71941 /* Kernel.framework */,
+				A9CFF8B71A88266500393473 /* IOKit.framework */,
 				F5C2AE73032E5BA501000164 /* Kernel.framework */,
 				3E9663EA1631FE730053D732 /* CoreFoundation.framework */,
 			);
@@ -1589,7 +1730,7 @@
 		3EB33C111330EAA800688D55 /* reenumerate */ = {
 			isa = PBXGroup;
 			children = (
-				3EB33C4A1330EB6A00688D55 /* renumerate.c */,
+				3EB33C4A1330EB6A00688D55 /* renumerate.cpp */,
 			);
 			name = reenumerate;
 			sourceTree = "<group>";
@@ -1826,6 +1967,64 @@
 				84AED1DA1277891500751A4A /* PortStatusGatherer.m */,
 			);
 			name = "Port Status";
+			sourceTree = "<group>";
+		};
+		A9AFBB441A87F5CE003C0BEF /* UMCLogger */ = {
+			isa = PBXGroup;
+			children = (
+				A9AFBB4B1A87F5FE003C0BEF /* UMCLogger.cpp */,
+			);
+			path = UMCLogger;
+			sourceTree = "<group>";
+		};
+		A9C14F131A87EB8600A642EB /* IOUSBMassStorageClass */ = {
+			isa = PBXGroup;
+			children = (
+				A9C14F161A87EB8700A642EB /* IOUSBMassStorageClass.h */,
+				A9C14F181A87EB8700A642EB /* IOUSBMassStorageClass.cpp */,
+				A9C14F141A87EB8700A642EB /* Supporting Files */,
+			);
+			path = IOUSBMassStorageClass;
+			sourceTree = "<group>";
+		};
+		A9C14F141A87EB8700A642EB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A9C14F151A87EB8700A642EB /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A9C14F261A87EBCD00A642EB /* IOUSBMassStorageClass */ = {
+			isa = PBXGroup;
+			children = (
+				A9C14F281A87EC0B00A642EB /* Classes */,
+				A9C14F271A87EBE600A642EB /* Public Headers */,
+			);
+			name = IOUSBMassStorageClass;
+			sourceTree = "<group>";
+		};
+		A9C14F271A87EBE600A642EB /* Public Headers */ = {
+			isa = PBXGroup;
+			children = (
+				A9C14F1E1A87EBC200A642EB /* Debugging.h */,
+				A9C14F1F1A87EBC200A642EB /* IOUFIStorageServices.h */,
+				A9C14F211A87EBC200A642EB /* IOUSBMassStorageUFISubclass.h */,
+				A9C14F201A87EBC200A642EB /* IOUSBMassStorageClassTimestamps.h */,
+			);
+			name = "Public Headers";
+			sourceTree = "<group>";
+		};
+		A9C14F281A87EC0B00A642EB /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				A9C14F291A87EC2700A642EB /* IOUFIStorageServices.cpp */,
+				A9C14F2A1A87EC2700A642EB /* IOUSBMassStorageClass.cpp */,
+				A9C14F2B1A87EC2700A642EB /* IOUSBMassStorageUFISubclass.cpp */,
+				A9C14F2C1A87EC2700A642EB /* USBMassStorageClassBulkOnly.cpp */,
+				A9C14F2D1A87EC2700A642EB /* USBMassStorageClassCBI.cpp */,
+			);
+			name = Classes;
 			sourceTree = "<group>";
 		};
 		F5395F86016D596001573190 /* Strings */ = {
@@ -2167,6 +2366,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A9C14F0F1A87EB8600A642EB /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9C14F171A87EB8700A642EB /* IOUSBMassStorageClass.h in Headers */,
+				A9C14F221A87EBC200A642EB /* Debugging.h in Headers */,
+				A9C14F231A87EBC200A642EB /* IOUFIStorageServices.h in Headers */,
+				A9C14F241A87EBC200A642EB /* IOUSBMassStorageClassTimestamps.h in Headers */,
+				A9C14F251A87EBC200A642EB /* IOUSBMassStorageUFISubclass.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -2214,10 +2425,14 @@
 				3E99F09D152B6A1D00F97A0C /* Resources */,
 				3E99F0A8152B6A1D00F97A0C /* Sources */,
 				3E99F0CB152B6A1D00F97A0C /* Frameworks */,
+				A97624651A867751002AC2FD /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A976246A1A867771002AC2FD /* PBXTargetDependency */,
+				A976246E1A86777C002AC2FD /* PBXTargetDependency */,
+				A976246C1A867777002AC2FD /* PBXTargetDependency */,
 			);
 			name = "USB Prober_standalone";
 			productInstallPath = /DevTools/Hardware;
@@ -2232,10 +2447,10 @@
 				3EAF89BD0B5D42860029974F /* Headers */,
 				3EAF89D00B5D42860029974F /* Resources */,
 				3EAF89D30B5D42860029974F /* Sources */,
-				3EAF89E40B5D42860029974F /* Frameworks */,
 				3EAF89E50B5D42860029974F /* Rez */,
 				3EAF89E60B5D42860029974F /* CopyFiles */,
 				3ED21AC015BDFBB2001910A5 /* CopyFiles */,
+				3EAF89E40B5D42860029974F /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2251,6 +2466,7 @@
 				3EAF8B7B0B5D42870029974F /* PBXTargetDependency */,
 				3EAF8B850B5D42870029974F /* PBXTargetDependency */,
 				3EAF8B790B5D42870029974F /* PBXTargetDependency */,
+				A9C14F341A87EDA200A642EB /* PBXTargetDependency */,
 				3E99F03D152B625500F97A0C /* PBXTargetDependency */,
 			);
 			name = IOUSBFamily_kexts;
@@ -2542,6 +2758,41 @@
 			productReference = 3EBFD16A1601264400B85B43 /* AppleUSBXHCI.kext */;
 			productType = "com.apple.product-type.kernel-extension.iokit";
 		};
+		A9AFBB421A87F5CE003C0BEF /* UMCLogger */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9AFBB471A87F5CE003C0BEF /* Build configuration list for PBXNativeTarget "UMCLogger" */;
+			buildPhases = (
+				A9AFBB3F1A87F5CE003C0BEF /* Sources */,
+				A9AFBB401A87F5CE003C0BEF /* Frameworks */,
+				A9AFBB411A87F5CE003C0BEF /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UMCLogger;
+			productName = UMCLogger;
+			productReference = A9AFBB431A87F5CE003C0BEF /* UMCLogger */;
+			productType = "com.apple.product-type.tool";
+		};
+		A9C14F111A87EB8600A642EB /* IOUSBMassStorageClass */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9C14F1A1A87EB8700A642EB /* Build configuration list for PBXNativeTarget "IOUSBMassStorageClass" */;
+			buildPhases = (
+				A9C14F0D1A87EB8600A642EB /* Sources */,
+				A9C14F0F1A87EB8600A642EB /* Headers */,
+				A9C14F0E1A87EB8600A642EB /* Frameworks */,
+				A9C14F101A87EB8600A642EB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IOUSBMassStorageClass;
+			productName = IOUSBMassStorageClass;
+			productReference = A9C14F121A87EB8600A642EB /* IOUSBMassStorageClass.kext */;
+			productType = "com.apple.product-type.kernel-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2549,6 +2800,14 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0610;
+				TargetAttributes = {
+					A9AFBB421A87F5CE003C0BEF = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					A9C14F111A87EB8600A642EB = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
 			};
 			buildConfigurationList = DDDEF9CB08886330003A7655 /* Build configuration list for PBXProject "IOUSBFamily" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -2571,11 +2830,12 @@
 				3EAF89A20B5D42860029974F /* IOUSBFamily_kexts */,
 				3E99F031152B61F100F97A0C /* IOUSBFamily_executables */,
 				3E99F0DF152B6C4200F97A0C /* --- standalone --- */,
-				3EAF8A030B5D42860029974F /* installhdrs */,
 				3EAF8AE80B5D42870029974F /* IOUSBLib_standalone */,
 				3E99F078152B6A1D00F97A0C /* USB Prober_standalone */,
+				3EAF8A030B5D42860029974F /* installhdrs */,
 				301DB0920EF8920B009BF777 /* usbtracer_standalone */,
 				3EB33C171330EAF700688D55 /* reenumerate_standalone */,
+				A9AFBB421A87F5CE003C0BEF /* UMCLogger */,
 				3E99F0E4152B6C5800F97A0C /* --- convenience --- */,
 				3EBFD14A1601264400B85B43 /* AppleUSBXHCI */,
 				3EAF8A420B5D42860029974F /* AppleUSBEHCI */,
@@ -2589,6 +2849,7 @@
 				3EAF8AAC0B5D42860029974F /* AppleUSBOpticalMouse */,
 				3EAF8A920B5D42860029974F /* IOUSBHIDDriverSafeBoot */,
 				3EAF8B070B5D42870029974F /* KLog */,
+				A9C14F111A87EB8600A642EB /* IOUSBMassStorageClass */,
 				3E99F0EA152B6EA600F97A0C /* USB Prober App */,
 				3E99F106152B6FE700F97A0C /* IOUSBLib */,
 			);
@@ -2730,6 +2991,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3ED3855F16012986008B5CB3 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9C14F101A87EB8600A642EB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3075,7 +3343,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EB33C4B1330EB6A00688D55 /* renumerate.c in Sources */,
+				3EB33C4B1330EB6A00688D55 /* renumerate.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3089,6 +3357,26 @@
 				3ED3855516012986008B5CB3 /* AppleUSBXHCI_PwrMgmt.cpp in Sources */,
 				3ED3855616012986008B5CB3 /* AppleUSBXHCI_RootHub.cpp in Sources */,
 				3ED3855716012986008B5CB3 /* AppleUSBXHCIUIM.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9AFBB3F1A87F5CE003C0BEF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9AFBB4C1A87F5FE003C0BEF /* UMCLogger.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9C14F0D1A87EB8600A642EB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9C14F2E1A87EC2700A642EB /* IOUFIStorageServices.cpp in Sources */,
+				A9C14F321A87EC2700A642EB /* USBMassStorageClassCBI.cpp in Sources */,
+				A9C14F2F1A87EC2700A642EB /* IOUSBMassStorageClass.cpp in Sources */,
+				A9C14F301A87EC2700A642EB /* IOUSBMassStorageUFISubclass.cpp in Sources */,
+				A9C14F311A87EC2700A642EB /* USBMassStorageClassBulkOnly.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3214,6 +3502,31 @@
 			isa = PBXTargetDependency;
 			target = 3EBFD14A1601264400B85B43 /* AppleUSBXHCI */;
 			targetProxy = 3ED3853616012951008B5CB3 /* PBXContainerItemProxy */;
+		};
+		A976246A1A867771002AC2FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3EAF8B070B5D42870029974F /* KLog */;
+			targetProxy = A97624691A867771002AC2FD /* PBXContainerItemProxy */;
+		};
+		A976246C1A867777002AC2FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3EB33C171330EAF700688D55 /* reenumerate_standalone */;
+			targetProxy = A976246B1A867777002AC2FD /* PBXContainerItemProxy */;
+		};
+		A976246E1A86777C002AC2FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 301DB0920EF8920B009BF777 /* usbtracer_standalone */;
+			targetProxy = A976246D1A86777C002AC2FD /* PBXContainerItemProxy */;
+		};
+		A9AFBB4E1A87F67D003C0BEF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9AFBB421A87F5CE003C0BEF /* UMCLogger */;
+			targetProxy = A9AFBB4D1A87F67D003C0BEF /* PBXContainerItemProxy */;
+		};
+		A9C14F341A87EDA200A642EB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9C14F111A87EB8600A642EB /* IOUSBMassStorageClass */;
+			targetProxy = A9C14F331A87EDA200A642EB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3353,9 +3666,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_MODEL_TUNING = G5;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				HEADERSINCLUDE = /usr/include;
 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
 				INSTALL_PATH = /usr/local/bin;
 				ONLY_ACTIVE_ARCH = NO;
@@ -3371,11 +3686,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_MODEL_TUNING = G5;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				HEADERSINCLUDE = /usr/include;
 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
+				INFOPLIST_PREPROCESSOR_DEFINITIONS = "DEBUG_LEVEL=6";
 				INSTALL_PATH = /usr/local/bin;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
@@ -3383,7 +3701,6 @@
 					"-D__APPLE_PRIVATE",
 				);
 				PRODUCT_NAME = usbtracer;
-				ZERO_LINK = NO;
 			};
 			name = Deployment;
 		};
@@ -3391,9 +3708,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_MODEL_TUNING = G5;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				HEADERSINCLUDE = /usr/include;
 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/System.framework/PrivateHeaders;
 				INSTALL_PATH = /usr/local/bin;
 				ONLY_ACTIVE_ARCH = NO;
@@ -3408,31 +3727,35 @@
 		3E61613109B900A600D5A55A /* kprintf */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Developer ID Application: Andy Vandijck (GSF3NR4NQ5)";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5.6.1;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 710.4.14;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_COMPATIBILITY_VERSION = 1.8;
-				DYLIB_CURRENT_VERSION = 5.6.1;
+				DYLIB_CURRENT_VERSION = 710.4.14;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_MODEL_TUNING = G4;
-				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
-				GCC_TREAT_NONCONFORMANT_CODE_ERRORS_AS_WARNINGS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
-				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
 				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = YES;
-				GCC_WARN_PEDANTIC = NO;
-				GCC_WARN_PROTOTYPE_CONVERSION = NO;
-				GCC_WARN_SIGN_COMPARE = NO;
 				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
+				HEADERSINCLUDE = "$(SDK_DIR)/System/Library/Frameworks/Kernel.framework/PrivateHeaders $(SDK_DIR)/System/Library/Frameworks/Kernel.framework/Headers";
 				HEADER_SEARCH_PATHS = (
+					"$(HEADERSINCLUDE)",
 					"$(PROJECT_DIR)",
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -3440,12 +3763,13 @@
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = "";
 				INSTALL_GROUP = wheel;
 				INSTALL_OWNER = root;
-				MODULE_VERSION = 5.6.1;
-				RUN_CLANG_STATIC_ANALYZER = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULE_VERSION = 710.4.14;
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_BUILDER = "AnV Software";
+				VERSION_INFO_FILE = IOUSBFamilyVersion.c;
 			};
 			name = kprintf;
 		};
@@ -3474,30 +3798,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = "";
+				HEADERSINCLUDE = "";
 				INFOPLIST_FILE = IOUSBLib/IOUSBLib.plist;
 				INFOPLIST_PREFIX_HEADER = IOUSBFamilyInfoPlist.pch;
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions/IOUSBFamily.kext/Contents/PlugIns";
-				LIBRARY_SEARCH_PATHS = "";
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = IOUSBLib;
 				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = bundle;
-				ZERO_LINK = NO;
 			};
 			name = Deployment;
 		};
@@ -3505,32 +3815,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "";
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = "";
+				HEADERSINCLUDE = "";
 				INFOPLIST_FILE = IOUSBLib/IOUSBLib.plist;
 				INFOPLIST_PREFIX_HEADER = IOUSBFamilyInfoPlist.pch;
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions/IOUSBFamily.kext/Contents/PlugIns";
-				LIBRARY_SEARCH_PATHS = "";
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = IOUSBLib;
 				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = bundle;
-				ZERO_LINK = YES;
 			};
 			name = Logging;
 		};
@@ -3538,109 +3832,80 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = "";
+				HEADERSINCLUDE = "";
 				INFOPLIST_FILE = IOUSBLib/IOUSBLib.plist;
 				INFOPLIST_PREFIX_HEADER = IOUSBFamilyInfoPlist.pch;
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions/IOUSBFamily.kext/Contents/PlugIns";
-				LIBRARY_SEARCH_PATHS = "";
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = IOUSBLib;
 				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = bundle;
-				ZERO_LINK = NO;
 			};
 			name = kprintf;
 		};
 		3E99F0D3152B6A1D00F97A0C /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = YES;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_USE_GCC3_PFE_SUPPORT = NO;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADERSINCLUDE = /usr/include;
 				INFOPLIST_FILE = USBProberV2/USB_Prober.plist;
 				INFOPLIST_PREFIX_HEADER = IOUSBFamilyInfoPlist.pch;
 				INFOPLIST_PREPROCESS = YES;
+				INFOPLIST_PREPROCESSOR_DEFINITIONS = "DEBUG_LEVEL=6";
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_PATH = /DevTools/Hardware;
+				OTHER_CFLAGS = "-UKERNEL";
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = "USB Prober";
 				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = app;
-				ZERO_LINK = NO;
 			};
 			name = Deployment;
 		};
 		3E99F0D4152B6A1D00F97A0C /* Logging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_USE_GCC3_PFE_SUPPORT = NO;
+				HEADERSINCLUDE = /usr/include;
 				INFOPLIST_FILE = USBProberV2/USB_Prober.plist;
 				INFOPLIST_PREFIX_HEADER = IOUSBFamilyInfoPlist.pch;
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_PATH = /DevTools/Hardware;
+				OTHER_CFLAGS = "-UKERNEL";
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = "USB Prober";
 				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = app;
-				ZERO_LINK = YES;
 			};
 			name = Logging;
 		};
 		3E99F0D5152B6A1D00F97A0C /* kprintf */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = YES;
-				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_USE_GCC3_PFE_SUPPORT = NO;
+				HEADERSINCLUDE = /usr/include;
 				INFOPLIST_FILE = USBProberV2/USB_Prober.plist;
 				INFOPLIST_PREFIX_HEADER = IOUSBFamilyInfoPlist.pch;
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_PATH = /DevTools/Hardware;
+				OTHER_CFLAGS = "-UKERNEL";
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = "USB Prober";
 				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = app;
-				ZERO_LINK = NO;
 			};
 			name = kprintf;
 		};
@@ -3758,9 +4023,6 @@
 		3EAF89FE0B5D42860029974F /* Logging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = IOUSBFamily/IOUSBFamily.plist;
 				INFOPLIST_PREFIX_HEADER = IOUSBFamilyInfoPlist.pch;
@@ -3768,34 +4030,17 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.iokit.IOUSBFamily;
-				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = IOUSBFamily;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = YES;
 			};
 			name = Logging;
 		};
 		3EAF89FF0B5D42860029974F /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				COPY_PHASE_STRIP = NO;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = IOUSBFamily/IOUSBFamily.plist;
 				INFOPLIST_PREFIX_HEADER = IOUSBFamilyInfoPlist.pch;
@@ -3803,26 +4048,10 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.iokit.IOUSBFamily;
-				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = IOUSBFamily;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = NO;
 			};
 			name = Deployment;
 		};
@@ -3830,7 +4059,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"CONTROLLER_USE_KPRINTF=6",
 					"IOUSBDEVICE_USE_KPRINTF=6",
@@ -3843,26 +4071,10 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.iokit.IOUSBFamily;
-				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = IOUSBFamily;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = NO;
 			};
 			name = kprintf;
 		};
@@ -3872,21 +4084,16 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				INSTALLHDRS_COPY_PHASE = YES;
-				INSTALLHDRS_SCRIPT_PHASE = YES;
 				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Frameworks/";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = installhdrs;
-				REZ_EXECUTABLE = YES;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
 					"-Wno-unknown-pragmas",
 				);
-				ZERO_LINK = YES;
 			};
 			name = Logging;
 		};
@@ -3894,21 +4101,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
-				INSTALLHDRS_COPY_PHASE = YES;
-				INSTALLHDRS_SCRIPT_PHASE = YES;
 				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Frameworks/";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = installhdrs;
-				REZ_EXECUTABLE = YES;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
 					"-Wno-unknown-pragmas",
 				);
-				ZERO_LINK = NO;
 			};
 			name = Deployment;
 		};
@@ -3916,27 +4118,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
-				INSTALLHDRS_COPY_PHASE = YES;
-				INSTALLHDRS_SCRIPT_PHASE = YES;
 				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Frameworks/";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = installhdrs;
-				REZ_EXECUTABLE = YES;
 				SECTORDER_FLAGS = "";
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
 					"-Wno-unknown-pragmas",
 				);
-				ZERO_LINK = NO;
 			};
 			name = kprintf;
 		};
 		3EAF8A3D0B5D42860029974F /* Logging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -3947,34 +4145,20 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.driver.AppleUSBOHCI;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = AppleUSBOHCI;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = YES;
 			};
 			name = Logging;
 		};
 		3EAF8A3E0B5D42860029974F /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -3984,34 +4168,20 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.driver.AppleUSBOHCI;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = AppleUSBOHCI;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = NO;
 			};
 			name = Deployment;
 		};
 		3EAF8A3F0B5D42860029974F /* kprintf */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -4026,34 +4196,20 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.driver.AppleUSBOHCI;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = AppleUSBOHCI;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = NO;
 			};
 			name = kprintf;
 		};
 		3EAF8A5F0B5D42860029974F /* Logging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -4064,31 +4220,18 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.driver.AppleUSBEHCI;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				PRODUCT_NAME = AppleUSBEHCI;
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = YES;
 			};
 			name = Logging;
 		};
 		3EAF8A600B5D42860029974F /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -4098,31 +4241,18 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.driver.AppleUSBEHCI;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				PRODUCT_NAME = AppleUSBEHCI;
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = NO;
 			};
 			name = Deployment;
 		};
 		3EAF8A610B5D42860029974F /* kprintf */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -4137,104 +4267,79 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.driver.AppleUSBEHCI;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				PRODUCT_NAME = AppleUSBEHCI;
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = NO;
 			};
 			name = kprintf;
 		};
 		3EAF8A7B0B5D42860029974F /* Logging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)",
+					"$(inherited)",
+					"$(SDK_DIR)/System/Library/Frameworks/Kernel.framework/Headers",
+					"$(SDK_DIR)/System/Library/Frameworks/Kernel.framework/PrivateHeaders",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = AppleUSBUHCI/AppleUSBUHCI.plist;
 				INFOPLIST_PREFIX_HEADER = IOUSBFamilyInfoPlist.pch;
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.driver.AppleUSBUHCI;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = AppleUSBUHCI;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = YES;
 			};
 			name = Logging;
 		};
 		3EAF8A7C0B5D42860029974F /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)",
+					"$(inherited)",
+					"$(SDK_DIR)/System/Library/Frameworks/Kernel.framework/Headers",
+					"$(SDK_DIR)/System/Library/Frameworks/Kernel.framework/PrivateHeaders",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = AppleUSBUHCI/AppleUSBUHCI.plist;
 				INFOPLIST_PREFIX_HEADER = IOUSBFamilyInfoPlist.pch;
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.driver.AppleUSBUHCI;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = AppleUSBUHCI;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = NO;
 			};
 			name = Deployment;
 		};
 		3EAF8A7D0B5D42860029974F /* kprintf */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -4243,39 +4348,33 @@
 					"DEBUG_LEVEL=3",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)",
+					"$(inherited)",
+					"$(SDK_DIR)/System/Library/Frameworks/Kernel.framework/Headers",
+					"$(SDK_DIR)/System/Library/Frameworks/Kernel.framework/PrivateHeaders",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = AppleUSBUHCI/AppleUSBUHCI.plist;
 				INFOPLIST_PREFIX_HEADER = IOUSBFamilyInfoPlist.pch;
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.driver.AppleUSBUHCI;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = AppleUSBUHCI;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = NO;
 			};
 			name = kprintf;
 		};
 		3EAF8A8D0B5D42860029974F /* Logging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -4286,34 +4385,20 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.driver.AppleUSBHub;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = AppleUSBHub;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = YES;
 			};
 			name = Logging;
 		};
 		3EAF8A8E0B5D42860029974F /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -4323,34 +4408,20 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.driver.AppleUSBHub;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = AppleUSBHub;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = NO;
 			};
 			name = Deployment;
 		};
 		3EAF8A8F0B5D42860029974F /* kprintf */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -4364,34 +4435,20 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.driver.AppleUSBHub;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = AppleUSBHub;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = NO;
 			};
 			name = kprintf;
 		};
 		3EAF8A990B5D42860029974F /* Logging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -4401,29 +4458,21 @@
 				INFOPLIST_FILE = IOUSBHIDDriver/IOUSBHIDDriverSafeBoot.plist;
 				INFOPLIST_PREFIX_HEADER = IOUSBFamilyInfoPlist.pch;
 				INFOPLIST_PREPROCESS = YES;
-				KERNEL_MODULE = YES;
 				LIBRARY_SEARCH_PATHS = "";
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.driver.IOUSBHIDDriver;
 				MODULE_VERSION = 5.6.0;
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = IOUSBHIDDriverSafeBoot;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = YES;
 			};
 			name = Logging;
 		};
 		3EAF8A9A0B5D42860029974F /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -4432,29 +4481,21 @@
 				INFOPLIST_FILE = IOUSBHIDDriver/IOUSBHIDDriverSafeBoot.plist;
 				INFOPLIST_PREFIX_HEADER = IOUSBFamilyInfoPlist.pch;
 				INFOPLIST_PREPROCESS = YES;
-				KERNEL_MODULE = YES;
 				LIBRARY_SEARCH_PATHS = "";
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.driver.IOUSBHIDDriver;
 				MODULE_VERSION = 5.6.0;
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = IOUSBHIDDriverSafeBoot;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = NO;
 			};
 			name = Deployment;
 		};
 		3EAF8A9B0B5D42860029974F /* kprintf */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -4463,29 +4504,21 @@
 				INFOPLIST_FILE = IOUSBHIDDriver/IOUSBHIDDriverSafeBoot.plist;
 				INFOPLIST_PREFIX_HEADER = IOUSBFamilyInfoPlist.pch;
 				INFOPLIST_PREPROCESS = YES;
-				KERNEL_MODULE = YES;
 				LIBRARY_SEARCH_PATHS = "";
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.driver.IOUSBHIDDriver;
 				MODULE_VERSION = 5.6.0;
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = IOUSBHIDDriverSafeBoot;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = NO;
 			};
 			name = kprintf;
 		};
 		3EAF8AA70B5D42860029974F /* Logging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -4496,34 +4529,20 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.driver.AppleUSBMergeNub;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = AppleUSBMergeNub;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = YES;
 			};
 			name = Logging;
 		};
 		3EAF8AA80B5D42860029974F /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -4533,34 +4552,20 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.driver.AppleUSBMergeNub;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = AppleUSBMergeNub;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = NO;
 			};
 			name = Deployment;
 		};
 		3EAF8AA90B5D42860029974F /* kprintf */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -4570,34 +4575,20 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.driver.AppleUSBMergeNub;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = AppleUSBMergeNub;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = NO;
 			};
 			name = kprintf;
 		};
 		3EAF8AB60B5D42860029974F /* Logging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -4608,34 +4599,20 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.driver.AppleUSBOpticalMouse;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = AppleUSBOpticalMouse;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = YES;
 			};
 			name = Logging;
 		};
 		3EAF8AB70B5D42860029974F /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -4645,34 +4622,20 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.driver.AppleUSBOpticalMouse;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = AppleUSBOpticalMouse;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = NO;
 			};
 			name = Deployment;
 		};
 		3EAF8AB80B5D42860029974F /* kprintf */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -4682,34 +4645,20 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.driver.AppleUSBOpticalMouse;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = AppleUSBOpticalMouse;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = NO;
 			};
 			name = kprintf;
 		};
 		3EAF8AC40B5D42870029974F /* Logging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -4720,34 +4669,20 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.driver.AppleUSBComposite;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = IOUSBCompositeDriver;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = YES;
 			};
 			name = Logging;
 		};
 		3EAF8AC50B5D42870029974F /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -4757,34 +4692,20 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.driver.AppleUSBComposite;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = IOUSBCompositeDriver;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = NO;
 			};
 			name = Deployment;
 		};
 		3EAF8AC60B5D42870029974F /* kprintf */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -4794,34 +4715,20 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.driver.AppleUSBComposite;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = IOUSBCompositeDriver;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = NO;
 			};
 			name = kprintf;
 		};
 		3EAF8AD20B5D42870029974F /* Logging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -4832,34 +4739,20 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.iokit.IOUSBHIDDriver;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = IOUSBHIDDriver;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = YES;
 			};
 			name = Logging;
 		};
 		3EAF8AD30B5D42870029974F /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -4869,34 +4762,20 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.iokit.IOUSBHIDDriver;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = IOUSBHIDDriver;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = NO;
 			};
 			name = Deployment;
 		};
 		3EAF8AD40B5D42870029974F /* kprintf */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "IOUSBHIDDriver_USE_KPRINTF=5";
@@ -4907,34 +4786,20 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.iokit.IOUSBHIDDriver;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = IOUSBHIDDriver;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = NO;
 			};
 			name = kprintf;
 		};
 		3EAF8AE30B5D42870029974F /* Logging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -4945,34 +4810,20 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.iokit.IOUSBUserClient;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = IOUSBUserClient;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = YES;
 			};
 			name = Logging;
 		};
 		3EAF8AE40B5D42870029974F /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -4982,34 +4833,20 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.iokit.IOUSBUserClient;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = IOUSBUserClient;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = NO;
 			};
 			name = Deployment;
 		};
 		3EAF8AE50B5D42870029974F /* kprintf */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -5019,28 +4856,13 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.iokit.IOUSBUserClient;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = IOUSBUserClient;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = NO;
 			};
 			name = kprintf;
 		};
@@ -5048,32 +4870,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADERSINCLUDE = /usr/include;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = IOUSBLib/IOUSBLib.plist;
 				INFOPLIST_PREFIX_HEADER = IOUSBFamilyInfoPlist.pch;
 				INFOPLIST_PREPROCESS = YES;
-				LIBRARY_SEARCH_PATHS = "";
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = IOUSBLib;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = bundle;
-				ZERO_LINK = YES;
 			};
 			name = Logging;
 		};
@@ -5081,30 +4891,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADERSINCLUDE = /usr/include;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = IOUSBLib/IOUSBLib.plist;
 				INFOPLIST_PREFIX_HEADER = IOUSBFamilyInfoPlist.pch;
 				INFOPLIST_PREPROCESS = YES;
-				LIBRARY_SEARCH_PATHS = "";
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = IOUSBLib;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = bundle;
-				ZERO_LINK = NO;
 			};
 			name = Deployment;
 		};
@@ -5112,36 +4910,25 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADERSINCLUDE = /usr/include;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = IOUSBLib/IOUSBLib.plist;
 				INFOPLIST_PREFIX_HEADER = IOUSBFamilyInfoPlist.pch;
 				INFOPLIST_PREPROCESS = YES;
-				LIBRARY_SEARCH_PATHS = "";
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = IOUSBLib;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = bundle;
-				ZERO_LINK = NO;
 			};
 			name = kprintf;
 		};
 		3EAF8B140B5D42870029974F /* Logging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -5153,29 +4940,20 @@
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
 				INSTALL_PATH = "/DevTools/Hardware/USB Prober.app/Contents/Resources";
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.iokit.KLog;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = KLog;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = YES;
 			};
 			name = Logging;
 		};
 		3EAF8B150B5D42870029974F /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -5186,29 +4964,20 @@
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
 				INSTALL_PATH = "/DevTools/Hardware/USB Prober.app/Contents/Resources";
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.iokit.KLog;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = KLog;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = NO;
 			};
 			name = Deployment;
 		};
 		3EAF8B160B5D42870029974F /* kprintf */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -5219,23 +4988,13 @@
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
 				INSTALL_PATH = "/DevTools/Hardware/USB Prober.app/Contents/Resources";
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.iokit.KLog;
 				MODULE_VERSION = 5.6.0;
-				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = KLog;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = NO;
 			};
 			name = kprintf;
 		};
@@ -5243,14 +5002,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_MODEL_TUNING = G5;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				HEADERSINCLUDE = /usr/include;
+				INFOPLIST_PREPROCESSOR_DEFINITIONS = "DEBUG_LEVEL=6";
 				INSTALL_PATH = /usr/local/bin;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = reenumerate;
-				ZERO_LINK = NO;
 			};
 			name = Deployment;
 		};
@@ -5258,9 +5019,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_MODEL_TUNING = G5;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				HEADERSINCLUDE = /usr/include;
 				INSTALL_PATH = /usr/local/bin;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = reenumerate;
@@ -5271,9 +5034,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_MODEL_TUNING = G5;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				HEADERSINCLUDE = /usr/include;
 				INSTALL_PATH = /usr/local/bin;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = reenumerate;
@@ -5283,6 +5048,7 @@
 		3EBFD1671601264400B85B43 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -5293,31 +5059,18 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.driver.AppleUSBXHCI;
 				MODULE_VERSION = 5.6.1;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				PRODUCT_NAME = AppleUSBXHCI;
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = NO;
 			};
 			name = Deployment;
 		};
 		3EBFD1681601264400B85B43 /* Logging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -5328,31 +5081,18 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.driver.AppleUSBXHCI;
 				MODULE_VERSION = 5.6.1;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				PRODUCT_NAME = AppleUSBXHCI;
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = YES;
 			};
 			name = Logging;
 		};
 		3EBFD1691601264400B85B43 /* kprintf */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -5367,55 +5107,260 @@
 				INSTALL_GROUP = wheel;
 				INSTALL_MODE_FLAG = "a-w,u+w,a+rX";
 				INSTALL_OWNER = root;
-				KERNEL_EXTENSION = YES;
-				KERNEL_MODULE = YES;
-				MODULE_IOKIT = YES;
 				MODULE_NAME = com.apple.driver.AppleUSBXHCI;
 				MODULE_VERSION = 5.6.1;
-				OTHER_CFLAGS = (
-					"-W",
-					"-Wall",
-					"-Wno-unused",
-				);
 				PRODUCT_NAME = AppleUSBXHCI;
 				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
 				WRAPPER_EXTENSION = kext;
-				ZERO_LINK = NO;
+			};
+			name = kprintf;
+		};
+		A9AFBB481A87F5CE003C0BEF /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 3.7.0;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1.0.0;
+				DYLIB_CURRENT_VERSION = 3.7.0;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADERSINCLUDE = /usr/include;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULE_VERSION = 3.7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Deployment;
+		};
+		A9AFBB491A87F5CE003C0BEF /* Logging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 3.7.0;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1.0.0;
+				DYLIB_CURRENT_VERSION = 3.7.0;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADERSINCLUDE = /usr/include;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULE_VERSION = 3.7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Logging;
+		};
+		A9AFBB4A1A87F5CE003C0BEF /* kprintf */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 3.7.0;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1.0.0;
+				DYLIB_CURRENT_VERSION = 3.7.0;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADERSINCLUDE = /usr/include;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULE_VERSION = 3.7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = kprintf;
+		};
+		A9C14F1B1A87EB8700A642EB /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 3.7.0;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1.0.0;
+				DYLIB_CURRENT_VERSION = 3.7.0;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = IOUSBMassStorageClass/IOUSBMassStorageClass.plist;
+				INFOPLIST_PREPROCESS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULE_NAME = com.apple.iokit.IOUSBMassStorageClass;
+				MODULE_VERSION = 3.7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Deployment;
+		};
+		A9C14F1C1A87EB8700A642EB /* Logging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 3.7.0;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1.0.0;
+				DYLIB_CURRENT_VERSION = 3.7.0;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = IOUSBMassStorageClass/IOUSBMassStorageClass.plist;
+				INFOPLIST_PREPROCESS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULE_NAME = com.apple.iokit.IOUSBMassStorageClass;
+				MODULE_VERSION = 3.7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Logging;
+		};
+		A9C14F1D1A87EB8700A642EB /* kprintf */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 3.7.0;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1.0.0;
+				DYLIB_CURRENT_VERSION = 3.7.0;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = IOUSBMassStorageClass/IOUSBMassStorageClass.plist;
+				INFOPLIST_PREPROCESS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULE_NAME = com.apple.iokit.IOUSBMassStorageClass;
+				MODULE_VERSION = 3.7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = kext;
 			};
 			name = kprintf;
 		};
 		DDDEF9CC08886330003A7655 /* Logging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Developer ID Application: Andy Vandijck (GSF3NR4NQ5)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 5.6.1;
+				CURRENT_PROJECT_VERSION = 710.4.14;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_COMPATIBILITY_VERSION = 1.8;
-				DYLIB_CURRENT_VERSION = 5.6.1;
-				GCC_OPTIMIZATION_LEVEL = 3;
+				DYLIB_CURRENT_VERSION = 710.4.14;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG_LEVEL=5";
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
-				GCC_TREAT_NONCONFORMANT_CODE_ERRORS_AS_WARNINGS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
-				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
 				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = YES;
-				GCC_WARN_PEDANTIC = NO;
-				GCC_WARN_PROTOTYPE_CONVERSION = NO;
-				GCC_WARN_SIGN_COMPARE = NO;
 				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
+				HEADERSINCLUDE = "$(SDK_DIR)/System/Library/Frameworks/Kernel.framework/PrivateHeaders $(SDK_DIR)/System/Library/Frameworks/Kernel.framework/Headers";
 				HEADER_SEARCH_PATHS = (
+					"$(HEADERSINCLUDE)",
 					"$(PROJECT_DIR)",
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -5423,57 +5368,65 @@
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = "DEBUG_LEVEL=6";
 				INSTALL_GROUP = wheel;
 				INSTALL_OWNER = root;
-				MODULE_VERSION = 5.6.1;
-				OTHER_CFLAGS = "-DDEBUG_LEVEL=5";
-				RUN_CLANG_STATIC_ANALYZER = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULE_VERSION = 710.4.14;
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_BUILDER = "AnV Software";
+				VERSION_INFO_FILE = IOUSBFamilyVersion.c;
 			};
 			name = Logging;
 		};
 		DDDEF9CD08886330003A7655 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Developer ID Application: Andy Vandijck (GSF3NR4NQ5)";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5.6.1;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 710.4.14;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_COMPATIBILITY_VERSION = 1.8;
-				DYLIB_CURRENT_VERSION = 5.6.1;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_MODEL_TUNING = G4;
-				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_PREPROCESSOR_DEFINITIONS = "";
+				DYLIB_CURRENT_VERSION = 710.4.14;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_OPTIMIZATION_LEVEL = fast;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG_LEVEL=DEBUG_LEVEL_DEVELOPMENT";
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
-				GCC_TREAT_NONCONFORMANT_CODE_ERRORS_AS_WARNINGS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_UNROLL_LOOPS = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
-				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = NO;
 				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = YES;
-				GCC_WARN_PEDANTIC = NO;
-				GCC_WARN_PROTOTYPE_CONVERSION = NO;
-				GCC_WARN_SIGN_COMPARE = NO;
 				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
+				HEADERSINCLUDE = "$(SDK_DIR)/System/Library/Frameworks/Kernel.framework/PrivateHeaders $(SDK_DIR)/System/Library/Frameworks/Kernel.framework/Headers";
 				HEADER_SEARCH_PATHS = (
+					"$(HEADERSINCLUDE)",
 					"$(PROJECT_DIR)",
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				INFOPLIST_PREPROCESSOR_DEFINITIONS = "";
+				INFOPLIST_PREPROCESSOR_DEFINITIONS = "DEBUG_LEVEL=DEBUG_LEVEL_DEVELOPMENT";
 				INSTALL_GROUP = wheel;
 				INSTALL_OWNER = root;
-				MODULE_VERSION = 5.6.1;
-				RUN_CLANG_STATIC_ANALYZER = NO;
+				LLVM_LTO = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULE_VERSION = 710.4.14;
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_BUILDER = "AnV Software";
+				VERSION_INFO_FILE = IOUSBFamilyVersion.c;
 			};
 			name = Deployment;
 		};
@@ -5726,6 +5679,26 @@
 				3EBFD1671601264400B85B43 /* Deployment */,
 				3EBFD1681601264400B85B43 /* Logging */,
 				3EBFD1691601264400B85B43 /* kprintf */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Deployment;
+		};
+		A9AFBB471A87F5CE003C0BEF /* Build configuration list for PBXNativeTarget "UMCLogger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9AFBB481A87F5CE003C0BEF /* Deployment */,
+				A9AFBB491A87F5CE003C0BEF /* Logging */,
+				A9AFBB4A1A87F5CE003C0BEF /* kprintf */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Deployment;
+		};
+		A9C14F1A1A87EB8700A642EB /* Build configuration list for PBXNativeTarget "IOUSBMassStorageClass" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9C14F1B1A87EB8700A642EB /* Deployment */,
+				A9C14F1C1A87EB8700A642EB /* Logging */,
+				A9C14F1D1A87EB8700A642EB /* kprintf */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;

@@ -24,8 +24,8 @@
 #ifndef _USBHUB_H
 #define _USBHUB_H
 
-#include "../../IOUSBFamily/Headers/USB.h"
-#include "../../IOUSBFamily/Headers/USBSpec.h"
+#include "USB.h"
+#include "USBSpec.h"
 
     /*!
     @header     USBHub.h
@@ -152,6 +152,9 @@ enum {
     kPerPortOverCurrentBit  = (1 << 3),
     kNoOverCurrentBit       = (1 << 4),
 	
+    kUSBHubOvercurrentMask  = 0x18,
+    kUSBHubOvercurrentShift = 3,
+    
 	kHubTTThinkTimeMask		= 0x60,
 	kHubTTThinkTimeShift	= 5,
 	

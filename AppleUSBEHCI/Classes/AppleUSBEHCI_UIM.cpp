@@ -291,7 +291,7 @@ do {																			\
 	dmaAddrHighBits = (UInt32)(segments.fIOVMAddr >> 32);						\
 	if (status || (numSegments != 1) || (dmaAddrHighBits && !_is64bit))			\
 	{																			\
-		USBError(1, "AppleUSBEHCI[%p]::CreateHSIsochTransfer - could not generate segments err (%p) numSegments (%d) fLength (%d)", this, (void*)status, (int)numSegments, (int)segments.fLength);	\
+		USBError(1, "AppleUSBEHCI[%p]::CreateHSIsochTransfer - could not generate segments err (%p) numSegments (%d) fLength (%d)", this, (void*)(UInt64)status, (int)numSegments, (int)segments.fLength);	\
 		status = status ? status : kIOReturnInternalError;						\
 		dmaStartAddr = 0;														\
 		segLen = 0;																\
@@ -587,10 +587,10 @@ AppleUSBEHCI::UIMCreateControlEndpoint(UInt8 functionAddress, UInt8 endpointNumb
 									   USBDeviceAddress highSpeedHub, int highSpeedPort)
 {
     AppleEHCIQueueHead	*pEP;
-	
+
     USBLog(3, "AppleUSBEHCI[%p]::UIMCreateControlEndpoint(%d, %d, %d, %d @(%d, %d))", this,
 		   functionAddress, endpointNumber, maxPacketSize, speed, highSpeedHub, highSpeedPort);
-	
+
     if (_rootHubFuncAddress == functionAddress)
     {
         return(kIOReturnSuccess);
@@ -813,7 +813,7 @@ AppleUSBEHCI::allocateTDs(AppleEHCIQueueHead* pEDQueue, IOUSBCommand *command, I
 			dmaAddrHighBits = (UInt32)(segments.fIOVMAddr >> 32);
 			if (status || (numSegments != 1) || (dmaAddrHighBits && !_is64bit))
 			{
-				USBError(1, "AppleUSBEHCI[%p]::allocateTDs - could not generate segments err (%p) numSegments (%d) fLength (%d)", this, (void*)status, (int)numSegments, (int)segments.fLength);
+				USBError(1, "AppleUSBEHCI[%p]::allocateTDs - could not generate segments err (%p) numSegments (%d) fLength (%d)", this, (void*)(UInt64)status, (int)numSegments, (int)segments.fLength);
 				status = status ? status : kIOReturnInternalError;
 				dmaStartAddr = 0;
 				totalPhysLength = 0;
@@ -825,7 +825,7 @@ AppleUSBEHCI::allocateTDs(AppleEHCIQueueHead* pEDQueue, IOUSBCommand *command, I
 				totalPhysLength = segments.fLength;
 			}			
 			
-			USBLog(7, "AppleUSBEHCI[%p]::allocateTDs - gen64IOVMSegments returned length of %d (out of %d) and start of %p:%p", this, (uint32_t)totalPhysLength, (uint32_t)bufferSize, (void*)dmaAddrHighBits, (void*)dmaStartAddr);
+			USBLog(7, "AppleUSBEHCI[%p]::allocateTDs - gen64IOVMSegments returned length of %d (out of %d) and start of %p:%p", this, (uint32_t)totalPhysLength, (uint32_t)bufferSize, (void*)(UInt64)dmaAddrHighBits, (void*)(UInt64)dmaStartAddr);
 			dmaStartOffset = (dmaStartAddr & (kEHCIPageSize-1));			
 			bytesToSchedule = 0;
 			
@@ -1244,21 +1244,21 @@ TranslateStatusToUSBError(UInt32 status)
     static const UInt32 statusToErrorMap[] = {
         /* OHCI Error */     /* USB Error */
         /*  0 */		kIOReturnSuccess,
-        /*  1 */		kIOUSBCRCErr,
-        /*  2 */ 		kIOUSBBitstufErr,
-        /*  3 */ 		kIOUSBDataToggleErr,
-        /*  4 */ 		kIOUSBPipeStalled,
-        /*  5 */ 		kIOReturnNotResponding,
-        /*  6 */ 		kIOUSBPIDCheckErr,
-        /*  7 */ 		kIOUSBWrongPIDErr,
-        /*  8 */ 		kIOReturnOverrun,
-        /*  9 */ 		kIOReturnUnderrun,
-        /* 10 */ 		kIOUSBReserved1Err,
-        /* 11 */ 		kIOUSBReserved2Err,
-        /* 12 */ 		kIOUSBBufferOverrunErr,
-        /* 13 */ 		kIOUSBBufferUnderrunErr,
-        /* 14 */		kIOUSBNotSent1Err,
-        /* 15 */		kIOUSBNotSent2Err
+        /*  1 */		(UInt32)kIOUSBCRCErr,
+        /*  2 */ 		(UInt32)kIOUSBBitstufErr,
+        /*  3 */ 		(UInt32)kIOUSBDataToggleErr,
+        /*  4 */ 		(UInt32)kIOUSBPipeStalled,
+        /*  5 */ 		(UInt32)kIOReturnNotResponding,
+        /*  6 */ 		(UInt32)kIOUSBPIDCheckErr,
+        /*  7 */ 		(UInt32)kIOUSBWrongPIDErr,
+        /*  8 */ 		(UInt32)kIOReturnOverrun,
+        /*  9 */ 		(UInt32)kIOReturnUnderrun,
+        /* 10 */ 		(UInt32)kIOUSBReserved1Err,
+        /* 11 */ 		(UInt32)kIOUSBReserved2Err,
+        /* 12 */ 		(UInt32)kIOUSBBufferOverrunErr,
+        /* 13 */ 		(UInt32)kIOUSBBufferUnderrunErr,
+        /* 14 */		(UInt32)kIOUSBNotSent1Err,
+        /* 15 */		(UInt32)kIOUSBNotSent2Err
     };
 	
     if (status > 15)
@@ -1394,7 +1394,7 @@ AppleUSBEHCI::EHCIUIMDoDoneQueueProcessing(EHCIGeneralTransferDescriptorPtr pHCD
 								else
 								{
 									_controlBulkTransactionsOut--;
-									USBLog(7, "AppleUSBEHCI[%p]::EHCIUIMDoDoneQueueProcessing - _controlBulkTransactionsOut(%p) pHCDoneTD(%p)", this, (void*)_controlBulkTransactionsOut, pHCDoneTD);
+									USBLog(7, "AppleUSBEHCI[%p]::EHCIUIMDoDoneQueueProcessing - _controlBulkTransactionsOut(%p) pHCDoneTD(%p)", this, (void*)(UInt64)_controlBulkTransactionsOut, pHCDoneTD);
 									if (!_controlBulkTransactionsOut)
 									{
 										USBLog(7, "AppleUSBEHCI[%p]::EHCIUIMDoDoneQueueProcessing - no more _controlBulkTransactionsOut - halting AsyncQueue", this);
@@ -1605,7 +1605,7 @@ AppleUSBEHCI::scavengeAnEndpointQueue(IOUSBControllerListElement *pListElem, IOU
 							   (pQH->_queueType == kEHCITypeControl) ? "CONTROL" : ((pQH->_queueType == kEHCITypeBulk) ? "BULK" : "UNKNOWN"),
 							   qTD,
 							   (int)pQH->_functionNumber, endpoint, 
-							   (int)debugRetryCount, (void*)flagsCErr, (void*)flags);						
+							   (int)debugRetryCount, (void*)(UInt64)flagsCErr, (void*)(UInt64)flags);
 
 						// Now try to software restart transaction if appropriate.
 						if ( ((flags & kEHCITDStatus_XactErr) != 0) && ((flags & kEHCITDStatus_Halted) != 0) )	// Halted due to transaction error
@@ -1979,7 +1979,7 @@ AppleUSBEHCI::returnTransactions(AppleEHCIQueueHead *pED, EHCIGeneralTransferDes
 	if (USBToHostLong(pED->GetSharedLogical()->NextqTDPtr) != (pED->_qTD->pPhysical & ~0x1F))
 	{
 		// 7592955 - make sure that the NextqTDPtr points to something we know and trust before we clear the "bytes to transfer" bits
-		USBLog(5, "AppleUSBEHCI[%p]::returnTransactions - NextqTDPtr(%p) AltqTDPtr(%p) - changing NextqTDPtr(%p)", this, (void*)USBToHostLong(pED->GetSharedLogical()->NextqTDPtr), (void*)USBToHostLong(pED->GetSharedLogical()->AltqTDPtr), (void*)(pED->_qTD->pPhysical & ~0x1F));
+		USBLog(5, "AppleUSBEHCI[%p]::returnTransactions - NextqTDPtr(%p) AltqTDPtr(%p) - changing NextqTDPtr(%p)", this, (void*)(UInt64)USBToHostLong(pED->GetSharedLogical()->NextqTDPtr), (void*)(UInt64)USBToHostLong(pED->GetSharedLogical()->AltqTDPtr), (void*)(UInt64)(pED->_qTD->pPhysical & ~0x1F));
 		pED->GetSharedLogical()->NextqTDPtr = HostToUSBLong( (UInt32)pED->_qTD->pPhysical & ~0x1F);
 	}
 	
@@ -2303,7 +2303,7 @@ AppleUSBEHCI::unlinkAsyncEndpoint(AppleEHCIQueueHead * pED, AppleEHCIQueueHead *
 					count++;
 					if ((count % 1000) == 0)
 					{
-						USBLog(2, "AppleUSBEHCI[%p]::unlinkAsyncEndpoint: count(%d) USBCMD(%p) USBSTS(%p) USBINTR(%p) ", this, (int)count, (void*)USBToHostLong(_pEHCIRegisters->USBCMD), (void*)USBToHostLong(_pEHCIRegisters->USBSTS), (void*)USBToHostLong(_pEHCIRegisters->USBIntr));
+						USBLog(2, "AppleUSBEHCI[%p]::unlinkAsyncEndpoint: count(%d) USBCMD(%p) USBSTS(%p) USBINTR(%p) ", this, (int)count, (void*)(UInt64)USBToHostLong(_pEHCIRegisters->USBCMD), (void*)(UInt64)USBToHostLong(_pEHCIRegisters->USBSTS), (void*)(UInt64)USBToHostLong(_pEHCIRegisters->USBIntr));
 					}
 					if ( count > 10000)
 					{
@@ -2673,7 +2673,7 @@ AppleUSBEHCI::UIMCreateInterruptEndpoint(short					functionAddress,
 	err = AllocateInterruptBandwidth(pEP, ttiPtr);
 	if (err)
 	{
-		USBLog(1, "AppleUSBEHCI[%p]::UIMCreateInterruptEndpoint - AllocateInterruptBandwidth returned err(%p)", this, (void*)err);
+		USBLog(1, "AppleUSBEHCI[%p]::UIMCreateInterruptEndpoint - AllocateInterruptBandwidth returned err(%p)", this, (void*)(UInt64)err);
 		DeallocateED(pEP);
 		return err;
 	}
@@ -3124,7 +3124,7 @@ AppleUSBEHCI::UIMCreateIsochEndpoint(short					functionAddress,
 
 	if (err)
 	{
-		USBLog(1, "AppleUSBEHCI[%p]::UIMCreateIsochEndpoint - AllocateIsochBandwidth returned err(%p)", this, (void*)err);
+		USBLog(1, "AppleUSBEHCI[%p]::UIMCreateIsochEndpoint - AllocateIsochBandwidth returned err(%p)", this, (void*)(UInt64)err);
 		
 		// Set the maxPacketSize to 0 if we fail, which indicates that the endpoint has zero bandwidth allocated
 		pEP->maxPacketSize = 0;
@@ -3790,7 +3790,7 @@ AppleUSBEHCI::CreateSplitIsochTransfer(AppleEHCIIsochEndpoint * pEP, IOUSBIsocCo
 		dmaAddrHighBits = (UInt32)(segments.fIOVMAddr >> 32);
 		if (status || (numSegments != 1) || (dmaAddrHighBits && !_is64bit))
 		{
-			USBError(1, "AppleUSBEHCI[%p]::CreateSplitIsochTransfer - could not generate segments err (%p) numSegments (%d) fLength (%d)", this, (void*)status, (int)numSegments, (int)segments.fLength);
+			USBError(1, "AppleUSBEHCI[%p]::CreateSplitIsochTransfer - could not generate segments err (%p) numSegments (%d) fLength (%d)", this, (void*)(UInt64)status, (int)numSegments, (int)segments.fLength);
 			status = status ? status : kIOReturnInternalError;
 			dmaStartAddr = 0;
 			segLen = 0;
@@ -3812,7 +3812,7 @@ AppleUSBEHCI::CreateSplitIsochTransfer(AppleEHCIIsochEndpoint * pEP, IOUSBIsocCo
 		}
 		pNewSITD->GetSharedLogical()->buffPtr0 = HostToUSBLong(dmaStartAddr);
 		pNewSITD->GetSharedLogical()->extBuffPtr0 = HostToUSBLong(dmaAddrHighBits);
-		USBLog(7, "AppleUSBEHCI[%p]::CreateSplitIocTransfer - gen64IOVMSegments returned start of %p:%p; length %d", this, (void*)dmaAddrHighBits, (void*)dmaStartAddr, (uint32_t)segLen);
+		USBLog(7, "AppleUSBEHCI[%p]::CreateSplitIocTransfer - gen64IOVMSegments returned start of %p:%p; length %d", this, (void*)(UInt64)dmaAddrHighBits, (void*)(UInt64)dmaStartAddr, (uint32_t)segLen);
 		
 		transferOffset += segLen;
 		bufferSize -= segLen;
@@ -3831,7 +3831,7 @@ AppleUSBEHCI::CreateSplitIsochTransfer(AppleEHCIIsochEndpoint * pEP, IOUSBIsocCo
 			dmaAddrHighBits = (UInt32)(segments.fIOVMAddr >> 32);
 			if (status || (numSegments != 1) || (dmaAddrHighBits && !_is64bit))
 			{
-				USBError(1, "AppleUSBEHCI[%p]::CreateSplitIsochTransfer - could not generate segments err (%p) numSegments (%d) fLength (%d)", this, (void*)status, (int)numSegments, (int)segments.fLength);
+				USBError(1, "AppleUSBEHCI[%p]::CreateSplitIsochTransfer - could not generate segments err (%p) numSegments (%d) fLength (%d)", this, (void*)(UInt64)status, (int)numSegments, (int)segments.fLength);
 				status = status ? status : kIOReturnInternalError;
 				dmaStartAddr = 0;
 				segLen = 0;
@@ -3852,7 +3852,7 @@ AppleUSBEHCI::CreateSplitIsochTransfer(AppleEHCIIsochEndpoint * pEP, IOUSBIsocCo
 			{
 				segLen = kEHCIPageSize;
 			}
-			USBLog(7, "AppleUSBEHCI[%p]::CreateSplitIocTransfer - gen64IOVMSegments returned start of %p:%p; length %d", this, (void*)dmaAddrHighBits, (void*)dmaStartAddr, (uint32_t)segLen);
+			USBLog(7, "AppleUSBEHCI[%p]::CreateSplitIocTransfer - gen64IOVMSegments returned start of %p:%p; length %d", this, (void*)(UInt64)dmaAddrHighBits, (void*)(UInt64)dmaStartAddr, (uint32_t)segLen);
 			transferOffset += segLen;
 			bufferSize -= segLen;
 		}
@@ -4605,7 +4605,7 @@ AppleUSBEHCI::CheckEDListForTimeouts(AppleEHCIQueueHead *head)
 		
 		if((pTDPhys != pTD->pPhysical) && !(pED->GetSharedLogical()->qTDFlags & USBToHostLong(kEHCITDStatus_Halted | kEHCITDStatus_Active)  ))
 		{
-			USBLog(6, "AppleUSBEHCI[%p]::CheckEDListForTimeouts - pED (%p) - mismatched logical and physical - TD (L:%p - P:%p) will be scavenged later", this, pED, pTD, (void*)pTD->pPhysical);
+			USBLog(6, "AppleUSBEHCI[%p]::CheckEDListForTimeouts - pED (%p) - mismatched logical and physical - TD (L:%p - P:%p) will be scavenged later", this, pED, pTD, (void*)(UInt64)pTD->pPhysical);
 			pED->print(7, this);
 			printTD(pTD, 7);
 			if (pTD->pLogicalNext)
@@ -5273,7 +5273,7 @@ AppleUSBEHCI::AllocateInterruptBandwidth(AppleEHCIQueueHead	*pED, AppleUSBEHCITT
 		err = pTT->AllocatePeriodicBandwidth(pED->_pSPE);
 		if (err)
 		{
-			USBLog (1, "AppleUSBEHCI[%p]::AllocateInterruptBandwidth - pTT->AllocatePeriodicBandwidth returned err(%p)", this, (void*)err);
+			USBLog (1, "AppleUSBEHCI[%p]::AllocateInterruptBandwidth - pTT->AllocatePeriodicBandwidth returned err(%p)", this, (void*)(UInt64)err);
 			
 			pED->_pSPE->release();
 			pED->_pSPE = NULL;
@@ -5376,7 +5376,7 @@ AppleUSBEHCI::ReturnInterruptBandwidth(AppleEHCIQueueHead	*pED)
 
 	if (err)
 	{
-		USBLog (1, "AppleUSBEHCI[%p]::ReturnInterruptBandwidth - pTT->ReturnInterruptBandwidth returned err(%p)", this, (void*)err);
+		USBLog (1, "AppleUSBEHCI[%p]::ReturnInterruptBandwidth - pTT->ReturnInterruptBandwidth returned err(%p)", this, (void*)(UInt64)err);
 		return err;
 	}
 	ReturnHSPeriodicSplitBandwidth(pED->_pSPE);
@@ -5534,7 +5534,7 @@ AppleUSBEHCI::AllocateIsochBandwidth(AppleEHCIIsochEndpoint	*pEP, AppleUSBEHCITT
 	err = pTT->AllocatePeriodicBandwidth(pEP->pSPE);
 	if (err)
 	{
-		USBLog (gEHCIBandwidthLogLevel, "AppleUSBEHCI[%p]::AllocateIsochBandwidth - pTT->AllocatePeriodicBandwidth returned err(%p)", this, (void*)err);
+		USBLog (gEHCIBandwidthLogLevel, "AppleUSBEHCI[%p]::AllocateIsochBandwidth - pTT->AllocatePeriodicBandwidth returned err(%p)", this, (void*)(UInt64)err);
 		
 		pEP->pSPE->release();
 		pEP->pSPE = NULL;
@@ -5626,7 +5626,7 @@ AppleUSBEHCI::ReturnIsochBandwidth(AppleEHCIIsochEndpoint *pEP)
 	pEP->pSPE->_FSBytesUsed = 0;
 	if (err)
 	{
-		USBLog (1, "AppleUSBEHCI[%p]::ReturnIsochBandwidth - pTT->DeallocatePeriodicBandwidth returned err(%p)", this, (void*)err);
+		USBLog (1, "AppleUSBEHCI[%p]::ReturnIsochBandwidth - pTT->DeallocatePeriodicBandwidth returned err(%p)", this, (void*)(UInt64)err);
 		return err;
 	}
 	ReturnHSPeriodicSplitBandwidth(pEP->pSPE);

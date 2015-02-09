@@ -23,7 +23,8 @@
 
 
 #include <IOKit/IOLib.h>
-#include <IOKit/IODataQueue.h>
+//#include <IOKit/IODataQueue.h>
+#include <IOKit/IOSharedDataQueue.h>
 #include "KLog.h"
 #include <string.h>
 
@@ -89,7 +90,7 @@ bool 	com_apple_iokit_KLogClient::init()
     }
 
     //Get mem for new queue of calcuated size 
-    myLogQueue = new IODataQueue;      
+    myLogQueue = new IOSharedDataQueue;
     if (myLogQueue == 0)
     {
         IOLog( DEBUG_NAME "[ERR]  Failed to allocate memory for buffer\n");
@@ -336,7 +337,7 @@ bool	com_apple_iokit_KLogClient::set_Q_Size(UInt32 capacity)
     myLogQueue->release();
 
     //Get mem for new queue of calcuated size 
-    myLogQueue = new IODataQueue;      
+    myLogQueue = new IOSharedDataQueue;
     if (myLogQueue == 0)
     {
         IOLog( DEBUG_NAME "[ERR]  Failed to allocate memory for buffer\n");

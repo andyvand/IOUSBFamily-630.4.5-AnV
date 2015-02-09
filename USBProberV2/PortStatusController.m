@@ -21,6 +21,9 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
+#define _NUM_VERSION_ 1
+#define _USB_H 1
+
 #import "PortStatusController.h"
 
 @interface PortStatusController (Private)
@@ -122,9 +125,9 @@
 - (IBAction)refreshAutomaticallyAction:(id)sender
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
+    NSButton *senderCast = (NSButton *)sender;
 
-	if( [sender state] == NSOnState )
+	if([senderCast state] == NSOnState)
 	{
 		[self refreshStart];
         [defaults setBool:YES forKey:@"PortStatusAutoRefresh"];
@@ -161,7 +164,7 @@
     
     [sp beginSheetModalForWindow:[NSApp mainWindow] completionHandler:^(NSInteger returnCode){
         
-        if (returnCode==NSOKButton)
+        if (returnCode == NSModalResponseOK)
         {
             NSString *selectedFileExtension = [[sp nameFieldStringValue] pathExtension];
             if (NSOrderedSame != [selectedFileExtension caseInsensitiveCompare:@"plist"])
@@ -245,11 +248,13 @@
 	
 - (id)outlineView:(NSOutlineView *)ov objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
 {
-	
+    NSString *itemString = item;
+
     if (ov == PortStatusOutputOV) 
 	{
-        return [item value];
+        return [itemString value];
     }
+
     return nil;
 }
 	
@@ -259,9 +264,7 @@
 
 - (void)portStatusItemDoubleClicked:(id)sender 
 {
-    [sender itemDoubleClicked];
+    [sender itemDoubleClicked:sender];
 }
-
-
 
 @end

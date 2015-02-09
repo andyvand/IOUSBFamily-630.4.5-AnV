@@ -27,6 +27,14 @@
 #include "AppleUHCIListElement.h"
 #include "USBTracepoints.h"
 
+#ifndef AbsoluteTime_to_scalar
+#define AbsoluteTime_to_scalar(x)	(*(uint64_t *)(x))
+#endif
+
+#ifndef SUB_ABSOLUTETIME
+#define SUB_ABSOLUTETIME(t1, t2) (AbsoluteTime_to_scalar(t1) -=	AbsoluteTime_to_scalar(t2))
+#endif
+
 #undef super
 #define super IOUSBControllerListElement
 // -----------------------------------------------------------------
@@ -80,8 +88,8 @@ AppleUHCIQueueHead::print(int level)
     UHCIQueueHeadSharedPtr shared = GetSharedLogical();
 	
     super::print(level);
-    USBLog(level, "AppleUHCIQueueHead::print - shared.hlink[%p]", (void*)USBToHostLong(shared->hlink));
-    USBLog(level, "AppleUHCIQueueHead::print - shared.elink[%p]", (void*)USBToHostLong(shared->elink));
+    USBLog(level, "AppleUHCIQueueHead::print - shared.hlink[%p]", (void*)(UInt64)USBToHostLong(shared->hlink));
+    USBLog(level, "AppleUHCIQueueHead::print - shared.elink[%p]", (void*)(UInt64)USBToHostLong(shared->elink));
     USBLog(level, "AppleUHCIQueueHead::print - functionNumber[%d]", functionNumber);
     USBLog(level, "AppleUHCIQueueHead::print - endpointNumber[%d]", endpointNumber);
     USBLog(level, "AppleUHCIQueueHead::print - speed[%s]", speed == kUSBDeviceSpeedLow ? "low" : "full");
@@ -158,15 +166,15 @@ AppleUHCITransferDescriptor::print(int level)
     super::print(level);
 	value = USBToHostLong(shared->link);
 	USBLog(level, "AppleUHCITransferDescriptor::print HW: link     %p %s%s%s",
-		   (void*)(value & 0xFFFFFFF0),
+		   (void*)(UInt64)(value & 0xFFFFFFF0),
 		   (value & 0x4) ? "Vf " : "",
 		   (value & 0x2) ? "Q " : "",
 		   (value & 0x1) ? "T" : "");
 	value = USBToHostLong(shared->ctrlStatus);
-	USBLog(level, "AppleUHCITransferDescriptor::print   ctrlStatus %p ActLen %x Status %x Err %x %s%s%s%s", (void*)value,
-		   (unsigned int)UHCI_TD_GET_ACTLEN(value),
-		   (unsigned int)UHCI_TD_GET_STATUS(value),
-		   (unsigned int)UHCI_TD_GET_ERRCNT(value),
+	USBLog(level, "AppleUHCITransferDescriptor::print   ctrlStatus %p ActLen %x Status %x Err %x %s%s%s%s", (void*)(void*)(UInt64)value,
+		   (UInt32)UHCI_TD_GET_ACTLEN(value),
+		   (UInt32)UHCI_TD_GET_STATUS(value),
+		   (UInt32)UHCI_TD_GET_ERRCNT(value),
 		   (value & kUHCI_TD_IOC) ? "IOC " : "",
 		   (value & kUHCI_TD_ISO) ? "ISO " : "",
 		   (value & kUHCI_TD_LS) ? "LS " : "",
@@ -195,7 +203,7 @@ AppleUHCITransferDescriptor::print(int level)
 			token_type = "(UNKNOWN)";
 			break;
 	}
-	USBLog(level, "AppleUHCITransferDescriptor::print        token %p %s DevAddr %x EndPt %x MaxLen %x %s", (void*)value,
+	USBLog(level, "AppleUHCITransferDescriptor::print        token %p %s DevAddr %x EndPt %x MaxLen %x %s", (void*)(UInt64)value,
 		   token_type,
 		   (unsigned int)UHCI_TD_GET_ADDR(value),
 		   (unsigned int)UHCI_TD_GET_ENDPT(value),
@@ -419,12 +427,12 @@ AppleUHCIIsochTransferDescriptor::print(int level)
     super::print(level);
 	value = USBToHostLong(shared->link);
 	USBLog(level, "AppleUHCIIsochTransferDescriptor::print HW: link     %p %s%s%s",
-		   (void*)(value & 0xFFFFFFF0),
+		   (void*)(UInt64)(value & 0xFFFFFFF0),
 		   (value & 0x4) ? "Vf " : "",
 		   (value & 0x2) ? "Q " : "",
 		   (value & 0x1) ? "T" : "");
 	value = USBToHostLong(shared->ctrlStatus);
-	USBLog(level, "AppleUHCIIsochTransferDescriptor::print   ctrlStatus %p ActLen %x Status %x Err %x %s%s%s%s", (void*)value,
+	USBLog(level, "AppleUHCIIsochTransferDescriptor::print   ctrlStatus %p ActLen %x Status %x Err %x %s%s%s%s", (void*)(UInt64)value,
 		   (unsigned int)UHCI_TD_GET_ACTLEN(value),
 		   (unsigned int)UHCI_TD_GET_STATUS(value),
 		   (unsigned int)UHCI_TD_GET_ERRCNT(value),
@@ -456,7 +464,7 @@ AppleUHCIIsochTransferDescriptor::print(int level)
 			token_type = "(UNKNOWN)";
 			break;
 	}
-	USBLog(level, "AppleUHCIIsochTransferDescriptor::print        token %p %s DevAddr %x EndPt %x MaxLen %x %s", (void*)value,
+	USBLog(level, "AppleUHCIIsochTransferDescriptor::print        token %p %s DevAddr %x EndPt %x MaxLen %x %s", (void*)(UInt64)value,
 		   token_type,
 		   (unsigned int)UHCI_TD_GET_ADDR(value),
 		   (unsigned int)UHCI_TD_GET_ENDPT(value),

@@ -75,7 +75,7 @@ bool
 AppleUSBUHCI::PrimaryInterruptFilter(OSObject *owner, IOFilterInterruptEventSource *source)
 {
 #pragma unused (source)
-    register AppleUSBUHCI	*controller = (AppleUSBUHCI *)owner;
+    AppleUSBUHCI	*controller = (AppleUSBUHCI *)owner;
     bool					result = true;
 	
     // If we our controller has gone away, or it's going away, or if we're on a PC Card and we have been ejected,
@@ -381,7 +381,7 @@ AppleUSBUHCI::HandleInterrupt(void)
 	if (_hostSystemErrorInterrupt & kUHCI_STS_HSE)
 	{
 		_hostSystemErrorInterrupt = 0;
-		USBLog(1, "AppleUSBUHCI[%p]::HandleInterrupt - Host controller system error(CMD:%p STS:%p INTR:%p PORTSC1:%p PORTSC2:%p FRBASEADDR:%p ConfigCMD:%p)", this,(void*)ioRead16(kUHCI_CMD), (void*)ioRead16(kUHCI_STS), (void*)ioRead16(kUHCI_INTR), (void*)ioRead16(kUHCI_PORTSC1), (void*)ioRead16(kUHCI_PORTSC2), (void*)ioRead32(kUHCI_FRBASEADDR), (void*)_device->configRead16(kIOPCIConfigCommand));
+		USBLog(1, "AppleUSBUHCI[%p]::HandleInterrupt - Host controller system error(CMD:%p STS:%p INTR:%p PORTSC1:%p PORTSC2:%p FRBASEADDR:%p ConfigCMD:%p)", this,(void*)(UInt64)ioRead16(kUHCI_CMD), (void*)(UInt64)ioRead16(kUHCI_STS), (void*)(UInt64)ioRead16(kUHCI_INTR), (void*)(UInt64)ioRead16(kUHCI_PORTSC1), (void*)(UInt64)ioRead16(kUHCI_PORTSC2), (void*)(UInt64)ioRead32(kUHCI_FRBASEADDR), (void*)(UInt64)_device->configRead16(kIOPCIConfigCommand));
 		USBTrace( kUSBTUHCIInterrupts,  kTPUHCIInterruptsHandleInterrupt, (uintptr_t)this, ioRead16(kUHCI_CMD), 0, 2  );
 		USBTrace( kUSBTUHCIInterrupts,  kTPUHCIInterruptsHandleInterrupt, ioRead16(kUHCI_STS), ioRead16(kUHCI_INTR), ioRead16(kUHCI_PORTSC1), 3  );
 		USBTrace( kUSBTUHCIInterrupts,  kTPUHCIInterruptsHandleInterrupt, ioRead16(kUHCI_PORTSC2), ioRead32(kUHCI_FRBASEADDR), _device->configRead16(kIOPCIConfigCommand), 4 );

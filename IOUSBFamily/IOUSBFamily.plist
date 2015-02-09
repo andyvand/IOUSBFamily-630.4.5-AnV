@@ -8,8 +8,6 @@
 	<string>IOUSBFamily</string>
 	<key>CFBundleGetInfoString</key>
 	<string>IOUSBFAMILY_VERSION, Copyright © 2000-IOUSBFAMILY_LAST_CHANGE_YEAR Apple Inc.  All rights reserved.</string>
-	<key>CFBundleIconFile</key>
-	<string></string>
 	<key>CFBundleIdentifier</key>
 	<string>com.apple.iokit.IOUSBFamily</string>
 	<key>CFBundleInfoDictionaryVersion</key>

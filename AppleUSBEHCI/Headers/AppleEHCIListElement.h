@@ -113,7 +113,7 @@ class AppleEHCIIsochTransferDescriptor : public IOUSBControllerIsochListElement
 
 public:
     // constructor method
-    static AppleEHCIIsochTransferDescriptor 	*WithSharedMemory(EHCIIsochTransferDescriptorSharedPtr sharedLogical, IOPhysicalAddress sharedPhysical);
+    static AppleEHCIIsochTransferDescriptor *WithSharedMemory(EHCIIsochTransferDescriptorSharedPtr sharedLogical, IOPhysicalAddress sharedPhysical);
 
     // virtual methods
     virtual void					SetPhysicalLink(IOPhysicalAddress next);

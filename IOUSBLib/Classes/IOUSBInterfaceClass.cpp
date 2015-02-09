@@ -22,16 +22,17 @@
  */
 
 #define CFRUNLOOP_NEW_API 1
+#define _NUM_VERSION_ 1
 
 #include <TargetConditionals.h>
 
-#include <CoreFoundation/CFNumber.h>
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/CFNumber.h>
 
 #include "IOUSBInterfaceClass.h"
 
 #include "../../IOUSBFamily/Headers/USB.h"
-#include "../../IOUSBFamily/Headers/IOUSBUserClient.h"
+#include "../../IOUSBUserClient/Headers/IOUSBUserClient.h"
 
 #if !TARGET_OS_EMBEDDED
 #endif
@@ -2472,7 +2473,7 @@ IOUSBInterfaceClass::LowLatencyCreateBuffer( void ** buffer, IOByteCount bufferS
     bufferInfo->bufferSize =  (uint64_t) bufferSize;
     bufferInfo->bufferType =  (uint64_t) bufferType;
     bufferInfo->isPrepared =  (uint64_t) 0;
-    bufferInfo->nextBuffer =  (uint64_t) NULL;
+    bufferInfo->nextBuffer =  NULL;
 
     // Update our buffer Data
     //

@@ -210,7 +210,7 @@ AppleUSBOHCI::InitializeOperationalRegisters(void)
     _pOHCIRegisters->hcPeriodicStart = HostToUSBLong(hcPS);
     IOSync();
 	
-	if (_errataBits & kErrataNECIncompleteWrite)
+	if (_ERRATA64BITS & kErrataNECIncompleteWrite)
 	{
 		UInt32		newValue = 0, count = 0;
 		// check hcFmInterval
@@ -236,7 +236,7 @@ AppleUSBOHCI::InitializeOperationalRegisters(void)
 	}
 	
     // Initialize the Root Hub registers
-    if (_errataBits & kErrataDisableOvercurrent)
+    if (_ERRATA64BITS & kErrataDisableOvercurrent)
         _pOHCIRegisters->hcRhDescriptorA |= HostToUSBLong(kOHCIHcRhDescriptorA_NOCP);
         
     // <rdar://problem/5981624> we used to also initialize the Root Hub Status register here. However, the bus might be in
@@ -250,7 +250,7 @@ AppleUSBOHCI::InitializeOperationalRegisters(void)
 void 		
 AppleUSBOHCI::stop( IOService * provider )
 {
-	USBLog(5, "AppleUSBOHCI[%p]::stop - isInactive(%s) - hcCommandStatus(%p)", this, isInactive() ? "true" : "false", (void*)USBToHostLong(_pOHCIRegisters->hcCommandStatus));
+	USBLog(5, "AppleUSBOHCI[%p]::stop - isInactive(%s) - hcCommandStatus(%p)", this, isInactive() ? "true" : "false", (void*)(UInt64)USBToHostLong(_pOHCIRegisters->hcCommandStatus));
 	super::stop(provider);
 }
 
@@ -258,7 +258,7 @@ AppleUSBOHCI::stop( IOService * provider )
 bool		
 AppleUSBOHCI::willTerminate(IOService * provider, IOOptionBits options)
 {
-	USBLog(5, "AppleUSBOHCI[%p]::willTerminate - isInactive(%s) - hcCommandStatus(%p)", this, isInactive() ? "true" : "false", (void*)USBToHostLong(_pOHCIRegisters->hcCommandStatus));
+	USBLog(5, "AppleUSBOHCI[%p]::willTerminate - isInactive(%s) - hcCommandStatus(%p)", this, isInactive() ? "true" : "false", (void*)(UInt64)USBToHostLong(_pOHCIRegisters->hcCommandStatus));
 	return super::willTerminate(provider, options);
 }
 
@@ -267,7 +267,7 @@ AppleUSBOHCI::willTerminate(IOService * provider, IOOptionBits options)
 bool		
 AppleUSBOHCI::didTerminate( IOService * provider, IOOptionBits options, bool * defer )
 {
-	USBLog(5, "AppleUSBOHCI[%p]::didTerminate - isInactive(%s) - hcCommandStatus(%p)", this, isInactive() ? "true" : "false", (void*)USBToHostLong(_pOHCIRegisters->hcCommandStatus));
+	USBLog(5, "AppleUSBOHCI[%p]::didTerminate - isInactive(%s) - hcCommandStatus(%p)", this, isInactive() ? "true" : "false", (void*)(UInt64)USBToHostLong(_pOHCIRegisters->hcCommandStatus));
 	return super::didTerminate(provider, options, defer);
 }
 
@@ -305,9 +305,9 @@ AppleUSBOHCI::UIMInitialize(IOService * provider)
 			/*
 			 * Initialize my data and the hardware
 			 */
-			_errataBits = GetErrataBits(_vendorID, _deviceID, _revisionID);
+			_ERRATA64BITS = GetErrataBits(_vendorID, _deviceID, _revisionID);
 
-			if (_v3ExpansionData->_onThunderbolt || (_errataBits & kErrataDontUseCompanionController))
+			if ((_v3ExpansionData->_tbBitmapsExist) || (_ERRATA64BITS & kErrataDontUseCompanionController))
 			{
 				USBLog(3, "AppleUSBOHCI[%p]::UIMInitialize - Thunderbolt and companion controllers disallowed. Not initializing", this);
 				err =  kIOReturnUnsupported;
@@ -345,9 +345,9 @@ AppleUSBOHCI::UIMInitialize(IOService * provider)
 				break;
 			}
 			
-			setProperty("Errata", _errataBits, 32);
+			setProperty("Errata", _ERRATA64BITS, 32);
 			
-			if (_errataBits & kErrataLucentSuspendResume)
+			if (_ERRATA64BITS & kErrataLucentSuspendResume)
 			{
 				OSData	*suspendProp;
 				UInt32	portBitmap = 0;
@@ -366,7 +366,7 @@ AppleUSBOHCI::UIMInitialize(IOService * provider)
 					_disablePortsBitmap = (0xffffffff);
 			}
 			
-			USBLog(5,"AppleUSBOHCI[%p]::UIMInitialize errata bits=0x%x", this, (uint32_t) _errataBits);
+			USBLog(5,"AppleUSBOHCI[%p]::UIMInitialize errata bits=0x%x", this, (uint32_t) _ERRATA64BITS);
 			
 			_pOHCIRegisters = (OHCIRegistersPtr) _deviceBase->getVirtualAddress();
 			
@@ -456,7 +456,7 @@ AppleUSBOHCI::UIMInitialize(IOService * provider)
 			
 			// Work around the Philips part which does weird things when a device is plugged in at boot
 			//
-			if (_errataBits & kErrataNeedsPortPowerOff)
+			if (_ERRATA64BITS & kErrataNeedsPortPowerOff)
 			{
 				USBError(1, "AppleUSBOHCI[%p]::UIMInitialize error, turning off power to ports to clear", this);
 				OHCIRootHubPower(0 /* kOff */);
@@ -472,7 +472,7 @@ AppleUSBOHCI::UIMInitialize(IOService * provider)
 			
 			// leave the controller in reset until we get the setPowerState
 			
-			if (_errataBits & kErrataLSHSOpti)
+			if (_ERRATA64BITS & kErrataLSHSOpti)
 				OptiLSHSFix();
 			
 			CheckSleepCapability();
@@ -1571,7 +1571,7 @@ AppleUSBOHCI::DoDoneQueueProcessing(IOPhysicalAddress cachedWriteDoneQueueHead, 
         }
         else if ((transferStatus == kOHCIGTDConditionBufferUnderrun) &&
                  (pHCDoneTD->pType == kOHCIBulkTransferOutType) &&
-                 (_errataBits & kErrataRetryBufferUnderruns))
+                 (_ERRATA64BITS & kErrataRetryBufferUnderruns))
         {
             tempED = (AppleOHCIEndpointDescriptorPtr) pHCDoneTD->pEndpoint;
             pHCDoneTD->pShared->ohciFlags = pHCDoneTD->pShared->ohciFlags & HostToUSBLong(kOHCIGTDClearErrorMask);
@@ -1745,21 +1745,21 @@ AppleUSBOHCI::TranslateStatusToUSBError(UInt32 status)
     static const UInt32 statusToErrorMap[] = {
         /* OHCI Error */     /* USB Error */
         /*  0 */		kIOReturnSuccess,
-        /*  1 */		kIOUSBCRCErr,
-        /*  2 */ 		kIOUSBBitstufErr,
-        /*  3 */ 		kIOUSBDataToggleErr,
-        /*  4 */ 		kIOUSBPipeStalled,
-        /*  5 */ 		kIOReturnNotResponding,
-        /*  6 */ 		kIOUSBPIDCheckErr,
-        /*  7 */ 		kIOUSBWrongPIDErr,
-        /*  8 */ 		kIOReturnOverrun,
-        /*  9 */ 		kIOReturnUnderrun,
-        /* 10 */ 		kIOUSBReserved1Err,
-        /* 11 */ 		kIOUSBReserved2Err,
-        /* 12 */ 		kIOUSBBufferOverrunErr,
-        /* 13 */ 		kIOUSBBufferUnderrunErr,
-        /* 14 */		kIOUSBNotSent1Err,
-        /* 15 */		kIOUSBNotSent2Err
+        /*  1 */		(UInt32)kIOUSBCRCErr,
+        /*  2 */ 		(UInt32)kIOUSBBitstufErr,
+        /*  3 */ 		(UInt32)kIOUSBDataToggleErr,
+        /*  4 */ 		(UInt32)kIOUSBPipeStalled,
+        /*  5 */ 		(UInt32)kIOReturnNotResponding,
+        /*  6 */ 		(UInt32)kIOUSBPIDCheckErr,
+        /*  7 */ 		(UInt32)kIOUSBWrongPIDErr,
+        /*  8 */ 		(UInt32)kIOReturnOverrun,
+        /*  9 */ 		(UInt32)kIOReturnUnderrun,
+        /* 10 */ 		(UInt32)kIOUSBReserved1Err,
+        /* 11 */ 		(UInt32)kIOUSBReserved2Err,
+        /* 12 */ 		(UInt32)kIOUSBBufferOverrunErr,
+        /* 13 */ 		(UInt32)kIOUSBBufferUnderrunErr,
+        /* 14 */		(UInt32)kIOUSBNotSent1Err,
+        /* 15 */		(UInt32)kIOUSBNotSent2Err
     };
 	
     if (status > 15) return(kIOReturnInternalError);
@@ -2020,18 +2020,18 @@ AppleUSBOHCI::showRegisters(UInt32 __unused level, const char * __unused s)
     USBLog(level,"     kIOPCIConfigStatus=%p", (void*)_device->configRead16(kIOPCIConfigStatus));
 #endif
 
-    USBLog(level,"OHCI: HcRevision=%p", (void*) USBToHostLong((_pOHCIRegisters)->hcRevision));
-    USBLog(level,"      HcControl=%p",  (void*) USBToHostLong((_pOHCIRegisters)->hcControl));
-    USBLog(level,"      HcCommandStatus=%p",  (void*) USBToHostLong((_pOHCIRegisters)->hcCommandStatus));
-    USBLog(level,"      HcInterruptStatus=%p",  (void*) USBToHostLong((_pOHCIRegisters)->hcInterruptStatus));
-    USBLog(level,"      hcInterruptEnable=%p",  (void*) USBToHostLong((_pOHCIRegisters)->hcInterruptEnable));
-    USBLog(level,"      HcFmInterval=%p",  (void*) USBToHostLong((_pOHCIRegisters)->hcFmInterval));
-    USBLog(level,"      hcRhStatus=%p",  (void*) USBToHostLong((_pOHCIRegisters)->hcRhStatus));
-    USBLog(level,"      hcRhDescriptorA=%p",  (void*) USBToHostLong((_pOHCIRegisters)->hcRhDescriptorA));
-    USBLog(level,"      hcRhDescriptorB=%p",  (void*) USBToHostLong((_pOHCIRegisters)->hcRhDescriptorB));
+    USBLog(level,"OHCI: HcRevision=%p", (void*)(UInt64)USBToHostLong((_pOHCIRegisters)->hcRevision));
+    USBLog(level,"      HcControl=%p",  (void*)(UInt64)USBToHostLong((_pOHCIRegisters)->hcControl));
+    USBLog(level,"      HcCommandStatus=%p",  (void*)(UInt64)USBToHostLong((_pOHCIRegisters)->hcCommandStatus));
+    USBLog(level,"      HcInterruptStatus=%p",  (void*)(UInt64)USBToHostLong((_pOHCIRegisters)->hcInterruptStatus));
+    USBLog(level,"      hcInterruptEnable=%p",  (void*)(UInt64)USBToHostLong((_pOHCIRegisters)->hcInterruptEnable));
+    USBLog(level,"      HcFmInterval=%p",  (void*)(UInt64)USBToHostLong((_pOHCIRegisters)->hcFmInterval));
+    USBLog(level,"      hcRhStatus=%p",  (void*)(UInt64)USBToHostLong((_pOHCIRegisters)->hcRhStatus));
+    USBLog(level,"      hcRhDescriptorA=%p",  (void*)(UInt64)USBToHostLong((_pOHCIRegisters)->hcRhDescriptorA));
+    USBLog(level,"      hcRhDescriptorB=%p",  (void*)(UInt64)USBToHostLong((_pOHCIRegisters)->hcRhDescriptorB));
 	for (i=0; i < numPorts; i++)
 	{
-		USBLog(level,"      hcRhPortStatus[%d]=%p",  (int)i, (void*)USBToHostLong((_pOHCIRegisters)->hcRhPortStatus[i]));
+		USBLog(level,"      hcRhPortStatus[%d]=%p",  (int)i, (void*)(UInt64)USBToHostLong((_pOHCIRegisters)->hcRhPortStatus[i]));
 	}
 }
 

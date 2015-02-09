@@ -94,9 +94,16 @@ enum {
 
 
 #if KERNEL
+#include "../../IOUSBFamily/Headers/USBSpec.h"
+#include "../../IOUSBFamily/Headers/USB.h"
+#include "../../IOUSBFamily/Headers/IOUSBDevice.h"
+#include "../../IOUSBFamily/Headers/IOUSBInterface.h"
+
 #include <IOKit/IOService.h>
 #include <IOKit/IOUserClient.h>
-#include <IOKit/usb/USB.h>
+
+class IOUSBDevice;
+class IOUSBInterface;
 
 //================================================================================================
 //
@@ -149,7 +156,39 @@ public:
     virtual bool		MergeDictionaryIntoDictionary(OSDictionary *  sourceDictionary,  OSDictionary *  targetDictionary);
 };
 
-#endif
+// this class declaration may want to move to another header file (and maybe not)
+class IOUSBNotification : public OSObject
+{
+    OSDeclareDefaultStructors(IOUSBNotification);
+    
+    IOUserClient *              fpIOUserClient;              // the IOUserClient object which created this IOUSBNotification
+    IOUSBDevice *               fpIOUSBDevice;               // the device whose user client created this note (or the parent of the interface user client)
+    IOUSBInterface *            fpIOUSBInterface;            // the interface whose user client create this note (could be NULL)
+    UInt64                      fbmNotificationMask;         // a bitmask of the desired bits for this notification
+    OSAsyncReference64          fAsyncRef;                   // this contains the callback routine and the refCon in user space
+    UInt64                      fToken;                      // this token is unique for each user client
+    
+public:
+    static IOUSBNotification*   withUserClient(IOUserClient *pIOUserClient);
+    
+    // Accessors
+    inline IOUserClient *              GetIOUserClient(void)                                        {return fpIOUserClient;}
+    inline IOUSBDevice *               GetIOUSBDevice(void)                                         {return fpIOUSBDevice;}
+    inline IOUSBInterface *            GetIOUSBInterface(void)                                      {return fpIOUSBInterface;}
+    inline UInt64                      GetNotificationMask(void)                                    {return fbmNotificationMask;}
+    inline OSAsyncReference64 *        GetAsyncRefPtr(void)                                         {return &fAsyncRef;}
+    inline UInt64                      GetToken(void)                                               {return fToken;}
+    
+    inline void                        SetIOUSBDevice(IOUSBDevice *iousbdevice)                     {fpIOUSBDevice = iousbdevice;}
+    inline void                        SetIOUSBInterface(IOUSBInterface *iousbinterface)            {fpIOUSBInterface = iousbinterface;}
+    inline void                        SetNotificationMask(UInt64 notificationmask)                 {fbmNotificationMask = notificationmask;}
+    inline void                        SetAsyncRef(OSAsyncReference64 *pAsyncRef)                   {bcopy(pAsyncRef, &fAsyncRef, sizeof(OSAsyncReference64));}
+    inline void                        SetToken(UInt64 token)                                       {fToken = token;}
+    
+    // public methods
+    IOReturn                            SendNotification(UInt64 notificationmask, void* pToken);
+};
+#endif /* KERNEL */
 
 #endif
 

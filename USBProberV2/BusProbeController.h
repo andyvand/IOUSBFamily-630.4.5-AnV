@@ -44,6 +44,8 @@
 - (IBAction)ToggleAutoRefresh:(id)sender;
 - (IBAction)ToggleProbeSuspended:(id)sender;
 
+- (void)probeItemDoubleClicked:(id)sender;
+
 - (void)applyFilter:(BusProbeDevice*)filterDevice finalString:(NSMutableString *)finalString;
 - (NSMutableArray *)strippedDownListFromFilter:(BusProbeDevice *)filterDevice;
 - (void)dumpToTerminal:(NSArray*)args showHelp:(bool)showHelp;

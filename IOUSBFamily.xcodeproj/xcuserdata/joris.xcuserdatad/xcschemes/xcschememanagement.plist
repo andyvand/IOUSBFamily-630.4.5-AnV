@@ -99,6 +99,11 @@
 			<key>orderHint</key>
 			<integer>8</integer>
 		</dict>
+		<key>IOUSBMassStorageClass.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>27</integer>
+		</dict>
 		<key>IOUSBUserClient.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -108,6 +113,11 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>24</integer>
+		</dict>
+		<key>UMCLogger.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>28</integer>
 		</dict>
 		<key>USB Prober App.xcscheme</key>
 		<dict>
@@ -263,6 +273,16 @@
 			<true/>
 		</dict>
 		<key>3EBFD14A1601264400B85B43</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A9AFBB421A87F5CE003C0BEF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A9C14F111A87EB8600A642EB</key>
 		<dict>
 			<key>primary</key>
 			<true/>

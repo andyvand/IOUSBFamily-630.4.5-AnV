@@ -24,11 +24,16 @@
 #ifndef _IOKIT_IOUSBCOMMAND_H
 #define _IOKIT_IOUSBCOMMAND_H
 
+#ifdef KERNEL
 #include <IOKit/IOCommand.h>
 #include <IOKit/IOCommandPool.h>
 #include <IOKit/IOMemoryDescriptor.h>
 #include <IOKit/IODMACommand.h>
-#include "../../IOUSBFamily/Headers/USB.h"
+#else /* ! KERNEL */
+#include <IOKit/IOKitLib.h>
+#endif /* KERNEL */
+
+#include "USB.h"
 
 /*
  * USB Command
@@ -53,7 +58,9 @@ typedef enum {
 } usbCommand;
 
 #define 	kUSBCommandScratchBuffers	10
+#define 	kUSBCommandScratch64Buffers	5
 
+#ifdef KERNEL
 /*
  IOUSBCommand
  Subclass of IOCommand that is used to add USB specific data.
@@ -98,6 +105,7 @@ protected:
 		IOUSBCommand		*_masterUSBCommand;						// points from the bufferUSBCommand back to the parent command
 		UInt32				_streamID;
 		void *				_backTrace[kUSBCommandScratchBuffers];
+        UInt64              _UIMScratch64[kUSBCommandScratch64Buffers];
     };
     ExpansionData * 		_expansionData;
     
@@ -130,6 +138,7 @@ public:
     void 					SetNoDataTimeout(UInt32 to);
     void 					SetCompletionTimeout(UInt32 to);
     void 					SetUIMScratch(UInt32 index, UInt32 value);
+    void 					SetUIMScratch64(UInt32 index, UInt64 value);
     void 					SetReqCount(IOByteCount reqCount);
     void					SetRequestMemoryDescriptor(IOMemoryDescriptor *requestMemoryDescriptor);
     void					SetBufferMemoryDescriptor(IOMemoryDescriptor *bufferMemoryDescriptor);
@@ -163,6 +172,7 @@ public:
     UInt32						GetNoDataTimeout(void);
     UInt32						GetCompletionTimeout(void);
     UInt32						GetUIMScratch(UInt32 index);
+    UInt64						GetUIMScratch64(UInt32 index);
     IOByteCount					GetReqCount(void);
     IOMemoryDescriptor *		GetRequestMemoryDescriptor(void);
     IOMemoryDescriptor *		GetBufferMemoryDescriptor(void);
@@ -174,6 +184,7 @@ public:
 	inline IODMACommand *		GetDMACommand(void)							{return _expansionData->_dmaCommand; }
 	inline UInt32				GetStreamID(void)							{return _expansionData->_streamID; }
 	inline IOUSBCommand *		GetBufferUSBCommand(void)					{return _expansionData->_bufferUSBCommand; }
+    inline IOUSBCommand *       GetMasterUSBCommand(void)                   {return _expansionData->_masterUSBCommand ? _expansionData->_masterUSBCommand : this;}
 };
 
 
@@ -269,7 +280,7 @@ protected:
 public:
     static IOCommandPool * withWorkLoop(IOWorkLoop * inWorkLoop);
 };
-
+ #endif
 
 #endif
 

@@ -205,7 +205,7 @@ AppleUSBUHCI::ResumeController(void)
 		cmd |= kUHCI_CMD_FGR;
 		ioWrite16(kUHCI_CMD, cmd);
 		cmd = ioRead16(kUHCI_CMD);
-		USBLog(5, "AppleUSBUHCI[%p]::ResumeController after EGSM->FGR, cmd is[%p]", this, (void*)cmd);
+		USBLog(5, "AppleUSBUHCI[%p]::ResumeController after EGSM->FGR, cmd is[%p]", this, (void*)(UInt64)cmd);
 	}
     
 	if (cmd & kUHCI_CMD_FGR)
@@ -243,7 +243,7 @@ AppleUSBUHCI::ResumeController(void)
 		_frameList[i] &= ~HostToUSBLong(kUHCI_FRAME_T);
 	}
     
-	USBLog(7, "AppleUSBUHCI[%p]::ResumeController resume done, cmd %x, status %x ports[%p, %p]", this, ioRead16(kUHCI_CMD), ioRead16(kUHCI_STS),(void*)ReadPortStatus(0), (void*)ReadPortStatus(1));
+	USBLog(7, "AppleUSBUHCI[%p]::ResumeController resume done, cmd %x, status %x ports[%p, %p]", this, ioRead16(kUHCI_CMD), ioRead16(kUHCI_STS),(void*)(UInt64)ReadPortStatus(0), (void*)(UInt64)ReadPortStatus(1));
 	showRegisters(7, "-ResumeController");
 }
 
@@ -274,16 +274,16 @@ AppleUSBUHCI::SuspendController(void)
 		{
 			if (value & kUHCI_PORTSC_SUSPEND)
 			{
-				USBLog(5, "AppleUSBUHCI[%p]::SuspendController - port[%d] is suspended [%p]", this, i, (void*)value);
+				USBLog(5, "AppleUSBUHCI[%p]::SuspendController - port[%d] is suspended [%p]", this, i, (void*)(UInt64)value);
 			}
 			else
 			{
-				USBLog(5, "AppleUSBUHCI[%p]::SuspendController - port[%d] is enabled but not suspended [%p]", this, i, (void*)value);
+				USBLog(5, "AppleUSBUHCI[%p]::SuspendController - port[%d] is enabled but not suspended [%p]", this, i, (void*)(UInt64)value);
 			}
 		}
 		else
 		{
-			USBLog(5, "AppleUSBUHCI[%p]::SuspendController - port[%d] is not enabled [%p]", this, i, (void*)value);
+			USBLog(5, "AppleUSBUHCI[%p]::SuspendController - port[%d] is not enabled [%p]", this, i, (void*)(UInt64)value);
 		}
 		
 		// only do this for controllers with overcurrent additions.
@@ -428,13 +428,13 @@ IOReturn
 AppleUSBUHCI::RestartControllerFromReset(void)
 {
 	USBTrace( kUSBTUHCI, KTPUHCIRestartControllerFromReset, (uintptr_t)this, 0, 0, 0);
-	USBLog(5, "AppleUSBUHCI[%p]::RestartControllerFromReset - _myBusState(%d) CMD(%p) STS(%p) FRBASEADDR(%p) IOPCIConfigCommand(%p)", this, (int)_myBusState, (void*)ioRead16(kUHCI_CMD), (void*)ioRead16(kUHCI_STS), (void*)ioRead32(kUHCI_FRBASEADDR), (void*)_device->configRead16(kIOPCIConfigCommand));
+	USBLog(5, "AppleUSBUHCI[%p]::RestartControllerFromReset - _myBusState(%d) CMD(%p) STS(%p) FRBASEADDR(%p) IOPCIConfigCommand(%p)", this, (int)_myBusState, (void*)(UInt64)ioRead16(kUHCI_CMD), (void*)(UInt64)ioRead16(kUHCI_STS), (void*)(UInt64)ioRead32(kUHCI_FRBASEADDR), (void*)(UInt64)_device->configRead16(kIOPCIConfigCommand));
 
 	Run(true);
 
 	// prepare the _saveInterrupts variable for later enabling
 	_saveInterrupts = kUHCI_INTR_TIE | kUHCI_INTR_RIE | kUHCI_INTR_IOCE | kUHCI_INTR_SPIE;
-	USBLog(5, "AppleUSBUHCI[%p]::RestartControllerFromReset - I set _saveInterrupts to (%p)", this, (void*)_saveInterrupts);
+	USBLog(5, "AppleUSBUHCI[%p]::RestartControllerFromReset - I set _saveInterrupts to (%p)", this, (void*)(UInt64)_saveInterrupts);
 			
 	return kIOReturnSuccess;
 }
@@ -452,7 +452,7 @@ AppleUSBUHCI::EnableInterruptsFromController(bool enable)
 	USBTrace( kUSBTUHCI, KTPUHCIEnableInterrupts, (uintptr_t)this, enable, 0, 0);
 	if (enable)
 	{
-		USBLog(5, "AppleUSBUHCI[%p]::EnableInterruptsFromController - enabling interrupts, USBIntr(%p) _savedUSBIntr(%p)", this, (void*)ioRead16(kUHCI_INTR), (void*)_saveInterrupts);
+		USBLog(5, "AppleUSBUHCI[%p]::EnableInterruptsFromController - enabling interrupts, USBIntr(%p) _savedUSBIntr(%p)", this, (void*)(UInt64)ioRead16(kUHCI_INTR), (void*)(UInt64)_saveInterrupts);
 		ioWrite16(kUHCI_INTR, _saveInterrupts);
 		_saveInterrupts = 0;
 		EnableUSBInterrupt(true);
@@ -462,7 +462,7 @@ AppleUSBUHCI::EnableInterruptsFromController(bool enable)
 		_saveInterrupts = ioRead16(kUHCI_INTR);
 		ioWrite16(kUHCI_INTR, 0);
 		EnableUSBInterrupt(false);
-		USBLog(5, "AppleUSBUHCI[%p]::EnableInterruptsFromController - interrupts disabled, _saveInterrupts(%p)", this, (void*)_saveInterrupts);
+		USBLog(5, "AppleUSBUHCI[%p]::EnableInterruptsFromController - interrupts disabled, _saveInterrupts(%p)", this, (void*)(UInt64)_saveInterrupts);
 	}
 	
 	return kIOReturnSuccess;
@@ -560,7 +560,7 @@ AppleUSBUHCI::WakeControllerFromDoze(void)
 		cmd |= kUHCI_CMD_FGR;
 		ioWrite16(kUHCI_CMD, cmd);
 		cmd = ioRead16(kUHCI_CMD);
-		USBLog(6, "AppleUSBUHCI[%p]::WakeControllerFromDoze after EGSM->FGR, cmd is[%p], sleeping 20ms", this, (void*)cmd);
+		USBLog(6, "AppleUSBUHCI[%p]::WakeControllerFromDoze after EGSM->FGR, cmd is[%p], sleeping 20ms", this, (void*)(UInt64)cmd);
 		IOSleep(20);
 		cmd &= ~kUHCI_CMD_FGR;
 		cmd &= ~kUHCI_CMD_EGSM;
@@ -573,7 +573,7 @@ AppleUSBUHCI::WakeControllerFromDoze(void)
 			{
 				status = ReadPortStatus(i) & kUHCI_PORTSC_MASK;
 				status &= ~(kUHCI_PORTSC_RD | kUHCI_PORTSC_SUSPEND);
-				USBLog(6, "AppleUSBUHCI[%p]::WakeControllerFromDoze  de-asserting resume signal for port %d by writing (%p)", this, i+1, (void*)status);
+				USBLog(6, "AppleUSBUHCI[%p]::WakeControllerFromDoze  de-asserting resume signal for port %d by writing (%p)", this, i+1, (void*)(UInt64)status);
 				WritePortStatus(i, status);
 				IOSync();
 				IOSleep(2);																	// allow it to kick in

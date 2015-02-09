@@ -269,29 +269,34 @@ dependencies: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IORangeAllocator.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/Headers/IOKit/pci/IOPCIDevice.h \
   /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/IOUSBControllerV3.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/../../IOUSBFamily/Headers/IOUSBControllerV2.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IODMACommand.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOCommand.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/../../IOUSBFamily/Headers/IOUSBControllerListElement.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/../../IOUSBFamily/Headers/USB.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/../../IOUSBFamily/Headers/USBSpec.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/../../IOUSBFamily/Headers/IOUSBController.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/IOUSBController.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/USBSpec.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/USB.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/USBHub.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOCommandGate.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOCommandPool.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/../../IOUSBFamily/Headers/USBHub.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/../../IOUSBFamily/Headers/IOUSBBus.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/../../IOUSBFamily/Headers/IOUSBNub.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/../../IOUSBFamily/Headers/IOUSBCommand.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/../../IOUSBFamily/Headers/IOUSBWorkLoop.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOCommand.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/IOUSBBus.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/IOUSBNub.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/IOUSBCommand.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IODMACommand.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/IOUSBWorkLoop.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/Headers/IOKit/acpi/IOACPIPlatformDevice.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOPlatformExpert.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOInterruptController.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/Headers/IOKit/acpi/IOACPITypes.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/../../IOUSBFamily/Headers/IOUSBHubDevice.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/../../IOUSBFamily/Headers/IOUSBDevice.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/../../IOUSBFamily/Headers/IOUSBPipe.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/../../IOUSBFamily/Headers/IOUSBPipeV2.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/../../IOUSBFamily/Headers/IOUSBHubPolicyMaker.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/IOUSBHubDevice.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/IOUSBDevice.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/IOUSBPipe.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/IOUSBControllerV2.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/IOUSBControllerListElement.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/IOUSBPipeV2.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOTimerEventSource.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/IOUSBHubPolicyMaker.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/../../IOUSBUserClient/Headers/IOUSBUserClient.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/../../IOUSBFamily/Headers/../../IOUSBUserClient/Headers/../../IOUSBFamily/Headers/IOUSBInterface.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOUserClient.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/OSMessageNotification.h \
   /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/USBOHCI.h \
   /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Headers/USBOHCIRootHub.h \
   /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBEHCI/Headers/AppleUSBEHCI.h \

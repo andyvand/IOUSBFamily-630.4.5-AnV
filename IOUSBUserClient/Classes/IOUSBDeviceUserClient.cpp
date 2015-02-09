@@ -2422,7 +2422,7 @@ IOUSBDeviceUserClientV2::ChangeOutstandingIO(OSObject *target, void *param1, voi
 			me->fOutstandingIO++;
 			break;
 			
-		case -1:
+		case (UInt32)-1:
 			if (!--me->fOutstandingIO && me->fNeedToClose && !me->FOWNER_WAS_RELEASED)
 			{
 				USBLog(6, "IOUSBDeviceUserClientV2[%p]::ChangeOutstandingIO isInactive = %d, outstandingIO = %d - closing device", me, me->isInactive(), me->fOutstandingIO);

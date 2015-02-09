@@ -42,7 +42,6 @@
 
 #include "Debugging.h"
 
-
 //--------------------------------------------------------------------------------------------------
 //	Macros
 //--------------------------------------------------------------------------------------------------
@@ -846,7 +845,7 @@ IOUSBMassStorageUFIDevice::PollForNewMedia( void )
 		return;
 	}
 	
-	SetMediumCharacteristics ( blockSize, blockCount );
+	SetMediumCharacteristics ( (UInt32)blockSize, (UInt32)blockCount );
 	
 	fMediumIsWriteProtected = DetermineMediumWriteProtectState();
 	

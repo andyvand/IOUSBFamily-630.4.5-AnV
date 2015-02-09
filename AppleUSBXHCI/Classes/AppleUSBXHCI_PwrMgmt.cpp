@@ -1062,7 +1062,7 @@ AppleUSBXHCI::EnableInterruptsFromController(bool enable)
 
 	if (enable)
 	{
-		USBLog(2, "AppleUSBXHCI[%p]::EnableInterruptsFromController - enabling interrupts, USBCMD(%p) INTE(%s)", this, (void*)CMD,
+		USBLog(2, "AppleUSBXHCI[%p]::EnableInterruptsFromController - enabling interrupts, USBCMD(%p) INTE(%s)", this, (void*)(UInt64)CMD,
                (CMD & kXHCICMDINTE) ? "true":"false" );
         
 		RestartUSBBus();
@@ -1072,7 +1072,7 @@ AppleUSBXHCI::EnableInterruptsFromController(bool enable)
 		CMD &= ~(kXHCICMDINTE | kXHCICMDEWE);  //it was CMD &= ~kXHCICMDINTE; 
 		Write32Reg(&_pXHCIRegisters->USBCMD, CMD);
 		IOSync();
-		USBLog(2, "AppleUSBXHCI[%p]::EnableInterruptsFromController - interrupts disabled, USBCMD(%p) INTE(%s)", this, (void*)CMD,
+		USBLog(2, "AppleUSBXHCI[%p]::EnableInterruptsFromController - interrupts disabled, USBCMD(%p) INTE(%s)", this, (void*)(UInt64)CMD,
                (CMD & kXHCICMDINTE | kXHCICMDEWE) ? "true":"false" );
 	}
 	

@@ -129,6 +129,7 @@ enum{
 	kMaxPorts = 15
 };
 
+#define _errataBits _v3ExpansionData->_errata64Bits
 
 //================================================================================================
 //
@@ -193,7 +194,7 @@ protected:
     UInt16									_vendorID;
     UInt16									_deviceID;
     UInt16									_revisionID;
-    UInt32									_errataBits;						// various bits for chip erratas
+    //UInt32								_errataBits;						// various bits for chip erratas
     EHCICapRegistersPtr						_pEHCICapRegisters;					// Capabilities registers
     EHCIRegistersPtr						_pEHCIRegisters;					// Pointer to base address of EHCI registers.
     UInt32									_dataAllocationSize;				// # of bytes allocated in for TD's

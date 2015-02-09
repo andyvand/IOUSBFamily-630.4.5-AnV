@@ -21,12 +21,13 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-#import "OutlineViewAdditions.h"
+#define _NUM_VERSION_ 1
 
+#import "OutlineViewAdditions.h"
 
 @implementation NSOutlineView(OutlineViewAdditions)
 
-- (void)itemDoubleClicked {
+- (void)itemDoubleClicked:(id)sender {
     int selectedRow = [self selectedRow];
     
     if (![self isExpandable:[self itemAtRow:selectedRow]]) {
@@ -48,6 +49,7 @@
     NSMutableString *pasteboardString = [[NSMutableString alloc] init];
 	NSIndexSet	*indexSet;
     id  anItem;
+    OutlineViewNode *nodeItem;
     
 	indexSet = [self selectedRowIndexes];
 	NSUInteger current = [indexSet firstIndex];
@@ -63,7 +65,9 @@
         if ([anItem class] == [BusProbeDevice class]) {
             anItem = [anItem rootNode];
         }
-        [pasteboardString appendString:[NSString stringWithFormat:@"%@   %@\n",[anItem name],[anItem value]]];
+
+        nodeItem = anItem;
+        [pasteboardString appendString:[NSString stringWithFormat:@"%@   %@\n",[nodeItem name],[nodeItem value]]];
 
          current = [indexSet indexGreaterThanIndex: current];
     }

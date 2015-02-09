@@ -30,7 +30,6 @@
 
 @interface PortStatusController : NSObject <PortStatusGathererListener>
 {
-
     IBOutlet id PortStatusOutputOV;
 
 	IBOutlet NSButton *fResfreshButton;
@@ -38,12 +37,11 @@
 
 	NSTimer *refreshTimer;
 
-    OutlineViewNode *       _rootNode;
-	PortStatusGatherer *    _infoGatherer;
+    OutlineViewNode *_rootNode;
+	PortStatusGatherer *_infoGatherer;
 }
 
 - (IBAction)Refresh:(id)sender;
 - (IBAction)SaveOutput:(id)sender;
 - (IBAction)refreshAutomaticallyAction:(id)sender;
-
 @end

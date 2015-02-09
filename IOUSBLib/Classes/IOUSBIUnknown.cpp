@@ -23,6 +23,18 @@
 
 #include <math.h>
 
+#define _NUM_VERSION_ 1
+#define _OSTYPES_H 1
+
+#ifdef KERNEL
+#include <IOKit/IOLib.h>
+#include <IOKit/IOService.h>
+#include <libkern/c++/OSObject.h>
+#else /* ! KERNEL */
+#include <IOKit/IOKitLib.h>
+#include <libkern/OSTypes.h>
+#endif /* KERNEL */
+
 #include "IOUSBIUnknown.h"
 #include "IOUSBDeviceClass.h"
 #include "IOUSBInterfaceClass.h"

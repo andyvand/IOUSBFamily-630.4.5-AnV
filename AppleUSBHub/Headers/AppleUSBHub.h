@@ -295,8 +295,7 @@ class AppleUSBHub : public IOUSBHubPolicyMaker
     bool				GetInternalHubErrataBits(UInt32 *errataBits);
 	bool				IsHubDeviceInternal();
 	void				GetACPIPortCaptiveProperties(UInt32 portnum, bool *isInternal, bool *hasExternalConnector);
-	
-	
+
 public:
 
     //  IOKit methods

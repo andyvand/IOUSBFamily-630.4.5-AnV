@@ -24,13 +24,13 @@
 #ifndef _IOUSBCONTROLLERLISTELEMENT_H
 #define _IOUSBCONTROLLERLISTELEMENT_H
 
+#include "USBSpec.h"
+#include "USB.h"
 
+#ifdef KERNEL
 #include <libkern/c++/OSObject.h>
 
 #include <IOKit/IOTypes.h>
-
-#include "../../IOUSBFamily/Headers/USB.h"
-
 
 /*
  class IOUSBControllerListElement
@@ -119,7 +119,7 @@ public:
     UInt8								direction;
 	bool								aborting;
 };
-
+#endif /* KERNEL */
 
 #endif
 

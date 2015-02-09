@@ -639,7 +639,7 @@ AppleUSBOHCI::UIMRootHubStatusChange(void)
 	
 	if (statusChangedBitmap)
 	{
-		USBLog(5, "AppleUSBOHCI[%p]::UIMRootHubStatusChange - reporting status of %p", this, (void*)statusChangedBitmap);
+		USBLog(5, "AppleUSBOHCI[%p]::UIMRootHubStatusChange - reporting status of %p", this, (void*)(UInt64)statusChangedBitmap);
 	}
 	
     _rootHubStatusChangedBitmap = statusChangedBitmap;

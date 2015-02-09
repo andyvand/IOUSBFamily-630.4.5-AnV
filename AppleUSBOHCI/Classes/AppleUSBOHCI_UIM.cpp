@@ -128,7 +128,7 @@ AppleUSBOHCI::CreateGeneralTransfer(AppleOHCIEndpointDescriptorPtr queue, IOUSBC
 				status = dmaCommand->gen64IOVMSegments(&offset, segments64, &pageCount);
 				if (status || ((pageCount != 1) && (pageCount != 2)))
 				{
-					USBError(1, "AppleUSBOHCI::CreateGeneralTransfer - could not generate segments - err (%p) pageCount (%d) offset (%qd) transferOffset (%d) bufferSize (%d) getMemoryDescriptor (%p)", (void*)status, (int)pageCount, offset, (int)transferOffset, (int)bufferSize, dmaCommand->getMemoryDescriptor());
+					USBError(1, "AppleUSBOHCI::CreateGeneralTransfer - could not generate segments - err (%p) pageCount (%d) offset (%qd) transferOffset (%d) bufferSize (%d) getMemoryDescriptor (%p)", (void*)(UInt64)status, (int)pageCount, offset, (int)transferOffset, (int)bufferSize, dmaCommand->getMemoryDescriptor());
 					status = status ? status : kIOReturnInternalError;
 					return status;
 				}
@@ -1725,7 +1725,7 @@ AppleUSBOHCI::print_list(AppleOHCIEndpointDescriptorPtr pListHead, AppleOHCIEndp
 		if ( printTDs )
 		{
 			// get the top TD
-			pTD = (AppleOHCIGeneralTransferDescriptorPtr) (USBToHostLong(pED->pShared->tdQueueHeadPtr) & kOHCIHeadPMask);
+			pTD = (AppleOHCIGeneralTransferDescriptorPtr)(UInt64)(USBToHostLong(pED->pShared->tdQueueHeadPtr) & kOHCIHeadPMask);
 			// convert physical to logical
 			pTD = AppleUSBOHCIgtdMemoryBlock::GetGTDFromPhysical((IOPhysicalAddress)pTD);
 			if ( pTD && !(pTD == pED->pLogicalTailP) )
@@ -1789,7 +1789,7 @@ AppleUSBOHCI::print_int_list(int level, bool printSkipped, bool printTDs)
 				AppleOHCIGeneralTransferDescriptorPtr	pTD;
 
 				// get the top TD
-				pTD = (AppleOHCIGeneralTransferDescriptorPtr) (USBToHostLong(pED->pShared->tdQueueHeadPtr) & kOHCIHeadPMask);
+				pTD = (AppleOHCIGeneralTransferDescriptorPtr)(UInt64)(USBToHostLong(pED->pShared->tdQueueHeadPtr) & kOHCIHeadPMask);
 				// convert physical to logical
 				pTD = AppleUSBOHCIgtdMemoryBlock::GetGTDFromPhysical((IOPhysicalAddress)pTD);
 				if ( pTD && !(pTD == pED->pLogicalTailP) )
@@ -1827,7 +1827,7 @@ AppleUSBOHCI::CheckEDListForTimeouts(AppleOHCIEndpointDescriptorPtr head, AppleO
     for (pED = pED->pLogicalNext; pED != tail; pED = pED->pLogicalNext)
     {
         // get the top TD
-        pTD = (AppleOHCIGeneralTransferDescriptorPtr) (USBToHostLong(pED->pShared->tdQueueHeadPtr) & kOHCIHeadPMask);
+        pTD = (AppleOHCIGeneralTransferDescriptorPtr)(UInt64)(USBToHostLong(pED->pShared->tdQueueHeadPtr) & kOHCIHeadPMask);
         // convert physical to logical
         pTD = AppleUSBOHCIgtdMemoryBlock::GetGTDFromPhysical((IOPhysicalAddress)pTD);
         if (!pTD)
@@ -1902,7 +1902,7 @@ AppleUSBOHCI::ReturnAllTransactionsInEndpoint(AppleOHCIEndpointDescriptorPtr hea
     for (pED = pED->pLogicalNext; pED != tail; pED = pED->pLogicalNext)
     {
         // get the top TD
-        pTD = (AppleOHCIGeneralTransferDescriptorPtr) (USBToHostLong(pED->pShared->tdQueueHeadPtr) & kOHCIHeadPMask);
+        pTD = (AppleOHCIGeneralTransferDescriptorPtr)(UInt64)(USBToHostLong(pED->pShared->tdQueueHeadPtr) & kOHCIHeadPMask);
         // convert physical to logical
         pTD = AppleUSBOHCIgtdMemoryBlock::GetGTDFromPhysical((IOPhysicalAddress)pTD);
         if (!pTD)
@@ -2234,7 +2234,7 @@ AppleUSBOHCI::UIMCreateIsochTransfer(IOUSBIsocCommand *command)
 
 			if (status)
 			{
-				USBError(1, "AppleUSBOHCI::UIMCreateIsochTransfer - curFrameInRequest[%d] frameCount[%d] - got status (%p) from gen64IOVMSegments", (int)curFrameInRequest, (int)frameCount, (void*)status);
+				USBError(1, "AppleUSBOHCI::UIMCreateIsochTransfer - curFrameInRequest[%d] frameCount[%d] - got status (%p) from gen64IOVMSegments", (int)curFrameInRequest, (int)frameCount, (void*)(UInt64)status);
 				return status;
 			}
 			
@@ -2295,7 +2295,7 @@ AppleUSBOHCI::UIMCreateIsochTransfer(IOUSBIsocCommand *command)
             if ( (segments32[numSegs-1].fIOVMAddr & kOHCIPageMask) != ((segments32[numSegs-1].fIOVMAddr + segments32[numSegs-1].fLength) & kOHCIPageMask))
             {
                 multiPageSegment = true;
-                USBLog(8,"We have a segment that crosses a page boundary:  start: %p, length: %p, end: %p, curFrameinTD: %d", (void*)segments32[numSegs-1].fIOVMAddr, (void*)segments32[numSegs-1].fLength, (void*)(segments32[numSegs-1].fIOVMAddr + segments32[numSegs-1].fLength), (int)curFrameInTD);
+                USBLog(8,"We have a segment that crosses a page boundary:  start: %p, length: %p, end: %p, curFrameinTD: %d", (void*)(UInt64)segments32[numSegs-1].fIOVMAddr, (void*)(UInt64)segments32[numSegs-1].fLength, (void*)(UInt64)(segments32[numSegs-1].fIOVMAddr + segments32[numSegs-1].fLength), (int)curFrameInTD);
             }
             else
                 multiPageSegment = false;

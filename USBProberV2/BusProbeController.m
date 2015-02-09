@@ -21,6 +21,8 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
+#define _NUM_VERSION_ 1
+
 #import "BusProbeController.h"
 
 @implementation BusProbeController
@@ -42,27 +44,34 @@
     [super dealloc];
 }
 
+- (void)probeItemDoubleClicked:(id)sender {
+    [sender itemDoubleClicked:sender];
+}
+
 - (void)awakeFromNib {
+    NSButton *refCheckBox = RefreshCheckBox;
+    NSButton *susCheckBox = SuspendCheckBox;
+
     if ( [[NSUserDefaults standardUserDefaults] boolForKey:@"BusProbeAutoRefresh"] == NO) {
-        [RefreshCheckBox setState:NSOffState];
+        [refCheckBox setState:NSOffState];
 //enable/disable button        [RefreshButton setEnabled:YES];
     } else {
-        [RefreshCheckBox setState:NSOnState];
+        [refCheckBox setState:NSOnState];
 //enable/disable button        [RefreshButton setEnabled:NO];
     }
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"BusProbeSuspended"] == YES) {
-        [SuspendCheckBox setState:NSOnState];
+        [susCheckBox setState:NSOnState];
 //enable/disable button        [RefreshButton setEnabled:YES];
     } else {
-        [SuspendCheckBox setState:NSOffState];
+        [susCheckBox setState:NSOffState];
 //enable/disable button        [RefreshButton setEnabled:NO];
     }
     	
     [BusProbeOutputOV setTarget:BusProbeOutputOV];
-    [BusProbeOutputOV setDoubleAction:@selector(itemDoubleClicked)];
-    
- //   [self expandOutlineViewItems];
+    //[BusProbeOutputOV setDoubleAction:@selector(itemDoubleClicked)];
+    [BusProbeOutputOV setDoubleAction:@selector(probeItemDoubleClicked:)];
+    [self expandOutlineViewItems];
 }
 
 - (IBAction)Refresh:(id)sender
@@ -117,9 +126,9 @@
     [sp setAccessoryView:newExSel];
     newExSel.theSavePanel = sp;
 
-    [sp beginSheetModalForWindow:[NSApp mainWindow] completionHandler:^(NSInteger returnCode){
-		
-        if (returnCode==NSOKButton)
+    [sp beginSheetModalForWindow:[NSApp mainWindow] completionHandler:^(NSInteger returnCode)
+    {
+        if (returnCode == NSModalResponseOK)
         {
             NSString *selectedFileExtension = [[sp nameFieldStringValue] pathExtension];
             NSMutableString *finalString = [NSMutableString string];
@@ -148,8 +157,9 @@
 - (IBAction)ToggleAutoRefresh:(id)sender
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    if ([sender state] == NSOffState) {
+    NSButton *senderButton = sender;
+
+    if ([senderButton state] == NSOffState) {
         [defaults setBool:NO forKey:@"BusProbeAutoRefresh"];
 //enable/disable button        [RefreshButton setEnabled:YES];
     } else {
@@ -162,8 +172,9 @@
 - (IBAction)ToggleProbeSuspended:(id)sender
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    if ([sender state] == NSOffState) {
+    NSButton *senderButton = sender;
+
+    if ([senderButton state] == NSOffState) {
         [defaults setBool:NO forKey:@"BusProbeSuspended"];
     } else {
         [defaults setBool:YES forKey:@"BusProbeSuspended"];
@@ -391,7 +402,7 @@
 }
 
 - (id)outlineView:(NSOutlineView *)ov objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
-{   
+{
     if ([[tableColumn identifier] intValue] == 0) {
         if ([item class] == [BusProbeDevice class]) {
             return [[(BusProbeDevice *)item rootNode] name];
@@ -401,7 +412,8 @@
         if ([item class] == [BusProbeDevice class]) {
             return [[(BusProbeDevice *)item rootNode] value];
         }
-        return [item value];
+
+        return [(Class)item value];
     }
 }
 

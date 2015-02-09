@@ -225,6 +225,7 @@ dependencies: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOServicePM.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOReportTypes.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IODMACommand.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBFamily/Classes/../Headers/../../IOUSBFamily/Headers/USB.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBFamily/Classes/../Headers/USB.h \
   /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBFamily/Classes/../Headers/../../IOUSBFamily/Headers/USBSpec.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBFamily/Classes/../Headers/IOUSBLog.h
+  /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBFamily/Classes/../Headers/IOUSBLog.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/Headers/AssertMacros.h

@@ -283,7 +283,7 @@ IOUSBHubPolicyMaker::start(IOService * provider)
 	err = registerPowerDriver(this, ourPowerStates, kIOUSBHubNumberPowerStates);
 	if (err)
 	{
-		USBError(1, "IOUSBHubPolicyMaker::start - err [%p] from registerPowerDriver", (void*)err);
+		USBError(1, "IOUSBHubPolicyMaker::start - err [%p] from registerPowerDriver", (void*)(UInt64)err);
 		PMstop();
 		return false;
 	}
@@ -362,7 +362,7 @@ IOUSBHubPolicyMaker::setPowerState( unsigned long powerStateOrdinal, IOService* 
 	
 	ret = HubPowerChange(powerStateOrdinal);
 	
-	USBLog(5, "IOUSBHubPolicyMaker[%p]::setPowerState - returning (%p)", this, (void*)ret);
+	USBLog(5, "IOUSBHubPolicyMaker[%p]::setPowerState - returning (%p)", this, (void*)(UInt64)ret);
 	return ret;
 }
 
@@ -614,10 +614,10 @@ OSMetaClassDefineReservedUsed(IOUSBHubPolicyMaker,  2);
 OSMetaClassDefineReservedUsed(IOUSBHubPolicyMaker,  3);
 OSMetaClassDefineReservedUsed(IOUSBHubPolicyMaker,  4);
 OSMetaClassDefineReservedUsed(IOUSBHubPolicyMaker,  5);
+OSMetaClassDefineReservedUsed(IOUSBHubPolicyMaker,  6);
+OSMetaClassDefineReservedUsed(IOUSBHubPolicyMaker,  7);
+OSMetaClassDefineReservedUsed(IOUSBHubPolicyMaker,  8);
 
-OSMetaClassDefineReservedUnused(IOUSBHubPolicyMaker,  6);
-OSMetaClassDefineReservedUnused(IOUSBHubPolicyMaker,  7);
-OSMetaClassDefineReservedUnused(IOUSBHubPolicyMaker,  8);
 OSMetaClassDefineReservedUnused(IOUSBHubPolicyMaker,  9);
 OSMetaClassDefineReservedUnused(IOUSBHubPolicyMaker,  10);
 OSMetaClassDefineReservedUnused(IOUSBHubPolicyMaker,  11);

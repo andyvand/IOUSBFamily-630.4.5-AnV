@@ -152,7 +152,7 @@ AppleUSBEHCI::stop( IOService * provider )
 {
 	if (_controllerAvailable)
 	{
-		USBLog(5, "AppleUSBEHCI[%p]::stop - isInactive(%s) - USBCMD(%p) USBSTS(%p)", this, isInactive() ? "true" : "false", (void*)USBToHostLong(_pEHCIRegisters->USBCMD), (void*)USBToHostLong(_pEHCIRegisters->USBSTS));
+		USBLog(5, "AppleUSBEHCI[%p]::stop - isInactive(%s) - USBCMD(%p) USBSTS(%p)", this, isInactive() ? "true" : "false", (void*)(UInt64)USBToHostLong(_pEHCIRegisters->USBCMD), (void*)(UInt64)USBToHostLong(_pEHCIRegisters->USBSTS));
 	}
 	else
 	{
@@ -178,7 +178,7 @@ AppleUSBEHCI::willTerminate(IOService * provider, IOOptionBits options)
 	}
 	if (_controllerAvailable)
 	{
-		USBLog(5, "AppleUSBEHCI[%p]::willTerminate - isInactive(%s) - USBCMD(%p) USBSTS(%p)", this, isInactive() ? "true" : "false", (void*)USBToHostLong(_pEHCIRegisters->USBCMD), (void*)USBToHostLong(_pEHCIRegisters->USBSTS));
+		USBLog(5, "AppleUSBEHCI[%p]::willTerminate - isInactive(%s) - USBCMD(%p) USBSTS(%p)", this, isInactive() ? "true" : "false", (void*)(UInt64)USBToHostLong(_pEHCIRegisters->USBCMD), (void*)(UInt64)USBToHostLong(_pEHCIRegisters->USBSTS));
 	}
 	else
 	{
@@ -195,7 +195,7 @@ AppleUSBEHCI::didTerminate( IOService * provider, IOOptionBits options, bool * d
 {
 	if (_controllerAvailable)
 	{
-		USBLog(5, "AppleUSBEHCI[%p]::didTerminate - isInactive(%s) - USBCMD(%p) USBSTS(%p)", this, isInactive() ? "true" : "false", (void*)USBToHostLong(_pEHCIRegisters->USBCMD), (void*)USBToHostLong(_pEHCIRegisters->USBSTS));
+		USBLog(5, "AppleUSBEHCI[%p]::didTerminate - isInactive(%s) - USBCMD(%p) USBSTS(%p)", this, isInactive() ? "true" : "false", (void*)(UInt64)USBToHostLong(_pEHCIRegisters->USBCMD), (void*)(UInt64)USBToHostLong(_pEHCIRegisters->USBSTS));
 	}
 	else
 	{
@@ -256,18 +256,18 @@ void AppleUSBEHCI::showRegisters(UInt32 __unused level, const char * __unused s)
     USBLog(level,"     kIOPCIConfigExpansionROMBase=0x%x", (uint32_t)_device->configRead32(kIOPCIConfigExpansionROMBase));
     USBLog(level,"     kIOPCIConfigInterruptLine=0x%x", (uint32_t)_device->configRead32(kIOPCIConfigInterruptLine));
     USBLog(level,"     kIOPCIConfigInterruptLine+4=0x%x", (uint32_t)_device->configRead32(kIOPCIConfigInterruptLine+4));
-    USBLog(level,"     kIOPCIConfigCommand=%p", (void*)_device->configRead16(kIOPCIConfigCommand));
-    USBLog(level,"     kIOPCIConfigStatus=%p", (void*)_device->configRead16(kIOPCIConfigStatus));
+    USBLog(level,"     kIOPCIConfigCommand=%p", (void*)(UInt64)_device->configRead16(kIOPCIConfigCommand));
+    USBLog(level,"     kIOPCIConfigStatus=%p", (void*)(UInt64)_device->configRead16(kIOPCIConfigStatus));
 #endif
 
-    USBLog(level,"EHCI: USBCMD:  %p", (void*)USBToHostLong(_pEHCIRegisters->USBCMD));
-    USBLog(level,"   USBSTS:  %p", (void*)USBToHostLong(_pEHCIRegisters->USBSTS));
-    USBLog(level,"   USBIntr: %p", (void*)USBToHostLong(_pEHCIRegisters->USBIntr));
-    USBLog(level,"   FRIndex: %p", (void*)USBToHostLong(_pEHCIRegisters->FRIndex));
-    USBLog(level,"   CTRLDSSeg:    %p", (void*)USBToHostLong(_pEHCIRegisters->CTRLDSSegment));
-    USBLog(level,"   PerListBase:  %p", (void*)USBToHostLong(_pEHCIRegisters->PeriodicListBase));
-    USBLog(level,"   AsyncListAd:  %p", (void*)USBToHostLong(_pEHCIRegisters->AsyncListAddr));
-    USBLog(level,"   ConfFlg: %p", (void*)USBToHostLong(_pEHCIRegisters->ConfigFlag));
+    USBLog(level,"EHCI: USBCMD:  %p", (void*)(UInt64)USBToHostLong(_pEHCIRegisters->USBCMD));
+    USBLog(level,"   USBSTS:  %p", (void*)(UInt64)USBToHostLong(_pEHCIRegisters->USBSTS));
+    USBLog(level,"   USBIntr: %p", (void*)(UInt64)USBToHostLong(_pEHCIRegisters->USBIntr));
+    USBLog(level,"   FRIndex: %p", (void*)(UInt64)USBToHostLong(_pEHCIRegisters->FRIndex));
+    USBLog(level,"   CTRLDSSeg:    %p", (void*)(UInt64)USBToHostLong(_pEHCIRegisters->CTRLDSSegment));
+    USBLog(level,"   PerListBase:  %p", (void*)(UInt64)USBToHostLong(_pEHCIRegisters->PeriodicListBase));
+    USBLog(level,"   AsyncListAd:  %p", (void*)(UInt64)USBToHostLong(_pEHCIRegisters->AsyncListAddr));
+    USBLog(level,"   ConfFlg: %p", (void*)(UInt64)USBToHostLong(_pEHCIRegisters->ConfigFlag));
 
     for(i=0;i<_rootHubNumPorts;i++)
     {
@@ -383,7 +383,7 @@ AppleUSBEHCI::UIMInitialize(IOService * provider)
 			_device->configWrite16(0x84, 0);
 		}
     
-      USBLog(7, "AppleUSBEHCI[%p]::UIMInitialize - errata bits=%p",  this,  (void*)_errataBits);
+      USBLog(7, "AppleUSBEHCI[%p]::UIMInitialize - errata bits=%p",  this,  (void*)(UInt64)_errataBits);
 
       _pEHCICapRegisters = (EHCICapRegistersPtr) _deviceBase->getVirtualAddress();
 
@@ -501,7 +501,7 @@ AppleUSBEHCI::UIMInitialize(IOService * provider)
 		_frameNumber = 0;
         
         // 10186556 - don't do rMBS during Isoch if we are on TBolt
-        if (!_v3ExpansionData->_onThunderbolt)
+        if (!_v3ExpansionData->_tbBitmapsExist)
             _expansionData->_isochMaxBusStall = 25000;						// we need a requireMaxBusStall of 25 microseconds for EHCI (but not on Tbolt)
 
 		// this is the "think time" needed for the controller to go from one QH to the next. It is used for periodic scheduling
@@ -760,7 +760,7 @@ AppleUSBEHCI::AcquireOSOwnership(void)
 		return kIOReturnSuccess;
 
   data = _device->configRead32(eecp);
-  USBLog(1, "USBLEGCTLSTS value %p", (void*)_device->configRead32(eecp + kEHCI_USBLEGCTLSTS));
+  USBLog(1, "USBLEGCTLSTS value %p", (void*)(UInt64)_device->configRead32(eecp + kEHCI_USBLEGCTLSTS));
 
   if ((data & 0xFF) == kEHCI_USBLEGSUP_ID)
   {
@@ -781,7 +781,7 @@ AppleUSBEHCI::AcquireOSOwnership(void)
 			}
 		}
 
-		USBLog(2, "Found USBLEGSUP_ID - value %p - writing OSOwned", (void*)data);
+		USBLog(2, "Found USBLEGSUP_ID - value %p - writing OSOwned", (void*)(UInt64)data);
     _device->configWrite32(eecp, data | kEHCI_USBLEGSUP_OSOwned);
 
     // wait for kEHCI_USBLEGSUP_BIOSOwned bit to clear
@@ -821,7 +821,7 @@ AppleUSBEHCI::AcquireOSOwnership(void)
         return kIOReturnNoResources;
       }
 
-      USBLog(1, "acquireOSOwnership done - value %p", (void*)_device->configRead32(eecp));
+      USBLog(1, "acquireOSOwnership done - value %p", (void*)(UInt64)_device->configRead32(eecp));
 		}
   }
 	else
@@ -865,7 +865,7 @@ AppleUSBEHCI::InterruptInitialize (void)
     status = _periodicListBuffer->prepare();
 	if (status)
 	{
-		USBError(1, "AppleUSBEHCI[%p]::InterruptInitialize - could not prepare buffer err(%p)", this, (void*)status);
+		USBError(1, "AppleUSBEHCI[%p]::InterruptInitialize - could not prepare buffer err(%p)", this, (void*)(UInt64)status);
 		_periodicListBuffer->release();
 		_periodicListBuffer = NULL;
         return status;
@@ -888,7 +888,7 @@ AppleUSBEHCI::InterruptInitialize (void)
 	status = dmaCommand->setMemoryDescriptor(_periodicListBuffer);
 	if (status)
 	{
-		USBError(1, "AppleUSBEHCI[%p]::InterruptInitialize - setMemoryDescriptor returned err (%p)", this, (void*)status);
+		USBError(1, "AppleUSBEHCI[%p]::InterruptInitialize - setMemoryDescriptor returned err (%p)", this, (void*)(UInt64)status);
 		dmaCommand->release();
 		_periodicListBuffer->complete();
 		_periodicListBuffer->release();
@@ -899,7 +899,7 @@ AppleUSBEHCI::InterruptInitialize (void)
 	status = dmaCommand->gen32IOVMSegments(&offset, &segments, &numSegments);
 	if (status || (numSegments != 1) || (segments.fLength != PAGE_SIZE))
 	{
-		USBError(1, "AppleUSBEHCI[%p]::InterruptInitialize - could not generate segments err (%p) numSegments (%d) fLength (%d)", this, (void*)status, (int)numSegments, (int)segments.fLength);
+		USBError(1, "AppleUSBEHCI[%p]::InterruptInitialize - could not generate segments err (%p) numSegments (%d) fLength (%d)", this, (void*)(UInt64)status, (int)numSegments, (int)segments.fLength);
 		status = status ? status : kIOReturnInternalError;
 		dmaCommand->clearMemoryDescriptor();
 		dmaCommand->release();
@@ -1207,7 +1207,7 @@ UInt32
 AppleUSBEHCI::GetFrameNumber32()
 {
     UInt32		temp1, temp2;
-    register 	UInt32	frindex;
+     	UInt32	frindex;
 	UInt32		sts = USBToHostLong(_pEHCIRegisters->USBSTS);
     
 	if (sts == kEHCIInvalidRegisterValue)
@@ -1239,7 +1239,7 @@ AppleUSBEHCI::GetFrameNumber32()
     //
     frindex = frindex >> 3;
     
-    USBLog(7, "AppleUSBEHCI[%p]::GetFrameNumber32 -- returning %d (%p)",  this, (int)(temp1+frindex), (void*)(temp1+frindex));
+    USBLog(7, "AppleUSBEHCI[%p]::GetFrameNumber32 -- returning %d (%p)",  this, (int)(temp1+frindex), (void*)(UInt64)(temp1+frindex));
     
     return (UInt32)(temp1 + frindex);
 }
@@ -1249,7 +1249,7 @@ UInt64
 AppleUSBEHCI::GetFrameNumber()
 {
     UInt64		temp1, temp2;
-    register 	UInt32	frindex;
+    	UInt32	frindex;
 	UInt32		sts = USBToHostLong(_pEHCIRegisters->USBSTS);
     
 	//*******************************************************************************************************
@@ -1296,7 +1296,7 @@ UInt64
 AppleUSBEHCI::GetMicroFrameNumber()
 {
     UInt64	temp1, temp2;
-    register 	UInt32	frindex;
+     	UInt32	frindex;
     
     // First, get a snapshot but make sure that we haven't wrapped around and not processed the new value.  Note that the
     // rollover bit is processed at primary interrupt time, so we don't need to take that into account in this calculation.
@@ -2016,7 +2016,7 @@ AppleUSBEHCI::message( UInt32 type, IOService * provider,  void * argument )
 	IOUSBRootHubDevice *		parentHub = NULL;
 	IOReturn					returnValue = kIOReturnSuccess;
 	
-    USBLog(6, "AppleUSBEHCI[%p]::message type: %p, isInactive = %d",  this, (void*)type, isInactive());
+    USBLog(6, "AppleUSBEHCI[%p]::message type: %p, isInactive = %d",  this, (void*)(UInt64)type, isInactive());
 
     // Let our superclass decide handle this method
     // messages

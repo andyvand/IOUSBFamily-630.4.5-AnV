@@ -168,7 +168,7 @@ void AppleUSBOHCI::PollInterrupts(IOUSBCompletionAction safeAction)
 void 
 AppleUSBOHCI::InterruptHandler(OSObject *owner, IOInterruptEventSource * /*source*/, int /*count*/)
 {
-    register AppleUSBOHCI		*controller = (AppleUSBOHCI *) owner;
+    AppleUSBOHCI		*controller = (AppleUSBOHCI *) owner;
 	
     if (!controller || controller->isInactive() || !controller->_controllerAvailable)
         return;
@@ -200,7 +200,7 @@ bool
 AppleUSBOHCI::PrimaryInterruptFilter(OSObject *owner, IOFilterInterruptEventSource *source)
 {
 #pragma unused (source)
-	register AppleUSBOHCI *controller = (AppleUSBOHCI *)owner;
+	AppleUSBOHCI *controller = (AppleUSBOHCI *)owner;
 	bool result = true;
 	
 	// If we our controller has gone away, or it's going away, or if we're on a PC Card and we have been ejected,
@@ -257,8 +257,8 @@ bool
 AppleUSBOHCI::FilterInterrupt(int index)
 {
 #pragma unused (index)
-	register UInt32							activeInterrupts;
-	register UInt32							enabledInterrupts;
+	 UInt32							activeInterrupts;
+	 UInt32							enabledInterrupts;
 	IOPhysicalAddress						physicalAddress;
 	AppleOHCIGeneralTransferDescriptorPtr 	pHCDoneTD = NULL;
 	AppleOHCIGeneralTransferDescriptorPtr	nextTD = NULL, prevTD = NULL;

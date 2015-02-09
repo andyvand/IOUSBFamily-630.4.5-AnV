@@ -23,7 +23,7 @@
 
 
 #import "KextInfoGatherer.h"
-
+#import <AppKit/AppKit.h>
 
 @implementation KextInfoGatherer
 
@@ -93,8 +93,115 @@ Boolean getNumValue(CFNumberRef aNumber, CFNumberType type, void * valueOut)
     return false;
 }
 
+#define KEXTD_PORT_NULL ((mach_port_t) 0UL)
+
+static int kmod_compare(const void * a, const void * b)
+{
+    kmod_info_t * k1 = (kmod_info_t *)a;
+    kmod_info_t * k2 = (kmod_info_t *)b;
+    // these are load indices, not CFBundleIdentifiers
+    //    return strcasecmp(k1->name, k2->name);
+    return (k1->id - k2->id);
+}
+
 + (NSMutableArray *)loadedExtensions {
-	return NULL;
+    NSMutableArray *returnArray = [[NSMutableArray alloc] init];
+
+    kern_return_t mach_result = KERN_SUCCESS;
+    mach_port_t host_port = KEXTD_PORT_NULL;
+    kmod_info_t *kmod_list = NULL;
+    mach_msg_type_number_t kmod_bytecount = 0;  // not really used
+    int kmod_count = 0;
+    kmod_info_t *this_kmod = NULL;
+    int i = 0;
+    
+    /* Get the list of loaded kmods from the kernel.
+     */
+    host_port = mach_host_self();
+    mach_result = kmod_get_info(host_port, (void *)&kmod_list, &kmod_bytecount);
+
+    if (mach_result != KERN_SUCCESS)
+    {
+        
+        // ERROR
+        
+        goto finish;
+    }
+    
+    /* kmod_get_info() doesn't return a proper count so we have
+     * to scan the array checking for a NULL next pointer.
+     */
+    this_kmod = kmod_list;
+    kmod_count = 0;
+
+    while (this_kmod)
+    {
+        kmod_count++;
+        this_kmod = (this_kmod->next) ? (this_kmod + 1) : 0;
+    }
+
+    if (!kmod_count)
+    {
+        goto finish;
+    }
+
+    qsort(kmod_list, kmod_count, sizeof(kmod_info_t), kmod_compare);
+
+    /* Now print out what was found. */
+    this_kmod = kmod_list;
+    for (i=0; i < kmod_count; i++, this_kmod++)
+    {
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+        [dict setObject:[NSString stringWithFormat:@"%s",this_kmod->name] forKey:@"Name"];
+        [dict setObject:[NSString stringWithFormat:@"%s",this_kmod->version] forKey:@"Version"];
+
+        if (this_kmod->size != 0)
+        {
+            if (this_kmod->size > 1024)
+            {
+                [dict setObject:[NSString stringWithFormat:@"%lU KB", (unsigned long)(this_kmod->size/1024)] forKey:@"Size"];
+            } else {
+                [dict setObject:[NSString stringWithFormat:@"%lU Bytes", (unsigned long)this_kmod->size] forKey:@"Size"];
+            }
+            
+        } else {
+            [dict setObject:@"n/a" forKey:@"Size"];
+        }
+
+        if (this_kmod->size - this_kmod->hdr_size)
+        {
+            if ((this_kmod->size - this_kmod->hdr_size) > 1024)
+            {
+                [dict setObject:[NSString stringWithFormat:@"%lU KB", (unsigned long)((this_kmod->size - this_kmod->hdr_size)/1024)] forKey:@"Wired"];
+            } else {
+                [dict setObject:[NSString stringWithFormat:@"%lU bytes", (unsigned long)(this_kmod->size - this_kmod->hdr_size)] forKey:@"Wired"];
+            }
+        } else {
+            [dict setObject:@"n/a" forKey:@"Wired"];
+        }
+
+        [dict setObject:[NSString stringWithFormat:@"%-10p",(void *)(UInt64)this_kmod->address] forKey:@"Address"];
+
+        [returnArray addObject:dict];
+        [dict release];
+    }
+    
+finish:
+    /* Dispose of the host port to prevent security breaches and port
+     * leaks. We don't care about the kern_return_t value of this
+     * call for now as there's nothing we can do if it fails.
+     */
+    if (KEXTD_PORT_NULL != host_port)
+    {
+        mach_port_deallocate(mach_task_self(), host_port);
+    }
+
+    if (kmod_list)
+    {
+        vm_deallocate(mach_task_self(), (vm_address_t)kmod_list, kmod_bytecount);
+    }
+
+    return [returnArray autorelease];
 }
 
 + (NSMutableArray *)loadedExtensionsContainingString:(NSString *)string {
@@ -103,7 +210,7 @@ Boolean getNumValue(CFNumberRef aNumber, CFNumberType type, void * valueOut)
 		NSArray * arrayCopy = [ returnArray copy ];
         NSEnumerator *enumerator = [arrayCopy objectEnumerator];
         NSDictionary *thisKext = NULL;
-        
+
         while (thisKext = [enumerator nextObject]) {
             if ([[thisKext objectForKey:@"Name"] rangeOfString:string options:NSCaseInsensitiveSearch].location == NSNotFound) {
                 [returnArray removeObject:thisKext];

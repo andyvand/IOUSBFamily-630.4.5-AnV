@@ -178,10 +178,10 @@ AppleUSBUHCI::UIMCreateControlTransfer(short				functionNumber,
     status = AllocTDChain(pQH, command, CBP, bufferSize, direction, true);
     if (status != kIOReturnSuccess) 
 	{
-		USBLog(2, "AppleUSBUHCI[%p]::UIMCreateControlTransfer - returning status %p", this, (void*)status);
+		USBLog(2, "AppleUSBUHCI[%p]::UIMCreateControlTransfer - returning status %p", this, (void*)(UInt64)status);
     }
     	
-	USBLog(7, "AppleUSBUHCI[%p]::UIMCreateControlTransfer - pQH[%p] firstTD[%p] lastTD[%p] status[%p]", this, pQH, pQH->firstTD, pQH->lastTD, (void*)status);
+	USBLog(7, "AppleUSBUHCI[%p]::UIMCreateControlTransfer - pQH[%p] firstTD[%p] lastTD[%p] status[%p]", this, pQH, pQH->firstTD, pQH->lastTD, (void*)(UInt64)status);
 	return status;
 }
 
@@ -358,7 +358,7 @@ AppleUSBUHCI::UIMCreateInterruptEndpoint(short				functionNumber,
         ret = UIMDeleteEndpoint(functionNumber, endpointNumber, direction);
         if ( ret != kIOReturnSuccess)
         {
-            USBLog(1, "AppleUSBUHCI[%p]::UIMCreateInterruptEndpoint deleting endpoint returned %p", this, (void*)ret);
+            USBLog(1, "AppleUSBUHCI[%p]::UIMCreateInterruptEndpoint deleting endpoint returned %p", this, (void*)(UInt64)ret);
 			USBTrace( kUSBTUHCIUIM,  kTPUHCIUIMCreateInterruptEndpoint, functionNumber, endpointNumber, direction, ret );
             return ret;
         }
@@ -794,7 +794,7 @@ AppleUSBUHCI::CreateIsochTransfer(IOUSBControllerIsochEndpoint* pEP, IOUSBIsocCo
 		status = dmaCommand->gen64IOVMSegments(&offset, &segments64, &numSegments);
 		if (status || (numSegments != 1) || ((UInt32)(segments64.fIOVMAddr >> 32) > 0) || ((UInt32)(segments64.fLength >> 32) > 0))
 		{
-			USBError(1, "AppleUSBUHCI::CreateIsochTransfer - could not generate segments err (%p) numSegments (%d) fIOVMAddr (0x%qx) fLength (0x%qx)", (void*)status, (int)numSegments, segments64.fIOVMAddr, segments64.fLength);
+			USBError(1, "AppleUSBUHCI::CreateIsochTransfer - could not generate segments err (%p) numSegments (%d) fIOVMAddr (0x%qx) fLength (0x%qx)", (void*)(UInt64)status, (int)numSegments, segments64.fIOVMAddr, segments64.fLength);
 			status = status ? status : kIOReturnInternalError;
 			dmaStartAddr = 0;
 			segLen = 0;
@@ -1184,7 +1184,7 @@ AppleUSBUHCI::UIMDeleteEndpoint(short functionNumber, short	endpointNumber, shor
 	err = UnlinkQueueHead(pQH, pQHPrev);
 	if (err)
 	{
-		USBLog(1, "AppleUSBUHCI[%p]::UIMDeleteEndpoint - err %p unlinking endpoint", this, (void*)err);
+		USBLog(1, "AppleUSBUHCI[%p]::UIMDeleteEndpoint - err %p unlinking endpoint", this, (void*)(UInt64)err);
 		USBTrace( kUSBTUHCIUIM,  kTPUHCIUIMDeleteEndpoint, (uintptr_t)this, err, 0, 0);
 	}
 	
@@ -1470,7 +1470,7 @@ AppleUSBUHCI::UIMCheckForTimeouts(void)
 		}
 		if ((curFrame - pTD->lastFrame) >= noDataTimeout)
 		{
-			USBLog(2, "AppleUSBUHCI[%p]UIMCheckForTimeouts:  Found a transaction (%p) which hasn't moved in 5 seconds, timing out! (0x%x - 0x%x)(CMD:%p STS:%p INTR:%p PORTSC1:%p PORTSC2:%p FRBASEADDR:%p ConfigCMD:%p)", this, pTD, (uint32_t)curFrame, (uint32_t)pTD->lastFrame, (void*)ioRead16(kUHCI_CMD), (void*)ioRead16(kUHCI_STS), (void*)ioRead16(kUHCI_INTR), (void*)ioRead16(kUHCI_PORTSC1), (void*)ioRead16(kUHCI_PORTSC2), (void*)ioRead32(kUHCI_FRBASEADDR), (void*)_device->configRead16(kIOPCIConfigCommand));
+			USBLog(2, "AppleUSBUHCI[%p]UIMCheckForTimeouts:  Found a transaction (%p) which hasn't moved in 5 seconds, timing out! (0x%x - 0x%x)(CMD:%p STS:%p INTR:%p PORTSC1:%p PORTSC2:%p FRBASEADDR:%p ConfigCMD:%p)", this, pTD, (uint32_t)(UInt64)curFrame, (uint32_t)(UInt64)pTD->lastFrame, (void*)(UInt64)ioRead16(kUHCI_CMD), (void*)(UInt64)ioRead16(kUHCI_STS), (void*)(UInt64)ioRead16(kUHCI_INTR), (void*)(UInt64)ioRead16(kUHCI_PORTSC1), (void*)(UInt64)ioRead16(kUHCI_PORTSC2), (void*)(UInt64)ioRead32(kUHCI_FRBASEADDR), (void*)(UInt64)_device->configRead16(kIOPCIConfigCommand));
 			//PrintFrameList(curFrame & kUHCI_NVFRAMES_MASK, 7);
 			USBError(1, "AppleUSBUHCI::Found a transaction which hasn't moved in 5 seconds on bus 0x%x, timing out! (Addr: %d, EP: %d)", (uint32_t) _busNumber, pQH->functionNumber, pQH->endpointNumber );
 			pQH->print(2);
@@ -1725,7 +1725,7 @@ AppleUSBUHCI::AllocTDChain(AppleUHCIQueueHead* pQH, IOUSBCommand *command, IOMem
 			status = dmaCommand->gen64IOVMSegments(&offset, &segments64, &numSegments);
 			if (status || (numSegments != 1))
 			{
-				USBError(1, "AppleUSBUHCI::AllocTDChain - could not generate segments err (%p) offset (%d) transferOffset (%d) bufferSize (%d) getMemoryDescriptor (%p)", (void*)status, (int)offset, (int)transferOffset, (int)bufferSize, dmaCommand->getMemoryDescriptor());
+				USBError(1, "AppleUSBUHCI::AllocTDChain - could not generate segments err (%p) offset (%d) transferOffset (%d) bufferSize (%d) getMemoryDescriptor (%p)", (void*)(UInt64)status, (int)offset, (int)transferOffset, (int)bufferSize, dmaCommand->getMemoryDescriptor());
 				status = status ? status : kIOReturnInternalError;
 				return status;
 			}
@@ -1900,11 +1900,11 @@ AppleUSBUHCI::AllocTDChain(AppleUHCIQueueHead* pQH, IOUSBCommand *command, IOMem
 		{
 			UInt32 link;
 			link = _lastQH->GetPhysicalLink();
-			USBLog(7, "AppleUSBUHCI[%p]::AllocTDChain - first transaction - unblocking list (%p to %p)", this, (void*)link, (void*)(link & ~kUHCI_QH_T));
+			USBLog(7, "AppleUSBUHCI[%p]::AllocTDChain - first transaction - unblocking list (%p to %p)", this, (void*)(UInt64)link, (void*)(UInt64)(link & ~kUHCI_QH_T));
 			_lastQH->SetPhysicalLink(link & ~kUHCI_QH_T);
 		}
 		_controlBulkTransactionsOut++;
-		USBLog(7, "AppleUSBUHCI[%p]::AllocTDChain - _controlBulkTransactionsOut(%p)", this, (void*)_controlBulkTransactionsOut);
+		USBLog(7, "AppleUSBUHCI[%p]::AllocTDChain - _controlBulkTransactionsOut(%p)", this, (void*)(UInt64)_controlBulkTransactionsOut);
 	}
     return status;
 }
@@ -2386,7 +2386,7 @@ AppleUSBUHCI::UIMEnableAddressEndpoints(USBDeviceAddress address, bool enable)
 					err = UnlinkQueueHead(pQH, pPrevQH);
 					if (err)
 					{
-						USBLog(2, "AppleUSBUHCI[%p]::UIMEnableAddressEndpoints- err[%p] unlinking queue head", this, (void*)err);
+						USBLog(2, "AppleUSBUHCI[%p]::UIMEnableAddressEndpoints- err[%p] unlinking queue head", this, (void*)(UInt64)err);
 					}
 					else
 					{
@@ -2524,7 +2524,7 @@ AppleUSBUHCI::UIMEnableAllEndpoints(bool enable)
 					err = UnlinkQueueHead(pQH, pPrevQH);
 					if (err)
 					{
-						USBLog(2, "AppleUSBUHCI[%p]::UIMEnableAllEndpoints- err[%p] unlinking queue head", this, (void*)err);
+						USBLog(2, "AppleUSBUHCI[%p]::UIMEnableAllEndpoints- err[%p] unlinking queue head", this, (void*)(UInt64)err);
 					}
 					else
 					{

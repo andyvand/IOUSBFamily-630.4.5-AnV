@@ -720,7 +720,7 @@ AppleUSBXHCI::UIMRootHubStatusChange(void)
 				retStatus = GetRootHubPortStatus(&portStatus, adjustedPort);
 				if (retStatus != kIOReturnSuccess)
 				{
-					USBLog(5, "AppleUSBXHCI[%p]::UIMRootHubStatusChange - got status (%p) from GetRootHubPortStatus for port (%d) - skipping", this, (void*)retStatus, (int)port);
+					USBLog(5, "AppleUSBXHCI[%p]::UIMRootHubStatusChange - got status (%p) from GetRootHubPortStatus for port (%d) - skipping", this, (void*)(UInt64)retStatus, (int)port);
 					continue;
 				}
 				portStatus.changeFlags = USBToHostWord(portStatus.changeFlags);
@@ -762,7 +762,7 @@ AppleUSBXHCI::UIMRootHubStatusChange(void)
 		
 		if (statusChangedBitmap)
 		{
-			USBLog(3,"AppleUSBXHCI[%p]::UIMRootHubStatusChange got bitmap (%p)",  this, (void*)statusChangedBitmap);
+			USBLog(3,"AppleUSBXHCI[%p]::UIMRootHubStatusChange got bitmap (%p)",  this, (void*)(UInt64)statusChangedBitmap);
 		}
 		_rootHubStatusChangedBitmap = statusChangedBitmap;
 	}
@@ -1469,7 +1469,7 @@ AppleUSBXHCI::XHCIRootHubSuspendPort(UInt8 RHSpeed, UInt16 adjustedPort, bool su
 			USBLog(1,"AppleUSBXHCI[%p]::XHCIRootHubSuspendPort - resuming port %d, but callout thread is NULL", this, (int)adjustedPort);
 		}
 		else
-			thread_call_enter1(_rhResumePortTimerThread[adjustedPort-1], (void*)adjustedPort);
+			thread_call_enter1(_rhResumePortTimerThread[adjustedPort-1], (void*)(UInt64)adjustedPort);
 	}
 	
     portSC = Read32Reg(&_pXHCIRegisters->PortReg[adjustedPort-1].PortSC);
@@ -2233,7 +2233,7 @@ AppleUSBXHCI::RHResumePortTimer(UInt32 port)
 	IOSleep(20);								// wait 20 ms for the resume to complete
 	USBLog(6, "AppleUSBXHCI[%p]::RHResumePortTimer - Host controller resume about to finish - calling EnsureUsability", this);
 	EnsureUsability();
-	_commandGate->runAction(RHResumePortCompletionEntry, (void*)port);
+	_commandGate->runAction(RHResumePortCompletionEntry, (void*)(UInt64)port);
 }
 
 
@@ -2413,7 +2413,7 @@ AppleUSBXHCI::RHCheckForPortResumes()
 					USBLog(1,"AppleUSBXHCI[%p]::RHCheckForPortResumes  port %d appears to be resuming from a remote wakeup, but the thread callout is NULL!", this, (uint32_t)port+1);
 				}
 				else
-					thread_call_enter1(_rhResumePortTimerThread[port], (void*)(port+1));
+					thread_call_enter1(_rhResumePortTimerThread[port], (void*)(UInt64)(port+1));
 			}
 		}
 	}

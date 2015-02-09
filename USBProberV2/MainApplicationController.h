@@ -56,5 +56,4 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification;
 - (void)windowWillClose:(NSNotification *)aNotification;
 - (void)applicationWillTerminate:(NSNotification *)aNotification;
-
 @end

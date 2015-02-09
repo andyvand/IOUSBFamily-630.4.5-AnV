@@ -418,7 +418,7 @@ IOUSBPipe::ClearPipeStall(bool withDeviceRequest)
 	
 	if (err == kIOUSBClearPipeStallNotRecursive)
 	{
-		USBLog(1,"IOUSBPipe[%p]::ClearPipeStall - tried to call recursively, err = %p", this, (void*)err);
+		USBLog(1,"IOUSBPipe[%p]::ClearPipeStall - tried to call recursively, err = %p", this, (void*)(UInt64)err);
         USBTrace( kUSBTPipe, kTPPipeClearPipeStall, (uintptr_t)this, _address, err , 6 );
 	}
 	

@@ -65,7 +65,7 @@ __attribute__((format(printf, 1, 2)));
 #define _MYCONTROLLERSPEED					_expansionData->_myControllerSpeed
 #define _PROVIDESEXTRACURRENT				_expansionData->_builtInController
 #define _HASBUILTINPROPERTY					_expansionData->_hasBuiltInProperty
-#define _HASTUNNELLEDPROPERTY				_expansionData->_hasTunnelledProperty
+#define _HASTUNNELLEDPROPERTY				_expansionData->X_hasTunnelledProperty
 
 // From our superclass
 #define _STANDARD_PORT_POWER_IN_SLEEP		super::_expansionData->_standardPortSleepCurrent
@@ -285,7 +285,7 @@ IOUSBRootHubDevice::DeviceRequest(IOUSBDevRequest *request, UInt32 noDataTimeout
             USBLog(5, "IOUSBRootHubDevice[%p]::DeviceRequest - doing a device request while in low power mode - should be OK", this);
         }
         
-        kr = gate->runAction(GatedDeviceRequest, request, (void*)noDataTimeout, (void*)completionTimeout, completion);       
+        kr = gate->runAction(GatedDeviceRequest, request, (void*)(UInt64)noDataTimeout, (void*)(UInt64)completionTimeout, completion);       
         if ( kr != kIOReturnSuccess )
         {
             USBLog(2,"IOUSBRootHubDevice[%p]::DeviceRequest GatedDeviceRequest runAction() failed (0x%x)",this, kr);

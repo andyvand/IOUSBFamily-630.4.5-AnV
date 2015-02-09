@@ -1,5 +1,5 @@
 /*
- * Copyright © 2007, 2012 Apple Inc. All rights reserved.
+ * Copyright © 2007-2014 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -25,9 +25,9 @@
 #define _IOKIT_IOUSBHUBPOLICYMAKER_H
 
 #include	<IOKit/IOService.h>
-#include	"../../IOUSBFamily/Headers/IOUSBController.h"
-#include	"../../IOUSBFamily/Headers/IOUSBHubDevice.h"
 
+#include	"IOUSBController.h"
+#include    "../../IOUSBUserClient/Headers/IOUSBUserClient.h"
 
 enum {
 	kIOUSBHubPowerStateOff		= 0,				// losing power
@@ -43,7 +43,39 @@ enum {
 	kPortResumeRecoveryTime =	10								// 10 ms to recover another device
 };
 
-#define kIOUSBHubPowerStateStable	-1
+/*
+    IOUSBHubExitLatencies
+    A hub policy maker will return a pointer to this structure from GetHubExitLatencies()
+    The latencies are described in uS, and describe the amount of time that a downstream port can expect to have to wait
+    to bring the hub and the port out of a given power state. This can be used, for example, for a downstream device driver
+    to decide whether it wants to request an an outputPowerCharacter of kIOPMLowPower or kIOPMSleep, or just stay with
+    kIOPMPowerOn when the device is not being used
+*/
+
+struct IOUSBHubExitLatencyStatesStruct
+{
+    IOPMPowerFlags          outputPowerCharacter;       // 00: from the hub's power state array
+    SInt32                  exitLatency;                // 08: latency in ms to go from the power state to full ON
+};
+
+struct IOUSBHubExitLatenciesStruct
+{
+    UInt8                       vers;                                   // version of this structure
+    UInt8                       numStates;                              // the number of states represented in the exitLatencies structure below
+    struct IOUSBHubExitLatencyStatesStruct exitLatencies[1];                          // array of exitLatencies
+};
+
+#ifndef IOUSBHubExitLatencies
+#define IOUSBHubExitLatencies struct IOUSBHubExitLatenciesStruct
+#endif /* IOUSBHubExitLatencies */
+
+#ifndef IOUSBHubExitLatencyStates
+#define IOUSBHubExitLatencyStates struct IOUSBHubExitLatencyStatesStruct
+#endif /* IOUSBHubExitLatencyStates */
+
+#define kIOUSBHubPowerStateStable       -1
+#define kIOUSBHubExitLatencyMax         -1
+#define kIOUSBHubExitLatenciesVersion    1
 
 /*
  class IOUSBHubPolicyMaker
@@ -112,9 +144,16 @@ public:
     OSMetaClassDeclareReservedUsed(IOUSBHubPolicyMaker,  5);
 	virtual IOReturn					ReturnExtraPower(UInt32 portNum, UInt32 type, UInt32 returnedPower);
 
-    OSMetaClassDeclareReservedUnused(IOUSBHubPolicyMaker,  6);
-    OSMetaClassDeclareReservedUnused(IOUSBHubPolicyMaker,  7);
-    OSMetaClassDeclareReservedUnused(IOUSBHubPolicyMaker,  8);
+    OSMetaClassDeclareReservedUsed(IOUSBHubPolicyMaker,  6);
+    virtual IOReturn                    ProcessUSBNotification(UInt8 action, IOUSBNotification *note, UInt64 notificationToken);
+
+    OSMetaClassDeclareReservedUsed(IOUSBHubPolicyMaker,  7);
+	// report the lowest power state this hub will change to on Idle
+	virtual UInt32                      GetMinimumIdlePowerState(void);
+
+    OSMetaClassDeclareReservedUsed(IOUSBHubPolicyMaker,  8);
+    virtual IOReturn                    GetPowerExitLatencies(IOUSBHubExitLatencies **latencies);
+    
     OSMetaClassDeclareReservedUnused(IOUSBHubPolicyMaker,  9);
     OSMetaClassDeclareReservedUnused(IOUSBHubPolicyMaker,  10);
     OSMetaClassDeclareReservedUnused(IOUSBHubPolicyMaker,  11);

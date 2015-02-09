@@ -44,18 +44,19 @@
 - (void)setText:(NSString *)text level:(int)level;
 - (NSString *)text;
 - (int)level;
-
 @end
 
 @interface USBLoggerController : NSObject <USBLoggerListener>
 {
+    NSWindow *window;
+
     IBOutlet id DumpCheckBox;
     IBOutlet id FilterTextField;
     IBOutlet id FilterProgressIndicator;
     IBOutlet id LoggerOutputTV;
     IBOutlet id LoggingLevelPopUp;
     IBOutlet id StartStopButton;
-    
+
     NSMutableArray *    _outputLines;
     NSMutableString *   _outputBuffer;
     NSLock *            _bufferLock;
@@ -95,5 +96,6 @@
 - (void)appendLoggerEntry:(LoggerEntry *)entry;
 - (void)usbLoggerTextAvailable:(NSString *)text forLevel:(int)level;
 
+- (NSString *)getMonthName:(NSInteger)monthNumber;
 @end
 

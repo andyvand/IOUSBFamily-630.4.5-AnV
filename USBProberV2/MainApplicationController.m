@@ -21,6 +21,8 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
+#define _NUM_VERSION_ 1
+
 #import "MainApplicationController.h"
 
 @implementation MainApplicationController
@@ -105,30 +107,50 @@
 }
 
 - (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem {
+    NSDrawer *drawer;
+    NSWindowController *winCtrl;
+
     if (tabView == MainTabView) {
         int index = [tabView indexOfTabViewItem:[tabView selectedTabViewItem]];
         switch (index) {
             case 0:
-                [[BusProbeOutput window] makeFirstResponder:BusProbeOutput];
+                winCtrl = BusProbeOutput;
+
+                [[winCtrl window] makeFirstResponder:BusProbeOutput];
                 break;
+
             case 1:
-                [[KernelExtensionsOutput window] makeFirstResponder:KernelExtensionsOutput];
+                winCtrl = KernelExtensionsOutput;
+
+                [[winCtrl window] makeFirstResponder:KernelExtensionsOutput];
                 break;
+
             case 2:
-                [[IORegistryOutput window] makeFirstResponder:IORegistryOutput];
+                winCtrl = IORegistryOutput;
+
+                [[winCtrl window] makeFirstResponder:IORegistryOutput];
                 break;
+
             case 3:
-                [[USBLoggerOutput window] makeFirstResponder:USBLoggerOutput];
+                winCtrl = USBLoggerOutput;
+
+                [[winCtrl window] makeFirstResponder:USBLoggerOutput];
                 break;
+
             case 4:
-                [[PortStatusOutput window] makeFirstResponder:PortStatusOutput];
+                winCtrl = PortStatusOutput;
+
+                [[winCtrl window] makeFirstResponder:PortStatusOutput];
                 break;
+
             default:
                 // do nothing
                 break;
         }
-        
-        if ( ([IORegDetailedOutputDrawer state] == NSDrawerOpeningState || [IORegDetailedOutputDrawer state] == NSDrawerOpenState) && index != 2 ) {
+
+        drawer = IORegDetailedOutputDrawer;
+
+        if ( ([drawer state] == NSDrawerOpeningState || [drawer state] == NSDrawerOpenState) && index != 2 ) {
             [IORegDetailedOutputDrawer close];
         }
     }

@@ -214,7 +214,7 @@ AppleUSBOpticalMouse::StartFinalProcessing()
             err = super::StartFinalProcessing();
             if (err)
             {
-				USBLog(1, "AppleUSBOpticalMouse[%p]::StartFinalProcessing - error (%p) from super::StartFinalProcessing", this, (void*)err);
+				USBLog(1, "AppleUSBOpticalMouse[%p]::StartFinalProcessing - error (%p) from super::StartFinalProcessing", this, (void*)(UInt64)err);
             }
         }
     }
@@ -264,7 +264,7 @@ AppleUSBOpticalMouse::setPowerState ( unsigned long powerStateOrdinal, IOService
 		err = _device->DeviceRequest(&devReq, 5000, 0);
 		if (err)
 		{
-			USBLog(1, "AppleUSBOpticalMouse[%p]::setPowerState - err (%p) on DeviceRequest", this, (void*)err);
+			USBLog(1, "AppleUSBOpticalMouse[%p]::setPowerState - err (%p) on DeviceRequest", this, (void*)(UInt64)err);
 		}
 		else
 		{

@@ -266,5 +266,6 @@ dependencies: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/kern/thread_call.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOLib.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/libkern/OSAtomic.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/Headers/AssertMacros.h \
   /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBFamily/Classes/../Headers/USB.h \
   /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBFamily/Classes/../Headers/../../IOUSBFamily/Headers/USBSpec.h

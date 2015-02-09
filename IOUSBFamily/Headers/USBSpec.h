@@ -41,6 +41,7 @@ extern "C" {
      @discussion    
      */
 
+#ifdef KERNEL
     /*!
     @enum Endpoint type
     @discussion Used in IOUSBFindEndpointRequest's type field
@@ -133,7 +134,6 @@ enum {
     kUSBPhysicalDesc        		= 0x23,
     kUSBHUBDesc             		= 0x29,
 };
-
 	
     /*!
 	 @enum Device Capability Types
@@ -505,6 +505,8 @@ enum {
 	 @define	kUSB1284DeviceID			IORegistry key for the 1284 Device ID of a printer
 	 
 	 */
+#endif /* KERNEL */
+
 #define kUSBDeviceClass             "bDeviceClass"
 #define kUSBDeviceSubClass          "bDeviceSubClass"
 #define kUSBDeviceProtocol          "bDeviceProtocol"
@@ -514,6 +516,7 @@ enum {
 #define kUSBProductID               "idProduct"         // good name
 #define kUSBProductName             kUSBProductID       // bad name - keep for backward compatibility
 #define kUSBDeviceReleaseNumber     "bcdDevice"
+#define kUSBSpecReleaseNumber       "bcdUSB"
 #define kUSBManufacturerStringIndex "iManufacturer"
 #define kUSBProductStringIndex      "iProduct"
 #define kUSBSerialNumberStringIndex "iSerialNumber"

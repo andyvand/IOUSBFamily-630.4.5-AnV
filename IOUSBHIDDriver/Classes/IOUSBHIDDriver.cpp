@@ -534,7 +534,7 @@ IOUSBHIDDriver::start(IOService *provider)
 	
 	if (err)
 	{
-		USBLog(1, "IOUSBHIDDriver(%s)[%p]::start - err [%p] from InitializeUSBHIDPowerManagement", getName(), this, (void*)err);
+		USBLog(1, "IOUSBHIDDriver(%s)[%p]::start - err [%p] from InitializeUSBHIDPowerManagement", getName(), this, (void*)(UInt64)err);
 		USBTrace( kUSBTHID,  kTPHIDStart, (uintptr_t)this, err, 0, 10);
 	}
 				
@@ -919,7 +919,7 @@ IOUSBHIDDriver::powerStateDidChangeTo ( IOPMPowerFlags capabilities, unsigned lo
 			err = RearmInterruptRead();
 			if (err)
 			{
-				USBLog(err != kIOReturnNoBandwidth ? 1 : 3, "IOUSBHIDDriver(%s)[%p]::powerStateDidChangeTo - err (%p) returned from RearmInterruptRead", getName(), this, (void*)err);
+				USBLog(err != kIOReturnNoBandwidth ? 1 : 3, "IOUSBHIDDriver(%s)[%p]::powerStateDidChangeTo - err (%p) returned from RearmInterruptRead", getName(), this, (void*)(UInt64)err);
 				USBTrace( kUSBTHID,  kTPHIDpowerStateDidChangeTo, (uintptr_t)this, err, 0, 0);
 			}
 			if ( _SUSPENDPORT_TIMER )
@@ -2773,7 +2773,7 @@ IOUSBHIDDriver::ChangeOutstandingIO(OSObject *target, void *param1, void *param2
 			me->_outstandingIO++;
 			break;
 			
-		case -1:
+		case (UInt32)-1:
 			if (!--me->_outstandingIO && me->_needToClose)
 			{
 				USBLog(3, "IOUSBHIDDriver(%s)[%p]::ChangeOutstandingIO isInactive = %d, outstandingIO = %d - closing device", me->getName(), me, me->isInactive(), (uint32_t)me->_outstandingIO);
@@ -3078,7 +3078,7 @@ IOUSBHIDDriver::InitializeUSBHIDPowerManagement(IOService *provider)
 
 	if (err)
 	{
-		USBLog(1, "IOUSBHIDDriver(%s)[%p]::InitializeUSBHIDPowerManagement - err [%p] from registerPowerDriver", getName(), this, (void*)err);
+		USBLog(1, "IOUSBHIDDriver(%s)[%p]::InitializeUSBHIDPowerManagement - err [%p] from registerPowerDriver", getName(), this, (void*)(UInt64)err);
 		USBTrace( kUSBTHID,  kTPHIDInitializeUSBHIDPowerManagement, (uintptr_t)this, err, 0, 0);
 		PMstop();
 	}

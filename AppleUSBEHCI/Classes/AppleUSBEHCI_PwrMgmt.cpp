@@ -298,7 +298,7 @@ AppleUSBEHCI::ResumeUSBBus()
 		//USBCmd &= ~kEHCICMDAsyncParkModeEnable;
 		USBCmd |= kEHCICMDRunStop;
 		
-		USBLog(5, "AppleUSBEHCI[%p]::ResumeUSBBus - initial restart - USBCMD is <%p> will be <%p>",  this, (void*)USBToHostLong(_pEHCIRegisters->USBCMD), (void*)USBCmd);
+		USBLog(5, "AppleUSBEHCI[%p]::ResumeUSBBus - initial restart - USBCMD is <%p> will be <%p>",  this, (void*)(UInt64)USBToHostLong(_pEHCIRegisters->USBCMD), (void*)(UInt64)USBCmd);
 		_pEHCIRegisters->USBCMD = HostToUSBLong(USBCmd);
 		IOSync();
 		
@@ -342,7 +342,7 @@ AppleUSBEHCI::ResumeUSBBus()
         
     if (_savedUSBCMD)
     {
-		USBLog(5, "AppleUSBEHCI[%p]::ResumeUSBBus - USBCMD is <%p> will be <%p>",  this, (void*)_pEHCIRegisters->USBCMD, (void*)_savedUSBCMD);
+		USBLog(5, "AppleUSBEHCI[%p]::ResumeUSBBus - USBCMD is <%p> will be <%p>",  this, (void*)(UInt64)_pEHCIRegisters->USBCMD, (void*)(UInt64)_savedUSBCMD);
 		_pEHCIRegisters->USBCMD = _savedUSBCMD;
     }
 	
@@ -368,7 +368,7 @@ AppleUSBEHCI::SuspendUSBBus()
 	
     // save the USBCMD register before disabling the list processing
     _savedUSBCMD = _pEHCIRegisters->USBCMD;
-    USBLog(7, "AppleUSBEHCI[%p]::SuspendUSBBus - got _savedUSBCMD <%p>",  this, (void*)_savedUSBCMD);
+    USBLog(7, "AppleUSBEHCI[%p]::SuspendUSBBus - got _savedUSBCMD <%p>",  this, (void*)(UInt64)_savedUSBCMD);
     
 	// disable list processing
     usbcmd = USBToHostLong(_savedUSBCMD);
@@ -421,7 +421,7 @@ AppleUSBEHCI::SuspendUSBBus()
 		
 	if (i > 2)
 	{
-		USBError(1, "AppleUSBEHCI[%p]::SuspendUSBBus - Periodic Schedule took %d loops to turn off CMD(%p) STS(%p)", this, i, (void*)USBToHostLong(_pEHCIRegisters->USBCMD), (void*)USBToHostLong(_pEHCIRegisters->USBSTS));
+		USBError(1, "AppleUSBEHCI[%p]::SuspendUSBBus - Periodic Schedule took %d loops to turn off CMD(%p) STS(%p)", this, i, (void*)(UInt64)USBToHostLong(_pEHCIRegisters->USBCMD), (void*)(UInt64)USBToHostLong(_pEHCIRegisters->USBSTS));
 	}
 
 	// save these registers per Intel recommendations - but do it AFTER the scheduling has stopped
@@ -476,7 +476,7 @@ AppleUSBEHCI::SuspendUSBBus()
     _pEHCIRegisters->USBCMD = HostToUSBLong(usbcmd);
     IOSync();
     _myBusState = kUSBBusStateReset;
-    USBLog(5, "AppleUSBEHCI[%p]::SuspendUSBBus - ports suspended, HC stop set, waiting for halted - USBCMD(%p) USBSTS(%p)",  this, (void*)USBToHostLong(_pEHCIRegisters->USBCMD), (void*)USBToHostLong(_pEHCIRegisters->USBSTS));
+    USBLog(5, "AppleUSBEHCI[%p]::SuspendUSBBus - ports suspended, HC stop set, waiting for halted - USBCMD(%p) USBSTS(%p)",  this, (void*)(UInt64)USBToHostLong(_pEHCIRegisters->USBCMD), (void*)(UInt64)USBToHostLong(_pEHCIRegisters->USBSTS));
     
 	i=0;
 	
@@ -485,7 +485,7 @@ AppleUSBEHCI::SuspendUSBBus()
     {
 		if ((++i % 10000) == 0)
 		{ 
-			USBLog(1, "AppleUSBEHCI[%p]::SuspendUSBBus - HC not halting! USBCMD(%p) USBSTS(%p) i(%d)", this, (void*)USBToHostLong(_pEHCIRegisters->USBCMD), (void*)USBToHostLong(_pEHCIRegisters->USBSTS), (int)i);
+			USBLog(1, "AppleUSBEHCI[%p]::SuspendUSBBus - HC not halting! USBCMD(%p) USBSTS(%p) i(%d)", this, (void*)(UInt64)USBToHostLong(_pEHCIRegisters->USBCMD), (void*)(UInt64)USBToHostLong(_pEHCIRegisters->USBSTS), (int)i);
 			USBTrace( kUSBTEHCI, kTPEHCISuspendUSBBus, (uintptr_t)this, USBToHostLong(_pEHCIRegisters->USBCMD), USBToHostLong(_pEHCIRegisters->USBSTS), (int)i);
 		}
 		usbsts = USBToHostLong(_pEHCIRegisters->USBSTS);
@@ -637,7 +637,7 @@ AppleUSBEHCI::RestoreControllerStateFromSleep(void)
 			{
 				if (portSC & kEHCIPortSC_Enabled)
 				{
-					USBError(1, "USB (EHCI):Port %d on bus 0x%x - connect status changed but still enabled. clearing enable bit: portSC(%p)\n", (int)port+1, (uint32_t)_busNumber, (void*)portSC);
+					USBError(1, "USB (EHCI):Port %d on bus 0x%x - connect status changed but still enabled. clearing enable bit: portSC(%p)\n", (int)port+1, (uint32_t)_busNumber, (void*)(UInt64)portSC);
 					portSC = getPortSCForWriting(_pEHCIRegisters, port+1);
 					portSC &= ~kEHCIPortSC_Enabled;
 					_pEHCIRegisters->PortSC[port] = HostToUSBLong(portSC);
@@ -645,7 +645,7 @@ AppleUSBEHCI::RestoreControllerStateFromSleep(void)
 				}
 				else
 				{
-					IOLog("USB (EHCI):Port %d on bus 0x%x connected or disconnected: portSC(%p)\n", (int)port+1, (uint32_t)_busNumber, (void*)portSC);
+					IOLog("USB (EHCI):Port %d on bus 0x%x connected or disconnected: portSC(%p)\n", (int)port+1, (uint32_t)_busNumber, (void*)(UInt64)portSC);
 					USBLog(5, "AppleUSBEHCI[%p]::RestoreControllerStateFromSleep  Port %d on bus 0x%x - connected or disconnected, calling EnsureUsability()", this, (int)port+1, (uint32_t)_busNumber);
 					EnsureUsability();
 				}
@@ -677,7 +677,7 @@ AppleUSBEHCI::RestoreControllerStateFromSleep(void)
 			}
 			else if ((portSC & kEHCIPortSC_Enabled) && !(portSC & kEHCIPortSC_Suspend))
 			{
-				USBError(1, "USB (EHCI):Port %d on bus 0x%x - port enabled but not suspended.  clearing enable bit: portSC(%p)\n", (int)port+1, (uint32_t)_busNumber, (void*)portSC);
+				USBError(1, "USB (EHCI):Port %d on bus 0x%x - port enabled but not suspended.  clearing enable bit: portSC(%p)\n", (int)port+1, (uint32_t)_busNumber, (void*)(UInt64)portSC);
 				portSC = getPortSCForWriting(_pEHCIRegisters, port+1);
 				portSC &= ~kEHCIPortSC_Enabled;
 				_pEHCIRegisters->PortSC[port] = HostToUSBLong(portSC);
@@ -719,7 +719,7 @@ AppleUSBEHCI::ResetControllerState(void)
 	else
 	{
 		USBTrace( kUSBTEHCI, kTPEHCIResetControllerState, (uintptr_t)this, 0, 0, 0);
-		USBLog(5, "AppleUSBEHCI[%p]::ResetControllerState - powering down USB - _pEHCIRegisters(%p) _pEHCICapRegisters(%p) PCIConfigCommand(%p)",  this, _pEHCIRegisters, _pEHCICapRegisters, (void*)_device->configRead16(kIOPCIConfigCommand));
+		USBLog(5, "AppleUSBEHCI[%p]::ResetControllerState - powering down USB - _pEHCIRegisters(%p) _pEHCICapRegisters(%p) PCIConfigCommand(%p)",  this, _pEHCIRegisters, _pEHCICapRegisters, (void*)(UInt64)_device->configRead16(kIOPCIConfigCommand));
 		showRegisters(2, "+ResetControllerState");
 
 		// interrupts were disabled in the superclass
@@ -751,7 +751,7 @@ AppleUSBEHCI::ResetControllerState(void)
 			if (asyncListAddr)
 			{
 				_savedAsyncListAddr = asyncListAddr;
-				USBLog(5, "AppleUSBEHCI[%p]::ResetControllerState - got _savedAsyncListAddr(%p)",  this, (void*)_savedAsyncListAddr);
+				USBLog(5, "AppleUSBEHCI[%p]::ResetControllerState - got _savedAsyncListAddr(%p)",  this, (void*)(UInt64)_savedAsyncListAddr);
 			}
 			
 			_pEHCIRegisters->PeriodicListBase = 0;		// no periodic list as yet
@@ -785,7 +785,7 @@ AppleUSBEHCI::RestartControllerFromReset(void)
 	UInt32			USBCmd;
 
 	USBTrace( kUSBTEHCI, kTPEHCIRestartControllerFromReset, (uintptr_t)this, 0, 0, 0);
-	USBLog(5, "AppleUSBEHCI[%p]::RestartControllerFromReset - restarting USB _uimInitialized(%s) _savedAsyncListAddr(%p)",  this, _uimInitialized ? "yes" : "no", (void*)_savedAsyncListAddr);
+	USBLog(5, "AppleUSBEHCI[%p]::RestartControllerFromReset - restarting USB _uimInitialized(%s) _savedAsyncListAddr(%p)",  this, _uimInitialized ? "yes" : "no", (void*)(UInt64)_savedAsyncListAddr);
  
 	if (!_uimInitialized)
 	{
@@ -983,7 +983,7 @@ AppleUSBEHCI::EnableInterruptsFromController(bool enable)
 				USBLog(2, "AppleUSBEHCI[%p]::EnableInterruptsFromController - Port Change int unexpectedly armed in USBIntr register", this);
 			}
 		}
-		USBLog(5, "AppleUSBEHCI[%p]::EnableInterruptsFromController - enabling interrupts, USBIntr(%p) _savedUSBIntr(%p)", this, (void*)_pEHCIRegisters->USBIntr, (void*)USBToHostLong(_savedUSBIntr));
+		USBLog(5, "AppleUSBEHCI[%p]::EnableInterruptsFromController - enabling interrupts, USBIntr(%p) _savedUSBIntr(%p)", this, (void*)(UInt64)_pEHCIRegisters->USBIntr, (void*)(UInt64)USBToHostLong(_savedUSBIntr));
 		_pEHCIRegisters->USBIntr = _savedUSBIntr;
 		IOSync();
 		_savedUSBIntr = 0;
@@ -993,7 +993,7 @@ AppleUSBEHCI::EnableInterruptsFromController(bool enable)
 		_savedUSBIntr = _pEHCIRegisters->USBIntr;									// save currently enabled interrupts
 		_pEHCIRegisters->USBIntr = HostToUSBLong(kEHCIFrListRolloverIntBit);		// disable all interrupts except frame rollover which can be handled in the HW Int routine
 		IOSync();
-		USBLog(5, "AppleUSBEHCI[%p]::EnableInterruptsFromController - interrupts disabled, _savedUSBIntr(%p)", this, (void*)_savedUSBIntr);
+		USBLog(5, "AppleUSBEHCI[%p]::EnableInterruptsFromController - interrupts disabled, _savedUSBIntr(%p)", this, (void*)(UInt64)_savedUSBIntr);
 	}
 	
 	if (armSecondaryInterrupt && _filterInterruptSource)
@@ -1011,7 +1011,7 @@ AppleUSBEHCI::maxCapabilityForDomainState ( IOPMPowerFlags domainState )
 	// trying to make this a limited thing for EHCI only
 	// if we are on a Thunderbolt system and we are not already waking from hibernation and we are waking up from sleep, but the ConfigFlag got cleared
 	// then we need to do a wake from hibernation
-	if (_v3ExpansionData->_onThunderbolt && !_wakingFromHibernation && (_myPowerState == kUSBPowerStateSleep) && (ret > kUSBPowerStateSleep))
+	if (_v3ExpansionData->_tbBitmapsExist && !_wakingFromHibernation && (_myPowerState == kUSBPowerStateSleep) && (ret > kUSBPowerStateSleep))
 	{
 		UInt32	configFlag = USBToHostLong(_pEHCIRegisters->ConfigFlag);
 		if (configFlag == kEHCIInvalidRegisterValue)
@@ -1053,7 +1053,7 @@ AppleUSBEHCI::powerStateDidChangeTo ( IOPMPowerFlags capabilities, unsigned long
 	if ((_myPowerState == kUSBPowerStateSleep) && (stateNumber == kUSBPowerStateLowPower))
 	{
 		_savedUSBIntr = _savedUSBIntr | HostToUSBLong(kEHCIPortChangeIntBit);
-		USBLog(5, "AppleUSBEHCI[%p]::powerStateDidChangeTo - added port change bit to _savedUSBIntr - now (%p)", this, (void*)_savedUSBIntr);
+		USBLog(5, "AppleUSBEHCI[%p]::powerStateDidChangeTo - added port change bit to _savedUSBIntr - now (%p)", this, (void*)(UInt64)_savedUSBIntr);
 	}
 	return super::powerStateDidChangeTo(capabilities, stateNumber, whatDevice);
 }
@@ -1075,7 +1075,7 @@ AppleUSBEHCI::powerChangeDone ( unsigned long fromState)
     
 	if (_wakingFromHibernation)
 	{
-		USBLog(2, "AppleUSBEHCI[%p]::powerChangeDone - _wakingFromHibernation - _savedAsyncListAddr(%p) AsyncListAddr(%p) _AsyncHead(%p)", this, (void*)USBToHostLong(_savedAsyncListAddr), (void*)_pEHCIRegisters->AsyncListAddr, _AsyncHead);		
+		USBLog(2, "AppleUSBEHCI[%p]::powerChangeDone - _wakingFromHibernation - _savedAsyncListAddr(%p) AsyncListAddr(%p) _AsyncHead(%p)", this, (void*)(UInt64)USBToHostLong(_savedAsyncListAddr), (void*)(UInt64)_pEHCIRegisters->AsyncListAddr, _AsyncHead);
 		_savedAsyncListAddr = _pEHCIRegisters->AsyncListAddr;
 		// at this point, we expect _savedAsyncListAddr to be NULL, since when we are waking from hibernation the AsyncListAddr should be NULL (see the end of ResetControllerState)
 		if (_savedAsyncListAddr == kEHCIInvalidRegisterValue)
@@ -1088,7 +1088,7 @@ AppleUSBEHCI::powerChangeDone ( unsigned long fromState)
 		{
 			if (_savedAsyncListAddr)
 			{
-				USBLog(1, "AppleUSBEHCI[%p]::powerChangeDone - _savedAsyncListAddr is NOT NULL (%p) - UNEXPECTED", this, (void*)_savedAsyncListAddr);
+				USBLog(1, "AppleUSBEHCI[%p]::powerChangeDone - _savedAsyncListAddr is NOT NULL (%p) - UNEXPECTED", this, (void*)(UInt64)_savedAsyncListAddr);
 				_savedAsyncListAddr = 0;
 			}
 			if (_AsyncHead)						// if all of the endpoints have not been aborted yet, then we need to throw them away

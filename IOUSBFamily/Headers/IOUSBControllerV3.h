@@ -1,5 +1,5 @@
 /*
- * Copyright © 2007-2012 Apple Inc. All rights reserved.
+ * Copyright © 2007-2014 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -24,11 +24,13 @@
 #ifndef _IOKIT_IOUSBCONTROLLERV3_H
 #define _IOKIT_IOUSBCONTROLLERV3_H
 
+#include <IOKit/IOInterruptEventSource.h>
 #include <IOKit/pci/IOPCIDevice.h>
 #include <IOKit/pwr_mgt/RootDomain.h>
 
-#include "../../IOUSBFamily/Headers/IOUSBControllerV2.h"
-#include "../../IOUSBFamily/Headers/IOUSBHubDevice.h"
+#include "IOUSBController.h"
+#include "IOUSBHubDevice.h"
+#include "IOUSBHubPolicyMaker.h"
 
 // Constants that define the different power states in the setPowerState call
 enum
@@ -61,11 +63,40 @@ typedef struct IOUSBRootHubInterruptTransaction
 
 typedef IOUSBRootHubInterruptTransaction* IOUSBRootHubInterruptTransactionPtr;
 
-enum 
+enum
 {
-	  kIOUSBMaxRootHubTransactions  = 2
+    kIOUSBMaxRootHubTransactions  				= 2,
+    kMaxXHCIPorts 								= 32,
+    kMaxEHCIPorts 								= 15,
+	kMaxTransactionsDuringPCIPause 				= 32,
+	kCheckPowerModeOptionsUserSpaceRequestMask	= (1 << 31)
 };
 
+#define kGPEACPIString                          "_GPE"
+#define kACPIInterruptTypeValid         (1 << 1)
+
+
+#ifndef __OPEN_SOURCE__
+	// Thunderbolt things
+	#ifndef kIOThunderboltTunnelEndpointDeviceMIDProperty
+		#define kIOThunderboltTunnelEndpointDeviceMIDProperty	"Tunnel Endpoint Device Model ID"
+	#endif
+	#ifndef kIOThunderboltTunnelEndpointDeviceVIDProperty
+		#define kIOThunderboltTunnelEndpointDeviceVIDProperty	"Tunnel Endpoint Device Vendor ID"
+	#endif
+	#ifndef  kIOThunderboltAppleDisplay2011DMID
+		#define kIOThunderboltAppleDisplay2011DMID				0x8002
+	#endif
+	#ifndef kIOThunderboltAppleDVID
+		#define kIOThunderboltAppleDVID                         0x0001
+	#endif
+#endif
+
+#ifndef IOUSBHubExitLatencies
+struct IOUSBHubExitLatenciesStruct;
+
+#define IOUSBHubExitLatencies struct IOUSBHubExitLatenciesStruct
+#endif /* IOUSBHubExitLatencies */
 
 /*!
  @class IOUSBControllerV3
@@ -77,15 +108,17 @@ enum
 
 class IOUSBControllerV3 : public IOUSBControllerV2
 {	
-		OSDeclareAbstractStructors(IOUSBControllerV3)
+    OSDeclareAbstractStructors(IOUSBControllerV3)
+	friend class IOUSBDevice;
+	friend class IOUSBHubDevice;
+	friend class IOUSBRootHubDevice;
 
 	protected:
 		// static variable shared by all instances
 		static uint32_t *				_gHibernateState;
-
 	
 		UInt8							_myBusState;					// kUSBBusStateReset, kUSBBusStateSuspended, kUSBBusStateRunning
-		bool							_wakingFromHibernation;			// True while the Hibernation Wake thread is active
+		bool							_wakingFromHibernation;			// True while the Hibernation Wake thread is active going to the OFF(0) state
 		bool							_needToAckPowerDown;			// True while we are changing power state due to shutdown/restart
 		bool							_onCardBus;						// OBSOLETE
 		bool							_controllerAvailable;			// true if we can talk to the controller
@@ -97,7 +130,6 @@ class IOUSBControllerV3 : public IOUSBControllerV2
 		unsigned long					_numPowerStates;				// how many power states do I support (defaults to kUSBNumDefaultPowerStates)
 		IOPMPowerState					*_myPowerStates;				// my power state array (allocated on the fly)
 		IOPCIDevice						*_device;						// my PCI device
-        UInt64                          _errataBits;
 
 		// root hub support
 	    IOTimerEventSource					*_rootHubTimer;				// timer which fires at the rate of the root hub interrupt endpoint
@@ -108,30 +140,76 @@ class IOUSBControllerV3 : public IOUSBControllerV2
 		IOUSBRootHubInterruptTransaction	_outstandingRHTrans[4];		// Transactions for the Root Hub.  We need 2, one for the current transaction and one for the next.  This is declared as 4 for binary compatibility
 
 		struct V3ExpansionData { 
-			uint32_t				_rootHubPollingRate32;
-			bool					_rootHubTransactionWasAborted;
-			IOPMDriverAssertionID	_externalUSBDeviceAssertionID;		// power manager assertion that we have an external USB device
-			SInt32					_externalDeviceCount;				// the count of external devices in this controller - changed through the WL gate
-			UInt32					_inCheckPowerModeSleeping;			// The CheckPowerModeGated
-			bool					_onThunderbolt;						// T if this controller is on a Thunderbolt bus
-			uint32_t				_thunderboltModelID;				// the model ID of the thunderbolt device in which this controller resides
-			uint32_t				_thunderboltVendorID;				// the vendor ID of the thunderbolt device in which this controller resides
-			UInt8					_rootHubNumPortsSS;					// number of SS root hub ports - should be 15 or fewer!
-			UInt8					_rootHubNumPortsHS;					// number of SS root hub ports - should be 15 or fewer!
-			UInt8					_rootHubPortsHSStartRange;
-			UInt8					_rootHubPortsSSStartRange;
-			IOUSBRootHubInterruptTransaction	_outstandingSSRHTrans[4];		// Transactions for the Root Hub.  We need 2, one for the current transaction and one for the next.  This is declared as 4 for binary compatibility
-            bool					_wakingFromStandby;					// t when waking from S4 stanby
-            UInt64                  _errata64Bits;
+			uint32_t							_rootHubPollingRate32;
+			bool								_rootHubTransactionWasAborted;
+			IOPMDriverAssertionID				_externalUSBDeviceAssertionID;		// power manager assertion that we have an external USB device
+			SInt32								_externalDeviceCount;				// the count of external devices in this controller - changed through the WL gate
+			UInt32								_inCheckPowerModeSleeping;			// The CheckPowerModeGated
+			uint32_t							_thunderboltModelID;				// the model ID of the thunderbolt device in which this controller resides
+			uint32_t							_thunderboltVendorID;				// the vendor ID of the thunderbolt device in which this controller resides
+			UInt8								_rootHubNumPortsSS;					// number of SS root hub ports - should be 15 or fewer! (1-based)
+			UInt8								_rootHubNumPortsHS;					// number of SS root hub ports - should be 15 or fewer! (1-based)
+			UInt8								_rootHubPortsHSStartRange;          // Start port number for the HS Range (1-based)
+			UInt8								_rootHubPortsSSStartRange;          // Start port number for the SS Range (1-based)
+			IOUSBRootHubInterruptTransaction	_outstandingSSRHTrans[4];			// Transactions for the Root Hub.  We need 2, one for the current transaction and one for the next.  This is declared as 4 for binary compatibility
+            bool								_wakingFromStandby;					// t when waking from S4 standby - meaning that the hibernation bit was set but we
+            bool								_rootDomainWakingFromHibernation;   // t when pmrootdomain is between powerWill(ON) and powerDid(ON) while waking from hibernation
+            UInt32								_rootHubStatusChangedBitmapSS;      // support up to 30 ports for status changes - XHCI has 2 Roothubs
+            UInt64								_errata64Bits;						// Bitmap of controller-specific workarounds
+            UInt8								_companionPort[kMaxXHCIPorts+1];    // Mapping between HS and SS port numbers in an XHCI controllers.  This is 1-based, so index 0 does not correspond to a valid port, and a companionPort of 0 indicates no companion port
+            bool								_hasPCIPwrMgmt;                     // Set when PCI power management is avaialable
+            bool								_hibernationWakePart2;              // we are in the middle of the second part of a hibernation wake (OFF(0) to ON(3))
+            AbsoluteTime						_hibernationWakeStartTime;          // the time when we first noticed that we needed to do a hibernation wake
+			UInt16								_powerManagerCSRoffset;				// the offset into Config Space of the Power Manager Control/Status Register
+			IOACPIPlatformDevice				*_acpiDevice;						// our device in the ACPI plane
+			UInt32                              _minimumIdlePowerState;				// the lowest power state this controller will go to when everything is idle (initialized to kUSBPowerStateLowPower)
+			IOInterruptEventSource				*_PMEInterruptEventSource;			// interrupt to wake from RTD3
+			bool								_PMEdisabled;						// tracks when we have disabled the PME handler
+			bool								_minimumIdlePowerStateValid;		// T when we have calculated the minimumIdlePowerState
+            bool                                _parentDeviceON;                    // T when our parent device is in the ON power state
+            UInt32                              _thunderboltMaxBusStall;            // RMBS advertisement value when on thunderbolt
+
+            // Support for XHCI Thunderbolt Docks and Extra current
+            SInt32                              _tbCurrentExtra;
+            SInt32                              _tbCurrentExtraInSleep;
+            SInt32                              _tbMaxCurrentPerPort;
+            SInt32                              _tbMaxCurrentPerPortInSleep;
+            SInt32                              _tbExternalSSPorts;
+            SInt32                              _tbUnconnectedExternalSSPorts;
+            SInt32                              _tbRevocableExtraCurrent;
+            SInt32                              _tbExternalNonSSPortsUsingExtraCurrent;
+            UInt32                              _tbCaptiveBitmap;
+            UInt32                              _tbExternalConnectorBitmap;
+            bool                                _tbBitmapsExist;
+			
+			bool                                _parentDeviceGoingToPCIPause;			// T when our parent device is going to sleep because of PCI Pause
+            bool                                _waitingForPCIPauseToFinish;            // T if we have a thread (or more) on commandSleep() waiting for the PCI Pause event to finish
+			SInt32								_pciPauseQueuedTransactionCount;		// Number of transactions/threads that have been commandSleep()'d due to the system processing a PCI Pause event
+			bool								_pciPauseTransactionToken[kMaxTransactionsDuringPCIPause];	// Token use to sleep/wake threads that come in during PCI Pause
+            bool                                _controllerWasResetOnSleep;
+
 		};
 		V3ExpansionData *_v3ExpansionData;
+    
+        // TB-relates expansion data
+        #define _TB_CURRENTEXTRA						_v3ExpansionData->_tbCurrentExtra
+        #define _TB_CURRENTEXTRAINSLEEP                 _v3ExpansionData->_tbCurrentExtraInSleep
+        #define _TB_MAXCURRENTPERPORT                   _v3ExpansionData->_tbMaxCurrentPerPort
+        #define _TB_MAXCURRENTPERPORTINSLEEP			_v3ExpansionData->_tbMaxCurrentPerPortInSleep
+        #define _TB_EXTERNALSSPORTS                     _v3ExpansionData->_tbExternalSSPorts
+        #define _TB_UNCONNECTEDEXTERNALSSPORTS			_v3ExpansionData->_tbUnconnectedExternalSSPorts
+        #define _TB_REVOCABLEEXTRACURRENT               _v3ExpansionData->_tbRevocableExtraCurrent
+        #define _TB_EXTERNALNONSSPORTSUSINGEXTRACURRENT _v3ExpansionData->_tbExternalNonSSPortsUsingExtraCurrent
+        #define _TB_CAPTIVEBITMAP                       _v3ExpansionData->_tbCaptiveBitmap
+        #define _TB_EXTERNALCONNECTORBITMAP             _v3ExpansionData->_tbExternalConnectorBitmap
+        #define _TB_BITMAPS_EXIST                       _v3ExpansionData->_tbBitmapsExist
 
-		// IOKit methods
+        // IOKit methods
 		virtual bool					init( OSDictionary *  propTable );
 		virtual bool					start( IOService *  provider );
 		virtual void					stop( IOService * provider );
-		virtual unsigned long			maxCapabilityForDomainState ( IOPMPowerFlags domainState );
 		virtual unsigned long			initialPowerStateForDomainState ( IOPMPowerFlags domainState );
+        virtual unsigned long			maxCapabilityForDomainState ( IOPMPowerFlags domainState );
 		virtual IOReturn				powerStateWillChangeTo ( IOPMPowerFlags capabilities, unsigned long stateNumber, IOService* whatDevice);
 		virtual IOReturn				setPowerState( unsigned long powerStateOrdinal, IOService* whatDevice );
 		virtual IOReturn				powerStateDidChangeTo ( IOPMPowerFlags capabilities, unsigned long stateNumber, IOService* whatDevice);
@@ -157,9 +235,6 @@ class IOUSBControllerV3 : public IOUSBControllerV2
 		virtual IOReturn		IsocIO(IOMemoryDescriptor *buffer, UInt64 frameStart, UInt32 numFrames, IOUSBIsocFrame *frameList, USBDeviceAddress address, Endpoint *endpoint, IOUSBIsocCompletion *completion );
 		virtual IOReturn		IsocIO(IOMemoryDescriptor *buffer, UInt64 frameStart, UInt32 numFrames, IOUSBLowLatencyIsocFrame *frameList, USBDeviceAddress address, Endpoint *endpoint, IOUSBLowLatencyIsocCompletion *completion, UInt32 updateFrequency );	
 
-		// we override this one to add some stuff which requires the _device iVar
-		virtual UInt32			GetErrataBits(UInt16 vendorID, UInt16 deviceID, UInt16 revisionID );    
-	
 		// IOUSBControllerV2 methods
 		// we override these to deal with methods attempting to go through the workloop while we are in sleep
 		virtual IOReturn 		OpenPipe(USBDeviceAddress address, UInt8 speed, Endpoint *endpoint);
@@ -177,7 +252,7 @@ class IOUSBControllerV3 : public IOUSBControllerV2
 		static IOReturn					ChangeExternalDeviceCount(OSObject *owner, void *arg0, void *arg1, void *arg2, void *arg3);
 		static IOReturn					DoGetActualDeviceAddress(OSObject *owner, void *arg0, void *arg1, void *arg2, void *arg3);
 		static IOReturn					DoCreateStreams(OSObject *owner, void *arg0, void *arg1, void *arg2, void *arg3 );
-	
+    
 		// also on the workloop
 	    static void						RootHubTimerFired(OSObject *owner, IOTimerEventSource *sender);
 	
@@ -221,7 +296,13 @@ class IOUSBControllerV3 : public IOUSBControllerV2
 		virtual IOReturn				UIMEnableAllEndpoints(bool enable) = 0;
 		virtual IOReturn				EnableInterruptsFromController(bool enable) = 0;
 	
-	public:
+        //
+        IOReturn                        WakeUpCheckPowerModeThreadsGated(unsigned long transactionNumber);
+        IOReturn                        WaitForPCIPauseToFinish();
+        bool                            GetPMCSR(UInt16 *pmcsr);
+    
+
+public:
 	
 		// public methods
 		virtual IOReturn				EnableAddressEndpoints(USBDeviceAddress address, bool enable);
@@ -444,26 +525,69 @@ class IOUSBControllerV3 : public IOUSBControllerV2
      @param pBandwidthAvailable Pointer to the holder for the bandwidth
      */
     virtual IOReturn        GetBandwidthAvailableForDevice(IOUSBDevice *forDevice, UInt32 *pBandwidthAvailable);
-    
+	
+    OSMetaClassDeclareReservedUsed(IOUSBControllerV3,  20);
+    /* !
+     @function GetMinimumIdlePowerState
+     @abstract determines the minimum Idle Power State for this controller and sets the iVar _v3ExpansionData->_minimumIdlePowerState.
+	 If the controller does support a lower idle power state, then it should also install the PME interrupt handler to handle it
+     @result returns the calculated minimum idle power state
+     */
+    virtual UInt32        GetMinimumIdlePowerState(void);
 
-	OSMetaClassDeclareReservedUnused(IOUSBControllerV3,  20);
-	OSMetaClassDeclareReservedUnused(IOUSBControllerV3,  21);
-	OSMetaClassDeclareReservedUnused(IOUSBControllerV3,  22);
-	OSMetaClassDeclareReservedUnused(IOUSBControllerV3,  23);
-	OSMetaClassDeclareReservedUnused(IOUSBControllerV3,  24);
+	OSMetaClassDeclareReservedUsed(IOUSBControllerV3,  21);
+    /* !
+     @function GetErrata64Bits
+     @abstract  Used to get controller specific information for workarounds
+     @result returns a bit field with the errata that apply to the given vendor/device/revision of a USB controller
+     */
+	virtual UInt64			GetErrata64Bits(UInt16 vendorID, UInt16 deviceID, UInt16 revisionID );
+
+    
+    OSMetaClassDeclareReservedUsed(IOUSBControllerV3,  22);
+    /* !
+     @function DoNotPowerOffPortsOnStop
+     @abstract  Used to indicate if ports should be powered down on shutdown or hibernate.
+     @result returns true if the ports should NOT be powered off on shutdown
+     */
+	virtual bool			DoNotPowerOffPortsOnStop(void);
+
+	OSMetaClassDeclareReservedUsed(IOUSBControllerV3,  23);
+    /* !
+     @function CheckPowerModeBeforeGatedCall
+     @abstract  Used to verify whether our controller is ON before issuing a request.  
+     @param fromStr A string specifying which type of request issued the call.  Used for logging.
+     @param token A pointer to an OSObject.  This can be used as the token to use with commandSleep/commandWake.
+     @param options Bit field of options for the call.  If kCheckPowerModeOptionsUserSpaceRequestBit is set, it indicates that the call originated from the user client.
+     @result IOReturn value of any of the calls made by this method
+     */
+	virtual IOReturn				CheckPowerModeBeforeGatedCall(char *fromStr, OSObject *token, UInt32 options);
+
+	OSMetaClassDeclareReservedUsed(IOUSBControllerV3,  24);
+    virtual IOReturn                GetRootHubPowerExitLatencies(IOUSBHubExitLatencies **latencies);
+    
 	OSMetaClassDeclareReservedUnused(IOUSBControllerV3,  25);
 	OSMetaClassDeclareReservedUnused(IOUSBControllerV3,  26);
 	OSMetaClassDeclareReservedUnused(IOUSBControllerV3,  27);
 	OSMetaClassDeclareReservedUnused(IOUSBControllerV3,  28);
 	OSMetaClassDeclareReservedUnused(IOUSBControllerV3,  29);
-	
-	protected:
+
+//#ifndef __OPEN_SOURCE__
+public:
+    // Non-virtual public methods which are out of the open source
+    bool                            GetInternalHubErrataBits(IORegistryEntry* provider, UInt32 portnum, UInt32 locationID, UInt32 *errataBits);
+    IOReturn                        GetConnectorType(IORegistryEntry * provider, UInt32 portNumber, UInt32 locationID, UInt8 *connectorType);
+    bool                            CanControllerMuxOverToEHCI( IORegistryEntry * provider, UInt32 locationID );
+    void                            UpdateThunderboltExtraCurrentiVars();
+//#endif
+    
+protected:
 	
 		void		FixupNECControllerConfigRegisters(void);
 		IOReturn	RHQueueTransaction(IOMemoryDescriptor *buf, UInt32 bufLen, IOUSBCompletion completion, IOUSBRootHubInterruptTransactionPtr outstandingRHXaction);
-		void		RHCompleteTransaction(IOUSBRootHubInterruptTransactionPtr outstandingRHTransPtr);
+		void		RHCompleteTransaction(IOUSBRootHubInterruptTransactionPtr outstandingRHTransPtr, UInt16	rhStatusChangedBitmap, UInt16 numPorts, bool cancelTimer);
 		void		RHAbortTransaction(IOUSBRootHubInterruptTransactionPtr outstandingRHXaction);
-	
+		void		PMEHandler(IOInterruptEventSource * source, int count);
 };
 
 #endif

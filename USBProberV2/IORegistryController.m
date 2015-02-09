@@ -21,6 +21,7 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
+#define _NUM_VERSION_ 1
 
 #import "IORegistryController.h"
 
@@ -55,11 +56,13 @@
 }
 
 - (void)awakeFromNib {
+    NSButton *refCheckBox = RefreshCheckBox;
+
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"IORegistryDontAutoRefresh"] == YES) {
-        [RefreshCheckBox setState:NSOffState];
+        [refCheckBox setState:NSOffState];
 //enable/disable button        [RefreshButton setEnabled:YES];
     } else {
-        [RefreshCheckBox setState:NSOnState];
+        [refCheckBox setState:NSOnState];
 //enable/disable button        [RefreshButton setEnabled:NO];
     }
     
@@ -72,9 +75,9 @@
     [IORegOutputOV setTarget:self];
     [IORegOutputOV setAction:@selector(ioregItemSingleClicked:)];
     [IORegOutputOV setDoubleAction:@selector(ioregItemDoubleClicked:)];
-    
+
     [IORegDetailedOutput setTarget:IORegDetailedOutput];
-    [IORegDetailedOutput setDoubleAction:@selector(itemDoubleClicked)];
+    [IORegDetailedOutput setDoubleAction:@selector(/*itemDoubleClicked*/ioregItemDoubleClicked:)];
     
     [self expandOutlineViewItems];
 }
@@ -107,9 +110,9 @@
     [sp setAccessoryView:newExSel];
     newExSel.theSavePanel = sp;
     
-    [sp beginSheetModalForWindow:[NSApp mainWindow] completionHandler:^(NSInteger returnCode){
-		
-        if (returnCode==NSOKButton)
+    [sp beginSheetModalForWindow:[NSApp mainWindow] completionHandler:^(NSInteger returnCode)
+    {
+        if (returnCode == NSModalResponseOK)
         {
             NSString *selectedFileExtension = [[sp nameFieldStringValue] pathExtension];
             if (NSOrderedSame != [selectedFileExtension caseInsensitiveCompare:@"plist"])
@@ -136,10 +139,11 @@
 
 - (IBAction)ToggleAutoRefresh:(id)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    if ([sender state] == NSOffState) {
+    NSButton *senderButton = sender;
+
+    if ([senderButton state] == NSOffState) {
         [defaults setBool:YES forKey:@"IORegistryDontAutoRefresh"];
-//enable/disable button        [RefreshButton setEnabled:YES];
+//enable/disable button        [RefreshButton setEnbled:YES];
     } else {
         [defaults setBool:NO forKey:@"IORegistryDontAutoRefresh"];
 //enable/disable button        [RefreshButton setEnabled:NO];
@@ -227,16 +231,16 @@
 }
 
 - (id)outlineView:(NSOutlineView *)ov objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
-{   
+{
     if (ov == IORegOutputOV) {
-        return [item value];
+        return [(__typeof__([item class]))item value];
     } else if (IORegDetailedOutput) {
         if ([[tableColumn identifier] intValue] == 0) {
             return [(OutlineViewNode *)item name];
         } else if ([[tableColumn identifier] intValue] == 1) {
             return [(IORegDetailOutlineViewNode *)item type];
         } else if ([[tableColumn identifier] intValue] == 2) {
-            return [item value];
+            return [(__typeof__([item class]))item value];
         }
     }
     return nil;
@@ -251,7 +255,9 @@
 }
 
 - (void)ioregItemSingleClicked:(id)sender {
-        if ([IORegDetailedOutputDrawer state] == NSDrawerOpenState) {
+    NSDrawer *ioregDrawer = IORegDetailedOutputDrawer;
+
+        if ([ioregDrawer state] == NSDrawerOpenState) {
             IORegOutlineViewNode *item = [sender itemAtRow:[sender selectedRow]];
             if ([item representedDevice] != IO_OBJECT_NULL) {
                 NSMutableDictionary *propertiesDict;
@@ -267,7 +273,7 @@
 }
 
 - (void)ioregItemDoubleClicked:(id)sender {
-    [sender itemDoubleClicked];
+    [sender itemDoubleClicked:sender];
 }
 
 - (void)populateNode:(IORegDetailOutlineViewNode *)node withKey:(NSString *)key value:(id)value {
@@ -319,10 +325,16 @@
     }
 }
 
+- (void)caseInsensitiveCompare:(id)sender
+{
+    NSArray *senderArr = sender;
+    [senderArr sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+}
+
 - (void)populateNode:(IORegDetailOutlineViewNode *)node withContentsOfDictionary:(NSDictionary *)dictionary {
-    NSMutableArray *    keys = [[dictionary allKeys] mutableCopy];
-    NSEnumerator *      enumerator;
-    NSString *          key;
+    NSMutableArray *keys = [[dictionary allKeys] mutableCopy];
+    NSEnumerator *enumerator;
+    NSString *key;
 
     [keys sortUsingSelector:@selector(caseInsensitiveCompare:)];
     enumerator = [keys objectEnumerator];

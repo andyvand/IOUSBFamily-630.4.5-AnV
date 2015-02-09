@@ -406,7 +406,7 @@ IOUFIStorageServices::doAsyncReadWrite (    IOMemoryDescriptor *    buffer,
 	retain();
 	fProvider->retain();	
 
-	requestBlockSize = fProvider->ReportMediumBlockSize();
+	requestBlockSize = (UInt32)((UInt64)fProvider->ReportMediumBlockSize());
 	
 	STATUS_LOG ( ( 5, "%s[%p]:: doAsyncReadWrite; save completion data!", getName(), this ) );
 
@@ -416,8 +416,8 @@ IOUFIStorageServices::doAsyncReadWrite (    IOMemoryDescriptor *    buffer,
 	// Save the client's request parameters.
 	clientData->completionData 				= *completion;
 	clientData->clientBuffer 				= buffer;
-	clientData->clientStartingBlock 		= block;
-	clientData->clientRequestedBlockCount 	= nblks;
+	clientData->clientStartingBlock 		= (UInt32)((UInt64)block);
+	clientData->clientRequestedBlockCount 	= (UInt32)((UInt64)nblks);
 	clientData->clientRequestedBlockSize 	= requestBlockSize;
 	
 	// Set the retry limit to the maximum

@@ -51,36 +51,36 @@ __attribute__((format(printf, 1, 2)));
 IOReturn IOUSBController::OpenPipe(USBDeviceAddress address, UInt8 speed,
 						Endpoint *endpoint)
 {
-    return _commandGate->runAction(DoCreateEP, (void *)(UInt32) address,
-			(void *)(UInt32) speed, endpoint);
+    return _commandGate->runAction(DoCreateEP, (void *)(UInt64)address,
+			(void *)(UInt64)speed, endpoint);
 }
 
 IOReturn IOUSBController::ClosePipe(USBDeviceAddress address,
                                     		Endpoint * endpoint)
 {
-    return _commandGate->runAction(DoDeleteEP, (void *)(UInt32) address,
-			(void *)(UInt32) endpoint->number, (void *)(UInt32) endpoint->direction);
+    return _commandGate->runAction(DoDeleteEP, (void *)(UInt64)address,
+			(void *)(UInt64)endpoint->number, (void *)(UInt64)endpoint->direction);
 }
 
 IOReturn IOUSBController::AbortPipe(USBDeviceAddress address,
                                     Endpoint * endpoint)
 {
-    return _commandGate->runAction(DoAbortEP, (void *)(UInt32) address,
-			(void *)(UInt32) endpoint->number, (void *)(UInt32) endpoint->direction);
+    return _commandGate->runAction(DoAbortEP, (void *)(UInt64)address,
+			(void *)(UInt64)endpoint->number, (void *)(UInt64)endpoint->direction);
 }
 
 IOReturn IOUSBController::ResetPipe(USBDeviceAddress address,
                                     Endpoint * endpoint)
 {
-    return _commandGate->runAction(DoClearEPStall, (void *)(UInt32) address,
-			(void *)(UInt32) endpoint->number, (void *)(UInt32) endpoint->direction);
+    return _commandGate->runAction(DoClearEPStall, (void *)(UInt64)address,
+			(void *)(UInt64)endpoint->number, (void *)(UInt64)endpoint->direction);
 }
 
 IOReturn IOUSBController::ClearPipeStall(USBDeviceAddress address,
                                          Endpoint * endpoint)
 {
-    return _commandGate->runAction(DoClearEPStall, (void *)(UInt32) address,
-			(void *)(UInt32) endpoint->number, (void *)(UInt32) endpoint->direction);
+    return _commandGate->runAction(DoClearEPStall, (void *)(UInt64)address,
+			(void *)(UInt64)endpoint->number, (void *)(UInt64)endpoint->direction);
 }
 
 
@@ -197,7 +197,7 @@ IOUSBController::CheckForDisjointDescriptor(IOUSBCommand *command, UInt16 maxPac
 		err = dmaCommand->gen64IOVMSegments(&offset64, &segment64, &numSegments);
         if (err || (numSegments != 1))
         {
-            USBLog(1, "%s[%p]::CheckForDisjointDescriptor - err (%p) trying to generate segments at offset (%qd), length (%d), segLength (%d), total length (%d), buf (%p), numSegments (%d)", getName(), this, (void*)err, offset64, (int)length, (int)segLength, (int)command->GetReqCount(), buf, (int)numSegments);
+            USBLog(1, "%s[%p]::CheckForDisjointDescriptor - err (%p) trying to generate segments at offset (%qd), length (%d), segLength (%d), total length (%d), buf (%p), numSegments (%d)", getName(), this, (void*)(UInt64)err, offset64, (int)length, (int)segLength, (int)command->GetReqCount(), buf, (int)numSegments);
 			USBTrace( kUSBTController, kTPControllerCheckForDisjointDescriptor, offset64, length, segLength, 3 );
 			USBTrace( kUSBTController, kTPControllerCheckForDisjointDescriptor, segLength, command->GetReqCount(), numSegments, 4 );
             return kIOReturnBadArgument;
@@ -411,7 +411,7 @@ IOUSBController::Read(IOMemoryDescriptor *buffer, USBDeviceAddress address, Endp
 			err = dmaCommand->setMemoryDescriptor(buffer);
 			if (err)
 			{
-				USBLog(1, "%s[%p]::Read - err(%p) attempting to set the memory descriptor to the dmaCommand", getName(), this, (void*)err);
+				USBLog(1, "%s[%p]::Read - err(%p) attempting to set the memory descriptor to the dmaCommand", getName(), this, (void*)(UInt64)err);
 				USBTrace( kUSBTController, kTPControllerRead, (uintptr_t)this, err, 0, 5 );
 			}
 		}
@@ -461,7 +461,7 @@ IOUSBController::Read(IOMemoryDescriptor *buffer, USBDeviceAddress address, Endp
 		
 		if (!isSyncTransfer)
 		{
-			USBLog(2, "%s[%p]::Read - General error (%p) - cleaning up - command(%p) dmaCommand(%p)", getName(), this, (void*)err, command, dmaCommand);
+			USBLog(2, "%s[%p]::Read - General error (%p) - cleaning up - command(%p) dmaCommand(%p)", getName(), this, (void*)(UInt64)err, command, dmaCommand);
 		}
 		
 		if (memDesc)
@@ -597,7 +597,7 @@ IOUSBController::Write(IOMemoryDescriptor *buffer, USBDeviceAddress address, End
 			if (err)
 			{
 				USBTrace( kUSBTController, kTPControllerWrite, (uintptr_t)this, err, 0, 4 );
-				USBLog(1, "%s[%p]::Write - err(%p) attempting to set the memory descriptor to the dmaCommand", getName(), this, (void*)err);
+				USBLog(1, "%s[%p]::Write - err(%p) attempting to set the memory descriptor to the dmaCommand", getName(), this, (void*)(UInt64)err);
 			}
 		}
 
@@ -646,12 +646,12 @@ IOUSBController::Write(IOMemoryDescriptor *buffer, USBDeviceAddress address, End
 
 		if (!isSyncTransfer)
 		{
-			USBLog(2, "%s[%p]::Write - General error (%p) - cleaning up - command(%p) dmaCommand(%p)", getName(), this, (void*)err, command, dmaCommand);
+			USBLog(2, "%s[%p]::Write - General error (%p) - cleaning up - command(%p) dmaCommand(%p)", getName(), this, (void*)(UInt64)err, command, dmaCommand);
 		}
 
 		if (memDesc)
 		{
-			USBLog(7, "%s[%p]::Write - General error (%p) - clearing memory descriptor (%p) from dmaCommand (%p)", getName(), this, (void*)err, memDesc, dmaCommand);
+			USBLog(7, "%s[%p]::Write - General error (%p) - clearing memory descriptor (%p) from dmaCommand (%p)", getName(), this, (void*)(UInt64)err, memDesc, dmaCommand);
 			dmaCommand->clearMemoryDescriptor();
 		}
 		nullCompletion = command->GetDisjointCompletion();
@@ -751,7 +751,7 @@ IOUSBController::IsocIO(IOMemoryDescriptor *				buffer,
 	err = dmaCommand->setMemoryDescriptor(buffer);								// this automatically calls prepare()
 	if (err)
 	{
-		USBLog(1, "%s[%p]::IsocIO - dmaCommand[%p]->setMemoryDescriptor(%p) failed with status (%p)", getName(), this, command->GetDMACommand(), buffer, (void*)err);
+		USBLog(1, "%s[%p]::IsocIO - dmaCommand[%p]->setMemoryDescriptor(%p) failed with status (%p)", getName(), this, command->GetDMACommand(), buffer, (void*)(UInt64)err);
 		USBTrace( kUSBTController, kTPIsocIO, (uintptr_t)this, err, 0, 2 );
 		_freeUSBIsocCommandPool->returnCommand(command);
 		return err;
@@ -900,7 +900,7 @@ IOUSBController::IsocIO(IOMemoryDescriptor *			buffer,
 	err = dmaCommand->setMemoryDescriptor(buffer);								// this automatically calls prepare()
 	if (err)
 	{
-		USBLog(1, "%s[%p]::IsocIO(LL) - dmaCommand[%p]->setMemoryDescriptor(%p) failed with status (%p)", getName(), this, command->GetDMACommand(), buffer, (void*)err);
+		USBLog(1, "%s[%p]::IsocIO(LL) - dmaCommand[%p]->setMemoryDescriptor(%p) failed with status (%p)", getName(), this, command->GetDMACommand(), buffer, (void*)(UInt64)err);
 		USBTrace( kUSBTController, kTPIsocIOLL, (uintptr_t)this, err, 0, 2 );		
 		_freeUSBIsocCommandPool->returnCommand(command);
 		return err;

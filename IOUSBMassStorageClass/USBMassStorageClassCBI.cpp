@@ -371,8 +371,8 @@ IOUSBMassStorageClass::CBIProtocolCommandCompletion(
 		
 	}
     
-	RecordUSBTimeStamp (	UMC_TRACE ( kCBICompletion ), ( uintptr_t ) this, resultingStatus, 
-							( unsigned int ) cbiRequestBlock->currentState, ( uintptr_t ) cbiRequestBlock->request );
+	RecordUSBTimeStamp (	UMC_TRACE ( kCBICompletion ), (unsigned int)(UInt64)this, resultingStatus,
+							(unsigned int)(UInt64)cbiRequestBlock->currentState, (unsigned int)(UInt64)cbiRequestBlock->request );
 	
 	switch ( cbiRequestBlock->currentState )
 	{

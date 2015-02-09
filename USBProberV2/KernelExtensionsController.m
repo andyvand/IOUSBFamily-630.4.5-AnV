@@ -35,15 +35,19 @@ static NSInteger sortKextArray(NSDictionary * dict1, NSDictionary * dict2, void 
             case 0:
                 return [(NSString *)[dict1 objectForKey:@"Name"] caseInsensitiveCompare:[dict2 objectForKey:@"Name"]];
                 break;
+
             case 1:
                 return [(NSString *)[dict1 objectForKey:@"Version"] caseInsensitiveCompare:[dict2 objectForKey:@"Version"]];
                 break;
+
             case 2:
                 return [[NSNumber numberWithInt:[(NSString *)[dict1 objectForKey:@"Size"] intValue]] compare:[NSNumber numberWithInt:[[dict2 objectForKey:@"Size"] intValue]]];
                 break;
+
             case 3:
                 return [[NSNumber numberWithInt:[(NSString *)[dict1 objectForKey:@"Wired"] intValue]] compare:[NSNumber numberWithInt:[[dict2 objectForKey:@"Wired"] intValue]]];
                 break;
+
             case 4:
                 return [(NSString *)[dict1 objectForKey:@"Address"] caseInsensitiveCompare:[dict2 objectForKey:@"Address"]];
                 break;
@@ -53,15 +57,19 @@ static NSInteger sortKextArray(NSDictionary * dict1, NSDictionary * dict2, void 
             case 0:
                 return [(NSString *)[dict2 objectForKey:@"Name"] caseInsensitiveCompare:[dict1 objectForKey:@"Name"]];
                 break;
+
             case 1:
                 return [(NSString *)[dict2 objectForKey:@"Version"] caseInsensitiveCompare:[dict1 objectForKey:@"Version"]];
                 break;
+
             case 2:
                 return [[NSNumber numberWithInt:[[dict2 objectForKey:@"Size"] intValue]] compare:[NSNumber numberWithInt:[(NSString *)[dict1 objectForKey:@"Size"] intValue]]];
                 break;
+
             case 3:
                 return [[NSNumber numberWithInt:[[dict2 objectForKey:@"Wired"] intValue]] compare:[NSNumber numberWithInt:[(NSString *)[dict1 objectForKey:@"Wired"] intValue]]];
                 break;
+
             case 4:
                 return [(NSString *)[dict2 objectForKey:@"Address"] caseInsensitiveCompare:[dict1 objectForKey:@"Address"]];
                 break;
@@ -96,16 +104,16 @@ static NSInteger sortKextArray(NSDictionary * dict1, NSDictionary * dict2, void 
             // an error occured when trying to load the kext list
             _loadedExtensions = [[NSMutableArray array] retain];
         }
-    }
-    else if ([[KextTypePopUpButton selectedItem] tag] == 1) {
+    } else if ([[KextTypePopUpButton selectedItem] tag] == 1) {
         [ _loadedExtensions  setArray:[KextInfoGatherer loadedExtensions]];
         if (_loadedExtensions == nil) {
             // an error occured when trying to load the kext list
             _loadedExtensions = [[NSMutableArray array] retain];
         }
     }
-    
-    if (previousSortedColumn != nil) {
+
+    if (previousSortedColumn != nil)
+    {
         [KextOutputTable setIndicatorImage:nil inTableColumn:previousSortedColumn];
         [previousSortedColumn release];
         previousSortedColumn = nil;
@@ -137,7 +145,7 @@ static NSInteger sortKextArray(NSDictionary * dict1, NSDictionary * dict2, void 
     
     [sp beginSheetModalForWindow:[NSApp mainWindow] completionHandler:^(NSInteger returnCode)
 	{
-        if (returnCode==NSOKButton)
+        if (returnCode == NSModalResponseOK)
         {
             NSString *selectedFileExtension = [[sp nameFieldStringValue] pathExtension];
             if (NSOrderedSame != [selectedFileExtension caseInsensitiveCompare:@"plist"])
@@ -164,13 +172,14 @@ static NSInteger sortKextArray(NSDictionary * dict1, NSDictionary * dict2, void 
 	[newExSel release];
 }
 
-
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
     return [_loadedExtensions count];
 }
 
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
-    return [[_loadedExtensions objectAtIndex:rowIndex] objectForKey:[aTableColumn identifier]];
+    NSDictionary *extDict = [_loadedExtensions objectAtIndex:rowIndex];
+
+    return [extDict objectForKey:[aTableColumn identifier]];
 }
 
 - (void)tableView:(NSTableView *)aTableView didClickTableColumn:(NSTableColumn *)aTableColumn {
@@ -178,7 +187,6 @@ static NSInteger sortKextArray(NSDictionary * dict1, NSDictionary * dict2, void 
     NSImage *currentIndicatorImage = [aTableView indicatorImageInTableColumn:aTableColumn];
     NSNumber *contextColNumber;
     NSNumber *contextSortOrder;
-    
 
     if (previousSortedColumn != nil) {
         [aTableView setIndicatorImage:nil inTableColumn:previousSortedColumn];
@@ -187,7 +195,8 @@ static NSInteger sortKextArray(NSDictionary * dict1, NSDictionary * dict2, void 
     }
     previousSortedColumn = [aTableColumn retain];
     
-    if (currentIndicatorImage == nil || currentIndicatorImage == [NSImage imageNamed:@"NSDescendingSortIndicator"]) {
+    if ((currentIndicatorImage == nil) || (currentIndicatorImage == [NSImage imageNamed:@"NSDescendingSortIndicator"]))
+    {
         contextSortOrder = [NSNumber numberWithInt:0];
         [aTableView setIndicatorImage:[NSImage imageNamed:@"NSAscendingSortIndicator"] inTableColumn:aTableColumn];
     } else {
@@ -195,7 +204,8 @@ static NSInteger sortKextArray(NSDictionary * dict1, NSDictionary * dict2, void 
         [aTableView setIndicatorImage:[NSImage imageNamed:@"NSDescendingSortIndicator"] inTableColumn:aTableColumn];
     }
 
-    if ([colName isEqualToString:@"Name"]) {
+    if ([colName isEqualToString:@"Name"])
+    {
         contextColNumber = [NSNumber numberWithInt:0];
     } else if ([colName isEqualToString:@"Version"]) {
         contextColNumber = [NSNumber numberWithInt:1];

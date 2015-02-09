@@ -238,7 +238,7 @@ UInt32 AppleUSBXHCI::GetErrataBits(UInt16 vendorID, UInt16 deviceID, UInt16 revi
     pciTunneled = (OSBoolean *) getProperty(kIOPCITunnelledKey, gIOServicePlane);
     if ( pciTunneled == kOSBooleanTrue)
     {
-        _v3ExpansionData->_onThunderbolt = true;
+        _v3ExpansionData->_tbBitmapsExist = true;
         requireMaxBusStall(kXHCIIsochMaxBusStall);
     }
 	
@@ -253,7 +253,7 @@ UInt8 AppleUSBXHCI::Read8Reg(volatile UInt8 *addr)
     {
 		value = *addr;
 		
-		if ( (value == 0xFF) && (_v3ExpansionData->_onThunderbolt) )
+		if ( (value == 0xFF) && (_v3ExpansionData->_tbBitmapsExist) )
 		{
             _lostRegisterAccess = true;
             USBLog(3, "AppleUSBXHCI[%p]::Read8Reg got invalid register base = %p reg addr = %p", this, _pXHCICapRegisters, addr);
@@ -275,7 +275,7 @@ UInt16 AppleUSBXHCI::Read16Reg(volatile UInt16 *addr)
   {
 		value = OSReadLittleInt16(addr, 0);
 
-		if ( (value == 0xFFFF) && (_v3ExpansionData->_onThunderbolt) )
+		if ( (value == 0xFFFF) && (_v3ExpansionData->_tbBitmapsExist) )
 		{
       _lostRegisterAccess = true;
       USBLog(3, "AppleUSBXHCI[%p]::Read16Reg got invalid register base = %p reg addr = %p", this, _pXHCICapRegisters, addr);
@@ -297,7 +297,7 @@ UInt32 AppleUSBXHCI::Read32Reg(volatile UInt32 *addr)
   {
 		value = OSReadLittleInt32(addr, 0);
 
-		if ( (value == (UInt32) -1) && (_v3ExpansionData->_onThunderbolt) )
+		if ( (value == (UInt32) -1) && (_v3ExpansionData->_tbBitmapsExist) )
 		{
       _lostRegisterAccess = true;
       USBLog(3, "AppleUSBXHCI[%p]::Read32Reg got invalid register base = %p reg addr =%p", this, _pXHCICapRegisters, addr);
@@ -329,7 +329,7 @@ UInt64 AppleUSBXHCI::Read64Reg(volatile UInt64 *addr)
 			if ((_errataBits & kXHCIErrata_FrescoLogic) == 0)
 			{
 				value = *addr;
-				if ( (value == (UInt64)-1) && (_v3ExpansionData->_onThunderbolt) )
+				if ( (value == (UInt64)-1) && (_v3ExpansionData->_tbBitmapsExist) )
 				{
                     _lostRegisterAccess = true;
                     USBLog(3, "AppleUSBXHCI[%p]::Read64Reg got invalid register base = %p reg addr = %p", this, _pXHCICapRegisters, addr);
@@ -340,7 +340,7 @@ UInt64 AppleUSBXHCI::Read64Reg(volatile UInt64 *addr)
 			else
 			{
 				UInt32 dwordLo = *(UInt32 *) addr;
-				if ( (dwordLo == (UInt32)-1) && (_v3ExpansionData->_onThunderbolt) )
+				if ( (dwordLo == (UInt32)-1) && (_v3ExpansionData->_tbBitmapsExist) )
 				{
                     _lostRegisterAccess = true;
                     USBLog(3, "AppleUSBXHCI[%p]::Read64Reg Got invalid register base = %p reg addr = %p", this, _pXHCICapRegisters, addr);
@@ -348,7 +348,7 @@ UInt64 AppleUSBXHCI::Read64Reg(volatile UInt64 *addr)
 				}
 				
 				UInt32 dwordHi = *((UInt32 *)addr + 1);
-				if ( (dwordHi == (UInt32)-1) && (_v3ExpansionData->_onThunderbolt) )
+				if ( (dwordHi == (UInt32)-1) && (_v3ExpansionData->_tbBitmapsExist) )
 				{
                     _lostRegisterAccess = true;
                     USBLog(3, "AppleUSBXHCI[%p]::Read64Reg got invalid register base = %p reg addr =%p", this, _pXHCICapRegisters, addr);
@@ -359,7 +359,7 @@ UInt64 AppleUSBXHCI::Read64Reg(volatile UInt64 *addr)
 			}
 #else
 			UInt32 dwordLo = *(UInt32 *) addr;
-			if ( (dwordLo == (UInt32)-1) && (_v3ExpansionData->_onThunderbolt) )
+			if ( (dwordLo == (UInt32)-1) && (_v3ExpansionData->_tbBitmapsExist) )
 			{
                 _lostRegisterAccess = true;
                 USBLog(3, "AppleUSBXHCI[%p]::Read64Reg got invalid register base = %p reg addr = %p", this, _pXHCICapRegisters, addr);
@@ -367,7 +367,7 @@ UInt64 AppleUSBXHCI::Read64Reg(volatile UInt64 *addr)
 			}
 			
 			UInt32 dwordHi = *((UInt32 *)addr + 1);
-			if ( (dwordLo == (UInt32)-1) && (_v3ExpansionData->_onThunderbolt) )
+			if ( (dwordLo == (UInt32)-1) && (_v3ExpansionData->_tbBitmapsExist) )
 			{
                 _lostRegisterAccess = true;
                 USBLog(3, "AppleUSBXHCI[%p]::Read64Reg got invalid register base = %p reg addr = %p", this, _pXHCICapRegisters, addr);
@@ -380,7 +380,7 @@ UInt64 AppleUSBXHCI::Read64Reg(volatile UInt64 *addr)
 		else
 		{
 			UInt32 dword = *(UInt32 *)addr;
-			if ( (dword == (UInt32)-1) && (_v3ExpansionData->_onThunderbolt) )
+			if ( (dword == (UInt32)-1) && (_v3ExpansionData->_tbBitmapsExist) )
 			{
 				_lostRegisterAccess = true;
 				USBLog(3, "AppleUSBXHCI[%p]::Read64Reg got invalid register base = %p reg addr =%p", this, _pXHCICapRegisters, addr);
@@ -604,7 +604,7 @@ IOReturn AppleUSBXHCI::MakeBuffer(IOOptionBits options, mach_vm_size_t size, mac
 	err = (*buffer)->prepare();
 	if (err)
 	{
-		USBError(1, "AppleUSBXHCI[%p]::MakeBuffer - could not prepare buffer err(%p)", this, (void*)err);
+		USBError(1, "AppleUSBXHCI[%p]::MakeBuffer - could not prepare buffer err(%p)", this, (void*)(UInt64)err);
 		(*buffer)->release();
 		*buffer = NULL;
 		return err;
@@ -635,7 +635,7 @@ IOReturn AppleUSBXHCI::MakeBuffer(IOOptionBits options, mach_vm_size_t size, mac
 	err = dmaCommand->setMemoryDescriptor((*buffer));
 	if (err)
 	{
-		USBError(1, "AppleUSBXHCI[%p]::MakeBuffer - setMemoryDescriptor returned err (%p)", this, (void*)err);
+		USBError(1, "AppleUSBXHCI[%p]::MakeBuffer - setMemoryDescriptor returned err (%p)", this, (void*)(UInt64)err);
 		dmaCommand->release();
 		(*buffer)->complete();
 		(*buffer)->release();
@@ -646,7 +646,7 @@ IOReturn AppleUSBXHCI::MakeBuffer(IOOptionBits options, mach_vm_size_t size, mac
 	err = dmaCommand->gen64IOVMSegments(&offset, &segments, &numSegments);
 	if (err || (numSegments != 1) || (segments.fLength != maxSegmentSize))
 	{
-		USBError(1, "AppleUSBXHCI[%p]::MakeBuffer - could not generate segments err (%p) numSegments (%d) fLength (%d)", this, (void*)err, (int)numSegments, (int)segments.fLength);
+		USBError(1, "AppleUSBXHCI[%p]::MakeBuffer - could not generate segments err (%p) numSegments (%d) fLength (%d)", this, (void*)(UInt64)err, (int)numSegments, (int)segments.fLength);
 		err = err ? err : kIOReturnInternalError;
 		dmaCommand->clearMemoryDescriptor();
 		dmaCommand->release();
@@ -1855,7 +1855,7 @@ IOReturn AppleUSBXHCI::MungeXHCIStatus(int code, bool in, UInt8 speed, bool sile
 			return(kIOUSBHighSpeedSplitError);
             
         // Intel specific errors
-        kXHCITRB_CC_CNTX_ENTRIES_GTR_MAXEP:
+        case kXHCITRB_CC_CNTX_ENTRIES_GTR_MAXEP:
             if( (_errataBits & kXHCIErrataPPT) == 0)
             {
                 return(kIOReturnInternalError);
@@ -1969,10 +1969,10 @@ AppleUSBXHCI::MungeCommandCompletion(int code, bool silent)
 		case CMD_NOT_COMPLETED:
 			return(kIOReturnTimeout);
             
-		case MAKEXHCIERR(kXHCITRB_CC_CtxParamErr):
+		case (int)MAKEXHCIERR(kXHCITRB_CC_CtxParamErr):
 			return(kIOReturnBadArgument);
 			
-		case MAKEXHCIERR(kXHCITRB_CC_CtxStateErr):
+		case (int)MAKEXHCIERR(kXHCITRB_CC_CtxStateErr):
 			return(kIOReturnNotPermitted);
 			
             
@@ -3873,7 +3873,7 @@ void AppleUSBXHCI::TestCommands(void)
 void
 AppleUSBXHCI::InterruptHandler(OSObject *owner, IOInterruptEventSource * /*source*/, int /*count*/)
 {
-    register 	AppleUSBXHCI		*controller = (AppleUSBXHCI *) owner;
+    	AppleUSBXHCI		*controller = (AppleUSBXHCI *) owner;
     static 	Boolean 		emitted;
 	
     if (!controller || controller->isInactive() || controller->_lostRegisterAccess || !controller->_controllerAvailable)
@@ -3905,7 +3905,7 @@ bool
 AppleUSBXHCI::PrimaryInterruptFilterSingleInt(OSObject *owner, IOFilterInterruptEventSource *source)
 {
 #pragma unused(source)
-    register AppleUSBXHCI	*controller = (AppleUSBXHCI *)owner;
+     AppleUSBXHCI	*controller = (AppleUSBXHCI *)owner;
     bool					result = true;
 	
     // If our controller has gone away, or it's going away, or if we're on a PC Card and we have been ejected,
@@ -3949,7 +3949,7 @@ bool
 AppleUSBXHCI::PrimaryInterruptFilter(OSObject *owner, IOFilterInterruptEventSource *source)
 {
 #pragma unused(source)
-    register AppleUSBXHCI	*controller = (AppleUSBXHCI *)owner;
+     AppleUSBXHCI	*controller = (AppleUSBXHCI *)owner;
     bool					result = true;
 	
     // If our controller has gone away, or it's going away, or if we're on a PC Card and we have been ejected,
@@ -4207,7 +4207,7 @@ IOReturn AppleUSBXHCI::UIMInitialize(IOService * provider)
         gUSBStackDebugFlags |= kUSBEnableAllXHCIControllersMask;
         bool allowAnyXHCIController = (gUSBStackDebugFlags & kUSBEnableAllXHCIControllersMask);
 			
-		if (!_v3ExpansionData->_onThunderbolt)
+		if (!_v3ExpansionData->_tbBitmapsExist)
 		{
 			_expansionData->_isochMaxBusStall = kXHCIIsochMaxBusStall;
 		}
@@ -5053,7 +5053,7 @@ AppleUSBXHCI::message( UInt32 type, IOService * provider,  void * argument )
 	UInt32		disableMuxedPorts = ((gUSBStackDebugFlags & kUSBDisableMuxedPortsMask) >> kUSBDisableMuxedPorts);
 	UInt8		controller  = kControllerXHCI;
     
-    USBLog(3, "AppleUSBXHCI[%p]::message type: %p, argument = %p isInactive = %d ",  this, (void*)type,  argument, isInactive());
+    USBLog(3, "AppleUSBXHCI[%p]::message type: %p, argument = %p isInactive = %d ",  this, (void*)(UInt64)type,  argument, isInactive());
 	
     // Let our superclass decide handle this method
     // messages
@@ -5070,7 +5070,7 @@ AppleUSBXHCI::message( UInt32 type, IOService * provider,  void * argument )
 			// Make sure we are ON before we handle mux hand offs from EHCI -> XHCI
 			if(_lostRegisterAccess)
 			{
-				USBLog(3, "AppleUSBXHCI[%p]::message type: %p, argument = %p Controller Not Available",  this, (void*)type,  argument);
+				USBLog(3, "AppleUSBXHCI[%p]::message type: %p, argument = %p Controller Not Available",  this, (void*)(UInt64)type,  argument);
 				return returnValue;
 			}
 			
@@ -5081,7 +5081,7 @@ AppleUSBXHCI::message( UInt32 type, IOService * provider,  void * argument )
 				{	
 					HCSelect((UInt8)(uint64_t)argument, controller);
 
-					USBLog(3, "AppleUSBXHCI[%p]::message type: %p port: %d to %s controller [HCSEL: %lx]", this, (void*)type, (UInt8)(uint64_t)argument, (controller == kControllerEHCI) ? "EHCI" : "XHCI", (long unsigned int)_device->configRead32(kXHCI_XUSB2PR));
+					USBLog(3, "AppleUSBXHCI[%p]::message type: %p port: %d to %s controller [HCSEL: %lx]", this, (void*)(UInt64)type, (UInt8)(uint64_t)argument, (controller == kControllerEHCI) ? "EHCI" : "XHCI", (long unsigned int)_device->configRead32(kXHCI_XUSB2PR));
 				}
 			}
 			break;
@@ -5090,7 +5090,7 @@ AppleUSBXHCI::message( UInt32 type, IOService * provider,  void * argument )
 			// Make sure we are ON before we handle mux hand offs from EHCI -> XHCI
 			if(_lostRegisterAccess)
 			{
-				USBLog(3, "AppleUSBXHCI[%p]::message type: %p, argument = %p Controller Not Available",  this, (void*)type,  argument);
+				USBLog(3, "AppleUSBXHCI[%p]::message type: %p, argument = %p Controller Not Available",  this, (void*)(UInt64)type,  argument);
 				return returnValue;
 			}
 			
@@ -5101,7 +5101,7 @@ AppleUSBXHCI::message( UInt32 type, IOService * provider,  void * argument )
 				{	
           HCSelectWithMethod((char*)argument);
                     
-					USBLog(3, "AppleUSBXHCI[%p]::message type: %p method %s to %s controller [HCSEL: %lx]", this, (void*)type, (char*)argument, "XHCI", (long unsigned int)_device->configRead32(kXHCI_XUSB2PR));
+					USBLog(3, "AppleUSBXHCI[%p]::message type: %p method %s to %s controller [HCSEL: %lx]", this, (void*)(UInt64)type, (char*)argument, "XHCI", (long unsigned int)_device->configRead32(kXHCI_XUSB2PR));
 				}
 			}
 			break;
@@ -9420,7 +9420,7 @@ UInt64 		AppleUSBXHCI::GetFrameNumber( void )
 {
 	
     UInt64		temp1, temp2;
-    register 	UInt32	frindex;
+     	UInt32	frindex;
 	UInt32		sts;
     UInt32      count = 0;
     bool        loggedZero = false;
@@ -9502,7 +9502,7 @@ AppleUSBXHCI::GetMicroFrameNumber( void )
 {
 	
     UInt64		temp1, temp2;
-    register 	UInt32	frindex;
+     	UInt32	frindex;
     UInt32      count = 0;
 	UInt32		sts;
 		

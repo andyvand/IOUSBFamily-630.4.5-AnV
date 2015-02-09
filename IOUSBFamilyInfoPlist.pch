@@ -1,18 +1,19 @@
-#define IOUSBFAMILY_VERSION                 710.4.14
-#define APPLEUSBHUB_VERSION                 705.4.2
-#define APPLEUSBMERGENUB_VERSION            705.4.0
-#define APPLEUSBXHCI_VERSION                710.4.11
-#define APPLEUSBEHCI_VERSION                705.4.14
-#define APPLEUSBOHCI_VERSION                656.4.1
-#define APPLEUSBUHCI_VERSION                656.4.1
-#define APPLEUSBOPTICALMOUSE_VERSION        650.4.0
-#define IOUSBCOMPOSITEDRIVER_VERSION        705.4.9
-#define IOUSBHIDDRIVERSAFEBOOT_VERSION      650.4.0
-#define IOUSBHIDDRIVER_VERSION              705.4.0
-#define IOUSBLIB_VERSION                    705.4.0
-#define IOUSBUSERCLIENT_VERSION             705.4.0
-#define USBPROBER_VERSION                   705.4.14
-#define KLOG_VERSION                        705.4.14
+#define IOUSBFAMILY_VERSION                         710.4.14
+#define APPLEUSBHUB_VERSION                         705.4.2
+#define APPLEUSBMERGENUB_VERSION                    705.4.0
+#define APPLEUSBXHCI_VERSION                        710.4.11
+#define APPLEUSBEHCI_VERSION                        705.4.14
+#define APPLEUSBOHCI_VERSION                        656.4.1
+#define APPLEUSBUHCI_VERSION                        656.4.1
+#define APPLEUSBOPTICALMOUSE_VERSION                650.4.0
+#define IOUSBCOMPOSITEDRIVER_VERSION                705.4.9
+#define IOUSBHIDDRIVERSAFEBOOT_VERSION              650.4.0
+#define IOUSBHIDDRIVER_VERSION                      705.4.0
+#define IOUSBLIB_VERSION                            705.4.0
+#define IOUSBUSERCLIENT_VERSION                     705.4.0
+#define USBPROBER_VERSION                           705.4.14
+#define KLOG_VERSION                                705.4.14
+#define IO_USB_MASS_STORAGE_CLASS_MODULE_VERSION    3.7.0
 
 #define USBTRACE_VERSION					"705.4.14"
 
@@ -37,6 +38,9 @@
 #define IOUSBUSERCLIENT_LAST_CHANGE_YEAR			2014
 #define USBPROBER_LAST_CHANGE_YEAR					2014
 #define KLOG_LAST_CHANGE_YEAR						2014
+#define IO_USB_MASS_STORAGE_CLASS_LAST_CHANGE_YEAR  2014
 
 #define QUOTEDSTRING(s) STRING(s)
 #define STRING(s) #s
+
+#define IO_USB_MASS_STORAGE_CLASS_VERSION_COPYRIGHT $IO_USB_MASS_STORAGE_CLASS_MODULE_VERSION, Copyright Apple Inc. 1999-$IO_USB_MASS_STORAGE_CLASS_LAST_CHANGE_YEAR

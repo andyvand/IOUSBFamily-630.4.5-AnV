@@ -30,7 +30,14 @@
 #import <IOKit/IOMessage.h>
 #import <IOKit/IOCFPlugIn.h>
 
+#ifdef KERNEL
 #import "../IOUSBFamily/Headers/IOUSBLib.h"
+#else /* ! KERNEL */
+#import <IOKit/IOKitLib.h>
+#import <IOKit/usb/USBSpec.h>
+#import <IOKit/usb/USB.h>
+#import <IOKit/usb/IOUSBLib.h>
+#endif /* KERNEL */
 
 #import <mach/mach_port.h>
 #import "IORegOutlineViewNode.h"

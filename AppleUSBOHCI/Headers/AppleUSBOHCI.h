@@ -136,6 +136,8 @@ class AppleUSBOHCI : public IOUSBControllerV3
 {
     OSDeclareDefaultStructors(AppleUSBOHCI)
 
+    V3ExpansionData *_v3ExpansionData;
+
 private:
     void						ResumeUSBBus(bool wakingFromSleep);
     void						SuspendUSBBus(bool goingToSleep);
@@ -151,7 +153,7 @@ private:
     void						print_int_list(int level, bool printSkipped, bool printTDs);
     bool						IsValidPhysicalAddress(IOPhysicalAddress pageAddr);
     void						showRegisters(UInt32 level, const char *s);
-		
+
 protected:
 
     IOMemoryMap *									_deviceBase;

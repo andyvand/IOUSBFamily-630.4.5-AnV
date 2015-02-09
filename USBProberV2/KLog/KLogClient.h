@@ -26,7 +26,8 @@
 #define KLOGCLIENT_H
 
 #include "KLog.h"
-#include <IOKit/IODataQueue.h>
+//#include <IOKit/IODataQueue.h>
+#include <IOKit/IOSharedDataQueue.h>
 #include <IOKit/IOUserClient.h>
 #include <IOKit/IOLib.h>
 
@@ -51,7 +52,7 @@ class com_apple_iokit_KLogClient : public IOUserClient
     int						State;
     bool					ActiveFlag;
     IOLock *				ClientLock;
-    IODataQueue *			myLogQueue;
+    IOSharedDataQueue *		myLogQueue;
     mach_port_t				myPort;
     int						Q_Err;
     

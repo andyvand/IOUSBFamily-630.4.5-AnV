@@ -849,7 +849,8 @@ IOUSBCompositeDriver::ConfigureDevicePowerManagement( IOService * provider )
 
 
 #pragma mark ееееееее Padding Methods еееееееее
-OSMetaClassDefineReservedUnused(IOUSBCompositeDriver,  1);
+OSMetaClassDefineReservedUsed(IOUSBCompositeDriver,  1);
+
 OSMetaClassDefineReservedUnused(IOUSBCompositeDriver,  2);
 OSMetaClassDefineReservedUnused(IOUSBCompositeDriver,  3);
 OSMetaClassDefineReservedUnused(IOUSBCompositeDriver,  4);

@@ -1,1 +1,0 @@
- const unsigned char AppleUSBEHCIVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:AppleUSBEHCI  PROJECT:IOUSBFamily-5.6.1" "\n"; const double AppleUSBEHCIVersionNumber __attribute__ ((used)) = (double)5.6;

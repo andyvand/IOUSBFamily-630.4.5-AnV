@@ -23,20 +23,30 @@
 
 #import "PortStatusGatherer.h"
 
-
 @interface PortStatusGatherer (Private)
 
 @end
 
-@implementation PortStatusGatherer
-
 #include <IOKit/IOKitLib.h>
 #include <IOKit/IOCFPlugIn.h>
 
+#define _NUM_VERSION_ 1
+#define __USB__ 1
+
+#ifdef KERNEL
 #include "../IOUSBFamily/Headers/IOUSBLib.h"
 #include "../IOUSBFamily/Headers/USB.h"
+#else
+#include <IOKit/IOKitLib.h>
+#include <IOKit/usb/USBSpec.h>
+#include <IOKit/usb/USB.h>
+#include <IOKit/usb/IOUSBLib.h>
+#include <IOKit/usb/IOUSBUserClient.h>
+#endif /* KERNEL */
 
 #include <AvailabilityMacros.h>
+
+@implementation PortStatusGatherer
 
 //============= Stuff from USBHub.h that is not public =============
 
@@ -756,7 +766,7 @@ finish:
 
 
 
-- (IOReturn) gatherStatus
+-(IOReturn)gatherStatus
 {
     IOReturn			err = kIOReturnSuccess;
     CFMutableDictionaryRef 	matchingDictionary = 0;		// requires <IOKit/IOKitLib.h>

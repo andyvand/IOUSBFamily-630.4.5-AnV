@@ -23,13 +23,18 @@
 #ifndef _IOKIT_IOUSBPIPE_H
 #define _IOKIT_IOUSBPIPE_H
 
+#ifdef KERNEL
 #include <IOKit/IOService.h>
 #include <IOKit/IOMemoryDescriptor.h>
+#else /* ! KERNEL */
+#include <IOKit/IOKitLib.h>
+#endif /* KERNEL */
 
-#include "../../IOUSBFamily/Headers/USB.h"
-#include "../../IOUSBFamily/Headers/IOUSBController.h"
-#include "../../IOUSBFamily/Headers/IOUSBControllerV2.h"
+#include "USB.h"
+#include "IOUSBController.h"
+#include "IOUSBControllerV2.h"
 
+#ifdef KERNEL
 class IOUSBInterface;
 
 #define	kAppleUSBSSIsocContinuousFrame		0xFFFFFFFFFFFFFFFEull
@@ -64,6 +69,7 @@ protected:
 		UInt8						_uasUsageID;
 		UInt8						_usageType;
 		UInt8						_syncType;
+		bool						_zeroNoDataTimeout;
     };
     ExpansionData * _expansionData;
     
@@ -392,5 +398,6 @@ public:
     OSMetaClassDeclareReservedUnused(IOUSBPipe,  19);
 	
 };
+#endif /* KERNEL */
 
 #endif

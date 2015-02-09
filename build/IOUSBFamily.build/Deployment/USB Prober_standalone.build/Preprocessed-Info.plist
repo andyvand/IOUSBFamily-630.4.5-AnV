@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -7,7 +8,7 @@
  <key>CFBundleExecutable</key>
  <string>USB Prober</string>
  <key>CFBundleGetInfoString</key>
- <string>621.4.0, Copyright © 2002-2013 Apple Inc. All rights reserved.</string>
+ <string>705.4.14, Copyright © 2002-2014 Apple Inc. All rights reserved.</string>
  <key>CFBundleIconFile</key>
  <string>USBProberIcon.icns</string>
  <key>CFBundleIdentifier</key>
@@ -19,11 +20,11 @@
  <key>CFBundlePackageType</key>
  <string>APPL</string>
  <key>CFBundleShortVersionString</key>
- <string>621.4.0</string>
+ <string>705.4.14</string>
  <key>CFBundleSignature</key>
  <string>USBP</string>
  <key>CFBundleVersion</key>
- <string>621.4.0</string>
+ <string>705.4.14</string>
  <key>NSMainNibFile</key>
  <string>MainMenu</string>
  <key>NSPrincipalClass</key>

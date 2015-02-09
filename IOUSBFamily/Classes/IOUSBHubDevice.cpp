@@ -245,7 +245,7 @@ IOUSBHubDevice::RequestExtraPower(UInt32 type, UInt32 requestedPower)
 			workLoop->retain();
 			gate->retain();
 			
-			kr = gate->runAction(OSMemberFunctionCast(IOCommandGate::Action, this, &IOUSBHubDevice::RequestExtraWakePowerGated), (void *)type, (void *)requestedPower, &extraAllocated);
+			kr = gate->runAction(OSMemberFunctionCast(IOCommandGate::Action, this, &IOUSBHubDevice::RequestExtraWakePowerGated), (void *)(UInt64)type, (void *)(UInt64)requestedPower, &extraAllocated);
 			if ( kr != kIOReturnSuccess )
 			{
 				USBLog(2,"IOUSBHubDevice[%p]::RequestExtraPower GatedRequestExtraPower runAction() failed (0x%x)", this, kr);
@@ -416,7 +416,7 @@ IOUSBHubDevice::ReturnExtraPower(UInt32 type, UInt32 returnedPower)
 			workLoop->retain();
 			gate->retain();
 			
-			kr = gate->runAction(OSMemberFunctionCast(IOCommandGate::Action, this, &IOUSBHubDevice::ReturnExtraWakePowerGated), (void *)type, (void *)returnedPower);
+			kr = gate->runAction(OSMemberFunctionCast(IOCommandGate::Action, this, &IOUSBHubDevice::ReturnExtraWakePowerGated), (void *)(UInt64)type, (void *)(UInt64)returnedPower);
 			if ( kr != kIOReturnSuccess )
 			{
 				USBLog(2,"IOUSBHubDevice[%p]::ReturnExtraPower GatedRequestExtraPower runAction() failed (0x%x)", this, kr);
@@ -503,7 +503,7 @@ IOUSBHubDevice::RequestSleepPower(UInt32 requestedPower)
         
         
         USBLog(5, "IOUSBHubDevice[%p]::RequestSleepPower - requestedPower = %d", this, (uint32_t)requestedPower);
-        gate->runAction(OSMemberFunctionCast(IOCommandGate::Action, this, &IOUSBHubDevice::RequestSleepPowerGated), (void *)requestedPower, &extraAllocated);
+        gate->runAction(OSMemberFunctionCast(IOCommandGate::Action, this, &IOUSBHubDevice::RequestSleepPowerGated), (void *)(UInt64)requestedPower, &extraAllocated);
         
         if ( kr != kIOReturnSuccess )
         {
@@ -656,7 +656,7 @@ IOUSBHubDevice::ReturnSleepPower(UInt32 returnedPower)
 		gate->retain();
         
         USBLog(5, "IOUSBHubDevice[%p]::ReturnSleepPower - returning = %d", this, (uint32_t)returnedPower);
-        gate->runAction(OSMemberFunctionCast(IOCommandGate::Action, this, &IOUSBHubDevice::ReturnSleepPowerGated), (void *)returnedPower);
+        gate->runAction(OSMemberFunctionCast(IOCommandGate::Action, this, &IOUSBHubDevice::ReturnSleepPowerGated), (void *)(UInt64)returnedPower);
         if ( kr != kIOReturnSuccess )
         {
             USBLog(2,"IOUSBHubDevice[%p]::RequestExtraPower GatedRequestExtraPower runAction() failed (0x%x)", this, kr);
@@ -881,7 +881,7 @@ IOUSBHubDevice::UpdateUnconnectedExternalPorts(SInt32 count)
 		workLoop->retain();
 		gate->retain();
         
-        gate->runAction(OSMemberFunctionCast(IOCommandGate::Action, this, &IOUSBHubDevice::UpdateUnconnectedExternalPortsGated), (void*) count, (void*)&newCount);
+        gate->runAction(OSMemberFunctionCast(IOCommandGate::Action, this, &IOUSBHubDevice::UpdateUnconnectedExternalPortsGated), (void*)(UInt64)count, (void*)&newCount);
         if ( kr != kIOReturnSuccess )
         {
             USBLog(2,"IOUSBHubDevice[%p]::UpdateUnconnectedExternalPorts UpdateUnconnectedExternalPortsGated runAction() failed (0x%x)", this, kr);

@@ -21,8 +21,10 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-#import "BusProbeDevice.h"
+#define _NUM_VERSION_ 1
+#define _USB_H 1
 
+#import "BusProbeDevice.h"
 
 @implementation BusProbeDevice
 
@@ -56,6 +58,8 @@
 - (void)addProperty:(char *)property withValue:(char *)value atDepth:(int)depth {
     [_rootNode addNodeWithName:property value:value atDepth:depth];
 }
+
+#import "BusProberSharedFunctions.h"
 
 - (void)addNumberProperty:(char *)property value:(UInt32)value size:(int)sizeInBytes atDepth:(int)depth usingStyle:(int)style {
     char *valstr = GetStringFromNumber(value, sizeInBytes, style);    

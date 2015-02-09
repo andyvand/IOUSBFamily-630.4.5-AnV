@@ -89,8 +89,7 @@ static void PrintBufferSettings ( void )
 //	Main
 //———————————————————————————————————————————————————————————————————————————
 
-int
-main ( int argc, const char * argv[] )
+int main(int argc, const char * argv[])
 {
 	
 	gProgramName = argv[0];
@@ -103,10 +102,10 @@ main ( int argc, const char * argv[] )
 		
 	}
 	
-    /*if ( reexec_to_match_kernel() )
+    /*if (reexec_to_match_kernel())
 	{
 		elog( "Could not re-execute to match kernel architecture. (Error %d)\n", errno );
-		exit( 1 );
+		exit(1);
     }*/
 
 	// Get program arguments.
@@ -923,7 +922,7 @@ CollectWithAlloc( void )
 	int				mib[6];
 	size_t 			needed;
 	int 			index;
-	kbufinfo_t		bufinfo = {0, 0, 0, 0};
+    kbufinfo_t		bufinfo = {0, 0, 0, 0, 0};
 	
 	// Get kernel buffer information
 	GetTraceBufferInfo(&bufinfo);
@@ -1117,6 +1116,8 @@ ProcessTracepoint( kd_buf tracepoint )
 
 
 #pragma mark Family Tracepoints
+
+#define kTPControllersetPowerState kTPControllerPowerState
 
 static void 
 CollectTraceController( kd_buf tracepoint ) 
@@ -2861,11 +2862,11 @@ CollectTraceHub ( kd_buf tracepoint )
 			}
 			else if ( arg4 == 8)
 			{			   
-				log(info, "Hub", "CheckForDeadHub", parg1, "device(%p) has been unplugged", (void *) arg2);
+				log(info, "Hub", "CheckForDeadHub", parg1, "device(%p) has been unplugged", (void *)(UInt64)arg2);
 			}
 			else if ( arg4 == 9)
 			{			   
-				log(info, "Hub", "CheckForDeadHub", parg1, "no hubInterface (%p), device(%p), or pipe", (void*)arg2, (void*)arg3);
+				log(info, "Hub", "CheckForDeadHub", parg1, "no hubInterface (%p), device(%p), or pipe", (void*)(UInt64)arg2, (void*)(UInt64)arg3);
 			}
 			else if ( arg4 == 10)
 			{			   
@@ -6910,7 +6911,7 @@ CollectTraceXHCI ( kd_buf tracepoint )
             {
                 if (qualifier == DBG_FUNC_START)
                 {
-                    log (info, "XHCI", "AsyncEPCreateTD", parg1, "USBCommand: %p totalTransferSize: %d offC: 0x%x", (void*)arg2, arg3, arg4);
+                    log (info, "XHCI", "AsyncEPCreateTD", parg1, "USBCommand: %p totalTransferSize: %d offC: 0x%x", (void*)(UInt64)arg2, arg3, arg4);
                 }
                 else if (qualifier == DBG_FUNC_END)
                 {
@@ -6963,7 +6964,7 @@ CollectTraceXHCI ( kd_buf tracepoint )
                 }
                 else
                 {
-                    log (info, "XHCI", "AsyncEPScheduleTD", parg1, "ReadyATD: %p USBCommand: %p CompletionIndex: %d", (void*)arg2, (void*)arg3, arg4);
+                    log (info, "XHCI", "AsyncEPScheduleTD", parg1, "ReadyATD: %p USBCommand: %p CompletionIndex: %d", (void*)(UInt64)arg2, (void*)(UInt64)arg3, arg4);
                 }
             }
             break;
@@ -6980,7 +6981,7 @@ CollectTraceXHCI ( kd_buf tracepoint )
                 }
                 else if(arg4 == 0)
                 {
-                    log (info, "XHCI", "AsyncEPScavengeTD", parg1, "ActiveATD: %p USBCommand: %p", (void*)arg2, (void*)arg3);
+                    log (info, "XHCI", "AsyncEPScavengeTD", parg1, "ActiveATD: %p USBCommand: %p", (void*)(UInt64)arg2, (void*)(UInt64)arg3);
                 }
                 else if(arg4 == 1)
                 {
@@ -7009,11 +7010,11 @@ CollectTraceXHCI ( kd_buf tracepoint )
                 }
                 else if (qualifier == DBG_FUNC_END)
                 {
-                    log (info, "XHCI", "AsyncEPUpdateTimeout", parg1, "USBCommand: %p noDataTimeout: %d time: %d", (void*)arg2, arg3, arg4);
+                    log (info, "XHCI", "AsyncEPUpdateTimeout", parg1, "USBCommand: %p noDataTimeout: %d time: %d", (void*)(UInt64)arg2, arg3, arg4);
                 }
                 else
                 {
-                    log (info, "XHCI", "AsyncEPUpdateTimeout", parg1, "ActiveATD: %p returnATransfer: %d", (void*)arg2, arg3);
+                    log (info, "XHCI", "AsyncEPUpdateTimeout", parg1, "ActiveATD: %p returnATransfer: %d", (void*)(UInt64)arg2, arg3);
                 }
             }
             break;
@@ -7030,7 +7031,7 @@ CollectTraceXHCI ( kd_buf tracepoint )
                 }
                 else
                 {
-                    log (info, "XHCI", "AsyncEPAbort", parg1, "ActiveATD: %p USBCommand: %p CompletionIndex: %d", (void*)arg2, (void*)arg3, arg4);
+                    log (info, "XHCI", "AsyncEPAbort", parg1, "ActiveATD: %p USBCommand: %p CompletionIndex: %d", (void*)(UInt64)arg2, (void*)(UInt64)arg3, arg4);
                 }
             }
             break;
@@ -7047,7 +7048,7 @@ CollectTraceXHCI ( kd_buf tracepoint )
                 }
                 else
                 {
-                    log (info, "XHCI", "AsyncEPComplete", parg1, "DoneATD: %p USBCommand: %p CompletionIndex: %d", (void*)arg2, (void*)arg3, arg4);
+                    log (info, "XHCI", "AsyncEPComplete", parg1, "DoneATD: %p USBCommand: %p CompletionIndex: %d", (void*)(UInt64)arg2, (void*)(UInt64)arg3, arg4);
                 }
             }
             break;
@@ -7209,11 +7210,11 @@ CollectTraceXHCI ( kd_buf tracepoint )
 		{
 			if (qualifier == DBG_FUNC_START)
 			{
-				log (info, "XHCI", "WaitForCMD", parg1, "TRB: %p, command: %d", (void*)arg2, arg3);
+				log (info, "XHCI", "WaitForCMD", parg1, "TRB: %p, command: %d", (void*)(UInt64)arg2, arg3);
 			}
 			else if (qualifier == DBG_FUNC_END)
 			{
-				log (info, "XHCI", "WaitForCMD", parg1, "TRB: %p, returning 0x%x", (void *)arg2, arg3);
+				log (info, "XHCI", "WaitForCMD", parg1, "TRB: %p, returning 0x%x", (void *)(UInt64)arg2, arg3);
 			}
 			else if (arg4 == 1)
 			{

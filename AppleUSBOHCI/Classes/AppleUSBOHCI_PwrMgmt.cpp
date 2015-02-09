@@ -126,7 +126,7 @@ AppleUSBOHCI::CheckSleepCapability(void)
     {
 		if (_device->getProperty("built-in"))
 		{
-			if (_errataBits & kErrataNECIncompleteWrite)
+			if (_ERRATA64BITS & kErrataNECIncompleteWrite)
 			{
 				FixupNECControllerConfigRegisters();
 			}
@@ -263,14 +263,14 @@ AppleUSBOHCI::SuspendUSBBus(bool goingToSleep)
 	if ( goingToSleep )
 	{
 		// now tell the controller to put the bus into suspend mode
-		if (_errataBits & kErrataOHCINoGlobalSuspendOnSleep)
+		if (_ERRATA64BITS & kErrataOHCINoGlobalSuspendOnSleep)
 		{
 			UInt32			port;
 			hcControl = kOHCIFunctionalState_Operational << kOHCIHcControl_HCFSPhase;
 			for (port=0; port < _rootHubNumPorts; port++)
 			{
 				_savedHcRhPortStatus[port] = USBToHostLong(_pOHCIRegisters->hcRhPortStatus[port]);
-				USBLog(5, "AppleUSBOHCI[%p]::SuspendUSBBus - port %d _savedHcRhPortStatus(%p)", this, (int)port+1, (void*)_savedHcRhPortStatus[port]);
+				USBLog(5, "AppleUSBOHCI[%p]::SuspendUSBBus - port %d _savedHcRhPortStatus(%p)", this, (int)port+1, (void*)(UInt64)_savedHcRhPortStatus[port]);
 			}
 		}
 		else
@@ -289,7 +289,7 @@ AppleUSBOHCI::SuspendUSBBus(bool goingToSleep)
 		UInt32			port;
 		for (port=0; port < _rootHubNumPorts; port++)
 		{
-			USBLog(7, "AppleUSBOHCI[%p]::SuspendUSBBus - hcRhPortStatus[%d] = %p", this, (int)port+1, (void*) USBToHostLong(_pOHCIRegisters->hcRhPortStatus[port]));
+			USBLog(7, "AppleUSBOHCI[%p]::SuspendUSBBus - hcRhPortStatus[%d] = %p", this, (int)port+1, (void*)(UInt64) USBToHostLong(_pOHCIRegisters->hcRhPortStatus[port]));
 		}
 	}
 }
@@ -318,7 +318,7 @@ AppleUSBOHCI::ResumeUSBBus(bool wakingFromSleep)
 			// intentional fall through
         case kOHCIFunctionalState_Resume:
 			// Complete the resume by waiting for the required delay
-			if (_errataBits & kErrataLucentSuspendResume)
+			if (_ERRATA64BITS & kErrataLucentSuspendResume)
                 // JRH 08-27-99
                 // this is a very simple yet clever hack for working around a bug in the Lucent controller
                 // By using 35 instead of 20, we overflow an internal 5 bit counter by exactly 3ms, which 
@@ -347,7 +347,7 @@ AppleUSBOHCI::ResumeUSBBus(bool wakingFromSleep)
 				_pOHCIRegisters->hcRhStatus = HostToUSBLong(kOHCIHcRhStatus_OCIC | kOHCIHcRhStatus_DRWE);
 				IOSync();
 				
-				if (_errataBits & kErrataNECIncompleteWrite)
+				if (_ERRATA64BITS & kErrataNECIncompleteWrite)
 				{
 					UInt32		count = 0;
 					newValue = USBToHostLong(_pOHCIRegisters->hcRhStatus);			// this bit SHOULD now be set
@@ -390,14 +390,14 @@ AppleUSBOHCI::ResumeUSBBus(bool wakingFromSleep)
 			{
 				if (portSC & kOHCIHcRhPortStatus_PES)
 				{
-					USBError(1, "USB (OHCI):Port %d on bus 0x%x has connect status change but is still enabled. setting clear port enable. hcRhPortStatus(%p)", (int)port+1, (uint32_t)_busNumber, (void*)portSC);
+					USBError(1, "USB (OHCI):Port %d on bus 0x%x has connect status change but is still enabled. setting clear port enable. hcRhPortStatus(%p)", (int)port+1, (uint32_t)_busNumber, (void*)(UInt64)portSC);
 					_pOHCIRegisters->hcRhPortStatus[port] = HostToUSBLong(kOHCIHcRhPortStatus_CCS);				// CCS when writing is CPE
 					IOSleep(1);
 					portSC = USBToHostLong(_pOHCIRegisters->hcRhPortStatus[port]);
 				}
 				else
 				{
-					USBLog(5, "AppleUSBOHCI[%p]::ResumeUSBBus Port %d on bus 0x%x connected or disconnected. portSC(%p)", this, (int)port+1, (uint32_t)_busNumber, (void*)portSC);
+					USBLog(5, "AppleUSBOHCI[%p]::ResumeUSBBus Port %d on bus 0x%x connected or disconnected. portSC(%p)", this, (int)port+1, (uint32_t)_busNumber, (void*)(UInt64)portSC);
 					// IOLog("USB (OHCI):Port %d on bus 0x%x connected or disconnected. portSC(%p)\n", (int)port+1, (uint32_t)_busNumber, (void*)portSC);
 				}
 			}
@@ -414,16 +414,16 @@ AppleUSBOHCI::ResumeUSBBus(bool wakingFromSleep)
 				}
 				USBLog(5, "AppleUSBOHCI[%p]::ResumeUSBBus Port %d on bus 0x%x has remote wakeup from some device", this, (int)port+1, (uint32_t)_busNumber);
 			}
-			else if ((_errataBits & kErrataOHCINoGlobalSuspendOnSleep)					// if we are on these controllers
+			else if ((_ERRATA64BITS & kErrataOHCINoGlobalSuspendOnSleep)					// if we are on these controllers
 					 && (portSC & kOHCIHcRhPortStatus_CCS)								// and we are currently connected
 					 && !(portSC & kOHCIHcRhPortStatus_PES)								// and we are not currently enabled
 					 &&  (_savedHcRhPortStatus[port] & kOHCIHcRhPortStatus_PES))		// and we were enabled before we went to sleep
 			{
-				USBError(1, "USB (OHCI):Port %d on bus 0x%x is connected but not enabled. trying to set port enable. hcRhPortStatus(%p) _savedHcRhPortStatus(%p)", (int)port+1, (uint32_t)_busNumber, (void*)portSC, (void*)_savedHcRhPortStatus[port]);
+				USBError(1, "USB (OHCI):Port %d on bus 0x%x is connected but not enabled. trying to set port enable. hcRhPortStatus(%p) _savedHcRhPortStatus(%p)", (int)port+1, (uint32_t)_busNumber, (void*)(UInt64)portSC, (void*)(UInt64)_savedHcRhPortStatus[port]);
 				_pOHCIRegisters->hcRhPortStatus[port] = HostToUSBLong(kOHCIHcRhPortStatus_PES);				// CCS when writing is CPE
 				IOSleep(1);
 				portSC = USBToHostLong(_pOHCIRegisters->hcRhPortStatus[port]);
-				USBLog(2, "AppleUSBOHCI[%p]::ResumeUSBBus - new hcRhPortStatus(%p)", this, (void*)portSC);
+				USBLog(2, "AppleUSBOHCI[%p]::ResumeUSBBus - new hcRhPortStatus(%p)", this, (void*)(UInt64)portSC);
 			}
 			_savedHcRhPortStatus[port] = 0;												// clear this out to be safe once we have no more need for it
 		}
@@ -484,14 +484,14 @@ AppleUSBOHCI::SaveControllerStateForSleep(void)
 	if (pmControlStatus)
 	{
 		UInt16			pmcsr = _device->configRead16(pmControlStatus);
-		USBLog(7, "AppleUSBOHCI[%p]::SaveControllerStateForSleep before PMCS for device (%p) is (%p)", this, _device, (void*)pmcsr);
+		USBLog(7, "AppleUSBOHCI[%p]::SaveControllerStateForSleep before PMCS for device (%p) is (%p)", this, _device, (void*)(UInt64)pmcsr);
 		if (pmcsr & kPCIPMCSPMEStatus)
 		{
 			// this one bit (kPCIPMCSPMEStatus) is Read/Write Clear. All other bits are R/W, so we write back the same value we 
 			// read so that it will be clear after the write
 			_device->configWrite16(pmControlStatus, pmcsr);
 			IOSleep(2);
-			USBLog(2, "AppleUSBOHCI[%p]::SaveControllerStateForSleep after PMCS for device (%p) is (%p)", this, _device, (void*)_device->configRead16(pmControlStatus));
+			USBLog(2, "AppleUSBOHCI[%p]::SaveControllerStateForSleep after PMCS for device (%p) is (%p)", this, _device, (void*)(UInt64)_device->configRead16(pmControlStatus));
 		}
 	}
 	
@@ -540,7 +540,7 @@ AppleUSBOHCI::RestoreControllerStateFromSleep(void)
 	// before resuming, make sure the op regs are inited
 	InitializeOperationalRegisters();
 
-	if (_errataBits & kErrataNECIncompleteWrite)
+	if (_ERRATA64BITS & kErrataNECIncompleteWrite)
 	{
 		FixupNECControllerConfigRegisters();
 	}
@@ -640,7 +640,7 @@ AppleUSBOHCI::RestartControllerFromReset(void)
 		_pOHCIRegisters->hcRhStatus = HostToUSBLong(kOHCIHcRhStatus_OCIC | kOHCIHcRhStatus_DRWE);
 		IOSync();
 		
-		if (_errataBits & kErrataNECIncompleteWrite)
+		if (_ERRATA64BITS & kErrataNECIncompleteWrite)
 		{
 			UInt32		count = 0;
 			newValue = USBToHostLong(_pOHCIRegisters->hcRhStatus);			// this bit SHOULD now be set

@@ -24,13 +24,22 @@
 #ifndef _IOKIT_IOUSBCONTROLLERV2_H
 #define _IOKIT_IOUSBCONTROLLERV2_H
 
+#include "USBSpec.h"
+#include "USB.h"
+#include "IOUSBController.h"
+#include "IOUSBControllerListElement.h"
+
+#ifdef KERNEL
 #include <IOKit/IODMACommand.h>
+#endif /* KERNEL */
 
-#include "../../IOUSBFamily/Headers/IOUSBControllerListElement.h"
-#include "../../IOUSBFamily/Headers/IOUSBController.h"
+// These are the values returned in GetLowLatencyOptionsAndPhysicalMask
 
+#define kLowLatencyUSBDefaultOptionBits						0							// by default we don't need contiguous memory
+#define kLowLatencyUSB32bitPhysicalMask						0x00000000FFFFF000ULL		// 32 bit memory aligned on a 4K boundary (default)
+#define kLowLatencyUSB64bitPhysicalMask						0xFFFFFFFFFFFFF000ULL		// 64 bit memory aligned on a 4K boundary
 
-
+#ifdef KERNEL
 /*!
     @class IOUSBControllerV2
     @abstract subclass of the IOUSBController to provide support for high speed 
@@ -443,6 +452,6 @@ public:
     OSMetaClassDeclareReservedUnused(IOUSBControllerV2,  29);
     
 };
-
+#endif /* KERNEL */
 
 #endif

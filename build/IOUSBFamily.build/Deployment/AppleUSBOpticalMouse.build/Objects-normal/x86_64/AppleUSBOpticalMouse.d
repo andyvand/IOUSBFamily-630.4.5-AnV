@@ -217,6 +217,7 @@ dependencies: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/kern/thread_call.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOLib.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/libkern/OSAtomic.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/Headers/AssertMacros.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/pwr_mgt/RootDomain.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOBufferMemoryDescriptor.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/sys/vnode.h \
@@ -276,23 +277,25 @@ dependencies: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOWorkLoop.h \
   /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBHIDDriver/Headers/../../IOUSBFamily/Headers/IOUSBBus.h \
   /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBHIDDriver/Headers/../../IOUSBFamily/Headers/IOUSBInterface.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOpticalMouse/../IOUSBFamily/Headers/../../IOUSBFamily/Headers/USB.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOpticalMouse/../IOUSBFamily/Headers/../../IOUSBFamily/Headers/USBSpec.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOpticalMouse/../IOUSBFamily/Headers/../../IOUSBFamily/Headers/IOUSBNub.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOpticalMouse/../IOUSBFamily/Headers/../../IOUSBFamily/Headers/IOUSBDevice.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOpticalMouse/../IOUSBFamily/Headers/../../IOUSBFamily/Headers/IOUSBPipe.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOpticalMouse/../IOUSBFamily/Headers/../../IOUSBFamily/Headers/IOUSBController.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOpticalMouse/../IOUSBFamily/Headers/USBSpec.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOpticalMouse/../IOUSBFamily/Headers/USB.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOpticalMouse/../IOUSBFamily/Headers/IOUSBNub.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOpticalMouse/../IOUSBFamily/Headers/IOUSBDevice.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOpticalMouse/../IOUSBFamily/Headers/IOUSBPipe.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOpticalMouse/../IOUSBFamily/Headers/IOUSBController.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOpticalMouse/../IOUSBFamily/Headers/USBHub.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOCommandGate.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOCommandPool.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOCommand.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOpticalMouse/../IOUSBFamily/Headers/../../IOUSBFamily/Headers/USBHub.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOpticalMouse/../IOUSBFamily/Headers/../../IOUSBFamily/Headers/IOUSBCommand.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOpticalMouse/../IOUSBFamily/Headers/IOUSBCommand.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IODMACommand.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOpticalMouse/../IOUSBFamily/Headers/../../IOUSBFamily/Headers/IOUSBWorkLoop.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOpticalMouse/../IOUSBFamily/Headers/IOUSBWorkLoop.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/Headers/IOKit/acpi/IOACPIPlatformDevice.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOPlatformExpert.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOInterruptController.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/Headers/IOKit/acpi/IOACPITypes.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOpticalMouse/../IOUSBFamily/Headers/../../IOUSBFamily/Headers/IOUSBControllerV2.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOpticalMouse/../IOUSBFamily/Headers/../../IOUSBFamily/Headers/IOUSBControllerListElement.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOpticalMouse/../IOUSBFamily/Headers/../../IOUSBFamily/Headers/IOUSBPipeV2.h
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOpticalMouse/../IOUSBFamily/Headers/IOUSBControllerV2.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOpticalMouse/../IOUSBFamily/Headers/IOUSBControllerListElement.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOpticalMouse/../IOUSBFamily/Headers/IOUSBPipeV2.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOInterruptEventSource.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOTimerEventSource.h

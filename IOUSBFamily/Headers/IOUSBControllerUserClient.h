@@ -25,6 +25,7 @@
 #define _IOKIT_IOUSBCONTROLLERUSERCLIENT_H
 
 #include <IOKit/IOUserClient.h>
+
 #include "../../IOUSBUserClient/Headers/IOUSBUserClient.h"
 #include "../../IOUSBFamily/Headers/IOUSBLog.h"
 
@@ -46,7 +47,7 @@ private:
     IOCommandGate *				fGate;
     IOMemoryMap *				fMemMap;
     UInt32						fNumMethods;
-    mach_port_t					fWakePort;
+    /*mach_port_t				fWakePort;*/
     bool						fDead;
 	bool						fIsTaskPrileged;
     IOWorkLoop	*				fWorkLoop;
@@ -55,7 +56,7 @@ private:
     static const IOItemCount 		sMethodCount;
 
     struct ExpansionData { /* */ };
-    ExpansionData * 			fExpansionData;
+    ExpansionData * __unused fExpansionData;
 
     virtual void				SetExternalMethodVectors(void);
 

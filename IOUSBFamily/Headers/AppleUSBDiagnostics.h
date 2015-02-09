@@ -24,10 +24,8 @@
 #define _IOKIT_APPLEUSBDIAGNOSTICS_H
 
 #include <IOKit/IOService.h>
-#include <IOKit/usb/IOUSBLog.h>
 
-
-
+#include "IOUSBLog.h"
 
 class AppleUSBDiagnostics : public OSObject
 {

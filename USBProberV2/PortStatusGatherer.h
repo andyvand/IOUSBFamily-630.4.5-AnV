@@ -38,7 +38,7 @@
     OutlineViewNode *       _rootNode;
 }
 
-- (IOReturn) gatherStatus;
+-(IOReturn)gatherStatus;
 
 - initWithListener:(id <PortStatusGathererListener>)listener rootNode:(OutlineViewNode *)rootNode;
 

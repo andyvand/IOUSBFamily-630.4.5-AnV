@@ -21,6 +21,7 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
+#define _NUM_VERSION_ 1
 
 #import <Cocoa/Cocoa.h>
 #import "BusProbeController.h"
@@ -28,45 +29,49 @@
 int main(int argc, const char *argv[])
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	
-	NSArray *args = [[NSProcessInfo processInfo] arguments];	
-
+	NSArray *args = [[NSProcessInfo processInfo] arguments];
 	NSEnumerator *enm = [args objectEnumerator];
     id word;
-	bool busProbe = false; bool showHelp = false;
+	bool busProbe = false;
+    bool showHelp = false;
 	
-    while (word = [enm nextObject]) 
+    while (word = [enm nextObject])
 	{
-		if ( [word caseInsensitiveCompare:[NSString stringWithUTF8String:"--busprobe"]] == NSOrderedSame )
+		if ([word caseInsensitiveCompare:[NSString stringWithUTF8String:"--busprobe"]] == NSOrderedSame)
 		{
 			busProbe = true;
-		}
-		else if ( [word caseInsensitiveCompare:[NSString stringWithUTF8String:"--help"]] == NSOrderedSame )
-		{
+		} else if ([word caseInsensitiveCompare:[NSString stringWithUTF8String:"--help"]] == NSOrderedSame) {
 			showHelp = true;
 		}
     }
 	
-	if ( ( [args count] > 2 ) && (!busProbe && !showHelp) )
+	if (([args count] > 2) && ((!busProbe) && (!showHelp)))
 	{
 		showHelp = true;
 	}
 
 	if ( !busProbe && !showHelp )
 	{
-		[NSApplication sharedApplication];
+#if MAC_OS_X_VERSION_MIN_REQUIRED < 1080
         [NSBundle loadNibNamed:@"MainMenu" owner:NSApp];
-		[NSApp run];
-	}
-	else
-	{
+#else
+        if ([[NSBundle mainBundle] loadNibNamed:@"MainMenu" owner:NSApp topLevelObjects:nil] == NO)
+        {
+            NSLog(@"Couldn't load main nib bundle\n");
+
+            return -1;
+        }
+#endif
+
+        [NSApplication sharedApplication];
+        [NSApp run];
+	} else {
 	    BusProbeController *ctr = [[BusProbeController alloc] init];
+
 		[ctr dumpToTerminal:args showHelp:showHelp];
 	}
 	
     [pool release];
     
     return 0;
-    
-    //return NSApplicationMain(argc, argv);
 }

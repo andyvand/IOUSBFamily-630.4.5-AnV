@@ -25,15 +25,20 @@
 #ifndef _IOKIT_IOUSBDEVICE_H
 #define _IOKIT_IOUSBDEVICE_H
 
-#include "../../IOUSBFamily/Headers/IOUSBNub.h"
-#include "../../IOUSBFamily/Headers/IOUSBPipe.h"
-#include "../../IOUSBFamily/Headers/IOUSBPipeV2.h"
+#include "../Headers/IOUSBNub.h"
 
+#include "IOUSBPipe.h"
+#include "IOUSBPipeV2.h"
+
+#ifdef KERNEL
 #include <IOKit/IOBufferMemoryDescriptor.h>
 #include <IOKit/IOWorkLoop.h>
 #include <IOKit/IOCommandGate.h>
+#include <IOKit/IOInterruptEventSource.h>
+#include <IOKit/IOTimerEventSource.h>
 
 #include <kern/thread_call.h>
+#endif /* KERNEL */
 
 // The following are definitions for errata properties needed for different devices.  This
 // should be but in the dictionary of the IOUSBDevice in question.  This can be achieved
@@ -47,9 +52,10 @@
 #define kAllowConfigValueOfZero		"kAllowZeroConfigValue"
 #define kAllowNumConfigsOfZero		"kAllowZeroNumConfigs"
 
-
+#ifdef KERNEL
 class IOUSBController;
 class IOUSBControllerV2;
+class IOUSBControllerV3;
 class IOUSBInterface;
 class IOUSBHubPolicyMaker;
 /*!
@@ -102,8 +108,8 @@ protected:
         bool					_doneWaiting;                   // Obsolete
         bool					_notifiedWhileBooting;          // Obsolete
         IOWorkLoop *			_workLoop;
-        IOTimerEventSource *	_notifierHandlerTimer;
-        UInt32					_notificationType;
+        IOTimerEventSource *	_notifierHandlerTimer;          // Obsolete
+        UInt32					_notificationType;              // Obsolete
         bool					_suspendInProgress;
         bool					_portHasBeenSuspendedOrResumed;
         bool					_addExtraResetTime;
@@ -131,7 +137,11 @@ protected:
 		UInt32					_wakeUSB3PowerAllocated;			// how much extra "USB3" power during wake did we already give our client
 		bool					_attachedToEnclosureAndUsingExtraWakePower;
 		bool					_deviceIsOnThunderbolt;					// Will be set if all our upstream hubs are on Thunderbolt
-
+        UInt16                  _isochDelay;
+        IOUSBControllerV3 *     _controllerV3;
+        IOService *             _interfacePowerParent;                // default parent for joinPMTree for interface drivers
+        bool                    _loadingDriverAfterReEnumerate;
+        bool                    _hasMSCInterface;                   // True if any of the IOUSBInterfaces are mass storage class
     };
     ExpansionData * _expansionData;
 
@@ -164,9 +174,13 @@ public:
     virtual void		stop( IOService *provider );
     virtual bool		finalize(IOOptionBits options);
 	virtual void		free( void );	
+	virtual void        joinPMtree ( IOService * driver );
 
 	// IOUSBDevice methods
     virtual void SetProperties();
+    
+    // simple accessor methods
+    IOService       *GetInterfacePowerParent(void);
     
     static IOUSBDevice *NewDevice(void);
     
@@ -259,7 +273,12 @@ public:
         @function GetBus
         returns a pointer to the IOUSBController object for the device
     */
+#if 0
     virtual IOUSBController *GetBus(void);
+#else
+    virtual IOUSBControllerV3 *GetBus(void);
+#endif
+
     /*!
         @function GetBusPowerAvailable
         returns the power available to the device, in units of 2mA
@@ -365,7 +384,11 @@ public:
     UInt8   GetDeviceSubClass(void);
     UInt8	GetProtocol(void);
     UInt32  GetLocationID(void);
+    UInt16  GetIsochDelay(void);
+    bool	IsDeviceInternal(void);
+	
 	void	SetBusPowerAvailable(UInt32 newPower);
+    IOService   *GetDevicePowerParent(void);
 
     OSMetaClassDeclareReservedUsed(IOUSBDevice,  0);
     /*!
@@ -545,12 +568,18 @@ public:
     OSMetaClassDeclareReservedUsed(IOUSBDevice,  16);
     /*!
 	 @function SetAddress
-	 @param 	Sets the bus address of the device
+	 @param 	address Sets the bus address of the device
 	 */
     virtual void 			SetAddress(USBDeviceAddress address);
     
-
-    OSMetaClassDeclareReservedUnused(IOUSBDevice,  17);
+    OSMetaClassDeclareReservedUsed(IOUSBDevice,  17);
+    /*!
+	 @function SetIsochDelay
+	 @param 	delay Sets the delay, in nanoseconds, from the time a host transmits a packet to the time it is received by the device.  Sum of all the wHubDelay's for the
+     upstream hubs.
+	 */
+    virtual IOReturn 			SetIsochDelay(UInt16 delay);
+    
     OSMetaClassDeclareReservedUnused(IOUSBDevice,  18);
     OSMetaClassDeclareReservedUnused(IOUSBDevice,  19);
 
@@ -567,12 +596,12 @@ private:
     static void			DoMessageClientsEntry(OSObject *target, thread_call_param_t messageStruct);
     void				DoMessageClients( void * messageStructPtr);
 	
-    static void			DisplayUserNotificationForDeviceEntry (OSObject *owner, IOTimerEventSource *sender);
-    void				DisplayUserNotificationForDevice( );
+    void                DisplayUserNotificationForDevice(UInt32 notificationType, UInt8 port);
     
     UInt32              SimpleUnicodeToUTF8(UInt16 uChar, UInt8 utf8Bytes[4]);
     void                SwapUniWords (UInt16  **unicodeString, UInt32 uniSize);
-
+    void                TrimStringDescriptor(UInt16  **unicodeString, SInt32 *uniSize);
+    
     IOReturn			TakeGetConfigLock(void);
     IOReturn			ReleaseGetConfigLock(void);
     static IOReturn		ChangeGetConfigLock(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
@@ -586,8 +615,12 @@ private:
 	static IOReturn		_GetConfiguration(OSObject *target, void *arg0,  __unused void *arg1, __unused void *arg2, __unused void *arg3);
 	static IOReturn		_GetDeviceStatus(OSObject *target, void *arg0,  __unused void *arg1, __unused void *arg2, __unused void *arg3);
 	static IOReturn		_DeviceRequestWithTimeout(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
-	static IOReturn		_DeviceRequestDescWithTimeout(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
+	static IOReturn		_DeviceRequestDescWithTimeout(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);    
+    static void _DisplayUserNotificationForDeviceTimer(OSObject *owner, ...);
 
+public:
+    virtual void DisplayUserNotificationForDeviceEntry(void);
 };
+#endif /* KERNEL */
 
 #endif

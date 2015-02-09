@@ -24,17 +24,29 @@
 #ifndef _IOUSBLIB_H
 #define _IOUSBLIB_H
 
+#ifdef KERNEL
 #include "../../IOUSBFamily/Headers/USBSpec.h"
 #include "../../IOUSBFamily/Headers/USB.h"
 #include "../../IOUSBFamily/Headers/IOUSBLib.h"
+#else /* ! KERNEL */
+#include <IOKit/IOKitLib.h>
+#include <IOKit/usb/USBSpec.h>
+#include <IOKit/usb/USB.h>
+#include <IOKit/usb/IOUSBLib.h>
+#endif /* KERNEL */
 
-//#include <IOKit/IOKitLib.h>
-#include "../../IOKitLib.h"
+#define __COREFOUNDATION_CFDICTIONARY__ 1
 
-#include "../../CoreFoundation/CFRunLoop.h"
-#include "../../CoreFoundation/CFPlugIn.h"
+#ifndef KERNEL
+#include <CoreFoundation/CFRunLoop.h>
+#include <CoreFoundation/CFPlugIn.h>
 #if COREFOUNDATION_CFPLUGINCOM_SEPARATE
-#include "../../CoreFoundation/CFPlugInCOM.h"
+#include <CoreFoundation/CFPlugInCOM.h>
+#endif
+
+#include <IOKit/IOKitLib.h>
+#else
+#include "../../IOKitLib.h"
 #endif
 
 #include <sys/cdefs.h>

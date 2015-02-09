@@ -163,8 +163,8 @@ IOUSBControllerV3::start( IOService * provider )
 		err = CheckForEHCIController(provider);
 		if (err != kIOReturnSuccess)
 		{
-			USBLog(1, "IOUSBControllerV3(%s)[%p]::start - CheckForEHCIController returned (%p)", getName(), this, (void*)err);
-			USBTrace( kUSBTController, kTPControllerV3Start, (uintptr_t)this, err, 0, 1 );
+			USBLog(1, "IOUSBControllerV3(%s)[%p]::start - CheckForEHCIController returned (%p)", getName(), this, (void*)(UInt64)err);
+			USBTrace( kUSBTController, kTPControllerV3Start, (uintptr_t)(UInt64)this, err, 0, 1 );
 			goto ErrorExit;
 		}
 	}
@@ -202,7 +202,7 @@ IOUSBControllerV3::start( IOService * provider )
 	err = InitForPM();
 	if (err != kIOReturnSuccess)
 	{
-		USBLog(1, "IOUSBControllerV3(%s)[%p]::start - InitForPM returned (%p)", getName(), this, (void*)err);
+		USBLog(1, "IOUSBControllerV3(%s)[%p]::start - InitForPM returned (%p)", getName(), this, (void*)(UInt64)err);
 		USBTrace( kUSBTController, kTPControllerV3Start, (uintptr_t)this, err, 0, 4 );
 		goto ErrorExit;
 	}
@@ -282,7 +282,7 @@ IOUSBControllerV3::didTerminate( IOService * provider, IOOptionBits options, boo
 {
 	USBLog(5, "IOUSBControllerV3(%s)[%p]::didTerminate - isInactive(%s)", getName(), this, isInactive() ? "true" : "false");
     
-    if (_onThunderbolt)
+    if (_TB_BITMAPS_EXIST)
         requireMaxBusStall(0);
     
 	return super::didTerminate(provider, options, defer);
@@ -328,7 +328,7 @@ IOUSBControllerV3::maxCapabilityForDomainState ( IOPMPowerFlags domainState )
 			// make sure that the PCI config space is set up to allow memory access. this appears to fix some OHCI controllers
 			USBLog(5, "IOUSBControllerV3(%s)[%p]::maxCapabilityForDomainState - waking from hibernation - setting flag - kIOPCIConfigCommand(0x%04x)", getName(), this, (int)configCommand);
 			_device->configWrite16(kIOPCIConfigCommand, configCommand | kIOPCICommandMemorySpace);
-			USBLog(5, "IOUSBControllerV3(%s)[%p]::maxCapabilityForDomainState - new kIOPCIConfigCommand(%p)", getName(), this, (void*)_device->configRead16(kIOPCIConfigCommand));
+			USBLog(5, "IOUSBControllerV3(%s)[%p]::maxCapabilityForDomainState - new kIOPCIConfigCommand(%p)", getName(), this, (void*)(UInt64)_device->configRead16(kIOPCIConfigCommand));
 			
 			UInt8			pciPMCapOffset = 0;
 			UInt16			pmControlStatus = 0;
@@ -582,7 +582,7 @@ IOUSBControllerV3::systemWillShutdown( IOOptionBits specifier )
 {
 	bool		ackNow = true;
 	
-    USBLog(5, "IOUSBControllerV3(%s)[%p]::systemWillShutdown - specifier(%p)", getName(), this, (void*)specifier);
+    USBLog(5, "IOUSBControllerV3(%s)[%p]::systemWillShutdown - specifier(%p)", getName(), this, (void*)(UInt64)specifier);
     switch (specifier)
     {
 		case kIOMessageSystemWillRestart:
@@ -848,7 +848,7 @@ IOUSBControllerV3::InitForPM(void)
 	err = AllocatePowerStateArray();
 	if (err)
 	{
-		USBLog(1, "IOUSBControllerV3(%s)[%p]::InitForPM - AllocatePowerStateArray returned (%p)", getName(), this, (void*)err);
+		USBLog(1, "IOUSBControllerV3(%s)[%p]::InitForPM - AllocatePowerStateArray returned (%p)", getName(), this, (void*)(UInt64)err);
 		USBTrace( kUSBTController, kTPInitForPM, (uintptr_t)this, err, 0, 0 );
 		return kIOReturnNoMemory;
 	}
@@ -972,7 +972,7 @@ IOUSBControllerV3::CheckPowerModeBeforeGatedCall(char *fromStr)
 						break;
 						
 					default:
-						USBLog(3,"IOUSBControllerV3(%s)[%p]::CheckPowerModeBeforeGatedCall woke up with unknown status %p, _myPowerState: %d",  getName(), this, (void*)kr, (uint32_t)_myPowerState);
+						USBLog(3,"IOUSBControllerV3(%s)[%p]::CheckPowerModeBeforeGatedCall woke up with unknown status %p, _myPowerState: %d",  getName(), this, (void*)(UInt64)kr, (uint32_t)_myPowerState);
 						USBTrace( kUSBTController, kTPControllerCheckPowerModeBeforeGatedCall, (uintptr_t)this, _myPowerState, err, 9 );
 						_inCheckPowerModeSleeping = false;
 						kr = kIOReturnNotPermitted;
@@ -1231,7 +1231,7 @@ IOUSBControllerV3::GatedPowerChange(OSObject *owner, void *arg0, void *arg1, voi
 				USBLog(5, "IOUSBControllerV3(%s)[%p]::GatedPowerChange - calling CreateRootHubDevice for SS Controller", me->getName(), me);
 
 				err = me->CreateRootHubDevice( me->_device, &(me->_rootHubDeviceSS) );
-				USBLog(5,"IOUSBControllerV3(%s)[%p]::GatedPowerChange - done with CreateRootHubDevice for SS - return (%p)", me->getName(), me, (void*)err);
+				USBLog(5,"IOUSBControllerV3(%s)[%p]::GatedPowerChange - done with CreateRootHubDevice for SS - return (%p)", me->getName(), me, (void*)(UInt64)err);
 				if ( err != kIOReturnSuccess )
 				{
 					USBLog(1,"AppleUSBEHCI[%p]::GatedPowerChange - Could not create root hub device for SS upon wakeup (%x)!", me, err);
@@ -1245,7 +1245,7 @@ IOUSBControllerV3::GatedPowerChange(OSObject *owner, void *arg0, void *arg1, voi
 			
 			USBLog(5, "IOUSBControllerV3(%s)[%p]::GatedPowerChange - calling CreateRootHubDevice", me->getName(), me);
 			err = me->CreateRootHubDevice( me->_device, &(me->_rootHubDevice) );
-			USBLog(5,"IOUSBControllerV3(%s)[%p]::GatedPowerChange - done with CreateRootHubDevice - return (%p)", me->getName(), me, (void*)err);
+			USBLog(5,"IOUSBControllerV3(%s)[%p]::GatedPowerChange - done with CreateRootHubDevice - return (%p)", me->getName(), me, (void*)(UInt64)err);
 			if ( err != kIOReturnSuccess )
 			{
 				USBLog(1,"AppleUSBEHCI[%p]::GatedPowerChange - Could not create root hub device upon wakeup (%x)!", me, err);
@@ -1345,7 +1345,7 @@ IOUSBControllerV3::HandlePowerChange(unsigned long powerStateOrdinal)
 {
 	IOCommandGate * 	commandGate = GetCommandGate();
 	
-	USBLog(5, "IOUSBControllerV3(%s)[%p]::HandlePowerChange - sending the state change request (%d) through the gate - configCommand(%p)", getName(), this, (int)powerStateOrdinal, (void*)_device->configRead16(kIOPCIConfigCommand));
+	USBLog(5, "IOUSBControllerV3(%s)[%p]::HandlePowerChange - sending the state change request (%d) through the gate - configCommand(%p)", getName(), this, (int)powerStateOrdinal, (void*)(UInt64)_device->configRead16(kIOPCIConfigCommand));
     return commandGate->runAction(GatedPowerChange, (void*)powerStateOrdinal);
 }
 
@@ -1358,18 +1358,18 @@ IOUSBControllerV3::EnableBusMastering(bool enable)
 	
 	if (enable)
 	{
-		USBLog(5, "IOUSBControllerV3(%s)[%p]::EnableBusMastering(true) - currently (%p) - enabling", getName(), this, (void*)config);
+		USBLog(5, "IOUSBControllerV3(%s)[%p]::EnableBusMastering(true) - currently (%p) - enabling", getName(), this, (void*)(UInt64)config);
 		config |= kIOPCICommandBusMaster;
 	}
 	else
 	{
-		USBLog(5, "IOUSBControllerV3(%s)[%p]::EnableBusMastering(false) - currently (%p) - disabling", getName(), this, (void*)config);
+		USBLog(5, "IOUSBControllerV3(%s)[%p]::EnableBusMastering(false) - currently (%p) - disabling", getName(), this, (void*)(UInt64)config);
 		config &= ~kIOPCICommandBusMaster;
 	}
 	
 	_device->configWrite16(kIOPCIConfigCommand, config);
 	
-	USBLog(5, "IOUSBControllerV3(%s)[%p]::EnableBusMastering - new value[%p]", getName(), this, (void*)_device->configRead16(kIOPCIConfigCommand));
+	USBLog(5, "IOUSBControllerV3(%s)[%p]::EnableBusMastering - new value[%p]", getName(), this, (void*)(UInt64)_device->configRead16(kIOPCIConfigCommand));
 	return kIOReturnSuccess;
 }
 
@@ -1445,8 +1445,15 @@ IOUSBControllerV3::RootHubTimerFired(OSObject *owner, IOTimerEventSource *sender
 		me->_rootHubTimer->setTimeoutMS(me->_rootHubPollingRate32);
 }
 
+#if 0
 void 
 IOUSBControllerV3::RHCompleteTransaction(IOUSBRootHubInterruptTransactionPtr outstandingRHTransPtr)
+#else
+void IOUSBControllerV3::RHCompleteTransaction(IOUSBRootHubInterruptTransactionPtr outstandingRHTransPtr,
+                                              UInt16 rhStatusChangedBitmap,
+                                              UInt16 numPorts,
+                                              bool cancelTimer)
+#endif
 {
 	IOUSBRootHubInterruptTransaction		xaction;
 	UInt8									bBitmap;
@@ -1466,21 +1473,21 @@ IOUSBControllerV3::RHCompleteTransaction(IOUSBRootHubInterruptTransactionPtr out
 		outstandingRHTransPtr[kIOUSBMaxRootHubTransactions-1].completion.action = NULL;
 			
 			// Create the bitmap
-			if (_rootHubNumPorts < 8)
+			if (numPorts < 8)
 			{
 				bytesToMove = 1;
-				bBitmap = (UInt8)_rootHubStatusChangedBitmap;
+				bBitmap = (UInt8)rhStatusChangedBitmap;
 				pBytes = &bBitmap;
 			}
 			else
 			{
 				bytesToMove = 2;
-				wBitmap = HostToUSBWord(_rootHubStatusChangedBitmap);
+				wBitmap = HostToUSBWord(rhStatusChangedBitmap);
 				pBytes = (UInt8*)&wBitmap;
 			}
 			if (xaction.completion.action && xaction.buf)
 			{
-				USBTrace( kUSBTController, kTPControllerRootHubTimer, (uintptr_t)this, 0, 0, 5 );
+				USBTrace( kUSBTController, kTPControllerRootHubTimer, (uintptr_t)(UInt64)this, 0, 0, 5 );
 			USBLog(6, "IOUSBControllerV3(%s)[%p]::RHCompleteTransaction - stopping timer and calling complete", getName(), this);
 				RootHubStopTimer();
 				_rootHubTransactionWasAborted = false;
@@ -1509,7 +1516,7 @@ IOUSBControllerV3::CheckForRootHubChanges(void)
 	// now I only have to do anything if there is something in the status changed bitmap
 	if (_rootHubStatusChangedBitmap)
 	{
-		USBLog(5, "IOUSBControllerV3(%s)[%p]::CheckForRootHubChanges - got _rootHubStatusChangedBitmap(%p) isInactive(%s)", getName(), this, (void*)_rootHubStatusChangedBitmap, isInactive() ? "true" : "false");
+		USBLog(5, "IOUSBControllerV3(%s)[%p]::CheckForRootHubChanges - got _rootHubStatusChangedBitmap(%p) isInactive(%s)", getName(), this, (void*)(UInt64)_rootHubStatusChangedBitmap, isInactive() ? "true" : "false");
  		if (_rootHubDevice)
 		{
 			if (_rootHubDevice->GetPolicyMaker())
@@ -1519,7 +1526,7 @@ IOUSBControllerV3::CheckForRootHubChanges(void)
 			}
 			else
 			{
-				USBLog(1, "IOUSBControllerV3(%s)[%p]::CheckForRootHubChanges - _rootHubStatusChangedBitmap(%p) for _rootHubDevice with no policy maker!!", getName(), this, (void*)_rootHubStatusChangedBitmap);
+				USBLog(1, "IOUSBControllerV3(%s)[%p]::CheckForRootHubChanges - _rootHubStatusChangedBitmap(%p) for _rootHubDevice with no policy maker!!", getName(), this, (void*)(UInt64)_rootHubStatusChangedBitmap);
 				USBTrace( kUSBTController, kTPControllerCheckForRootHubChanges, (uintptr_t)this, _rootHubStatusChangedBitmap, 0, 0);
 			}
 		}
@@ -1533,7 +1540,7 @@ IOUSBControllerV3::CheckForRootHubChanges(void)
 			}
 			else
 			{
-				USBLog(1, "IOUSBControllerV3(%s)[%p]::CheckForRootHubChanges - _rootHubStatusChangedBitmap(%p)for _rootHubDeviceSS with no  policy maker!!", getName(), this, (void*)_rootHubStatusChangedBitmap);
+				USBLog(1, "IOUSBControllerV3(%s)[%p]::CheckForRootHubChanges - _rootHubStatusChangedBitmap(%p)for _rootHubDeviceSS with no  policy maker!!", getName(), this, (void*)(UInt64)_rootHubStatusChangedBitmap);
 				USBTrace( kUSBTController, kTPControllerCheckForRootHubChanges, (uintptr_t)this, _rootHubStatusChangedBitmap, 0, 1);
 			}
 		}
@@ -1555,25 +1562,25 @@ IOUSBControllerV3::CheckForRootHubChanges(void)
 			SSPortMap			<<=	1;
 			SSPortMap			|=	( _rootHubStatusChangedBitmap & 0x1 );
 			
-			USBLog(6, "IOUSBControllerV3(%s)[%p]::CheckForRootHubChanges - _rootHubStatusChangedBitmap(%p) HSPortMap(%p) SSPortMap(%p)", getName(), this, (void*)_rootHubStatusChangedBitmap, (void*)HSPortMap, (void*)SSPortMap);
+			USBLog(6, "IOUSBControllerV3(%s)[%p]::CheckForRootHubChanges - _rootHubStatusChangedBitmap(%p) HSPortMap(%p) SSPortMap(%p)", getName(), this, (void*)(UInt64)_rootHubStatusChangedBitmap, (void*)(UInt64)HSPortMap, (void*)(UInt64)SSPortMap);
 			
 			if( HSPortMap > 0 )
 			{
 				_rootHubStatusChangedBitmap = HSPortMap;
 				
-				RHCompleteTransaction(_outstandingRHTrans);
+                RHCompleteTransaction(_outstandingRHTrans, _rootHubStatusChangedBitmap, _rootHubNumPorts, _rootHubTimerActive);
 			}
 			
 			if( SSPortMap > 0 )
 			{
 				_rootHubStatusChangedBitmap = SSPortMap;
 				
-				RHCompleteTransaction(_outstandingSSRHTrans);
+				RHCompleteTransaction(_outstandingSSRHTrans, _rootHubStatusChangedBitmap, _rootHubNumPorts, _rootHubTimerActive);
 			}
 		}
 		else 
 		{
-			RHCompleteTransaction(_outstandingRHTrans);
+			RHCompleteTransaction(_outstandingRHTrans, _rootHubStatusChangedBitmap, _rootHubNumPorts, _rootHubTimerActive);
 		}
 	}
 	
@@ -2246,9 +2253,10 @@ IOUSBControllerV3::RemoveHSHub(USBDeviceAddress highSpeedHub)
 	return IOUSBControllerV2::RemoveHSHub(highSpeedHub);
 }
 
-UInt32	IOUSBControllerV3::GetErrataBits(UInt16 vendorID, UInt16 deviceID, UInt16 revisionID )
+UInt64
+IOUSBControllerV3::GetErrata64Bits(UInt16 vendorID, UInt16 deviceID, UInt16 revisionID )
 {
-  return IOUSBControllerV2::GetErrataBits(vendorID, deviceID, revisionID );
+  return (UInt64)IOUSBControllerV2::GetErrataBits(vendorID, deviceID, revisionID );
 }
 
 
@@ -2427,12 +2435,12 @@ OSMetaClassDefineReservedUsed(IOUSBControllerV3,  16);
 OSMetaClassDefineReservedUsed(IOUSBControllerV3,  17);
 OSMetaClassDefineReservedUsed(IOUSBControllerV3,  18);
 OSMetaClassDefineReservedUsed(IOUSBControllerV3,  19);
+OSMetaClassDefineReservedUsed(IOUSBControllerV3,  20);
+OSMetaClassDefineReservedUsed(IOUSBControllerV3,  21);
+OSMetaClassDefineReservedUsed(IOUSBControllerV3,  22);
+OSMetaClassDefineReservedUsed(IOUSBControllerV3,  23);
+OSMetaClassDefineReservedUsed(IOUSBControllerV3,  24);
 
-OSMetaClassDefineReservedUnused(IOUSBControllerV3,  20);
-OSMetaClassDefineReservedUnused(IOUSBControllerV3,  21);
-OSMetaClassDefineReservedUnused(IOUSBControllerV3,  22);
-OSMetaClassDefineReservedUnused(IOUSBControllerV3,  23);
-OSMetaClassDefineReservedUnused(IOUSBControllerV3,  24);
 OSMetaClassDefineReservedUnused(IOUSBControllerV3,  25);
 OSMetaClassDefineReservedUnused(IOUSBControllerV3,  26);
 OSMetaClassDefineReservedUnused(IOUSBControllerV3,  27);

@@ -23,15 +23,19 @@
 #ifndef _IOKIT_IOUSBPIPEV2_H
 #define _IOKIT_IOUSBPIPEV2_H
 
+#ifdef KERNEL
 #include <IOKit/IOService.h>
 #include <IOKit/IOMemoryDescriptor.h>
+#else /* ! KERNEL */
+#include <IOKit/IOKitLib.h>
+#endif /* KERNEL */
 
-#include "../../IOUSBFamily/Headers/USB.h"
-#include "../../IOUSBFamily/Headers/IOUSBController.h"
-#include "../../IOUSBFamily/Headers/IOUSBControllerV2.h"
-#include "../../IOUSBFamily/Headers/IOUSBPipe.h"
+#include "USB.h"
+#include "IOUSBController.h"
+#include "IOUSBControllerV2.h"
+#include "IOUSBPipe.h"
 
-
+#ifdef KERNEL
 /*!
     @class IOUSBPipeV2
     @abstract The object representing an open pipe for a device.
@@ -192,5 +196,6 @@ public:
 	OSMetaClassDeclareReservedUnused(IOUSBPipeV2,  28);
 	OSMetaClassDeclareReservedUnused(IOUSBPipeV2,  29);
 };
+#endif /* KERNEL */
 
 #endif	

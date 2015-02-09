@@ -24,12 +24,18 @@
 
 #include <AvailabilityMacros.h>
 
-
 #import <Foundation/Foundation.h>
 
+#ifdef KERNEL
 #import "../IOUSBFamily/Headers/IOUSBLib.h"
-#import "../IOUSBFamily/Headers/USB.h"
 #import "../IOUSBFamily/Headers/USBSpec.h"
+#import "../IOUSBFamily/Headers/USB.h"
+#else
+#include <IOKit/IOKitLib.h>
+#include <IOKit/usb/USBSpec.h>
+#include <IOKit/usb/USB.h>
+#include <IOKit/usb/IOUSBLib.h>
+#endif /* KERNEL */
 
 #import <IOKit/IOCFPlugIn.h>
 #import "BusProbeClass.h"
@@ -86,4 +92,3 @@ const char *		USBErrorToString(IOReturn status);
 IOUSBDescriptorHeader *		NextDescriptor(const void *desc);
 IOUSBDescriptorHeader* 		FindNextDescriptor(IOUSBConfigurationDescriptor	*curConfDesc, const void *cur, UInt8 descType);
 IOReturn					FindNextInterfaceDescriptor(const IOUSBConfigurationDescriptor *configDescIn, const IOUSBInterfaceDescriptor *intfDesc,IOUSBInterfaceDescriptor **descOut);
-

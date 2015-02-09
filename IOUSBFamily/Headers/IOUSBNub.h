@@ -24,12 +24,17 @@
 #ifndef _IOKIT_IOUSBNUB_H
 #define _IOKIT_IOUSBNUB_H
 
+#ifdef KERNEL
 #include <IOKit/IOService.h>
 #include <libkern/c++/OSData.h>
 #include <IOKit/IOMemoryDescriptor.h>
+#else /* ! KERNEL */
+#include <IOKit/IOKitLib.h>
+#endif /* KERNEL */
 
-#include "../../IOUSBFamily/Headers/USB.h"
+#include "USB.h"
 
+#ifdef KERNEL
 extern const OSSymbol *gUSBVendorID;
 extern const OSSymbol *gUSBProductID;
 extern const OSSymbol *gUSBInterfaceNumber;
@@ -58,7 +63,6 @@ public:
     static void initialize();
 
 	// IOKit method
-	virtual void					joinPMtree ( IOService * driver );
 
     virtual bool					USBCompareProperty(OSDictionary   * matching, const OSSymbol     * key );
     
@@ -67,7 +71,9 @@ public:
 	bool							USBComparePropertyInArray( OSDictionary *matching, const char *arrayName, const char * key, UInt32 * theProductIDThatMatched );
 	bool							USBComparePropertyInArrayWithMask( OSDictionary *matching, const char *arrayName, const char * key, const char * maskKey, UInt32 * theProductIDThatMatched );
 
+    virtual void joinPMtree(IOService *driver);
 };
+#endif
 
 #ifdef __cplusplus
 extern "C" {

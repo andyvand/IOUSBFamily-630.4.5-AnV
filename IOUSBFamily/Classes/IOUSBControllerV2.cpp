@@ -269,7 +269,7 @@ IOUSBControllerV2::ClearTT(USBDeviceAddress fnAddress, UInt8 endpt, Boolean IN)
 		err = memDesc->prepare();
 		if (err != kIOReturnSuccess)
 		{
-			USBError(1,"%s[%p]::ClearTT - err (%p) trying to prepare memory descriptor", getName(), this, (void*)err);
+			USBError(1,"%s[%p]::ClearTT - err (%p) trying to prepare memory descriptor", getName(), this, (void*)(UInt64)err);
 			memDesc->release();
 			memDesc = NULL;
 			break;
@@ -331,7 +331,7 @@ IOUSBControllerV2::ClearTT(USBDeviceAddress fnAddress, UInt8 endpt, Boolean IN)
 		err = dmaCommand->setMemoryDescriptor(memDesc);
 		if (err)
 		{
-			USBError(1,"%s[%p]::ClearTT - err (%p) setting memory descriptor (%p) into dmaCommand (%p)", getName(), this, (void*)err, memDesc, dmaCommand);
+			USBError(1,"%s[%p]::ClearTT - err (%p) setting memory descriptor (%p) into dmaCommand (%p)", getName(), this, (void*)(UInt64)err, memDesc, dmaCommand);
 			break;
 		}
 		
@@ -458,7 +458,7 @@ IOReturn IOUSBControllerV2::OpenPipe(USBDeviceAddress address, UInt8 speed, Endp
 	// This method is used for all HS and FS endpoints, and for SS endpoints which are not stream endpoints or which have a bMaxBurst of 0
 	// If the ep is a HS High Bandwidth Isoc endpoint, then the endpoint.maxPacketSize may have an encapsulated mult value which will
 	// get decoded by the UIM
-    return _commandGate->runAction(DoCreateEP, (void *)(UInt32)address, (void *)(UInt32)speed, endpoint);
+    return _commandGate->runAction(DoCreateEP, (void *)(UInt64)address, (void *)(UInt64)speed, endpoint);
 }
 
 
@@ -468,7 +468,7 @@ IOReturn IOUSBControllerV2::OpenSSPipe(USBDeviceAddress address, UInt8 speed, En
 	// This method is used for SS endpoints which are for streams endpoints or which have a bMaxBurst field in the endpoint descriptor
 	// If the endpoint is a SS Isoc endpoint, then the endpoint.maxPacketSize will be have the fully multipled MPS in it (MPS * mult * burst)
 	// We do this because the Endpoint data structure used is old, and we need to keep the same meaning as we did for HS High Bandwidth endpoints
-    return _commandGate->runAction(DoCreateEP, (void *)(UInt32)address, (void *)(UInt32)speed, endpoint, (void *)(maxStreams+(maxBurstAndMult << 16)));
+    return _commandGate->runAction(DoCreateEP, (void *)(UInt64)address, (void *)(UInt64)speed, endpoint, (void *)(UInt64)(maxStreams+(maxBurstAndMult << 16)));
 }
 
 IOReturn 
@@ -776,8 +776,8 @@ OSMetaClassDefineReservedUsed(IOUSBControllerV2,  0);
 IOReturn		
 IOUSBControllerV2::AddHSHub(USBDeviceAddress highSpeedHub, UInt32 flags)
 {
-    return _commandGate->runAction(DOHSHubMaintenance, (void *)(UInt32)highSpeedHub,
-								   (void *)(UInt32)kUSBHSHubCommandAddHub, (void *)flags);
+    return _commandGate->runAction(DOHSHubMaintenance, (void *)(UInt64)highSpeedHub,
+								   (void *)(UInt64)kUSBHSHubCommandAddHub, (void *)(UInt64)flags);
 }
 
 
@@ -796,8 +796,8 @@ OSMetaClassDefineReservedUsed(IOUSBControllerV2,  2);
 IOReturn		
 IOUSBControllerV2::RemoveHSHub(USBDeviceAddress highSpeedHub)
 {
-    return _commandGate->runAction(DOHSHubMaintenance, (void *)(UInt32)highSpeedHub,
-								   (void *)(UInt32)kUSBHSHubCommandRemoveHub, NULL);
+    return _commandGate->runAction(DOHSHubMaintenance, (void *)(UInt64)highSpeedHub,
+								   (void *)(UInt64)kUSBHSHubCommandRemoveHub, NULL);
 }
 
 
@@ -806,7 +806,7 @@ OSMetaClassDefineReservedUsed(IOUSBControllerV2,  3);
 IOReturn		
 IOUSBControllerV2::SetTestMode(UInt32 mode, UInt32 port)
 {
-    return _commandGate->runAction(DOSetTestMode, (void *)mode, (void *)port);
+    return _commandGate->runAction(DOSetTestMode, (void *)(UInt64)mode, (void *)(UInt64)port);
 }
 
 OSMetaClassDefineReservedUsed(IOUSBControllerV2,  4);
@@ -916,7 +916,7 @@ IOUSBControllerV2::ReadV2(IOMemoryDescriptor *buffer, USBDeviceAddress address, 
 		err = dmaCommand->setMemoryDescriptor(buffer);
 		if (err)
 		{
-			USBError(1, "%s[%p]::ReadV2 - err(%p) attempting to set the memory descriptor to the dmaCommand", getName(), this, (void*)err);
+			USBError(1, "%s[%p]::ReadV2 - err(%p) attempting to set the memory descriptor to the dmaCommand", getName(), this, (void*)(UInt64)err);
 			_freeUSBCommandPool->returnCommand(command);
 			return err;
 		}
@@ -990,7 +990,7 @@ IOUSBControllerV2::ReadV2(IOMemoryDescriptor *buffer, USBDeviceAddress address, 
 		//
 		if (memDesc)
 		{
-			USBLog(7, "%s[%p]::ReadV2 - CheckForDisjointDescriptor error (%p) - clearing memDesc (%p) from dmaCommand (%p)", getName(), this, (void*)err, memDesc, dmaCommand);
+			USBLog(7, "%s[%p]::ReadV2 - CheckForDisjointDescriptor error (%p) - clearing memDesc (%p) from dmaCommand (%p)", getName(), this, (void*)(UInt64)err, memDesc, dmaCommand);
 			dmaCommand->clearMemoryDescriptor();
 		}
 		_freeUSBCommandPool->returnCommand(command);
@@ -1358,7 +1358,7 @@ IOUSBControllerV2::ReturnIsochDoneQueue(IOUSBControllerIsochEndpoint* pEP)
 			}
 
 			USBLog(7, "IOUSBControllerV2[%p]::ReturnIsocDoneQueue- TD (%p) calling handler[%p](target: %p, comp.param: %p, status: %p (%s), pFrames: %p)  Bus: %x, Address: %d, Endpoint: %d", this, pTD,
-																pHandler, pTD->_completion.target, pTD->_completion.parameter, (void*)pEP->accumulatedStatus, USBStringFromReturn(pEP->accumulatedStatus), pFrames, (uint32_t)_busNumber, pEP->functionAddress,  pEP->endpointNumber);
+																pHandler, pTD->_completion.target, pTD->_completion.parameter, (void*)(UInt64)pEP->accumulatedStatus, USBStringFromReturn(pEP->accumulatedStatus), pFrames, (uint32_t)_busNumber, pEP->functionAddress,  pEP->endpointNumber);
 			
 			USBTrace( kUSBTController, kTPControllerReturnIsochDoneQueue, (uint32_t)busFunctEP, (uintptr_t)pHandler, (uint32_t)pEP->accumulatedStatus, 5);
                         
@@ -1534,7 +1534,7 @@ IOUSBControllerV2::ReadStream(UInt32 streamID, IOMemoryDescriptor *buffer, USBDe
 			err = dmaCommand->setMemoryDescriptor(buffer);
 			if (err)
 			{
-				USBLog(1, "%s[%p]::Read - err(%p) attempting to set the memory descriptor to the dmaCommand", getName(), this, (void*)err);
+				USBLog(1, "%s[%p]::Read - err(%p) attempting to set the memory descriptor to the dmaCommand", getName(), this, (void*)(UInt64)err);
 				USBTrace( kUSBTController, kTPControllerRead, (uintptr_t)this, err, 0, 5 );
 			}
 		}
@@ -1584,9 +1584,9 @@ IOUSBControllerV2::ReadStream(UInt32 streamID, IOMemoryDescriptor *buffer, USBDe
 		
 		if (!isSyncTransfer)
 		{
-			USBLog(2, "%s[%p]::Read - General error (%p) - cleaning up - command(%p) dmaCommand(%p)", getName(), this, (void*)err, command, dmaCommand);
+			USBLog(2, "%s[%p]::Read - General error (%p) - cleaning up - command(%p) dmaCommand(%p)", getName(), this, (void*)(UInt64)err, command, dmaCommand);
 		}
-		
+
 		if (memDesc)
 		{
 			USBLog(7, "%s[%p]::Read - sync xfer or err return - clearing memory descriptor (%p) from dmaCommand (%p)", getName(), this, memDesc, dmaCommand);
@@ -1693,7 +1693,7 @@ IOUSBControllerV2::WriteStream(UInt32 streamID, IOMemoryDescriptor *buffer, USBD
 			if (err)
 			{
 				USBTrace( kUSBTController, kTPControllerWrite, (uintptr_t)this, err, 0, 4 );
-				USBLog(1, "%s[%p]::Write - err(%p) attempting to set the memory descriptor to the dmaCommand", getName(), this, (void*)err);
+				USBLog(1, "%s[%p]::Write - err(%p) attempting to set the memory descriptor to the dmaCommand", getName(), this, (void*)(UInt64)err);
 			}
 		}
 		
@@ -1742,12 +1742,12 @@ IOUSBControllerV2::WriteStream(UInt32 streamID, IOMemoryDescriptor *buffer, USBD
 		
 		if (!isSyncTransfer)
 		{
-			USBLog(2, "%s[%p]::Write - General error (%p) - cleaning up - command(%p) dmaCommand(%p)", getName(), this, (void*)err, command, dmaCommand);
+			USBLog(2, "%s[%p]::Write - General error (%p) - cleaning up - command(%p) dmaCommand(%p)", getName(), this, (void*)(UInt64)err, command, dmaCommand);
 		}
 		
 		if (memDesc)
 		{
-			USBLog(7, "%s[%p]::Write - General error (%p) - clearing memory descriptor (%p) from dmaCommand (%p)", getName(), this, (void*)err, memDesc, dmaCommand);
+			USBLog(7, "%s[%p]::Write - General error (%p) - clearing memory descriptor (%p) from dmaCommand (%p)", getName(), this, (void*)(UInt64)err, memDesc, dmaCommand);
 			dmaCommand->clearMemoryDescriptor();
 		}
 		nullCompletion = command->GetDisjointCompletion();

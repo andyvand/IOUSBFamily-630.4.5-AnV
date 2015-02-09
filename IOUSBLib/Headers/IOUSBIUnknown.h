@@ -25,6 +25,9 @@
 #define _IOKIT_IOUSBIUNKNOWN_H
 
 #include <IOKit/IOCFPlugIn.h>
+#include <CoreFoundation/CoreFoundation.h>
+
+#undef TARGET_OS_EMBEDDED
 
 #include "../../IOUSBFamily/Headers/IOUSBLib.h"
 

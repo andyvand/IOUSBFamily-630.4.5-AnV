@@ -30,7 +30,13 @@
 #include <IOKit/IOMessage.h>
 #include <IOKit/IOCFPlugIn.h>
 
+#define _NUM_VERSION_ 1
+
+#if 0
 #include "../../IOUSBFamily/Headers/IOUSBLib.h"
+#else
+#include <IOKit/usb/IOUSBLib.h>
+#endif
 
 #include "IOUSBFamilyInfoPlist.pch"
 
@@ -214,7 +220,7 @@ void ProcessDevice(io_service_t aDevice)
 	if ( kr != kIOReturnSuccess)
 		return;
 	
-	numberObj = IORegistryEntryCreateCFProperty(aDevice, CFSTR("locationID"), kCFAllocatorDefault, 0);
+	numberObj = (CFNumberRef)IORegistryEntryCreateCFProperty(aDevice, CFSTR("locationID"), kCFAllocatorDefault, 0);
 	if ( numberObj )
 	{
 		CFNumberGetValue(numberObj, kCFNumberSInt32Type, &locationID);

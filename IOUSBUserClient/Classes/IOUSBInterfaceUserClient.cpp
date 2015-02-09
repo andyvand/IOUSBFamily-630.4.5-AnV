@@ -3752,7 +3752,7 @@ IOUSBInterfaceUserClientV2::LowLatencyPrepareBuffer(LowLatencyUserBufferInfoV3 *
 				goto ErrorExit;
 			}
 			
-			USBLog(7,"IOUSBInterfaceUserClientV2[%p]::LowLatencyPrepareBuffer  GetLowLatencyOptionsAndPhysicalMask IOOptionBits: %p, physicalMask: %p",  this, (void *)optionBits, (void *)physicalMask );
+			USBLog(7,"IOUSBInterfaceUserClientV2[%p]::LowLatencyPrepareBuffer  GetLowLatencyOptionsAndPhysicalMask IOOptionBits: %p, physicalMask: %p",  this, (void *)(UInt64)optionBits, (void *)(UInt64)physicalMask );
 			
             direction = ( bufferData->bufferType == kUSBLowLatencyWriteBuffer ? kIODirectionOut : kIODirectionIn );
 			
@@ -4277,7 +4277,7 @@ IOUSBInterfaceUserClientV2::ChangeOutstandingIO(OSObject *target, void *param1, 
 			me->fOutstandingIO++;
 			break;
 			
-		case -1:
+		case (UInt32)-1:
 			if (!--me->fOutstandingIO && me->fNeedToClose && !me->FOWNER_WAS_RELEASED)
             {
                 USBLog(6, "IOUSBInterfaceUserClientV2[%p]::ChangeOutstandingIO isInactive = %d, outstandingIO = %d - closing device",  me, me->isInactive(), me->fOutstandingIO);

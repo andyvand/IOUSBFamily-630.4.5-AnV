@@ -1,1 +1,0 @@
- const unsigned char usbtracerVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:usbtracer  PROJECT:IOUSBFamily-5.6.1" "\n"; const double usbtracerVersionNumber __attribute__ ((used)) = (double)5.6;

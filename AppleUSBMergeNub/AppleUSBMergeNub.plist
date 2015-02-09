@@ -8,8 +8,6 @@
 	<string>AppleUSBMergeNub</string>
 	<key>CFBundleGetInfoString</key>
 	<string>APPLEUSBMERGENUB_VERSION, Copyright © 2000-APPLEUSBMERGENUB_LAST_CHANGE_YEAR Apple Inc.  All Rights Reserved.</string>
-	<key>CFBundleIconFile</key>
-	<string></string>
 	<key>CFBundleIdentifier</key>
 	<string>com.apple.driver.AppleUSBMergeNub</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -950,37 +948,6 @@
 			<integer>1060</integer>
 			<key>bcdDevice</key>
 			<integer>0</integer>
-		</dict>
-		<key>SMSC2514x</key>
-		<dict>
-			<key>CFBundleIdentifier</key>
-			<string>com.apple.driver.AppleUSBMergeNub</string>
-			<key>IOClass</key>
-			<string>AppleUSBMergeNub</string>
-			<key>IOProviderClass</key>
-			<string>IOUSBDevice</string>
-			<key>IOProviderMergeProperties</key>
-			<dict>
-				<key>MacModel</key>
-				<array>
-					<string>iMac11,1</string>
-					<string>iMac11,2</string>
-					<string>iMac11,3</string>
-					<string>MacBookPro6,1</string>
-					<string>MacBookPro6,2</string>
-				</array>
-				<key>RequestExtraCurrentFromParent</key>
-				<true/>
-				<key>OverrideIfAtLocationID</key>
-				<array>
-					<integer>4195352576</integer>
-					<integer>4245684224</integer>
-				</array>
-			</dict>
-			<key>idProduct</key>
-			<integer>9492</integer>
-			<key>idVendor</key>
-			<integer>1060</integer>
 		</dict>
 		<key>SuspendPort</key>
 		<dict>

@@ -24,9 +24,16 @@
 
 #import <Foundation/Foundation.h>
 
+#ifdef KERNEL
 #import "../IOUSBFamily/Headers/IOUSBLib.h"
 #import "../IOUSBFamily/Headers/USB.h"
 #import "../IOUSBFamily/Headers/USBSpec.h"
+#else
+#include <IOKit/IOKitLib.h>
+#include <IOKit/usb/USBSpec.h>
+#include <IOKit/usb/USB.h>
+#include <IOKit/usb/IOUSBLib.h>
+#endif
 
 #import <IOKit/IOCFPlugIn.h>
 #import <mach/mach_port.h>

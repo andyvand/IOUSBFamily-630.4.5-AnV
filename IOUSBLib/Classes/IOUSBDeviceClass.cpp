@@ -22,8 +22,9 @@
  */
 
 #define CFRUNLOOP_NEW_API 1 
+#define _NUM_VERSION_ 1
 
-// 
+//
 #include <TargetConditionals.h>
 
 #include <CoreFoundation/CFMachPort.h>
@@ -32,9 +33,12 @@
 
 #include "IOUSBDeviceClass.h"
 
+#include "../../IOUSBFamily/Headers/USBSpec.h"
 #include "../../IOUSBFamily/Headers/USB.h"
-#include "../../IOUSBFamily/Headers/IOUSBUserClient.h"
 #include "../../IOUSBFamily/Headers/IOUSBLib.h"
+#include "../../IOUSBFamily/Headers/IOUSBControllerV2.h"
+#include "../../IOUSBFamily/Headers/IOUSBDevice.h"
+#include "../../IOUSBFamily/Headers/IOUSBUserClient.h"
 
 #if !TARGET_OS_EMBEDDED
 #endif

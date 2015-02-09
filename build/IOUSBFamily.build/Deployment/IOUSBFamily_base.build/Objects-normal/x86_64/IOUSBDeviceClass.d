@@ -1,7 +1,19 @@
 dependencies: \
   /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBLib/Classes/IOUSBDeviceClass.cpp \
   /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBLib/Headers/IOUSBDeviceClass.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBLib/Headers/IOUSBIUnknown.h \
   /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBLib/Headers/../../IOUSBFamily/Headers/IOUSBLib.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBLib/Headers/IOUSBIUnknown.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBLib/Classes/../../IOUSBFamily/Headers/USBSpec.h \
   /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBLib/Classes/../../IOUSBFamily/Headers/USB.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBLib/Classes/../../IOUSBUserClient/Headers/IOUSBUserClient.h
+  /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBLib/Classes/../../IOUSBFamily/Headers/IOUSBControllerV2.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBLib/Headers/../../IOUSBFamily/Headers/IOUSBController.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBLib/Headers/../../IOUSBFamily/Headers/USBHub.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBLib/Headers/../../IOUSBFamily/Headers/IOUSBBus.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBLib/Headers/../../IOUSBFamily/Headers/IOUSBNub.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBLib/Headers/../../IOUSBFamily/Headers/IOUSBCommand.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBLib/Headers/../../IOUSBFamily/Headers/IOUSBWorkLoop.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBLib/Headers/../../IOUSBFamily/Headers/IOUSBControllerListElement.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBLib/Classes/../../IOUSBFamily/Headers/IOUSBDevice.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBLib/Headers/../../IOUSBFamily/Headers/IOUSBPipe.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBLib/Headers/../../IOUSBFamily/Headers/IOUSBPipeV2.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBLib/Classes/../../IOUSBFamily/Headers/IOUSBUserClient.h

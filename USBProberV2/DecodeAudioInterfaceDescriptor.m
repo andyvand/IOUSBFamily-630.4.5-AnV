@@ -21,6 +21,8 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
+#define _NUM_VERSION_ 1
+
 #import "DecodeAudioInterfaceDescriptor.h"
 
 @implementation DecodeAudioInterfaceDescriptor

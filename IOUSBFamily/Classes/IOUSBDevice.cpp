@@ -41,16 +41,17 @@ extern "C" {
 #include <IOKit/IOMessage.h>
 #include <IOKit/IOPlatformExpert.h>
 #include <IOKit/IOTimerEventSource.h>
-#include "../Headers/IOUSBControllerV3.h"
+
 #include "../Headers/IOUSBDevice.h"
+#include "../Headers/IOUSBControllerV3.h"
 #include "../Headers/IOUSBInterface.h"
 #include "../Headers/IOUSBLog.h"
 #include "../Headers/IOUSBRootHubDevice.h"
 #include "../Headers/IOUSBHubPolicyMaker.h"
 #include "../Headers/USB.h"
 
-
 #include <UserNotification/KUNCUserNotifications.h>
+
 #include "USBTracepoints.h"
 
 //================================================================================================
@@ -894,7 +895,7 @@ IOUSBDevice::message( UInt32 type, IOService * provider,  void * argument )
 		
 	case kIOUSBMessagePortWasNotSuspended:
 	case kIOUSBMessagePortHasBeenResumed:
-		USBLog(5,"%s[%p]::message - kIOUSBMessagePortWasNotSuspended or kIOUSBMessagePortHasBeenResumed (%p)", getName(), this, (void*)type);
+		USBLog(5,"%s[%p]::message - kIOUSBMessagePortWasNotSuspended or kIOUSBMessagePortHasBeenResumed (%p)", getName(), this, (void*)(UInt64)type);
 		break;
 		
 	case kIOUSBMessagePortHasBeenSuspended:
@@ -3327,7 +3328,7 @@ IOUSBDevice::GetStringDescriptor(UInt8 index, char *utf8Buffer, int utf8BufferSi
     //
     if ( desc[1] != kUSBStringDesc )
     {
-        USBLog(3,"%s[%p]::GetStringDescriptor descriptor is not a string (%d ­ kUSBStringDesc)", getName(), this, desc[1] );
+        USBLog(3,"%s[%p]::GetStringDescriptor descriptor is not a string (%d != kUSBStringDesc)", getName(), this, desc[1] );
         return kIOReturnDeviceError;
     }
 	
@@ -3380,7 +3381,17 @@ IOUSBDevice::GetStringDescriptor(UInt8 index, char *utf8Buffer, int utf8BufferSi
     return kIOReturnSuccess;
 }
 
-
+void _DisplayUserNotificationForDeviceTimer(OSObject *owner, ...)
+{
+    IOUSBDevice *me = (IOUSBDevice *)owner;
+    
+    if (me == NULL)
+    {
+        return;
+    }
+    
+    me->DisplayUserNotificationForDeviceEntry();
+};
 
 void
 IOUSBDevice::DisplayNotEnoughPowerNotice()
@@ -3388,26 +3399,21 @@ IOUSBDevice::DisplayNotEnoughPowerNotice()
     DisplayUserNotification(kUSBNotEnoughPowerNotificationType);
 }
 
-
-
-void
-IOUSBDevice::DisplayUserNotificationForDeviceEntry(OSObject *owner, IOTimerEventSource *sender)
+void IOUSBDevice::DisplayUserNotificationForDevice(UInt32 notification, UInt8 port)
 {
-#pragma unused (sender)
-    IOUSBDevice *	me = OSDynamicCast(IOUSBDevice, owner);
-	
+    IOUSBDevice *me = OSDynamicCast(IOUSBDevice, this);
+
     if (!me)
+    {
         return;
+    }
 	
     me->retain();
-    me->DisplayUserNotificationForDevice();
+    me->DisplayUserNotificationForDeviceEntry();
     me->release();
 }
 
-
-
-void
-IOUSBDevice::DisplayUserNotificationForDevice ()
+void IOUSBDevice::DisplayUserNotificationForDeviceEntry(void)
 {
     kern_return_t	notificationError = kIOReturnSuccess;
     OSNumber *		locationIDProperty = NULL;
@@ -3578,8 +3584,10 @@ IOUSBDevice::DisplayUserNotificationForDevice ()
 		// If we don't have one create it
 		if (_NOTIFIERHANDLER_TIMER == NULL)
 		{
-			_NOTIFIERHANDLER_TIMER = IOTimerEventSource::timerEventSource(this, (IOTimerEventSource::Action) DisplayUserNotificationForDeviceEntry);
-			
+            _NOTIFIERHANDLER_TIMER = IOTimerEventSource::timerEventSource(this);
+
+            _NOTIFIERHANDLER_TIMER->setAction(_DisplayUserNotificationForDeviceTimer);
+
 			if ( _NOTIFIERHANDLER_TIMER == NULL )
 			{
 				USBError(1, "%s[%p]::DisplayUserNotificationForDevice Couldn't allocate timer event source", getName(), this);
@@ -3826,7 +3834,7 @@ IOUSBDevice::ChangeGetConfigLock(OSObject *target, void *param1, void *param2, v
                         break;
                         
                     default:
-                        USBLog(3,"%s[%p]::ChangeGetConfigLock woke up with unknown status %p",  me->getName(), me, (void*)kr);
+                        USBLog(3,"%s[%p]::ChangeGetConfigLock woke up with unknown status %p",  me->getName(), me, (void*)(UInt64)kr);
                         USBTrace( kUSBTDevice, kTPDeviceConfigLock, (uintptr_t)me, 0, 0, 10 );
                         retVal = kIOReturnNotPermitted;
                 }
@@ -4164,7 +4172,7 @@ IOUSBDevice::_ReEnumerateDevice(OSObject *target, void *arg0, __unused void *arg
 	if( me->_HUBPARENT )
 	{
 		me->retain();
-		if ( thread_call_enter1( me->_DO_PORT_REENUMERATE_THREAD, (thread_call_param_t) *options) == TRUE )
+		if ( thread_call_enter1( me->_DO_PORT_REENUMERATE_THREAD, (thread_call_param_t)(UInt64)*options) == TRUE )
 		{
 			USBLog(3, "%s[%p]::ReEnumerateDevice for port %d, _DO_PORT_REENUMERATE_THREAD already queued", me->getName(), me, (uint32_t)me->_PORT_NUMBER );
 			USBTrace( kUSBTDevice, kTPDeviceReEnumerateDevice, (uintptr_t)me, me->_PORT_NUMBER, 0, 4);
@@ -4212,13 +4220,15 @@ IOUSBDevice::ProcessPortReEnumerate(UInt32 options)
 void
 IOUSBDevice::DisplayUserNotification(UInt32 notificationType )
 {
+    UInt32 thisInt = *(UInt32 *)this;
+
     // NOTE:  If we get multiple calls before we actually display the notification (i.e. this gets called at boot)
     //        we will only display the last notification.
     //
     USBLog(3, "%s[%p] DisplayUserNotification type %d", getName(), this, (uint32_t)notificationType );
     _NOTIFICATION_TYPE = notificationType;
     
-    DisplayUserNotificationForDeviceEntry(this, NULL );
+    DisplayUserNotificationForDevice(thisInt, NULL );
 }
 
 void
@@ -4652,16 +4662,24 @@ IOUSBDevice::GetSpeed(void)
     return _speed; 
 }
 
+#if 0
 IOUSBController *
 IOUSBDevice::GetBus(void) 
 { 
     return _controller; 
 }
+#else
+IOUSBControllerV3 *
+IOUSBDevice::GetBus(void)
+{
+    return (IOUSBControllerV3 *)_controller;
+}
+#endif
 
 UInt32 
 IOUSBDevice::GetBusPowerAvailable( void ) 
 { 
-    return _busPowerAvailable; 
+    return _busPowerAvailable;
 }
 
 void
@@ -4776,8 +4794,8 @@ OSMetaClassDefineReservedUsed(IOUSBDevice,  13);
 OSMetaClassDefineReservedUsed(IOUSBDevice,  14);
 OSMetaClassDefineReservedUsed(IOUSBDevice,  15);
 OSMetaClassDefineReservedUsed(IOUSBDevice,  16);
+OSMetaClassDefineReservedUsed(IOUSBDevice,  17);
 
-OSMetaClassDefineReservedUnused(IOUSBDevice,  17);
 OSMetaClassDefineReservedUnused(IOUSBDevice,  18);
 OSMetaClassDefineReservedUnused(IOUSBDevice,  19);
 

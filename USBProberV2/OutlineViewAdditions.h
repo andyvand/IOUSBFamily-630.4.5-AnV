@@ -28,7 +28,7 @@
 
 @interface NSOutlineView(OutlineViewAdditions)
 
-- (void)itemDoubleClicked;
+- (void)itemDoubleClicked:(id)sender;
 
 @end
 

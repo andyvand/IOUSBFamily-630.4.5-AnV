@@ -24,7 +24,8 @@
 #ifndef _IOKIT_IOUSBDeviceClass_H
 #define _IOKIT_IOUSBDeviceClass_H
 
-#include <IOKit/usb/IOUSBLib.h>
+#include "../../IOUSBFamily/Headers/IOUSBLib.h"
+
 #include <asl.h>
 
 #include "IOUSBIUnknown.h"

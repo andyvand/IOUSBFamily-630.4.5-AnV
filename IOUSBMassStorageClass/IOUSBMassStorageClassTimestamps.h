@@ -30,9 +30,14 @@
 
 #if KERNEL
 #include <IOKit/IOTimeStamp.h>
-#endif
+#else /* ! KERNEL */
+#include <stdint.h>
+#include <IOKit/IOKitLib.h>
+#endif /* KERNEL */
 
+#ifdef _HAVE_SCSI_ARCH_MODEL_TIMESTAMPS
 #include <IOKit/scsi/IOSCSIArchitectureModelFamilyTimestamps.h>
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -189,7 +194,13 @@ enum
     kAppleUSBCardReaderUMC_stop_2                   = 0x0C
     
 };
-    
+
+enum
+{
+    kSAMClassUSB = 0xE2, // guess based on http://www.projectosx.com/forum/lofiversion/index.php/t1922.html
+    kSAMClassFireWire,
+};
+
 // Tracepoint macros.                                          
 #define UMC_TRACE( code )           ( ( ( DBG_IOKIT & 0xFF ) << 24 ) | ( ( DBG_IOSAM & 0xFF ) << 16 ) | ( ( kSAMClassUSB & 0x3F ) << 10 ) | ( ( code & 0xFF ) << 2 ) )
 #define USBODD_TRACE( code )        ( ( ( kSubclassCode_AppleUSBODD & 0xFF ) << 24 ) | ( code & 0xFFFFFF ) )

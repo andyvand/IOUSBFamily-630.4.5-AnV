@@ -1,5 +1,5 @@
 /*
- * Copyright © 1998-2012 Apple Inc. All rights reserved.
+ * Copyright © 1998-2014 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -21,21 +21,32 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
+#if !defined(_USB_USB_H) && !defined(_USB_H)
+#define _USB_USB_H 1
+
 #ifndef _USB_H
-#define _USB_H
+#define _USB_H 1
+#endif /* _USB_H */
 
 #if KERNEL
-	#include <libkern/OSByteOrder.h>
-	#include <IOKit/IOMemoryDescriptor.h>
+#define __MACTYPES__ 1
+#define CF_EXCLUDE_CSTD_HEADERS 1
+#define COREFOUNDATION_CFPLUGINCOM_SEPARATE 1
+
+#include <libkern/OSByteOrder.h>
+#include <IOKit/IOMemoryDescriptor.h>
+#include <IOKit/IOTypes.h>
 #else
-	#include <libkern/OSByteOrder.h>
+#include <libkern/OSByteOrder.h>
 #endif
 
-#include <IOKit/IOTypes.h>
-
+#ifdef KERNEL
 #if !defined(__USB__)
 #    include "../../IOUSBFamily/Headers/USBSpec.h"
 #endif
+#else /* ! KERNEL */
+#include <IOKit/IOKitLib.h>
+#endif /* KERNEL */
 
 #ifdef __cplusplus
 extern "C" {
@@ -48,59 +59,83 @@ extern "C" {
      */
 
     /*!
-    @defined	Endian conversion definitions
+    @defineblock	Endian conversion definitions
      @discussion The USB API's use a convention of specifying parameters in the host order.  The USB spec specifies that multi-byte items should be
      formatted in little endian order.  The following macros allow one to translate multi-byte values from Host order to USB order and vice versa.  There are separate macros for
      in-kernel use and for user space use.
      */
+
+#ifndef USBToHostWord
 #define USBToHostWord OSSwapLittleToHostInt16
+#endif
+
+#ifndef HostToUSBWord
 #define HostToUSBWord OSSwapHostToLittleInt16
+#endif
+
+#ifndef USBToHostLong
 #define USBToHostLong OSSwapLittleToHostInt32
+#endif
+
+#ifndef HostToUSBLong
 #define HostToUSBLong OSSwapHostToLittleInt32
+#endif
+    /*! @/defineblock */
 
 	
-#define USBBitRange(start, end)				\
-(								\
-((((UInt32) 0xFFFFFFFF) << (31 - (end))) >>		\
-((31 - (end)) + (start))) <<				\
-(start)							\
+#define USBBitRange(start, end) \
+( \
+    ((((UInt32) 0xFFFFFFFF) << (31 - (end))) >>	((31 - (end)) + (start))) << (start) \
 )
 	
-#define USBBitRangePhase(start, end)				\
-(start)
-	
+#define USBBitRangePhase(start, end) \
+    (start)
+
+#ifdef KERNEL
     /*!
     @enum Miscellaneous Constants
     @discussion 
     */
     enum {
-    kUSBDeviceIDShift = 7,
-    kUSBMaxDevices = 128,
-    kUSBMaxDevice = kUSBMaxDevices-1,
-    kUSBDeviceIDMask = 0x7f,
+		kUSBDeviceIDShift = 7,
+		kUSBMaxDevices = 128,
 
-    kUSBPipeIDMask = 0xf,
-    kUSBMaxPipes = 32,	// In and Out pipes can have same pipe number.
+		kUSBMaxDevice = kUSBMaxDevices-1,
+		kUSBDeviceIDMask = 0x7f,
+        kUSBTooManyDevicesAddress = 0xfffe,
+        kUSBPipeIDMask = 0xf,
+		kUSBMaxPipes = 32,	// In and Out pipes can have same pipe number.
+		kUSBInterfaceIDShift = 8,
+		kUSBMaxInterfaces = 1 << kUSBInterfaceIDShift,
+		kUSBInterfaceIDMask = kUSBMaxInterfaces-1,
+		
+		kUSBEndPtShift = 7,
+		kUSBDeviceMask = ((1 << kUSBEndPtShift) -1),
+		
+		kUSBNoPipeIdx = -1,
 
-    kUSBInterfaceIDShift = 8,
-    kUSBMaxInterfaces = 1 << kUSBInterfaceIDShift,
-    kUSBInterfaceIDMask = kUSBMaxInterfaces-1,
+        // In order to ameliorate the effects of PCI Pause on drivers that do not subscribe to the USB Notifications for it, we have decided to sleep threads that come into the UIM
+        // while we are in PCI Pause.  We will wake those threads up after the root hub drivers are back ON.  However, we needed a way to detect that an I/O was coming from user space.
+        // One way to solve that would be to power manage the user client and do the sleep/wake there, but that was a big undertaking.  Another way is for the user client to somehow
+        // let the UIM know through some APIs.  We decided on a quick way by using bits that are part of the API to communicate that the request is coming from user space.  For device
+        // requests we use the wLenDone field, a 32-bit quantity, but whose maximum value is only 16 bits.  Same goes for the streamID of bulk requests.  Those bits are set by the user
+        // client and cleared by the controller after checking them.  If they are set and PCI Pause is active, we will sleep that request.
 
-    kUSBEndPtShift = 7,
-    kUSBDeviceMask = ((1 << kUSBEndPtShift) -1),
-
-    kUSBNoPipeIdx = -1,
-        
-   // Constants for streams
-    kUSBStream0 = 0,
-    kUSBMaxStream = 65533,
-    kUSBPRimeStream = 0xfffe,
-    kUSBNoStream = 0xffff,
-    kUSBAllStreams = 0xffffffff
-};
-
+        kUSBUCRequestWithoutUSBNotificationMask = (1 << 30),
+		kUSBEndpointTransferTypeUCMask			= (1 << 7),
+		
+		// Constants for streams
+		kUSBStream0 					= 0,
+		kUSBMaxStream 					= 65533,
+		kUSBPRimeStream 				= 0xfffe,
+		kUSBNoStream 					= 0xffff,
+		kUSBAllStreams 					= 0xffffffff, 		// Obsolete, use kUSBStreamIDAllStreamsMask
+		kUSBStreamIDMask				= 0xffff,
+		kUSBStreamIDAllStreamsMask		= (1 << 31)
+	};
+    
 /*!
-@enum bRequest Shifts and Masks 
+@enum bRequest Shifts and Masks
 @discussion These are used to create the macro to encode the bRequest filed of a Device Request
 */
 enum {
@@ -110,18 +145,20 @@ enum {
     kUSBRqTypeShift = 5,
     kUSBRqTypeMask = 3,
 
-    kUSBRqRecipientMask = 0X1F
+    kUSBRqRecipientMask = 0x1F
 };
+#endif
 
 /*!
 @defined USBmakebmRequestType 
 @discussion Macro to encode the bRequest field of a Device Request.  It is used when constructing an IOUSBDevRequest.
 */
-#define USBmakebmRequestType(direction, type, recipient)		\
-    (((direction & kUSBRqDirnMask) << kUSBRqDirnShift) |			\
-    ((type & kUSBRqTypeMask) << kUSBRqTypeShift) |			\
+#define USBmakebmRequestType(direction, type, recipient) \
+    (((direction & kUSBRqDirnMask) << kUSBRqDirnShift) | \
+    ((type & kUSBRqTypeMask) << kUSBRqTypeShift) | \
     (recipient & kUSBRqRecipientMask))
 
+#ifdef KERNEL
 /*!
 @enum kUSBMaxIsocFrameReqCount 
 @discussion Maximum size in bytes allowed for one Isochronous frame
@@ -131,18 +168,16 @@ enum {
 	kUSBMaxHSIsocEndpointReqCount = 3072,	// max size (bytes) of any one Isoc frame for 1 HS endpoint
 	kUSBMaxHSIsocFrameCount = 7168			// max size (bytes) of all Isoc transfers in a HS frame
 };
+#endif
 
 /*!
 @defined EncodeRequest 
 @discussion Macro that encodes the bRequest and bRequestType fields of a IOUSBDevRequest into a single value.  It is useful when one needs
 to know what type of request the IOUSBDevRequest encodes and simplifies comparisons.
 */
-#define EncodeRequest(request, direction, type, recipient)		\
-    (((UInt16)request << 8) +	    					\
-              ((UInt16)recipient +					\
-                        ((UInt16)type << kUSBRqTypeShift) +		\
-                        ((UInt16)direction << kUSBRqDirnShift)))
-
+#define EncodeRequest(request, direction, type, recipient) \
+    (((UInt16)request << 8) + ((UInt16)recipient + \
+    ((UInt16)type << kUSBRqTypeShift) + ((UInt16)direction << kUSBRqDirnShift)))
 
 /*!
 @enum Standard Device Requests
@@ -175,6 +210,7 @@ bmRequestType bRequest          wValue        wIndex     wLength Data</b>
 </pre>
 </tt>
 */
+#ifdef KERNEL
 enum {
     kClearDeviceFeature     = EncodeRequest(kUSBRqClearFeature,  kUSBOut, kUSBStandard, kUSBDevice),
     kClearInterfaceFeature  = EncodeRequest(kUSBRqClearFeature,  kUSBOut, kUSBStandard, kUSBInterface),
@@ -194,6 +230,7 @@ enum {
     kSetInterface           = EncodeRequest(kUSBRqSetInterface,  kUSBOut, kUSBStandard, kUSBInterface),
     kSyncFrame              = EncodeRequest(kUSBRqSyncFrame,     kUSBIn,  kUSBStandard, kUSBEndpoint),
 };
+#endif
 
 /*!
 @defined kCallInterfaceOpenWithGate
@@ -207,6 +244,7 @@ typedef UInt16 USBDeviceAddress;
 
 typedef uint32_t USBPhysicalAddress32;
 
+#ifdef KERNEL
 /*!
     @typedef IOUSBIsocFrame
     @discussion Structure used to encode information about each isoc frame.
@@ -347,12 +385,13 @@ typedef struct IOUSBLowLatencyIsocCompletion {
     IOUSBLowLatencyIsocCompletionAction	action;
     void *				parameter;
 } IOUSBLowLatencyIsocCompletion;
-
+#endif
 
 /*!
-@defined IOUSBFamily error codes
+@defineblock IOUSBFamily error codes
 @discussion  Errors specific to the IOUSBFamily.  Note that the iokit_usb_err(x) translates to 0xe0004xxx, where xxx is the value in parenthesis as a hex number.
 */
+
 #define	iokit_usb_err(return)								(sys_iokit|sub_iokit_usb|return)
 #define kIOUSBUnknownPipeErr								iokit_usb_err(0x61)									// 0xe0004061  Pipe ref not recognized
 #define kIOUSBTooManyPipesErr								iokit_usb_err(0x60)									// 0xe0004060  Too many pipes
@@ -377,10 +416,10 @@ typedef struct IOUSBLowLatencyIsocCompletion {
 #define kIOUSBDeviceCountExceeded							iokit_usb_err(0x45)									// 0xe0004045  The device cannot be enumerated because the controller cannot support more devices
 #define kIOUSBStreamsNotSupported							iokit_usb_err(0x44)                                 // 0xe0004044  The request cannot be completed because the XHCI controller does not support streams
 #define kIOUSBInvalidSSEndpoint								iokit_usb_err(0x43)									// 0xe0004043  An endpoint found in a SuperSpeed device is invalid (usually because there is no Endpoint Companion Descriptor)
-#define kIOUSBTooManyTransactionsPending                    iokit_usb_err(0x42)
-
+#define kIOUSBTooManyTransactionsPending                    iokit_usb_err(0x42)                                 // 0xe0004042  The transaction cannot be submitted because it would exceed the allowed number of pending transactions
+    
 /*!
-@defined IOUSBFamily hardware error codes
+@definedblock IOUSBFamily hardware error codes
 @discussion These errors are returned by the OHCI controller.  The # in parenthesis (xx) corresponds to the OHCI Completion Code.
 For the following Completion codes, we return a generic IOKit error instead of a USB specific error.  
 <tt>
@@ -405,9 +444,11 @@ Completion Code         Error Returned              Description
 #define kIOUSBDataToggleErr     iokit_usb_err(0x03)		// 0xe0004003 Pipe stall, Bad data toggle
 #define kIOUSBBitstufErr        iokit_usb_err(0x02)		// 0xe0004002 Pipe stall, bitstuffing
 #define kIOUSBCRCErr            iokit_usb_err(0x01)		// 0xe0004001 Pipe stall, bad CRC
+/*! @/definedblock */
+
 
 /*!
-@defined IOUSBFamily message codes
+@defineblock IOUSBFamily message codes
 @discussion  Messages specific to the IOUSBFamily.  Note that the iokit_usb_msg(x) translates to 0xe0004xxx, where xxx is the value in parenthesis as a hex number.
 */
 #define iokit_usb_msg(message)						(UInt32)(sys_iokit|sub_iokit_usb|message)
@@ -435,8 +476,11 @@ Completion Code         Error Returned              Description
 #define kIOUSBMessageEndpointCountExceeded			iokit_usb_msg(0x19)		// 0xe0004019  Message sent to a device when endpoints cannot be created because the USB controller ran out of resources
 #define kIOUSBMessageDeviceCountExceeded			iokit_usb_msg(0x1a)		// 0xe000401a  Message sent by a hub when a device cannot be enumerated because the USB controller ran out of resources
 #define kIOUSBMessageHubPortDeviceDisconnected      iokit_usb_msg(0x1b)		// 0xe000401b  Message sent by a built-in hub when a device was disconnected
-    
+#define kIOUSBMessageUnsupportedConfiguration		iokit_usb_msg(0x1c)     // 0xe000401c  Message sent to the clients of the device when a device is not supported in the current configuration.  The message argument contains the locationID of the device
+#define kIOUSBMessageHubCountExceeded               iokit_usb_err(0x1d)     // 0xe000401d  Message sent when a 6th hub was plugged in and was not enumerated, as the USB spec only support 5 hubs in a chain
+/*! @/defineblock */
 
+#ifdef KERNEL
 // Obsolete
 //
 struct IOUSBMouseData {
@@ -467,7 +511,7 @@ typedef IOUSBHIDData *			IOUSBHIDDataPtr;
 
 /*!
     @typedef IOUSBDeviceDescriptor
-    @discussion Descriptor for a USB Device.  See the USB Specification at <a href="http://www.usb.org"TARGET="_blank">http://www.usb.org</a>.
+    @discussion Descriptor for a USB Device.  See the USB Specification at <a href="http://www.usb.org" target="_blank">http://www.usb.org</a>.
 */
 struct IOUSBDeviceDescriptor {
 	UInt8 			bLength;
@@ -579,7 +623,7 @@ typedef IOUSBDescriptorHeader *			IOUSBDescriptorHeaderPtr;
 /*!
     @typedef IOUSBConfigurationDescriptor
     @discussion Standard USB Configuration Descriptor.  It is variable length, so this only specifies the known fields.  We use the wTotalLength field to read the whole descriptor.
-    See the USB Specification at <a href="http://www.usb.org"TARGET="_blank">http://www.usb.org</a>.
+    See the USB Specification at <a href="http://www.usb.org" target="_blank">http://www.usb.org</a>.
 */
 struct IOUSBConfigurationDescriptor {
 	UInt8 			bLength;
@@ -608,7 +652,7 @@ typedef IOUSBConfigurationDescHeader *		IOUSBConfigurationDescHeaderPtr;
 
 /*!
     @typedef IOUSBInterfaceDescriptor
-    @discussion Descriptor for a USB Interface.  See the USB Specification at <a href="http://www.usb.org"TARGET="_blank">http://www.usb.org</a>.
+    @discussion Descriptor for a USB Interface.  See the USB Specification at <a href="http://www.usb.org" target="_blank">http://www.usb.org</a>.
 */
 struct IOUSBInterfaceDescriptor {
 	UInt8 			bLength;
@@ -626,7 +670,7 @@ typedef IOUSBInterfaceDescriptor *	IOUSBInterfaceDescriptorPtr;
 
 /*!
     @typedef IOUSBEndpointDescriptor
-    @discussion Descriptor for a USB Endpoint.  See the USB Specification at <a href="http://www.usb.org"TARGET="_blank">http://www.usb.org</a>.
+    @discussion Descriptor for a USB Endpoint.  See the USB Specification at <a href="http://www.usb.org" target="_blank">http://www.usb.org</a>.
 */
 struct IOUSBEndpointDescriptor {
 	UInt8 			bLength;
@@ -642,9 +686,6 @@ typedef IOUSBEndpointDescriptor *	IOUSBEndpointDescriptorPtr;
 enum {
     kUSB_EPDesc_bmAttributes_TranType_Mask      = USBBitRange(0,1),
     kUSB_EPDesc_bmAttributes_TranType_Shift     = USBBitRangePhase(0,1),
-    kUSB1010                                    = 1024,
-    
-    
     kUSB_EPDesc_bmAttributes_SyncType_Mask      = USBBitRange(2, 3),
     kUSB_EPDesc_bmAttributes_SyncType_Shift     = USBBitRangePhase(2, 3),
     kUSB_EPDesc_bmAttributes_UsageType_Mask     = USBBitRange(4, 5),
@@ -682,75 +723,76 @@ enum {
 
 
 
+#ifndef __OPEN_SOURCE__
+// Leave this here because it has existed for many years, but it never really belonged here in the first place
+#endif
 
 // these following 2 lines are deprecated and should not be used. 
 enum{addPacketShift = 11};  // Bits for additional packets in maxPacketField. (Table 9-13)
 #define mungeMaxPacketSize(w) ((w>1024)?(((w>>(addPacketShift))+1)*(w&((1<<addPacketShift)-1))):w)
 
-	/*!
-	 @typedef IOUSBEndpointProperties
-	 @discussion  Structure used with the IOUSBLib GetEndpointPropertiesV3 and GetPipePropertiesV3 API. Most of the fields are taken directly from corresponding Standard Endpoint Descriptor and SuperSpeed Endpoint Companion Descriptor. wBytesPerInterval will be synthesized for  High Speed High Bandwidth Isochronous endpoints.
-	 @field bVersion  Version of the structure.  Currently kUSBEndpointPropertiesVersion3.  Need to set this when using this structure
-	 @field bAlternateSetting Used as an input for GetEndpointPropertiesV3.  Used as an output for GetPipePropertiesV3
-	 @field bDirection Used as an input for GetEndpointPropertiesV3.  Used as an output for GetPipePropertiesV3. One of kUSBIn or kUSBOut.
-	 @field bEndpointNumber Used as an input for GetEndpointPropertiesV3.  Used as an output for GetPipePropertiesV3
-	 @field bTransferType  One of kUSBControl, kUSBBulk, kUSBIsoc, or kUSBInterrupt
-	 @field bUsageType  For interrupt and isoc endpoints, the usage type.  For Bulk endpoints of the UAS Mass Storage Protocol, the pipe ID.
-	 @field bSyncType	For isoc endpoints only
-	 @field bInterval	The bInterval field from the Standard Endpoint descriptor.
-	 @field wMaxPacketSize  The meaning of this value depends on whether this is called with GetPipePropertiesV3 or GetEndpointPropertiesV3. See the documentation of those calls for more info.
-	 @field bMaxBurst  For SuperSpeed endpoints, maximum number of packets the endpoint can send or receive as part of a burst
-	 @field bMaxStreams  For SuperSpeed bulk endpoints, maximum number of streams this endpoint supports.
-	 @field bMult  For SuperSpeed isoc endpoints, this is the mult value from the SuperSpeed Endpoint Companion Descriptor. For High Speed isoc and interrupt endpoints, this is bits 11 and 12 of the Standard Endpoint Descriptor, which represents a similar value.
-	 @field wBytesPerInterval  For SuperSpeed interrupt and isoc endpoints, this is the wBytesPerInterval from the SuperSpeed Endpoint Companion Descriptor. For High Speed High Bandwidth isoc endpoints, this will be equal to wMaxPacketSize * (bMult+1).
-	 */
-#ifndef USB_EPP
-#define USB_EPP 1
-	struct IOUSBEndpointProperties {
-		UInt8 			bVersion;
-		UInt8			bAlternateSetting;
-		UInt8			bDirection;
-		UInt8			bEndpointNumber;
-		UInt8			bTransferType;
-		UInt8			bUsageType;
-		UInt8			bSyncType;
-		UInt8			bInterval;
-		UInt16			wMaxPacketSize;
-		UInt8			bMaxBurst;
-		UInt8			bMaxStreams;
-		UInt8			bMult;
-		UInt16			wBytesPerInterval;
-	};
-	typedef struct IOUSBEndpointProperties	IOUSBEndpointProperties;
-	typedef IOUSBEndpointProperties *	IOUSBEndpointPropertiesPtr;
-#endif
+/*!
+    @typedef IOUSBEndpointProperties
+    @discussion  Structure used with the IOUSBLib GetEndpointPropertiesV3 and GetPipePropertiesV3 API. Most of the fields are taken directly from corresponding Standard Endpoint Descriptor and SuperSpeed Endpoint Companion Descriptor. wBytesPerInterval will be synthesized for  High Speed High Bandwidth Isochronous endpoints.
+    @field bVersion  Version of the structure.  Currently kUSBEndpointPropertiesVersion3.  Need to set this when using this structure
+    @field bAlternateSetting Used as an input for GetEndpointPropertiesV3.  Used as an output for GetPipePropertiesV3
+    @field bDirection Used as an input for GetEndpointPropertiesV3.  Used as an output for GetPipePropertiesV3. One of kUSBIn or kUSBOut.
+    @field bEndpointNumber Used as an input for GetEndpointPropertiesV3.  Used as an output for GetPipePropertiesV3
+    @field bTransferType  One of kUSBControl, kUSBBulk, kUSBIsoc, or kUSBInterrupt
+    @field bUsageType  For interrupt and isoc endpoints, the usage type.  For Bulk endpoints of the UAS Mass Storage Protocol, the pipe ID.
+    @field bSyncType	For isoc endpoints only
+    @field bInterval	The bInterval field from the Standard Endpoint descriptor.
+    @field wMaxPacketSize  The meaning of this value depends on whether this is called with GetPipePropertiesV3 or GetEndpointPropertiesV3. See the documentation of those calls for more info.
+    @field bMaxBurst  For SuperSpeed endpoints, maximum number of packets the endpoint can send or receive as part of a burst
+    @field bMaxStreams  For SuperSpeed bulk endpoints, maximum number of streams this endpoint supports.
+    @field bMult  For SuperSpeed isoc endpoints, this is the mult value from the SuperSpeed Endpoint Companion Descriptor. For High Speed isoc and interrupt endpoints, this is bits 11 and 12 of the Standard Endpoint Descriptor, which represents a similar value.
+    @field wBytesPerInterval  For SuperSpeed interrupt and isoc endpoints, this is the wBytesPerInterval from the SuperSpeed Endpoint Companion Descriptor. For High Speed High Bandwidth isoc endpoints, this will be equal to wMaxPacketSize * (bMult+1).
+ */
+struct IOUSBEndpointProperties {
+    UInt8 			bVersion;
+    UInt8			bAlternateSetting;
+    UInt8			bDirection;
+    UInt8			bEndpointNumber;
+    UInt8			bTransferType;
+    UInt8			bUsageType;
+    UInt8			bSyncType;
+    UInt8			bInterval;
+    UInt16			wMaxPacketSize;
+    UInt8			bMaxBurst;
+    UInt8			bMaxStreams;
+    UInt8			bMult;
+    UInt16			wBytesPerInterval;
+};
+typedef struct IOUSBEndpointProperties	IOUSBEndpointProperties;
+typedef IOUSBEndpointProperties *	IOUSBEndpointPropertiesPtr;
 
-	/*!
-	 @enum USBGetEndpointVersion
-	 @discussion 	Version of the IOUSBEndpointProperties structure.
-	 @constant	kUSBEndpointPropertiesVersion3			Version that has support for USB3 SuperSpeed Endpoint Companion fields.
-	*/
-	enum {
-		kUSBEndpointPropertiesVersion3	= 0x03
-	};
+/*!
+    @enum USBGetEndpointVersion
+    @discussion 	Version of the IOUSBEndpointProperties structure.
+    @constant	kUSBEndpointPropertiesVersion3			Version that has support for USB3 SuperSpeed Endpoint Companion fields.
+*/
+enum {
+    kUSBEndpointPropertiesVersion3	= 0x03
+};
 
-	/*!
-	 @typedef UASPipeDescriptor
-	 @discussion  Structure used to specify the Mass Storage Specific UAS pipe usage descriptor
-	*/
-	struct UASPipeDescriptor {
-		UInt8	bLength;
-		UInt8	bDescriptorType;
-		UInt8	bPipeID;
-		UInt8   bReserved;
-	};
-	typedef struct 	UASPipeDescriptor	UASPipeDescriptor;
-	typedef 		UASPipeDescriptor * UASPipeDescriptorPtr;
+/*!
+    @typedef UASPipeDescriptor
+    @discussion  Structure used to specify the Mass Storage Specific UAS pipe usage descriptor
+*/
+struct UASPipeDescriptor {
+    UInt8	bLength;
+    UInt8	bDescriptorType;
+    UInt8	bPipeID;
+    UInt8   bReserved;
+};
+typedef struct 	UASPipeDescriptor	UASPipeDescriptor;
+typedef 		UASPipeDescriptor * UASPipeDescriptorPtr;
 
 #pragma options align=reset
+
 /*!
     @typedef IOUSBHIDDescriptor
-    @discussion USB HID Descriptor.  See the USB HID Specification at <a href="http://www.usb.org"TARGET="_blank">http://www.usb.org</a>.  (This structure
+    @discussion USB HID Descriptor.  See the USB HID Specification at <a href="http://www.usb.org" target="_blank">http://www.usb.org</a>.  (This structure
     should have used the #pragma pack(1) compiler directive to get byte alignment.
 */
 struct IOUSBHIDDescriptor {
@@ -768,7 +810,7 @@ typedef IOUSBHIDDescriptor *IOUSBHIDDescriptorPtr;
 
 /*!
     @typedef IOUSBHIDReportDesc
-    @discussion USB HID Report Descriptor header.  See the USB HID Specification at <a href="http://www.usb.org"TARGET="_blank">http://www.usb.org</a>.  (This structure
+    @discussion USB HID Report Descriptor header.  See the USB HID Specification at <a href="http://www.usb.org" target="_blank">http://www.usb.org</a>.  (This structure
     should have used the #pragma pack(1) compiler directive to get byte alignment.
 */
 struct IOUSBHIDReportDesc {
@@ -781,7 +823,7 @@ typedef IOUSBHIDReportDesc *		IOUSBHIDReportDescPtr;
 
 /*!
     @typedef IOUSBDeviceQualifierDescriptor
-    @discussion USB Device Qualifier Descriptor.  See the USB Specification at <a href="http://www.usb.org"TARGET="_blank">http://www.usb.org</a>.
+    @discussion USB Device Qualifier Descriptor.  See the USB Specification at <a href="http://www.usb.org" target="_blank">http://www.usb.org</a>.
 */
 #pragma pack(1)
 struct IOUSBDeviceQualifierDescriptor
@@ -802,7 +844,7 @@ typedef IOUSBDeviceQualifierDescriptor *	IOUSBDeviceQualifierDescriptorPtr;
 
 /*!
     @typedef IOUSBDFUDescriptor
-    @discussion USB Device Firmware Update Descriptor.  See the USB Device Firmware Update Specification at <a href="http://www.usb.org"TARGET="_blank">http://www.usb.org</a>.
+    @discussion USB Device Firmware Update Descriptor.  See the USB Device Firmware Update Specification at <a href="http://www.usb.org" target="_blank">http://www.usb.org</a>.
 */
 #pragma pack(1)
 struct IOUSBDFUDescriptor 
@@ -820,7 +862,7 @@ typedef 		IOUSBDFUDescriptor *	IOUSBDFUDescriptorPtr;
 
 /*!
 @typedef IOUSBInterfaceAssociationDescriptor
- @discussion USB Inerface Association Descriptor.  ECN to the USB 2.0 Spec.  See the USB Specification at <a href="http://www.usb.org"TARGET="_blank">http://www.usb.org</a>.
+ @discussion USB Inerface Association Descriptor.  ECN to the USB 2.0 Spec.  See the USB Specification at <a href="http://www.usb.org" target="_blank">http://www.usb.org</a>.
  */
 #pragma pack(1)
 struct IOUSBInterfaceAssociationDescriptor
@@ -1090,12 +1132,13 @@ enum {
         };
 
 /*!
-    @enum kIOUSBVendorIDAppleComputer
-    @discussion USB Vendor ID for Apple Computer, Inc. 
+    @enum kIOUSBVendorIDApple
+    @discussion USB Vendor ID for Apple, Inc. 
 */
-enum {
-	kIOUSBVendorIDAppleComputer		= 0x05AC
-        };
+    enum {
+        kIOUSBVendorIDAppleComputer		= 0x05AC,
+        kIOUSBVendorIDApple             = 0x05AC
+    };
 
 	/*!
 	 @enum USBDeviceSpeed
@@ -1191,14 +1234,21 @@ typedef enum {
 // USB User Notification Types
 //
 enum {
-    kUSBNoUserNotificationType			= 0,
-    kUSBNotEnoughPowerNotificationType		= 1,
+    kUSBNoUserNotificationType                  = 0,
+    kUSBNotEnoughPowerNotificationType          = 1,
     kUSBIndividualOverCurrentNotificationType	= 2,
-    kUSBGangOverCurrentNotificationType		= 3
+    kUSBGangOverCurrentNotificationType         = 3,
+    kUSBiOSDeviceNotEnoughPowerNotificationType = 4,
+    kUSBNotEnoughPowerNoACNotificationType      = 5,
+    kUSBDeviceCountExceededNotificationType     = 6,
+    kUSBEndpointCountExceededNotificationType   = 7,
+    kUSBUnsupportedNotificationType             = 8,
+    kUSBHubCountExceededNotificationType        = 9
 };
+#endif
 
 /*!
-    @defined Property Definitions
+    @defineblock Property Definitions
     @discussion Useful property names in USB land. 
 */
 #define kUSBDevicePropertySpeed                 "Device Speed"
@@ -1208,6 +1258,8 @@ enum {
 #define kUSBProductIDMask						"idProductMask"
 #define kUSBProductIdsArrayName					"idProductArray"
 #define kUSBPreferredConfiguration				"Preferred Configuration"
+#define kUSBPreferredInterface                  "Preferred Interface"
+#define kUSBPreferredInterfacePriority          "priority"
 #define kUSBSuspendPort							"kSuspendPort"
 #define kUSBExpressCardCantWake					"ExpressCardCantWake"
 #define kUSBControllerNeedsContiguousMemoryForIsoch	"Need contiguous memory for isoch"
@@ -1216,16 +1268,26 @@ enum {
 #define kUSBOutOfSpecMPSOK						"Out of spec MPS OK"
 #define kConfigurationDescriptorOverride		"ConfigurationDescriptorOverride"
 #define kOverrideIfAtLocationID					"OverrideIfAtLocationID"
+/*! @/defineblock */
 
 /*!
 @enum USBReEnumerateOptions
  @discussion Options used when calling ReEnumerateDevice. 
  @constant	kUSBAddExtraResetTimeBit	Setting this bit will cause the Hub driver to wait 100ms before addressing the device after the reset following the re-enumeration.
+ @constant	kUSBReEnumerateCaptureDeviceBit	Setting this bit will terminate any drivers attached to an IOUSBInterface for the device and to the IOUSBDevice itself.  It will not terminate
+ any drivers attached to a Mass Storage Class IOUSBInterface.  A client needs to have the appropriate permissions in order to specify this bit.  See IOUSBLib.h
+ @constant	kUSBReEnumerateReleaseDeviceBit	Setting this bit will return return any device that was captured back to the OS.  The driver for the IOUSBDevice will be loaded.  A client needs to have the appropriate permissions in order to specify this bit.  See IOUSBLib.h
  */
+#ifdef KERNEL
 typedef enum {
-    kUSBAddExtraResetTimeBit 		= 31,
-    kUSBAddExtraResetTimeMask		= ( 1 << kUSBAddExtraResetTimeBit)
+    kUSBAddExtraResetTimeBit            = 31,
+    kUSBReEnumerateCaptureDeviceBit     = 30,
+    kUSBReEnumerateReleaseDeviceBit     = 29,
+    kUSBAddExtraResetTimeMask           = ( 1 << kUSBAddExtraResetTimeBit),
+    kUSBReEnumerateCaptureDeviceMask    = ( 1 << kUSBReEnumerateCaptureDeviceBit),
+    kUSBReEnumerateReleaseDeviceMask    = ( 1 << kUSBReEnumerateReleaseDeviceBit)
 } USBReEnumerateOptions;
+#endif
 
 /*!
  @enum USBDeviceInformationBits
@@ -1244,9 +1306,10 @@ typedef enum {
  @constant  kUSBInformationRootHubisBuiltIn				If this is a root hub simulation and it's built into the enclosure, this bit is set.  If it's on an expansion card, it will be cleared
  @constant  kUSBInformationDeviceIsRemote				This device is "attached" to the controller through a remote connection
  @constant  kUSBInformationDeviceIsAttachedToEnclosure	The hub port to which the USB device is connected has a USB connector on the enclosure
- @constant  kUSBInformationDeviceIsOnThunderbolt		The USB device is downstream of a controller that is attached through Thunderbolt
+ @constant  kUSBInformationDeviceIsOnThunderboltBit		The USB device is downstream of a controller that is attached through Thunderbolt
  
  */
+#ifdef KERNEL
 	typedef enum {
 		kUSBInformationDeviceIsCaptiveBit				= 0,
 		kUSBInformationDeviceIsAttachedToRootHubBit		= 1,
@@ -1302,7 +1365,33 @@ typedef enum {
 		kUSBPowerDuringWakeRevocable	= 6,
 		kUSBPowerDuringWakeUSB3			= 7
 	} USBPowerRequestTypes;
+
+
+	// these are not for a Public API, but are just the bits used below
+	enum {
+		kUSBNotificationPreForcedSuspendBit              =    0,
+		kUSBNotificationPostForcedSuspendBit             =    1,
+		kUSBNotificationPreForcedResumeBit               =    2,
+		kUSBNotificationPostForcedResumeBit              =    3,
+	};
 	
+		
+	/*!
+	 @enum USBNotificationTypes
+	 @discussion Used to register for USB notifications. These types may be OR'd together if more than one notification is desired. These notification are expected to be acknowledged before the process (e.g. system sleep or system wake) can be continued. See RegisterForNotification and AcknowledgeNotification in IOUSBDeviceInterface and IOUSBInterfaceInterface.
+	 @constant	kUSBNotificationPreForcedSuspend	A notification is sent prior to a forced suspend (e.g. system sleep).
+	 @constant	kUSBNotificationPostForcedSuspend	A notification is sent after a forced suspend has been completed (e.g. system sleep).
+	 @constant	kUSBNotificationPreForcedResume		A notification is sent before a resume which happens after a forced suspend (e.g. system wake).
+	 @constant	kUSBNotificationPostForcedResume	A notification is sent after a resume which happens after a forced suspend (e.g. system wake).
+	 */
+	typedef enum {
+		kUSBNotificationPreForcedSuspend             =    (1 << kUSBNotificationPreForcedSuspendBit),
+		kUSBNotificationPostForcedSuspend            =    (1 << kUSBNotificationPostForcedSuspendBit),
+		kUSBNotificationPreForcedResume              =    (1 << kUSBNotificationPreForcedResumeBit),
+		kUSBNotificationPostForcedResume             =    (1 << kUSBNotificationPostForcedResumeBit),
+	} USBNotificationTypes;
+#endif
+
 	// Apple specific properties
 #define kAppleMaxPortCurrent				"AAPL,current-available"
 #define kAppleCurrentExtra					"AAPL,current-extra"
@@ -1311,10 +1400,12 @@ typedef enum {
 #define kAppleRevocableExtraCurrent			"AAPL,revocable-extra-current"
 #define kAppleExternalSuperSpeedPorts		"AAPL,ExternalSSPorts"
 #define kAppleUnconnectedSuperSpeedPorts	"AAPL,UnconnectedSSPorts"
+#define kAppleAcpiRootHubDepth				"AAPL,root-hub-depth"
 
 #define kAppleStandardPortCurrentInSleep	"AAPL,standard-port-current-in-sleep"
 
 #define kAppleInternalUSBDevice				"AAPL,device-internal"
+#define kAppleExternalConnectorBitmap       "AAPL,ExternalConnectorBitmap"
 #define kUSBBusID							"AAPL,bus-id"
 	
 	// Deprecated Names and/or values
@@ -1322,7 +1413,7 @@ typedef enum {
 #define kAppleCurrentInSleep				"AAPL,current-in-sleep"
 #define kApplePortCurrentInSleep			"AAPL,port-current-in-sleep"
 
-
+#ifdef KERNEL
 // UPC definitions from ACPI Rev 4.0
 typedef enum {
 	kUSBPortNotConnectable 		= 0,	// Port is not connectable
@@ -1352,11 +1443,23 @@ enum {
 
 enum {
 	kXHCISSRootHubAddress	= kUSBMaxDevices,
-	kXHCIUSB2RootHubAddress = kUSBMaxDevices+1
+	kXHCIUSB2RootHubAddress = kUSBMaxDevices+1,
+    kSuperSpeedBusBitMask   = 0x01000000
 };
+#endif
+
+#define ISROOTHUB(a) ((a == kXHCISSRootHubAddress) || (a == kXHCIUSB2RootHubAddress))
+
+// values (in nanoseconds) which are sent to requireMaxBusStall as appropriate
+#define kEHCIIsochMaxBusStall            25000
+#define kXHCIIsochMaxBusStall            25000
+#define kOHCIIsochMaxBusStall            25000
+#define kUHCIIsochMaxBusStall            10000
+#define kMaxBusStall10uS                 10000
+#define kMaxBusStall25uS                 25000
 
 #ifdef __cplusplus
 }       
 #endif
 
-#endif
+#endif /* _USB_USB_H */

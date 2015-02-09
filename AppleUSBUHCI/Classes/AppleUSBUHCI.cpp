@@ -166,7 +166,7 @@ AppleUSBUHCI::EnableUSBInterrupt(bool enableInterrupt)
 {
     UInt16		value;
 	
-    USBLog(7, "AppleUSBUHCI[%p]::EnableUSBInterrupt(%s) - Legacy register[%p]", this, enableInterrupt ? "true" : "false", (void*)_device->configRead16(kUHCI_PCI_LEGKEY));
+    USBLog(7, "AppleUSBUHCI[%p]::EnableUSBInterrupt(%s) - Legacy register[%p]", this, enableInterrupt ? "true" : "false", (void*)(UInt64)_device->configRead16(kUHCI_PCI_LEGKEY));
     
 	// The master interrupt for the UHCI controller is actually in the Legacy Support register (section 5.2.1)
     if (enableInterrupt) 
@@ -203,7 +203,7 @@ AppleUSBUHCI::HardwareInit(void)
 	status = InitializeBufferMemory();
     if (status != kIOReturnSuccess) 
 	{
-		USBError(1, "AppleUSBUHCI::HardwareInit - InitializeBufferMemory failed with status(%p)", (void*)status);
+		USBError(1, "AppleUSBUHCI::HardwareInit - InitializeBufferMemory failed with status(%p)", (void*)(UInt64)status);
         return status;
     }
 
@@ -392,7 +392,7 @@ AppleUSBUHCI::UIMInitialize(IOService * provider)
         // SetVendorInfo() set an errata bit, so we need to OR in our regular errata
         _ERRATA64BITS |= GetErrata64Bits(_vendorID, _deviceID, _revisionID);
 		
-		if (_v3ExpansionData->_onThunderbolt || (_ERRATA64BITS & kErrataDontUseCompanionController))
+		if (_v3ExpansionData->_tbBitmapsExist || (_ERRATA64BITS & kErrataDontUseCompanionController))
 		{
 			USBLog(3, "AppleUSBUHCI[%p]::UIMInitialize - Thunderbolt and companion controllers disallowed. Not initializing", this);
             return kIOReturnUnsupported;
@@ -451,7 +451,7 @@ AppleUSBUHCI::UIMInitialize(IOService * provider)
         
         status = HardwareInit();
         
-        USBLog(7, "AppleUSBUHCI[%p]:: UIMInitialize - status after init: %p", this, (void*)status);
+        USBLog(7, "AppleUSBUHCI[%p]:: UIMInitialize - status after init: %p", this, (void*)(UInt64)status);
         
 		// check for sleep capability before we initialize power management
 		CheckSleepCapability();
@@ -580,7 +580,7 @@ AppleUSBUHCI::SetVendorInfo(void)
     if (vendProp)
         _vendorID = *((UInt32 *) vendProp->getBytesNoCopy());
 	
-    USBLog(7, "AppleUSBUHCI[%p]::SetVendorInfo - vendorID = %p", this, (void*)_vendorID);
+    USBLog(7, "AppleUSBUHCI[%p]::SetVendorInfo - vendorID = %p", this, (void*)(UInt64)_vendorID);
     
     deviceProp   = OSDynamicCast(OSData, _device->getProperty( "device-id" ));
     if (deviceProp)
@@ -953,15 +953,15 @@ AppleUSBUHCI::showRegisters(UInt32 __unused level, const char * __unused s)
 		return;
 		
     USBLog(level,"UHCIUIM -- showRegisters %s", s);
-    USBLog(level,"kUHCI_CMD:  %p", (void*)ioRead16(kUHCI_CMD));
-    USBLog(level,"kUHCI_STS:  %p", (void*)ioRead16(kUHCI_STS));
-    USBLog(level,"kUHCI_INTR: %p", (void*)ioRead16(kUHCI_INTR));
-    USBLog(level,"kUHCI_PORTSC1: %p", (void*)ioRead16(kUHCI_PORTSC1));
-    USBLog(level,"kUHCI_PORTSC2:    %p", (void*)ioRead16(kUHCI_PORTSC2));
-    USBLog(level,"kUHCI_FRBASEADDR:  %p", (void*)ioRead32(kUHCI_FRBASEADDR));
-    USBLog(level,"kUHCI_FRNUM:  %p", (void*)ioRead32(kUHCI_FRNUM));
-    USBLog(level,"kUHCI_SOFMOD: %p", (void*)ioRead32(kUHCI_SOFMOD));
-    USBLog(level,"kIOPCIConfigCommand: %p", (void*)_device->configRead16(kIOPCIConfigCommand));
+    USBLog(level,"kUHCI_CMD:  %p", (void*)(UInt64)ioRead16(kUHCI_CMD));
+    USBLog(level,"kUHCI_STS:  %p", (void*)(UInt64)ioRead16(kUHCI_STS));
+    USBLog(level,"kUHCI_INTR: %p", (void*)(UInt64)ioRead16(kUHCI_INTR));
+    USBLog(level,"kUHCI_PORTSC1: %p", (void*)(UInt64)ioRead16(kUHCI_PORTSC1));
+    USBLog(level,"kUHCI_PORTSC2:    %p", (void*)(UInt64)ioRead16(kUHCI_PORTSC2));
+    USBLog(level,"kUHCI_FRBASEADDR:  %p", (void*)(UInt64)ioRead32(kUHCI_FRBASEADDR));
+    USBLog(level,"kUHCI_FRNUM:  %p", (void*)(UInt64)ioRead32(kUHCI_FRNUM));
+    USBLog(level,"kUHCI_SOFMOD: %p", (void*)(UInt64)ioRead32(kUHCI_SOFMOD));
+    USBLog(level,"kIOPCIConfigCommand: %p", (void*)(UInt64)_device->configRead16(kIOPCIConfigCommand));
 }
 
 
@@ -1137,11 +1137,11 @@ AppleUSBUHCI::scavengeAnIsochTD(AppleUHCIIsochTransferDescriptor *pTD)
 		{
 			if ( pTD->frStatus == kIOReturnUnderrun )
 			{
-				USBLog(7, "AppleUSBUHCI[%p]::scavengeAnIsochTD - frStatus is %p - _frameNumber %qd - _frameIndex %d", this, (void*)pTD->frStatus, pTD->_frameNumber, (int)pTD->_frameIndex);
+				USBLog(7, "AppleUSBUHCI[%p]::scavengeAnIsochTD - frStatus is %p - _frameNumber %qd - _frameIndex %d", this, (void*)(UInt64)pTD->frStatus, pTD->_frameNumber, (int)pTD->_frameIndex);
 			}
 			else
 			{
-				USBLog(3, "AppleUSBUHCI[%p]::scavengeAnIsochTD - frStatus is %p - _frameNumber %qd - _frameIndex %d", this, (void*)pTD->frStatus, pTD->_frameNumber, (int)pTD->_frameIndex);
+				USBLog(3, "AppleUSBUHCI[%p]::scavengeAnIsochTD - frStatus is %p - _frameNumber %qd - _frameIndex %d", this, (void*)(UInt64)pTD->frStatus, pTD->_frameNumber, (int)pTD->_frameIndex);
 			}
 
 		}
@@ -1464,7 +1464,7 @@ AppleUSBUHCI::UHCIUIMDoDoneQueueProcessing(AppleUHCITransferDescriptor *pHCDoneT
 					pHCDoneTD->callbackOnTD = false;
 					if (errStatus)
 					{
-						USBLog(3, "AppleUSBUHCI[%p]::UHCIUIMDoDoneQueueProcessing - calling completion routine (%p) - err[%p] remain[%p]", this, completion.action, (void*)errStatus, (void*)bufferSizeRemaining);
+						USBLog(3, "AppleUSBUHCI[%p]::UHCIUIMDoDoneQueueProcessing - calling completion routine (%p) - err[%p] remain[%p]", this, completion.action, (void*)(UInt64)errStatus, (void*)(UInt64)bufferSizeRemaining);
 					}
 					Complete(completion, errStatus, bufferSizeRemaining);
 					if ((pHCDoneTD->pQH->type == kUSBControl) || (pHCDoneTD->pQH->type == kUSBBulk))
@@ -1476,12 +1476,12 @@ AppleUSBUHCI::UHCIUIMDoDoneQueueProcessing(AppleUHCITransferDescriptor *pHCDoneT
 						else
 						{
 							_controlBulkTransactionsOut--;
-							USBLog(7, "AppleUSBUHCI[%p]::UHCIUIMDoDoneQueueProcessing - _controlBulkTransactionsOut(%p) pHCDoneTD(%p)", this, (void*)_controlBulkTransactionsOut, pHCDoneTD);
+							USBLog(7, "AppleUSBUHCI[%p]::UHCIUIMDoDoneQueueProcessing - _controlBulkTransactionsOut(%p) pHCDoneTD(%p)", this, (void*)(UInt64)_controlBulkTransactionsOut, pHCDoneTD);
 							if (!_controlBulkTransactionsOut)
 							{
 								UInt32 link;
 								link = _lastQH->GetPhysicalLink();
-								USBLog(7, "AppleUSBUHCI[%p]::UHCIUIMDoDoneQueueProcessing - no more _controlBulkTransactionsOut - terminating list (%p to %p)", this, (void*)link, (void*)(link | kUHCI_QH_T));
+								USBLog(7, "AppleUSBUHCI[%p]::UHCIUIMDoDoneQueueProcessing - no more _controlBulkTransactionsOut - terminating list (%p to %p)", this, (void*)(UInt64)link, (void*)(UInt64)(link | kUHCI_QH_T));
 								_lastQH->SetPhysicalLink(link | kUHCI_QH_T);
 							}
 						}
@@ -1869,7 +1869,7 @@ AppleUSBUHCI::InitializeBufferMemory()
 		status = _frameListBuffer->prepare();
 		if (status)
 		{
-			USBError(1, "AppleUSBUHCI::InitializeBufferMemory - _frameListBuffer->prepare failed with status(%p)", (void*)status);
+			USBError(1, "AppleUSBUHCI::InitializeBufferMemory - _frameListBuffer->prepare failed with status(%p)", (void*)(UInt64)status);
 			break;
 		}
 		
@@ -1878,7 +1878,7 @@ AppleUSBUHCI::InitializeBufferMemory()
 		status = dmaCommand->setMemoryDescriptor(_frameListBuffer);
 		if (status)
 		{
-			USBError(1, "AppleUSBUHCI::InitializeBufferMemory - setMemoryDescriptor returned err (%p)", (void*)status);
+			USBError(1, "AppleUSBUHCI::InitializeBufferMemory - setMemoryDescriptor returned err (%p)", (void*)(UInt64)status);
 			break;
 		}
 		
@@ -1890,7 +1890,7 @@ AppleUSBUHCI::InitializeBufferMemory()
 		status = dmaCommand->gen32IOVMSegments(&offset, &segments, &numSegments);
 		if (status || (numSegments != 1) || (segments.fLength != PAGE_SIZE))
 		{
-			USBError(1, "AppleUSBUHCI::InitializeBufferMemory - could not generate segments err (%p) numSegments (%d) fLength (%d)", (void*)status, (int)numSegments, (int)segments.fLength);
+			USBError(1, "AppleUSBUHCI::InitializeBufferMemory - could not generate segments err (%p) numSegments (%d) fLength (%d)", (void*)(UInt64)status, (int)numSegments, (int)segments.fLength);
 			dmaCommand->clearMemoryDescriptor();
 			status = status ? status : kIOReturnInternalError;
 			break;
@@ -1914,14 +1914,14 @@ AppleUSBUHCI::InitializeBufferMemory()
 		status = _cbiAlignBuffer->prepare();
 		if (status)
 		{
-			USBError(1, "AppleUSBUHCI::InitializeBufferMemory - _alignBuffer->prepare failed with status(%p)", (void*)status);
+			USBError(1, "AppleUSBUHCI::InitializeBufferMemory - _alignBuffer->prepare failed with status(%p)", (void*)(UInt64)status);
 			break;
 		}
 		alignBufferPrepared = true;
 		status = dmaCommand->setMemoryDescriptor(_cbiAlignBuffer);
 		if (status)
 		{
-			USBError(1, "AppleUSBUHCI::InitializeBufferMemory - setMemoryDescriptor (_alignBuffer) returned err (%p)", (void*)status);
+			USBError(1, "AppleUSBUHCI::InitializeBufferMemory - setMemoryDescriptor (_alignBuffer) returned err (%p)", (void*)(UInt64)status);
 			break;
 		}
 		
@@ -1935,7 +1935,7 @@ AppleUSBUHCI::InitializeBufferMemory()
 		status = dmaCommand->gen32IOVMSegments(&offset, &segments, &numSegments);
 		if (status || (numSegments != 1) || (segments.fLength != PAGE_SIZE))
 		{
-			USBError(1, "AppleUSBUHCI::InitializeBufferMemory - could not generate segments err (%p) numSegments (%d) fLength (%d)", (void*)status, (int)numSegments, (int)segments.fLength);
+			USBError(1, "AppleUSBUHCI::InitializeBufferMemory - could not generate segments err (%p) numSegments (%d) fLength (%d)", (void*)(UInt64)status, (int)numSegments, (int)segments.fLength);
 			dmaCommand->clearMemoryDescriptor();
 			status = status ? status : kIOReturnInternalError;
 			break;
@@ -1971,14 +1971,14 @@ AppleUSBUHCI::InitializeBufferMemory()
 		status = _isochAlignBuffer->prepare();
 		if (status)
 		{
-			USBError(1, "AppleUSBUHCI::InitializeBufferMemory - _alignBuffer->prepare failed with status(%p)", (void*)status);
+			USBError(1, "AppleUSBUHCI::InitializeBufferMemory - _alignBuffer->prepare failed with status(%p)", (void*)(UInt64)status);
 			break;
 		}
 		isochBufferPrepared = true;
 		status = dmaCommand->setMemoryDescriptor(_isochAlignBuffer);
 		if (status)
 		{
-			USBError(1, "AppleUSBUHCI::InitializeBufferMemory - setMemoryDescriptor (_alignBuffer) returned err (%p)", (void*)status);
+			USBError(1, "AppleUSBUHCI::InitializeBufferMemory - setMemoryDescriptor (_alignBuffer) returned err (%p)", (void*)(UInt64)status);
 			break;
 		}
 		
@@ -1994,7 +1994,7 @@ AppleUSBUHCI::InitializeBufferMemory()
 		status = dmaCommand->gen32IOVMSegments(&offset, &segments, &numSegments);
 		if (status || (numSegments != 1) || (segments.fLength != PAGE_SIZE))
 		{
-			USBError(1, "AppleUSBUHCI::InitializeBufferMemory - could not generate segments err (%p) numSegments (%d) fLength (%d)", (void*)status, (int)numSegments, (int)segments.fLength);
+			USBError(1, "AppleUSBUHCI::InitializeBufferMemory - could not generate segments err (%p) numSegments (%d) fLength (%d)", (void*)(UInt64)status, (int)numSegments, (int)segments.fLength);
 			dmaCommand->clearMemoryDescriptor();
 			status = status ? status : kIOReturnInternalError;
 			break;
@@ -2297,10 +2297,10 @@ AppleUSBUHCI::PrintFrameList(UInt32 slot, int level)
 	USBLog(level, "AppleUSBUHCI[%p]::PrintFrameList - raw list", this);
 	for (i=0; i< 1024; i++)
 	{
-		USBLog(level, "*********_frameList[%d]=%p", i, (void*)USBToHostLong(_frameList[i]));
+		USBLog(level, "*********_frameList[%d]=%p", i, (void*)(UInt64)USBToHostLong(_frameList[i]));
 		IOSleep(1);
 	}
-	USBLog(level, "AppleUSBUHCI[%p]::PrintFrameList(%d) - _frameList@%p[%p] _logicalFrameList[%p]", this, (int)slot, &_frameList[slot], (void*)USBToHostLong(_frameList[slot]), _logicalFrameList[slot]);
+	USBLog(level, "AppleUSBUHCI[%p]::PrintFrameList(%d) - _frameList@%p[%p] _logicalFrameList[%p]", this, (int)slot, &_frameList[slot], (void*)(UInt64)USBToHostLong(_frameList[slot]), _logicalFrameList[slot]);
 	pLE = _logicalFrameList[slot];
 	while (pLE)
 	{

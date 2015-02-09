@@ -162,7 +162,7 @@ class IOUSBLowLatencyCommand : public IOCommand
 private:
 
     OSAsyncReference64						fAsyncRef;
-	mach_vm_size_t							fFrameLength;				// In bytes
+	/*mach_vm_size_t                        fFrameLength;				// In bytes*/
 	mach_vm_address_t						fFrameBase;					// The address where the frame list for Isoc starts
     IOMemoryDescriptor *					fDataBufferDescriptor;		// The Memory Descriptor that we use for DMA'ing the data to/from
 	uint32_t								fAsyncReferenceCount;

@@ -225,7 +225,7 @@ IOUSBInterface::open( IOService *forClient, IOOptionBits options, void *arg )
 	
         USBLog(6,"%s[%p]::open calling super::open with gate", getName(), this);
 		
-        error = gate->runAction(CallSuperOpen, (void *)forClient, (void *)options, (void *)arg, (void *)NULL);
+        error = gate->runAction(CallSuperOpen, (void *)forClient, (void *)(UInt64)options, (void *)arg, (void *)NULL);
         if ( error != kIOReturnSuccess )
         {
             USBLog(2,"%s[%p]::open super::open failed (0x%x)", getName(), this, error);
@@ -381,7 +381,7 @@ IOUSBInterface::close( IOService *forClient, IOOptionBits options)
 		
         USBLog(6,"%s[%p]::close calling super::close with gate", getName(), this);
 
-		err = gate->runAction(CallSuperClose, (void *)forClient, (void *)options, (void *)NULL, (void *)NULL);
+		err = gate->runAction(CallSuperClose, (void *)forClient, (void *)(UInt64)options, (void *)NULL, (void *)NULL);
 		if ( err != kIOReturnSuccess )
 		{
 			USBLog(2,"%s[%p]:message CallSuperClose() runAction failed (0x%x)", getName(), this, err);
@@ -2011,7 +2011,7 @@ IOUSBInterface::GetPipeObj(UInt8 index)
 		workLoop->retain();
 		gate->retain();
 	
-		err = gate->runAction(_GetPipeObj, (void *)index, (void *)&thePipeObj, (void *)NULL, (void *)NULL);
+		err = gate->runAction(_GetPipeObj, (void *)(UInt64)index, (void *)&thePipeObj, (void *)NULL, (void *)NULL);
 		if ( err != kIOReturnSuccess )
 		{
 			USBLog(2,"%s[%p]:GetPipeObj _GetPipeObj runAction failed (0x%x)", getName(), this, err);

@@ -24,7 +24,14 @@
 
 #import <Foundation/Foundation.h>
 
+#ifdef KERNEL
 #import "../IOUSBFamily/Headers/USB.h"
+#else /* ! KERNEL */
+#include <IOKit/IOKitLib.h>
+#include <IOKit/usb/USBSpec.h>
+#include <IOKit/usb/USB.h>
+#include <IOKit/usb/IOUSBLib.h>
+#endif /* KERNEL */
 
 #import "BusProberSharedFunctions.h"
 #import "OutlineViewNode.h"
