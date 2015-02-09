@@ -1,0 +1,1 @@
+ const unsigned char IOUSBMassStorageClassVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:IOUSBMassStorageClass  PROJECT:IOUSBFamily-3.7.0" "\n"; const double IOUSBMassStorageClassVersionNumber __attribute__ ((used)) = (double)3.7;

@@ -1,0 +1,1 @@
+ const unsigned char IOUSBUserClientVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:IOUSBUserClient  PROJECT:IOUSBFamily-710.4.14" "\n"; const double IOUSBUserClientVersionNumber __attribute__ ((used)) = (double)710.4;

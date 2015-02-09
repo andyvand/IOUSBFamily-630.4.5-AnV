@@ -1,0 +1,1 @@
+ const unsigned char IOUSBLibVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:IOUSBLib  PROJECT:IOUSBFamily-710.4.14" "\n"; const double IOUSBLibVersionNumber __attribute__ ((used)) = (double)710.4;

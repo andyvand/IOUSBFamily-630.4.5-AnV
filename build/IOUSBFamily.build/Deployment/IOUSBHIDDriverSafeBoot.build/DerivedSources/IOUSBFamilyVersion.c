@@ -1,0 +1,1 @@
+ const unsigned char IOUSBHIDDriverSafeBootVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:IOUSBHIDDriverSafeBoot  PROJECT:IOUSBFamily-710.4.14" "\n"; const double IOUSBHIDDriverSafeBootVersionNumber __attribute__ ((used)) = (double)710.4;

@@ -1,0 +1,1 @@
+ const unsigned char IOUSBCompositeDriverVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:IOUSBCompositeDriver  PROJECT:IOUSBFamily-710.4.14" "\n"; const double IOUSBCompositeDriverVersionNumber __attribute__ ((used)) = (double)710.4;
