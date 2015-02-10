@@ -2534,10 +2534,46 @@ IOUSBInterface::GetEndpointPropertiesV3(IOUSBEndpointProperties *properties)
 	return ret;
 }
 
+IOReturn
+IOUSBInterface::SetFunctionSuspendFeature(UInt8 options)
+{
+    return kIOReturnSuccess;
+}
+
+IOReturn
+IOUSBInterface::GetInterfaceStatus(USBStatus *status)
+{
+    if (status == NULL)
+    {
+        status = &_expansionData->_status;
+    } else {
+        *status = _expansionData->_status;
+    }
+
+    return kIOReturnSuccess;
+}
+
+IOReturn
+IOUSBInterface::EnableRemoteWake(bool enable)
+{
+    _expansionData->_remoteWake = enable;
+
+    return kIOReturnSuccess;
+}
+
+void
+IOUSBInterface::joinPMtree (IOService *driver)
+{
+    if (_device != NULL)
+    {
+        _device->joinPMtree(driver);
+    }
+}
 
 OSMetaClassDefineReservedUsed(IOUSBInterface,  7);
 OSMetaClassDefineReservedUsed(IOUSBInterface,  8);
 OSMetaClassDefineReservedUsed(IOUSBInterface,  9);
+
 OSMetaClassDefineReservedUnused(IOUSBInterface,  10);
 OSMetaClassDefineReservedUnused(IOUSBInterface,  11);
 OSMetaClassDefineReservedUnused(IOUSBInterface,  12);

@@ -1762,6 +1762,16 @@ IOUSBControllerV2::WriteStream(UInt32 streamID, IOMemoryDescriptor *buffer, USBD
 }
 
 OSMetaClassDefineReservedUsed(IOUSBControllerV2,  26);
+IOReturn
+IOUSBControllerV2::UpdateDeviceAddress(USBDeviceAddress oldDeviceAddress,
+                                       USBDeviceAddress newDeviceAddress,
+                                       UInt8 speed,
+                                       USBDeviceAddress hubAddress,
+                                       int port)
+{
+    return kIOReturnUnsupported;
+}
+
 OSMetaClassDefineReservedUnused(IOUSBControllerV2,  27);
 OSMetaClassDefineReservedUnused(IOUSBControllerV2,  28);
 OSMetaClassDefineReservedUnused(IOUSBControllerV2,  29);

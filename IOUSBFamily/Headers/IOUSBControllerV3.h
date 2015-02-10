@@ -187,7 +187,7 @@ class IOUSBControllerV3 : public IOUSBControllerV2
 			SInt32								_pciPauseQueuedTransactionCount;		// Number of transactions/threads that have been commandSleep()'d due to the system processing a PCI Pause event
 			bool								_pciPauseTransactionToken[kMaxTransactionsDuringPCIPause];	// Token use to sleep/wake threads that come in during PCI Pause
             bool                                _controllerWasResetOnSleep;
-
+            IOUSBHubExitLatencies               _latencies[1];                          // Latencies
 		};
 		V3ExpansionData *_v3ExpansionData;
     

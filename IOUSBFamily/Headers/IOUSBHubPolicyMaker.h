@@ -98,6 +98,8 @@ protected:
 	UInt32								_extraPower;				// DEPRECATED
 	UInt32								_extraPowerRemaining;		// DEPRECATED
 	UInt32								_hubResumeRecoveryTime;		// # of ms that we will wait before issuing any transactions on our port (nominally 10ms)
+    IOUSBHubExitLatencies               _latencies[1];              // Latencies
+
     struct ExpansionData 
 	{ 
 	};

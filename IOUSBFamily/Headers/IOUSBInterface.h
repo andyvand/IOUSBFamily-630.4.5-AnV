@@ -73,6 +73,8 @@ protected:
 		OSSet *				_openClients;
         UInt32              _RememberedStreams[kUSBMaxPipes];
         bool                _openPending;
+        USBStatus           _status;
+        bool                _remoteWake;
     };
     ExpansionData * _expansionData;
 

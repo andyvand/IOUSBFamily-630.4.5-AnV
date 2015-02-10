@@ -29,7 +29,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			QrqTwOKieXELzn51MU1lZe0Negc=
+			6RGKR/r4jMpbkJeE3Efrurh3im4=
 			</data>
 			<key>requirement</key>
 			<string>anchor apple generic and identifier "com.apple.driver.AppleUSBEHCI" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = GSF3NR4NQ5)</string>
@@ -38,7 +38,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			Up6rt/8TwWl3PQ7omu2J+0KvxbI=
+			kbBtu04vHJLmEiomIUFszH4vfL0=
 			</data>
 			<key>requirement</key>
 			<string>anchor apple generic and identifier "com.apple.driver.AppleUSBHub" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = GSF3NR4NQ5)</string>
@@ -47,7 +47,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			iDCH4+9NMYL9Q7HiH1Rfie26Z94=
+			j4lrEOKjh4ZLUyM2Fzt5zuBhcTY=
 			</data>
 			<key>requirement</key>
 			<string>anchor apple generic and identifier "com.apple.driver.AppleUSBMergeNub" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = GSF3NR4NQ5)</string>
@@ -56,7 +56,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			RmoGLHViejQ4WNz5FqCW0xJILPE=
+			4Hq6Js1Ix1RXCkj6fMFmvNcW7WU=
 			</data>
 			<key>requirement</key>
 			<string>anchor apple generic and identifier "com.apple.driver.AppleUSBOHCI" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = GSF3NR4NQ5)</string>
@@ -65,7 +65,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			sr1Y9Nd/Zx4ekvwUdt8MNyllE/w=
+			4XJ+vGLTbz5CJ0uFY4vuTkg+/xQ=
 			</data>
 			<key>requirement</key>
 			<string>anchor apple generic and identifier "com.apple.driver.AppleUSBOpticalMouse" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = GSF3NR4NQ5)</string>
@@ -74,7 +74,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			41WOI7oXYsIa/z730pNGYDMfHbY=
+			3DiMH/lKeIGJGe4SvA93opW5GJA=
 			</data>
 			<key>requirement</key>
 			<string>anchor apple generic and identifier "com.apple.driver.AppleUSBUHCI" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = GSF3NR4NQ5)</string>
@@ -83,7 +83,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			JDuT1R31nUzdAZj9IfK9kSyPX1Y=
+			5kVPLnTCnfz78HrNEMvvUD0rRAg=
 			</data>
 			<key>requirement</key>
 			<string>anchor apple generic and identifier "com.apple.driver.AppleUSBXHCI" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = GSF3NR4NQ5)</string>
@@ -92,7 +92,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			pE6Kxa9yZHOol4xivl9DQeFPf40=
+			fHGLCIPnOnD7Oy53lNyMOEIvWxw=
 			</data>
 			<key>requirement</key>
 			<string>anchor apple generic and identifier "com.apple.driver.AppleUSBComposite" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = GSF3NR4NQ5)</string>
@@ -101,7 +101,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			SfHNXPhG8BDfZp19Mdn1lT1jeDI=
+			DvQ/9XtMsC/33z5XhpmOKh6HTdE=
 			</data>
 			<key>requirement</key>
 			<string>anchor apple generic and identifier "com.apple.iokit.IOUSBHIDDriver" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = GSF3NR4NQ5)</string>
@@ -119,7 +119,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			tn63Gz0Tmqeb9emNuFhGH4OLuH8=
+			+SrlwX9YxAg18DvdlCyPr2EcdWo=
 			</data>
 			<key>requirement</key>
 			<string>anchor apple generic and identifier "com.apple.iokit.IOUSBUserClient" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = GSF3NR4NQ5)</string>

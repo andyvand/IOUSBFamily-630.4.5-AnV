@@ -879,7 +879,10 @@ IOUSBControllerV3::InitForPM(void)
 	return kIOReturnSuccess;
 }
 
-
+IOReturn IOUSBControllerV3::CheckPowerModeBeforeGatedCall(char *fromStr, OSObject *token, UInt32 options)
+{
+    return CheckPowerModeBeforeGatedCall(fromStr);
+}
 
 IOReturn
 IOUSBControllerV3::CheckPowerModeBeforeGatedCall(char *fromStr)
@@ -2414,9 +2417,52 @@ IOUSBControllerV3::GetBandwidthAvailableForDevice(IOUSBDevice *forDevice,  UInt3
     return ret;
 }
 
+IOReturn IOUSBControllerV3::GetRootHubPowerExitLatencies(IOUSBHubExitLatencies **latencies)
+{
+    _v3ExpansionData->_latencies[0].vers = 1;
+    _v3ExpansionData->_latencies[0].numStates = 0;
+
+    if (latencies != NULL)
+    {
+        *latencies = (IOUSBHubExitLatencies *)_v3ExpansionData->_latencies;
+    }
+
+    return kIOReturnSuccess;
+}
+
+UInt32 IOUSBControllerV3::GetMinimumIdlePowerState(void)
+{
+    _v3ExpansionData->_minimumIdlePowerState = 0;
+
+    return _v3ExpansionData->_minimumIdlePowerState;
+}
+
+bool
+IOUSBControllerV3::GetInternalHubErrataBits(IORegistryEntry * provider, UInt32 portnum, UInt32 locationID, UInt32 *errataBits)
+{
+    IOACPIPlatformDevice *	acpiDevice;
+    bool					found = false;
+    
+    acpiDevice = CopyACPIDevice( provider );
+    if (acpiDevice)
+    {
+        found = CheckACPIUPCTableForInternalHubErrataBits(acpiDevice, portnum, locationID, errataBits);
+        acpiDevice->release();
+        acpiDevice = NULL;
+    }
+    
+    USBLog(5, "IOUSBController(%s)[%p]::GetInternalHubErrataBits(%s) - provider(%p) portNum(%d) locationID(0x%x)", getName(), this, found?"true":"false", provider, (int)portnum, (int)locationID);
+    
+    return found;
+}
+
+bool IOUSBControllerV3::DoNotPowerOffPortsOnStop(void)
+{
+    return false;
+}
+
 OSMetaClassDefineReservedUsed(IOUSBControllerV3,  0);
 OSMetaClassDefineReservedUsed(IOUSBControllerV3,  1);
-
 OSMetaClassDefineReservedUsed(IOUSBControllerV3,  2);
 OSMetaClassDefineReservedUsed(IOUSBControllerV3,  3);
 OSMetaClassDefineReservedUsed(IOUSBControllerV3,  4);

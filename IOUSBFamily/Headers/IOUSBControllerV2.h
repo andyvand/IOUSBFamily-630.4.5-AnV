@@ -444,8 +444,6 @@ public:
                               UInt8 speed,
                               USBDeviceAddress hubAddress,
                               int port);
-
-    
     
 	OSMetaClassDeclareReservedUnused(IOUSBControllerV2,  27);
     OSMetaClassDeclareReservedUnused(IOUSBControllerV2,  28);

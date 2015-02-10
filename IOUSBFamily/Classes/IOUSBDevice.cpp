@@ -4777,6 +4777,33 @@ IOUSBDevice::MakePipe(const IOUSBEndpointDescriptor *ep, IOUSBSuperSpeedEndpoint
     return IOUSBPipeV2::ToEndpoint(ep, sscd, this, _controller, interface); 
 }
 
+void
+IOUSBDevice::joinPMtree(IOService * driver)
+{
+    if (_controller != NULL)
+    {
+        _controller->joinPMtree(driver);
+    }
+}
+
+IOReturn
+IOUSBDevice::SetIsochDelay(UInt16 delay)
+{
+    IOReturn err = kIOReturnSuccess;
+    IOUSBDevRequest	request;
+
+    request.bmRequestType = USBmakebmRequestType(kUSBIn, kUSBStandard, kUSBDevice);
+    request.bRequest = kUSBSetIsochDelay;
+    request.wValue = delay;
+    request.wIndex = 0;
+    request.wLength = 0;
+    request.pData = 0;
+
+    err = DeviceRequest(&request, 5000, 0);
+
+    return err;
+}
+
 OSMetaClassDefineReservedUsed(IOUSBDevice,  0);
 OSMetaClassDefineReservedUsed(IOUSBDevice,  1);
 OSMetaClassDefineReservedUsed(IOUSBDevice,  2);
@@ -4798,6 +4825,3 @@ OSMetaClassDefineReservedUsed(IOUSBDevice,  17);
 
 OSMetaClassDefineReservedUnused(IOUSBDevice,  18);
 OSMetaClassDefineReservedUnused(IOUSBDevice,  19);
-
-
-

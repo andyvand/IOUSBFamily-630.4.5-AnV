@@ -605,6 +605,34 @@ IOUSBHubPolicyMaker::ReEnumeratePort(UInt32 portNum, UInt32 options)
 	return kIOReturnUnsupported;
 }
 
+IOReturn
+IOUSBHubPolicyMaker::GetPowerExitLatencies(IOUSBHubExitLatencies **latencies)
+{
+    _latencies[0].vers = 1;
+    _latencies[0].numStates = 0;
+
+    if (latencies)
+    {
+        *latencies = (IOUSBHubExitLatencies *)_latencies;
+    }
+
+    return kIOReturnSuccess;
+}
+
+IOReturn
+IOUSBHubPolicyMaker::ProcessUSBNotification(UInt8 action, IOUSBNotification *note, UInt64 notificationToken)
+{
+#pragma unused (action, note, notificationToken)
+    USBLog(5, "IOUSBHubPolicyMaker[%p]::ProcessUSBNotification  UNSUPPORTED", this);
+
+    return kIOReturnUnsupported;
+}
+
+UInt32
+IOUSBHubPolicyMaker::GetMinimumIdlePowerState(void)
+{
+    return 0;
+}
 
 #pragma mark MetaClass
 
