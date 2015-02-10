@@ -27,8 +27,6 @@
 #include "AppleUSBEHCI.h"
 #include "USBEHCI.h"
 
-
-
 IOReturn
 AppleUSBEHCI::EnterTestMode()
 {

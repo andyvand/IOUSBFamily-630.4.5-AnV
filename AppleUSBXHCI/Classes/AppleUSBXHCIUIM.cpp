@@ -11068,3 +11068,8 @@ AppleUSBXHCI::GetNewDMACommand()
 	return IODMACommand::withSpecification(kIODMACommandOutputHost64, _AC64 ? 64 : 32, 0);
 }
 
+UInt16
+AppleUSBXHCI::getRootPortNumber(UInt8 slot)
+{
+    return 0;
+}

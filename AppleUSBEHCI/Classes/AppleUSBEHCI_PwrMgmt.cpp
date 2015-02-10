@@ -55,7 +55,9 @@
 //
 // Declare a statically-initialized instance of the class so that its constructor will be called on driver load 
 // and its destructor will be called on unload.
+#if 0
 static class AppleUSBEHCI_IOLockClass gEHCI_GlobalLock;
+#endif /* 0 */
 
 //================================================================================================
 //
@@ -117,6 +119,7 @@ extern UInt32 getPortSCForWriting(EHCIRegistersPtr _pEHCIRegisters, short port);
 //
 //================================================================================================
 //
+#if 0
 AppleUSBEHCI_IOLockClass::AppleUSBEHCI_IOLockClass() 
 {
 	lock = IOLockAlloc();
@@ -126,7 +129,7 @@ AppleUSBEHCI_IOLockClass::~AppleUSBEHCI_IOLockClass()
 {
 	IOLockFree(lock);
 }		
-
+#endif /* 0 */
 
 //================================================================================================
 //

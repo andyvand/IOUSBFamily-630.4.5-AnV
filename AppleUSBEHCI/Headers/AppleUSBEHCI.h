@@ -131,6 +131,7 @@ enum{
 
 #define _errataBits _v3ExpansionData->_errata64Bits
 
+#if 0
 //================================================================================================
 //
 //   AppleUSBEHCI_IOLockClass
@@ -147,11 +148,12 @@ public:
 	
 	IOLock *lock;
 };
+#endif /* 0 */
 
 class AppleUSBEHCI : public IOUSBControllerV3
 {
     friend class AppleUSBEHCIDiagnostics;
-	
+
     OSDeclareDefaultStructors(AppleUSBEHCI)
 
 	// Structure used for statistics for UIMs.
@@ -176,9 +178,7 @@ class AppleUSBEHCI : public IOUSBControllerV3
 		UInt32			controlBulkTxOut;
 	} UIMDiagnostics;
 	
-	
 private:
-	
     void							showRegisters(UInt32 level, const char *s);
     void							printTD(EHCIGeneralTransferDescriptorPtr pTD, int level);
     void							printAsyncQueue(int level, const char *str, bool printSkipped, bool printTDs);

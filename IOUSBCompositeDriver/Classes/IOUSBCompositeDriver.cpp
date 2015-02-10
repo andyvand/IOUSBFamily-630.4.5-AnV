@@ -847,9 +847,113 @@ IOUSBCompositeDriver::ConfigureDevicePowerManagement( IOService * provider )
         return kIOReturnSuccess;
 }
 
+/*!
+ @function FindPreferredConfiguration
+ @abstract Called when an IOUSBDevice has more than one Configuration Descriptor. This method will decide which Configuration Descriptor is the preferred one.
+ @discussion The default implementation will pick a preferred configuration as follows:
+ 1) If either the plist for the subclass of IOUSBCompositeDriver or the IOUSBDevice itself contains a "Preferred Configuration" property, then the number contained in that property will be
+ used to attempt to match a bConfigurationValue in one of the configuration descriptors
+ 2) If there is a plist array entry called "Preferred Interfaces", then the IOUSBCompositeDriver will look through that array for a set of dictionaries with the following fields:
+ "bInterfaceClass"  - [required] value specifying an Interface Descriptor class
+ "bInterfaceSubClass" - [optional] value specifying an Interface Descriptor subclass
+ "bInterfaceProtocol"  - [optional] value specifying an Interface Descriptor protocol
+ "priority" - [required] value from 1 to 10 indicating a priority for this dictionary
+ the IOUSBCompositeDriver will search through all configurations available in the device, and if it finds a configuration descriptor which contains an interface descriptor which matches one of the provided dictionaries, it will make that configuration descriptor the preferred configuration. lower values of "priority" will match first
+ 3) If neither 1 or 2 results in a preferred configuration, then the first highest power configuration descriptor for which the port has sufficient power will be the preferred descriptor
+ @param preferredConfig A pointer to a UInt8 which will hold the index of the preferred configuration descriptor (Not the bConfigurationValue!)
+ @result kIOReturnSuccess if a preferred configuration could be determined, otherwise an error.
+ */
+OSMetaClassDefineReservedUsed(IOUSBCompositeDriver,  1);
+IOReturn
+IOUSBCompositeDriver::FindPreferredConfiguration(UInt8 *pPreferredConfigIndex)
+{
+    OSNumber *prefConfig;
+    OSArray *prefInterfaces;
+    OSDictionary *prefInterfaceDict;
+    OSNumber *priority;
+    unsigned int currentInterface = 0;
+    unsigned int interfaceCount = 0;
+    UInt8 cfgIndex = 0;
+    UInt8 highestPriority = 0;
+    bool configFound = false;
+    UInt8 numConfigs = 0;
+
+    /* 1 */
+    prefConfig = OSDynamicCast(OSNumber, getProperty("Preferred Configuration"));
+    if (prefConfig != NULL)
+    {
+        cfgIndex = (UInt8)prefConfig->unsigned8BitValue();
+
+        pPreferredConfigIndex = &cfgIndex;
+
+        return kIOReturnSuccess;
+    }
+
+    if (fDevice != NULL)
+    {
+        prefConfig = OSDynamicCast(OSNumber, fDevice->getProperty("Preferred Configuration"));
+
+        if (prefConfig != NULL)
+        {
+            cfgIndex = (UInt8)prefConfig->unsigned8BitValue();
+            
+            pPreferredConfigIndex = &cfgIndex;
+            
+            return kIOReturnSuccess;
+        }
+    }
+
+    /* 2 */
+    prefInterfaces = OSDynamicCast(OSArray, getProperty("Preferred Interfaces"));
+    if (prefInterfaces != NULL)
+    {
+        interfaceCount = prefInterfaces->getCount();
+
+        while (currentInterface < interfaceCount)
+        {
+            prefInterfaceDict = OSDynamicCast(OSDictionary, prefInterfaces->getObject(currentInterface));
+
+            if (prefInterfaceDict != NULL)
+            {
+                priority = OSDynamicCast(OSNumber, prefInterfaceDict->getObject("priority"));
+                if (priority != NULL)
+                {
+                    if (highestPriority < priority->unsigned8BitValue())
+                    {
+                        highestPriority = priority->unsigned8BitValue();
+
+                        configFound = true;
+                    }
+                }
+            }
+
+            ++currentInterface;
+        }
+
+        if (configFound == true)
+        {
+            pPreferredConfigIndex = &cfgIndex;
+
+            return kIOReturnSuccess;
+        }
+    }
+
+    /* 3 */
+    numConfigs = fDevice->GetNumConfigurations();
+    if (numConfigs != 0)
+    {
+        if (fDevice->GetConfiguration(&cfgIndex) == kIOReturnSuccess)
+        {
+            pPreferredConfigIndex = &cfgIndex;
+
+            return kIOReturnSuccess;
+        }
+    }
+
+    return kIOReturnNotFound;
+}
 
 #pragma mark ееееееее Padding Methods еееееееее
-OSMetaClassDefineReservedUsed(IOUSBCompositeDriver,  1);
 
 OSMetaClassDefineReservedUnused(IOUSBCompositeDriver,  2);
 OSMetaClassDefineReservedUnused(IOUSBCompositeDriver,  3);
@@ -869,5 +973,3 @@ OSMetaClassDefineReservedUnused(IOUSBCompositeDriver, 16);
 OSMetaClassDefineReservedUnused(IOUSBCompositeDriver, 17);
 OSMetaClassDefineReservedUnused(IOUSBCompositeDriver, 18); 
 OSMetaClassDefineReservedUnused(IOUSBCompositeDriver, 19);
-
-

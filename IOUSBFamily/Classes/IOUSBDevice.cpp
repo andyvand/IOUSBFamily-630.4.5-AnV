@@ -4804,6 +4804,12 @@ IOUSBDevice::SetIsochDelay(UInt16 delay)
     return err;
 }
 
+IOService *
+IOUSBDevice::GetInterfacePowerParent(void)
+{
+    return _expansionData->_interfacePowerParent;
+}
+
 OSMetaClassDefineReservedUsed(IOUSBDevice,  0);
 OSMetaClassDefineReservedUsed(IOUSBDevice,  1);
 OSMetaClassDefineReservedUsed(IOUSBDevice,  2);
