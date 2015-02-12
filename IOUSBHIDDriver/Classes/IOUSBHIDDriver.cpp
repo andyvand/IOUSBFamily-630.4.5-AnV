@@ -206,7 +206,7 @@ IOUSBHIDDriver::init(OSDictionary *properties)
             return false;
         bzero(_usbHIDExpansionData, sizeof(IOUSBHIDDriverExpansionData));
     }
-    _retryCount = kHIDDriverRetryCount;
+    _retryCount = kHIDStandardDriverRetryCount;
     _maxReportSize = kMaxHIDReportSize;
 	_HID_LOGGING_LEVEL = 7;
 
@@ -631,7 +631,7 @@ IOUSBHIDDriver::message( UInt32 type, IOService * provider,  void * argument )
 				}
 			}
 
-      _retryCount = kHIDDriverRetryCount;
+      _retryCount = kHIDStandardDriverRetryCount;
       ABORTEXPECTED = FALSE;
       _deviceHasBeenDisconnected = FALSE;
 
@@ -1626,7 +1626,7 @@ IOUSBHIDDriver::InterruptReadHandler(IOReturn status, UInt32 bufferSizeRemaining
         case kIOReturnSuccess:
             // Reset the retry count, since we had a successful read
             //
-            _retryCount = kHIDDriverRetryCount;
+            _retryCount = kHIDStandardDriverRetryCount;
 			_deviceHasBeenDisconnected = FALSE;
 			
 			// If we got a "short" transfer, adjust the length of the buffer so we don't send stale data to the HID family.
