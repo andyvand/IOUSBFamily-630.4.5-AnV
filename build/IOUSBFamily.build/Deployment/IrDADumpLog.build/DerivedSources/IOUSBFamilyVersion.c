@@ -1,0 +1,1 @@
+ const unsigned char IrDADumpLogVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:IrDADumpLog  PROJECT:IOUSBFamily-710.4.14" "\n"; const double IrDADumpLogVersionNumber __attribute__ ((used)) = (double)710.4;

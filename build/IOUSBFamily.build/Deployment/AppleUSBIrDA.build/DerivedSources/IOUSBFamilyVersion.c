@@ -1,0 +1,1 @@
+ const unsigned char AppleUSBIrDAVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:AppleUSBIrDA  PROJECT:IOUSBFamily-1.4.5b4" "\n"; const double AppleUSBIrDAVersionNumber __attribute__ ((used)) = (double)1.4;

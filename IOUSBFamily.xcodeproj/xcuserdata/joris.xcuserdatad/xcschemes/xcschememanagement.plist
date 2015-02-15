@@ -14,6 +14,11 @@
 			<key>orderHint</key>
 			<integer>6</integer>
 		</dict>
+		<key>AppleSCCIrDA.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>30</integer>
+		</dict>
 		<key>AppleUSBEHCI.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -23,6 +28,11 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>17</integer>
+		</dict>
+		<key>AppleUSBIrDA.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>29</integer>
 		</dict>
 		<key>AppleUSBMergeNub.xcscheme</key>
 		<dict>
@@ -109,6 +119,26 @@
 			<key>orderHint</key>
 			<integer>20</integer>
 		</dict>
+		<key>IrDADebugLog.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>33</integer>
+		</dict>
+		<key>IrDADumpLog.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>31</integer>
+		</dict>
+		<key>IrDAMenu.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>35</integer>
+		</dict>
+		<key>IrDAStatus.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>34</integer>
+		</dict>
 		<key>KLog.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -133,6 +163,11 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>3</integer>
+		</dict>
+		<key>deltatime.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>32</integer>
 		</dict>
 		<key>installhdrs.xcscheme</key>
 		<dict>
@@ -283,6 +318,51 @@
 			<true/>
 		</dict>
 		<key>A9C14F111A87EB8600A642EB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A9C5F5341A9106D7004851CC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A9E17C2A1A90FEE200676EE6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A9E17C431A91008800676EE6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A9E17D361A9101EF00676EE6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A9E17D471A9102C000676EE6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A9E17D5A1A91036300676EE6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A9E17D6C1A91036300676EE6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A9E17DA61A9104E500676EE6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A9E17DB81A9104E500676EE6</key>
 		<dict>
 			<key>primary</key>
 			<true/>

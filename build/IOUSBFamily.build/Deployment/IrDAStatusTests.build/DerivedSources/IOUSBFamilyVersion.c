@@ -1,0 +1,1 @@
+ const unsigned char IrDAStatusTestsVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:IrDAStatusTests  PROJECT:IOUSBFamily-710.4.14" "\n"; const double IrDAStatusTestsVersionNumber __attribute__ ((used)) = (double)710.4;

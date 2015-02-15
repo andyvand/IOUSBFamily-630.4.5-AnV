@@ -18,7 +18,12 @@
 				3E99F039152B621100F97A0C /* PBXTargetDependency */,
 				3E99F03B152B621600F97A0C /* PBXTargetDependency */,
 				A9AFBB4E1A87F67D003C0BEF /* PBXTargetDependency */,
+				A9E17D401A91020B00676EE6 /* PBXTargetDependency */,
+				A9E17D531A9102F500676EE6 /* PBXTargetDependency */,
 				3E99F0DA152B6AF100F97A0C /* PBXTargetDependency */,
+				A9E17D7E1A9103B600676EE6 /* PBXTargetDependency */,
+				A9E17DCA1A91051700676EE6 /* PBXTargetDependency */,
+				A9296A341A91073500184BDD /* PBXTargetDependency */,
 			);
 			name = IOUSBFamily_executables;
 			productName = IOUSBFamily_executables;
@@ -383,6 +388,25 @@
 		3EFE2F1D0B8B58ED00013454 /* IOUSBHubPolicyMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EFE2F1C0B8B58ED00013454 /* IOUSBHubPolicyMaker.h */; };
 		3EFE2F960B8B5DD300013454 /* IOUSBUserClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 01E71EE4FFB8799F7F000001 /* IOUSBUserClient.h */; };
 		A91767F01A885EF0003E5F43 /* libutil.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A91767EF1A885EF0003E5F43 /* libutil.dylib */; };
+		A9296A441A91076000184BDD /* menu.strings in Resources */ = {isa = PBXBuildFile; fileRef = A9296A361A91076000184BDD /* menu.strings */; };
+		A9296A451A91076000184BDD /* IRDA1IdleCropped.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A9296A381A91076000184BDD /* IRDA1IdleCropped.pdf */; };
+		A9296A461A91076000184BDD /* IRDA2DiscoveringCropped.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A9296A391A91076000184BDD /* IRDA2DiscoveringCropped.pdf */; };
+		A9296A471A91076000184BDD /* IRDA3ConnectedCropped.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A9296A3A1A91076000184BDD /* IRDA3ConnectedCropped.pdf */; };
+		A9296A481A91076000184BDD /* IRDA4BrokenBeamCropped.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A9296A3B1A91076000184BDD /* IRDA4BrokenBeamCropped.pdf */; };
+		A9296A491A91076000184BDD /* IRDA5InvalidCropped.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A9296A3C1A91076000184BDD /* IRDA5InvalidCropped.pdf */; };
+		A9296A4A1A91076000184BDD /* IRDA6OffCropped.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A9296A3D1A91076000184BDD /* IRDA6OffCropped.pdf */; };
+		A9296A4B1A91076000184BDD /* IrDAExtra.m in Sources */ = {isa = PBXBuildFile; fileRef = A9296A3F1A91076000184BDD /* IrDAExtra.m */; };
+		A9296A4D1A91076000184BDD /* ToDo in Resources */ = {isa = PBXBuildFile; fileRef = A9296A411A91076000184BDD /* ToDo */; };
+		A9296A4E1A91076000184BDD /* UtilityRoutines.c in Sources */ = {isa = PBXBuildFile; fileRef = A9296A421A91076000184BDD /* UtilityRoutines.c */; };
+		A9296A4F1A9115BF00184BDD /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9CFF8B71A88266500393473 /* IOKit.framework */; };
+		A9296A501A9115D700184BDD /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9CFF8B71A88266500393473 /* IOKit.framework */; };
+		A9296A521A9115E300184BDD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9296A511A9115E300184BDD /* Foundation.framework */; };
+		A9296A531A91160800184BDD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9296A511A9115E300184BDD /* Foundation.framework */; };
+		A9296A541A91160D00184BDD /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9CFF8B71A88266500393473 /* IOKit.framework */; };
+		A9296A561A91161900184BDD /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9296A551A91161900184BDD /* AppKit.framework */; };
+		A9296A571A91163500184BDD /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9296A551A91161900184BDD /* AppKit.framework */; };
+		A946C7C61A9127C900B7EB90 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A946C7C51A9127C900B7EB90 /* main.m */; };
+		A946C7CB1A912EE400B7EB90 /* SystemUIPlugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A946C7C71A912DFA00B7EB90 /* SystemUIPlugin.framework */; };
 		A97624661A86775D002AC2FD /* usbtracer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 301DB0930EF8920B009BF777 /* usbtracer */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		A97624671A867762002AC2FD /* reenumerate in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EB33C211330EAF700688D55 /* reenumerate */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		A97624681A86776A002AC2FD /* KLog.kext in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EAF8B180B5D42870029974F /* KLog.kext */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -398,6 +422,171 @@
 		A9C14F311A87EC2700A642EB /* USBMassStorageClassBulkOnly.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9C14F2C1A87EC2700A642EB /* USBMassStorageClassBulkOnly.cpp */; };
 		A9C14F321A87EC2700A642EB /* USBMassStorageClassCBI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9C14F2D1A87EC2700A642EB /* USBMassStorageClassCBI.cpp */; };
 		A9CFF8B81A88266500393473 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9CFF8B71A88266500393473 /* IOKit.framework */; };
+		A9E17C3C1A91003200676EE6 /* AppleUSBIrDA.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C391A91003200676EE6 /* AppleUSBIrDA.cpp */; };
+		A9E17C3D1A91003200676EE6 /* AppleUSBIrDA.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C3A1A91003200676EE6 /* AppleUSBIrDA.h */; };
+		A9E17C551A91015C00676EE6 /* AppleSCCIrDA.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C521A91015C00676EE6 /* AppleSCCIrDA.cpp */; };
+		A9E17C561A91015C00676EE6 /* AppleSCCIrDA.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C531A91015C00676EE6 /* AppleSCCIrDA.h */; };
+		A9E17CA71A91017100676EE6 /* AppleIrDA.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C591A91017100676EE6 /* AppleIrDA.cpp */; };
+		A9E17CA81A91017100676EE6 /* AppleIrDA.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C591A91017100676EE6 /* AppleIrDA.cpp */; };
+		A9E17CA91A91017100676EE6 /* AppleIrDA.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C5A1A91017100676EE6 /* AppleIrDA.h */; };
+		A9E17CAA1A91017100676EE6 /* AppleIrDA.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C5A1A91017100676EE6 /* AppleIrDA.h */; };
+		A9E17CAB1A91017100676EE6 /* IrDADebugging.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C5C1A91017100676EE6 /* IrDADebugging.h */; };
+		A9E17CAC1A91017100676EE6 /* IrDADebugging.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C5C1A91017100676EE6 /* IrDADebugging.h */; };
+		A9E17CAD1A91017100676EE6 /* IrDALog.c in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C5D1A91017100676EE6 /* IrDALog.c */; };
+		A9E17CAE1A91017100676EE6 /* IrDALog.c in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C5D1A91017100676EE6 /* IrDALog.c */; };
+		A9E17CAF1A91017100676EE6 /* IrDALog.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C5E1A91017100676EE6 /* IrDALog.h */; };
+		A9E17CB01A91017100676EE6 /* IrDALog.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C5E1A91017100676EE6 /* IrDALog.h */; };
+		A9E17CB11A91017100676EE6 /* IrDALogPriv.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C5F1A91017100676EE6 /* IrDALogPriv.h */; };
+		A9E17CB21A91017100676EE6 /* IrDALogPriv.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C5F1A91017100676EE6 /* IrDALogPriv.h */; };
+		A9E17CB31A91017100676EE6 /* IrIASClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C611A91017100676EE6 /* IrIASClient.cpp */; };
+		A9E17CB41A91017100676EE6 /* IrIASClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C611A91017100676EE6 /* IrIASClient.cpp */; };
+		A9E17CB51A91017100676EE6 /* IrIASClient.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C621A91017100676EE6 /* IrIASClient.h */; };
+		A9E17CB61A91017100676EE6 /* IrIASClient.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C621A91017100676EE6 /* IrIASClient.h */; };
+		A9E17CB71A91017100676EE6 /* IrIASServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C631A91017100676EE6 /* IrIASServer.cpp */; };
+		A9E17CB81A91017100676EE6 /* IrIASServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C631A91017100676EE6 /* IrIASServer.cpp */; };
+		A9E17CB91A91017100676EE6 /* IrIASServer.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C641A91017100676EE6 /* IrIASServer.h */; };
+		A9E17CBA1A91017100676EE6 /* IrIASServer.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C641A91017100676EE6 /* IrIASServer.h */; };
+		A9E17CBB1A91017100676EE6 /* IrIASService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C651A91017100676EE6 /* IrIASService.cpp */; };
+		A9E17CBC1A91017100676EE6 /* IrIASService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C651A91017100676EE6 /* IrIASService.cpp */; };
+		A9E17CBD1A91017100676EE6 /* IrIASService.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C661A91017100676EE6 /* IrIASService.h */; };
+		A9E17CBE1A91017100676EE6 /* IrIASService.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C661A91017100676EE6 /* IrIASService.h */; };
+		A9E17CBF1A91017100676EE6 /* CIrDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C681A91017100676EE6 /* CIrDevice.cpp */; };
+		A9E17CC01A91017100676EE6 /* CIrDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C681A91017100676EE6 /* CIrDevice.cpp */; };
+		A9E17CC11A91017100676EE6 /* CIrDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C691A91017100676EE6 /* CIrDevice.h */; };
+		A9E17CC21A91017100676EE6 /* CIrDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C691A91017100676EE6 /* CIrDevice.h */; };
+		A9E17CC31A91017100676EE6 /* IrDAStats.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C6A1A91017100676EE6 /* IrDAStats.h */; };
+		A9E17CC41A91017100676EE6 /* IrDAStats.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C6A1A91017100676EE6 /* IrDAStats.h */; };
+		A9E17CC51A91017100676EE6 /* IrComm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C6C1A91017100676EE6 /* IrComm.cpp */; };
+		A9E17CC61A91017100676EE6 /* IrComm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C6C1A91017100676EE6 /* IrComm.cpp */; };
+		A9E17CC71A91017100676EE6 /* IrComm.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C6D1A91017100676EE6 /* IrComm.h */; };
+		A9E17CC81A91017100676EE6 /* IrComm.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C6D1A91017100676EE6 /* IrComm.h */; };
+		A9E17CC91A91017100676EE6 /* IrDAComm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C6E1A91017100676EE6 /* IrDAComm.cpp */; };
+		A9E17CCA1A91017100676EE6 /* IrDAComm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C6E1A91017100676EE6 /* IrDAComm.cpp */; };
+		A9E17CCB1A91017100676EE6 /* IrDAComm.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C6F1A91017100676EE6 /* IrDAComm.h */; };
+		A9E17CCC1A91017100676EE6 /* IrDAComm.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C6F1A91017100676EE6 /* IrDAComm.h */; };
+		A9E17CCD1A91017100676EE6 /* IrDATypes.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C701A91017100676EE6 /* IrDATypes.h */; };
+		A9E17CCE1A91017100676EE6 /* IrDATypes.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C701A91017100676EE6 /* IrDATypes.h */; };
+		A9E17CCF1A91017100676EE6 /* IrDAUser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C711A91017100676EE6 /* IrDAUser.cpp */; };
+		A9E17CD01A91017100676EE6 /* IrDAUser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C711A91017100676EE6 /* IrDAUser.cpp */; };
+		A9E17CD11A91017100676EE6 /* IrDAUser.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C721A91017100676EE6 /* IrDAUser.h */; };
+		A9E17CD21A91017100676EE6 /* IrDAUser.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C721A91017100676EE6 /* IrDAUser.h */; };
+		A9E17CD31A91017100676EE6 /* IrDAUserClient.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C731A91017100676EE6 /* IrDAUserClient.h */; };
+		A9E17CD41A91017100676EE6 /* IrDAUserClient.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C731A91017100676EE6 /* IrDAUserClient.h */; };
+		A9E17CD51A91017100676EE6 /* IrGlue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C741A91017100676EE6 /* IrGlue.cpp */; };
+		A9E17CD61A91017100676EE6 /* IrGlue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C741A91017100676EE6 /* IrGlue.cpp */; };
+		A9E17CD71A91017100676EE6 /* IrGlue.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C751A91017100676EE6 /* IrGlue.h */; };
+		A9E17CD81A91017100676EE6 /* IrGlue.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C751A91017100676EE6 /* IrGlue.h */; };
+		A9E17CD91A91017100676EE6 /* IrDscInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C771A91017100676EE6 /* IrDscInfo.cpp */; };
+		A9E17CDA1A91017100676EE6 /* IrDscInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C771A91017100676EE6 /* IrDscInfo.cpp */; };
+		A9E17CDB1A91017100676EE6 /* IrDscInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C781A91017100676EE6 /* IrDscInfo.h */; };
+		A9E17CDC1A91017100676EE6 /* IrDscInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C781A91017100676EE6 /* IrDscInfo.h */; };
+		A9E17CDD1A91017100676EE6 /* IrEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C791A91017100676EE6 /* IrEvent.cpp */; };
+		A9E17CDE1A91017100676EE6 /* IrEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C791A91017100676EE6 /* IrEvent.cpp */; };
+		A9E17CDF1A91017100676EE6 /* IrEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C7A1A91017100676EE6 /* IrEvent.h */; };
+		A9E17CE01A91017100676EE6 /* IrEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C7A1A91017100676EE6 /* IrEvent.h */; };
+		A9E17CE11A91017100676EE6 /* IrLAP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C7B1A91017100676EE6 /* IrLAP.cpp */; };
+		A9E17CE21A91017100676EE6 /* IrLAP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C7B1A91017100676EE6 /* IrLAP.cpp */; };
+		A9E17CE31A91017100676EE6 /* IrLAP.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C7C1A91017100676EE6 /* IrLAP.h */; };
+		A9E17CE41A91017100676EE6 /* IrLAP.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C7C1A91017100676EE6 /* IrLAP.h */; };
+		A9E17CE51A91017100676EE6 /* IrLAPConn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C7D1A91017100676EE6 /* IrLAPConn.cpp */; };
+		A9E17CE61A91017100676EE6 /* IrLAPConn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C7D1A91017100676EE6 /* IrLAPConn.cpp */; };
+		A9E17CE71A91017100676EE6 /* IrLAPConn.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C7E1A91017100676EE6 /* IrLAPConn.h */; };
+		A9E17CE81A91017100676EE6 /* IrLAPConn.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C7E1A91017100676EE6 /* IrLAPConn.h */; };
+		A9E17CE91A91017100676EE6 /* IrLMP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C7F1A91017100676EE6 /* IrLMP.cpp */; };
+		A9E17CEA1A91017100676EE6 /* IrLMP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C7F1A91017100676EE6 /* IrLMP.cpp */; };
+		A9E17CEB1A91017100676EE6 /* IrLMP.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C801A91017100676EE6 /* IrLMP.h */; };
+		A9E17CEC1A91017100676EE6 /* IrLMP.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C801A91017100676EE6 /* IrLMP.h */; };
+		A9E17CED1A91017100676EE6 /* IrQOS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C811A91017100676EE6 /* IrQOS.cpp */; };
+		A9E17CEE1A91017100676EE6 /* IrQOS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C811A91017100676EE6 /* IrQOS.cpp */; };
+		A9E17CEF1A91017100676EE6 /* IrQOS.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C821A91017100676EE6 /* IrQOS.h */; };
+		A9E17CF01A91017100676EE6 /* IrQOS.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C821A91017100676EE6 /* IrQOS.h */; };
+		A9E17CF11A91017100676EE6 /* CIrLSAP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C841A91017100676EE6 /* CIrLSAP.cpp */; };
+		A9E17CF21A91017100676EE6 /* CIrLSAP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C841A91017100676EE6 /* CIrLSAP.cpp */; };
+		A9E17CF31A91017100676EE6 /* CIrLSAP.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C851A91017100676EE6 /* CIrLSAP.h */; };
+		A9E17CF41A91017100676EE6 /* CIrLSAP.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C851A91017100676EE6 /* CIrLSAP.h */; };
+		A9E17CF51A91017100676EE6 /* IrDiscovery.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C861A91017100676EE6 /* IrDiscovery.cpp */; };
+		A9E17CF61A91017100676EE6 /* IrDiscovery.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C861A91017100676EE6 /* IrDiscovery.cpp */; };
+		A9E17CF71A91017100676EE6 /* IrDiscovery.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C871A91017100676EE6 /* IrDiscovery.h */; };
+		A9E17CF81A91017100676EE6 /* IrDiscovery.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C871A91017100676EE6 /* IrDiscovery.h */; };
+		A9E17CF91A91017100676EE6 /* IrLSAPConn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C881A91017100676EE6 /* IrLSAPConn.cpp */; };
+		A9E17CFA1A91017100676EE6 /* IrLSAPConn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C881A91017100676EE6 /* IrLSAPConn.cpp */; };
+		A9E17CFB1A91017100676EE6 /* IrLSAPConn.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C891A91017100676EE6 /* IrLSAPConn.h */; };
+		A9E17CFC1A91017100676EE6 /* IrLSAPConn.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C891A91017100676EE6 /* IrLSAPConn.h */; };
+		A9E17CFD1A91017100676EE6 /* IrStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C8A1A91017100676EE6 /* IrStream.cpp */; };
+		A9E17CFE1A91017100676EE6 /* IrStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C8A1A91017100676EE6 /* IrStream.cpp */; };
+		A9E17CFF1A91017100676EE6 /* IrStream.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C8B1A91017100676EE6 /* IrStream.h */; };
+		A9E17D001A91017100676EE6 /* IrStream.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C8B1A91017100676EE6 /* IrStream.h */; };
+		A9E17D011A91017100676EE6 /* ttp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C8D1A91017100676EE6 /* ttp.cpp */; };
+		A9E17D021A91017100676EE6 /* ttp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C8D1A91017100676EE6 /* ttp.cpp */; };
+		A9E17D031A91017100676EE6 /* ttp.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C8E1A91017100676EE6 /* ttp.h */; };
+		A9E17D041A91017100676EE6 /* ttp.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C8E1A91017100676EE6 /* ttp.h */; };
+		A9E17D051A91017100676EE6 /* ttp2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C8F1A91017100676EE6 /* ttp2.cpp */; };
+		A9E17D061A91017100676EE6 /* ttp2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C8F1A91017100676EE6 /* ttp2.cpp */; };
+		A9E17D071A91017100676EE6 /* ttp3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C901A91017100676EE6 /* ttp3.cpp */; };
+		A9E17D081A91017100676EE6 /* ttp3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C901A91017100676EE6 /* ttp3.cpp */; };
+		A9E17D091A91017100676EE6 /* ttplmp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C911A91017100676EE6 /* ttplmp.cpp */; };
+		A9E17D0A1A91017100676EE6 /* ttplmp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C911A91017100676EE6 /* ttplmp.cpp */; };
+		A9E17D0B1A91017100676EE6 /* ttppdu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C921A91017100676EE6 /* ttppdu.cpp */; };
+		A9E17D0C1A91017100676EE6 /* ttppdu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C921A91017100676EE6 /* ttppdu.cpp */; };
+		A9E17D0D1A91017100676EE6 /* ttppdu.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C931A91017100676EE6 /* ttppdu.h */; };
+		A9E17D0E1A91017100676EE6 /* ttppdu.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C931A91017100676EE6 /* ttppdu.h */; };
+		A9E17D0F1A91017100676EE6 /* CArrayIterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C951A91017100676EE6 /* CArrayIterator.cpp */; };
+		A9E17D101A91017100676EE6 /* CArrayIterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C951A91017100676EE6 /* CArrayIterator.cpp */; };
+		A9E17D111A91017100676EE6 /* CArrayIterator.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C961A91017100676EE6 /* CArrayIterator.h */; };
+		A9E17D121A91017100676EE6 /* CArrayIterator.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C961A91017100676EE6 /* CArrayIterator.h */; };
+		A9E17D131A91017100676EE6 /* CBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C971A91017100676EE6 /* CBuffer.cpp */; };
+		A9E17D141A91017100676EE6 /* CBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C971A91017100676EE6 /* CBuffer.cpp */; };
+		A9E17D151A91017100676EE6 /* CBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C981A91017100676EE6 /* CBuffer.h */; };
+		A9E17D161A91017100676EE6 /* CBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C981A91017100676EE6 /* CBuffer.h */; };
+		A9E17D171A91017100676EE6 /* CBufferSegment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C991A91017100676EE6 /* CBufferSegment.cpp */; };
+		A9E17D181A91017100676EE6 /* CBufferSegment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C991A91017100676EE6 /* CBufferSegment.cpp */; };
+		A9E17D191A91017100676EE6 /* CBufferSegment.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C9A1A91017100676EE6 /* CBufferSegment.h */; };
+		A9E17D1A1A91017100676EE6 /* CBufferSegment.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C9A1A91017100676EE6 /* CBufferSegment.h */; };
+		A9E17D1B1A91017100676EE6 /* CDynamicArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C9B1A91017100676EE6 /* CDynamicArray.cpp */; };
+		A9E17D1C1A91017100676EE6 /* CDynamicArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C9B1A91017100676EE6 /* CDynamicArray.cpp */; };
+		A9E17D1D1A91017100676EE6 /* CDynamicArray.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C9C1A91017100676EE6 /* CDynamicArray.h */; };
+		A9E17D1E1A91017100676EE6 /* CDynamicArray.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C9C1A91017100676EE6 /* CDynamicArray.h */; };
+		A9E17D1F1A91017100676EE6 /* CItemComparer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C9D1A91017100676EE6 /* CItemComparer.cpp */; };
+		A9E17D201A91017100676EE6 /* CItemComparer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C9D1A91017100676EE6 /* CItemComparer.cpp */; };
+		A9E17D211A91017100676EE6 /* CItemComparer.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C9E1A91017100676EE6 /* CItemComparer.h */; };
+		A9E17D221A91017100676EE6 /* CItemComparer.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17C9E1A91017100676EE6 /* CItemComparer.h */; };
+		A9E17D231A91017100676EE6 /* CList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C9F1A91017100676EE6 /* CList.cpp */; };
+		A9E17D241A91017100676EE6 /* CList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17C9F1A91017100676EE6 /* CList.cpp */; };
+		A9E17D251A91017100676EE6 /* CList.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17CA01A91017100676EE6 /* CList.h */; };
+		A9E17D261A91017100676EE6 /* CList.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17CA01A91017100676EE6 /* CList.h */; };
+		A9E17D271A91017100676EE6 /* CListIterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17CA11A91017100676EE6 /* CListIterator.cpp */; };
+		A9E17D281A91017100676EE6 /* CListIterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17CA11A91017100676EE6 /* CListIterator.cpp */; };
+		A9E17D291A91017100676EE6 /* CListIterator.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17CA21A91017100676EE6 /* CListIterator.h */; };
+		A9E17D2A1A91017100676EE6 /* CListIterator.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17CA21A91017100676EE6 /* CListIterator.h */; };
+		A9E17D2B1A91017100676EE6 /* CTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17CA31A91017100676EE6 /* CTimer.cpp */; };
+		A9E17D2C1A91017100676EE6 /* CTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17CA31A91017100676EE6 /* CTimer.cpp */; };
+		A9E17D2D1A91017100676EE6 /* CTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17CA41A91017100676EE6 /* CTimer.h */; };
+		A9E17D2E1A91017100676EE6 /* CTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17CA41A91017100676EE6 /* CTimer.h */; };
+		A9E17D2F1A91017100676EE6 /* IrDATimerEventSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17CA51A91017100676EE6 /* IrDATimerEventSource.cpp */; };
+		A9E17D301A91017100676EE6 /* IrDATimerEventSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17CA51A91017100676EE6 /* IrDATimerEventSource.cpp */; };
+		A9E17D311A91017100676EE6 /* IrDATimerEventSource.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17CA61A91017100676EE6 /* IrDATimerEventSource.h */; };
+		A9E17D321A91017100676EE6 /* IrDATimerEventSource.h in Headers */ = {isa = PBXBuildFile; fileRef = A9E17CA61A91017100676EE6 /* IrDATimerEventSource.h */; };
+		A9E17D431A9102A600676EE6 /* dumplog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9E17D411A9102A600676EE6 /* dumplog.cpp */; };
+		A9E17D511A9102E600676EE6 /* deltatime.c in Sources */ = {isa = PBXBuildFile; fileRef = A9E17D501A9102E600676EE6 /* deltatime.c */; };
+		A9E17D961A9103D300676EE6 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E17D801A9103D300676EE6 /* AppController.m */; };
+		A9E17D971A9103D300676EE6 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = A9E17D811A9103D300676EE6 /* Defaults.plist */; };
+		A9E17D981A9103D300676EE6 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A9E17D831A9103D300676EE6 /* Credits.rtf */; };
+		A9E17D991A9103D300676EE6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9E17D851A9103D300676EE6 /* MainMenu.xib */; };
+		A9E17D9A1A9103D300676EE6 /* MyDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9E17D871A9103D300676EE6 /* MyDocument.xib */; };
+		A9E17D9B1A9103D300676EE6 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9E17D891A9103D300676EE6 /* Preferences.xib */; };
+		A9E17D9C1A9103D300676EE6 /* GetEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E17D8C1A9103D300676EE6 /* GetEntry.m */; };
+		A9E17D9E1A9103D300676EE6 /* LogItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E17D8F1A9103D300676EE6 /* LogItem.m */; };
+		A9E17D9F1A9103D300676EE6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E17D901A9103D300676EE6 /* main.m */; };
+		A9E17DA01A9103D300676EE6 /* MyDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E17D921A9103D300676EE6 /* MyDocument.m */; };
+		A9E17DA11A9103D300676EE6 /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E17D941A9103D300676EE6 /* Preferences.m */; };
+		A9E17DA21A9103D300676EE6 /* ToDo in Resources */ = {isa = PBXBuildFile; fileRef = A9E17D951A9103D300676EE6 /* ToDo */; };
+		A9E17DF31A91061700676EE6 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E17DE51A91061700676EE6 /* AppController.m */; };
+		A9E17DF41A91061700676EE6 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = A9E17DE61A91061700676EE6 /* Defaults.plist */; };
+		A9E17DF51A91061700676EE6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9E17DE81A91061700676EE6 /* MainMenu.xib */; };
+		A9E17DF61A91061700676EE6 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9E17DEA1A91061700676EE6 /* Preferences.xib */; };
+		A9E17DF71A91061700676EE6 /* IrDAActions.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E17DED1A91061700676EE6 /* IrDAActions.m */; };
+		A9E17DF81A91061700676EE6 /* IrDAStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E17DEF1A91061700676EE6 /* IrDAStatus.m */; };
+		A9E17DFA1A91061700676EE6 /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E17DF21A91061700676EE6 /* Preferences.m */; };
 		DDA42BA60BA0956C002C2F56 /* IOUSBControllerV3.h in Headers */ = {isa = PBXBuildFile; fileRef = DDA42BA50BA0956C002C2F56 /* IOUSBControllerV3.h */; };
 		DDA42BA70BA0956C002C2F56 /* IOUSBControllerV3.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDA42BA50BA0956C002C2F56 /* IOUSBControllerV3.h */; };
 		DDBF20230BA0A01B007CE86C /* IOUSBControllerV3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DDBF20220BA0A01B007CE86C /* IOUSBControllerV3.cpp */; };
@@ -572,6 +761,13 @@
 			remoteGlobalIDString = 3EBFD14A1601264400B85B43;
 			remoteInfo = AppleUSBXHCI;
 		};
+		A9296A331A91073500184BDD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9C5F5341A9106D7004851CC;
+			remoteInfo = IrDAMenu;
+		};
 		A97624691A867771002AC2FD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
@@ -606,6 +802,48 @@
 			proxyType = 1;
 			remoteGlobalIDString = A9C14F111A87EB8600A642EB;
 			remoteInfo = IOUSBMassStorageClass;
+		};
+		A9E17C371A90FFC700676EE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9E17C2A1A90FEE200676EE6;
+			remoteInfo = AppleUSBIrDA;
+		};
+		A9E17C501A91009800676EE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9E17C431A91008800676EE6;
+			remoteInfo = AppleSCCIrDA;
+		};
+		A9E17D3F1A91020B00676EE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9E17D361A9101EF00676EE6;
+			remoteInfo = IrDADumpLog;
+		};
+		A9E17D521A9102F500676EE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9E17D471A9102C000676EE6;
+			remoteInfo = deltatime;
+		};
+		A9E17D7D1A9103B600676EE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9E17D5A1A91036300676EE6;
+			remoteInfo = IrDADebugLog;
+		};
+		A9E17DC91A91051700676EE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9E17DA61A9104E500676EE6;
+			remoteInfo = IrDAStatus;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -751,6 +989,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A9AFBB411A87F5CE003C0BEF /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		A9E17D351A9101EF00676EE6 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		A9E17D461A9102C000676EE6 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -989,6 +1245,23 @@
 		84AED1D91277891500751A4A /* PortStatusGatherer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PortStatusGatherer.h; path = USBProberV2/PortStatusGatherer.h; sourceTree = "<group>"; };
 		84AED1DA1277891500751A4A /* PortStatusGatherer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PortStatusGatherer.m; path = USBProberV2/PortStatusGatherer.m; sourceTree = "<group>"; };
 		A91767EF1A885EF0003E5F43 /* libutil.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libutil.dylib; path = usr/lib/libutil.dylib; sourceTree = SDKROOT; };
+		A9296A371A91076000184BDD /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = menu.strings; sourceTree = "<group>"; };
+		A9296A381A91076000184BDD /* IRDA1IdleCropped.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = IRDA1IdleCropped.pdf; sourceTree = "<group>"; };
+		A9296A391A91076000184BDD /* IRDA2DiscoveringCropped.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = IRDA2DiscoveringCropped.pdf; sourceTree = "<group>"; };
+		A9296A3A1A91076000184BDD /* IRDA3ConnectedCropped.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = IRDA3ConnectedCropped.pdf; sourceTree = "<group>"; };
+		A9296A3B1A91076000184BDD /* IRDA4BrokenBeamCropped.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = IRDA4BrokenBeamCropped.pdf; sourceTree = "<group>"; };
+		A9296A3C1A91076000184BDD /* IRDA5InvalidCropped.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = IRDA5InvalidCropped.pdf; sourceTree = "<group>"; };
+		A9296A3D1A91076000184BDD /* IRDA6OffCropped.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = IRDA6OffCropped.pdf; sourceTree = "<group>"; };
+		A9296A3E1A91076000184BDD /* IrDAExtra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrDAExtra.h; sourceTree = "<group>"; };
+		A9296A3F1A91076000184BDD /* IrDAExtra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IrDAExtra.m; sourceTree = "<group>"; };
+		A9296A401A91076000184BDD /* IrDAMenu.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = IrDAMenu.plist; sourceTree = "<group>"; };
+		A9296A411A91076000184BDD /* ToDo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ToDo; sourceTree = "<group>"; };
+		A9296A421A91076000184BDD /* UtilityRoutines.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = UtilityRoutines.c; sourceTree = "<group>"; };
+		A9296A431A91076000184BDD /* UtilityRoutines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilityRoutines.h; sourceTree = "<group>"; };
+		A9296A511A9115E300184BDD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A9296A551A91161900184BDD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		A946C7C51A9127C900B7EB90 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A946C7C71A912DFA00B7EB90 /* SystemUIPlugin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemUIPlugin.framework; path = ../../../System/Library/PrivateFrameworks/SystemUIPlugin.framework; sourceTree = "<group>"; };
 		A96FE6171A87E5190097B09B /* AppleUSBCDC.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; name = AppleUSBCDC.kext; path = ../../../System/Library/Extensions/IOUSBFamily.kext/Contents/PlugIns/AppleUSBCDC.kext; sourceTree = "<group>"; };
 		A96FE6191A87E5280097B09B /* AppleUSBCDCACMControl.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; name = AppleUSBCDCACMControl.kext; path = ../../../System/Library/Extensions/IOUSBFamily.kext/Contents/PlugIns/AppleUSBCDCACMControl.kext; sourceTree = "<group>"; };
 		A96FE61B1A87E54A0097B09B /* AppleUSBCDCACMData.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; name = AppleUSBCDCACMData.kext; path = ../../../System/Library/Extensions/IOUSBFamily.kext/Contents/PlugIns/AppleUSBCDCACMData.kext; sourceTree = "<group>"; };
@@ -1018,7 +1291,126 @@
 		A9C14F2C1A87EC2700A642EB /* USBMassStorageClassBulkOnly.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = USBMassStorageClassBulkOnly.cpp; path = IOUSBMassStorageClass/USBMassStorageClassBulkOnly.cpp; sourceTree = "<group>"; };
 		A9C14F2D1A87EC2700A642EB /* USBMassStorageClassCBI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = USBMassStorageClassCBI.cpp; path = IOUSBMassStorageClass/USBMassStorageClassCBI.cpp; sourceTree = "<group>"; };
 		A9C14F361A87EE0000A642EB /* IOUSBMassStorageClass.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = IOUSBMassStorageClass.plist; path = IOUSBMassStorageClass/IOUSBMassStorageClass.plist; sourceTree = "<group>"; };
+		A9C5F5351A9106D7004851CC /* IrDAMenu.menu */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IrDAMenu.menu; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9CFF8B71A88266500393473 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		A9E17C2B1A90FEE200676EE6 /* AppleUSBIrDA.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppleUSBIrDA.kext; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9E17C391A91003200676EE6 /* AppleUSBIrDA.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppleUSBIrDA.cpp; sourceTree = "<group>"; };
+		A9E17C3A1A91003200676EE6 /* AppleUSBIrDA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppleUSBIrDA.h; sourceTree = "<group>"; };
+		A9E17C3B1A91003200676EE6 /* AppleUSBIrDA.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppleUSBIrDA.plist; sourceTree = "<group>"; };
+		A9E17C441A91008800676EE6 /* AppleSCCIrDA.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppleSCCIrDA.kext; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9E17C521A91015C00676EE6 /* AppleSCCIrDA.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppleSCCIrDA.cpp; sourceTree = "<group>"; };
+		A9E17C531A91015C00676EE6 /* AppleSCCIrDA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppleSCCIrDA.h; sourceTree = "<group>"; };
+		A9E17C541A91015C00676EE6 /* AppleSCCIrDA.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppleSCCIrDA.plist; sourceTree = "<group>"; };
+		A9E17C591A91017100676EE6 /* AppleIrDA.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppleIrDA.cpp; sourceTree = "<group>"; };
+		A9E17C5A1A91017100676EE6 /* AppleIrDA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppleIrDA.h; sourceTree = "<group>"; };
+		A9E17C5C1A91017100676EE6 /* IrDADebugging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrDADebugging.h; sourceTree = "<group>"; };
+		A9E17C5D1A91017100676EE6 /* IrDALog.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = IrDALog.c; sourceTree = "<group>"; };
+		A9E17C5E1A91017100676EE6 /* IrDALog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrDALog.h; sourceTree = "<group>"; };
+		A9E17C5F1A91017100676EE6 /* IrDALogPriv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrDALogPriv.h; sourceTree = "<group>"; };
+		A9E17C611A91017100676EE6 /* IrIASClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IrIASClient.cpp; sourceTree = "<group>"; };
+		A9E17C621A91017100676EE6 /* IrIASClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrIASClient.h; sourceTree = "<group>"; };
+		A9E17C631A91017100676EE6 /* IrIASServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IrIASServer.cpp; sourceTree = "<group>"; };
+		A9E17C641A91017100676EE6 /* IrIASServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrIASServer.h; sourceTree = "<group>"; };
+		A9E17C651A91017100676EE6 /* IrIASService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IrIASService.cpp; sourceTree = "<group>"; };
+		A9E17C661A91017100676EE6 /* IrIASService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrIASService.h; sourceTree = "<group>"; };
+		A9E17C681A91017100676EE6 /* CIrDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CIrDevice.cpp; sourceTree = "<group>"; };
+		A9E17C691A91017100676EE6 /* CIrDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CIrDevice.h; sourceTree = "<group>"; };
+		A9E17C6A1A91017100676EE6 /* IrDAStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrDAStats.h; sourceTree = "<group>"; };
+		A9E17C6C1A91017100676EE6 /* IrComm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IrComm.cpp; sourceTree = "<group>"; };
+		A9E17C6D1A91017100676EE6 /* IrComm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrComm.h; sourceTree = "<group>"; };
+		A9E17C6E1A91017100676EE6 /* IrDAComm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IrDAComm.cpp; sourceTree = "<group>"; };
+		A9E17C6F1A91017100676EE6 /* IrDAComm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrDAComm.h; sourceTree = "<group>"; };
+		A9E17C701A91017100676EE6 /* IrDATypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrDATypes.h; sourceTree = "<group>"; };
+		A9E17C711A91017100676EE6 /* IrDAUser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IrDAUser.cpp; sourceTree = "<group>"; };
+		A9E17C721A91017100676EE6 /* IrDAUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrDAUser.h; sourceTree = "<group>"; };
+		A9E17C731A91017100676EE6 /* IrDAUserClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrDAUserClient.h; sourceTree = "<group>"; };
+		A9E17C741A91017100676EE6 /* IrGlue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IrGlue.cpp; sourceTree = "<group>"; };
+		A9E17C751A91017100676EE6 /* IrGlue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrGlue.h; sourceTree = "<group>"; };
+		A9E17C771A91017100676EE6 /* IrDscInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IrDscInfo.cpp; sourceTree = "<group>"; };
+		A9E17C781A91017100676EE6 /* IrDscInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrDscInfo.h; sourceTree = "<group>"; };
+		A9E17C791A91017100676EE6 /* IrEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IrEvent.cpp; sourceTree = "<group>"; };
+		A9E17C7A1A91017100676EE6 /* IrEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrEvent.h; sourceTree = "<group>"; };
+		A9E17C7B1A91017100676EE6 /* IrLAP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IrLAP.cpp; sourceTree = "<group>"; };
+		A9E17C7C1A91017100676EE6 /* IrLAP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrLAP.h; sourceTree = "<group>"; };
+		A9E17C7D1A91017100676EE6 /* IrLAPConn.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IrLAPConn.cpp; sourceTree = "<group>"; };
+		A9E17C7E1A91017100676EE6 /* IrLAPConn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrLAPConn.h; sourceTree = "<group>"; };
+		A9E17C7F1A91017100676EE6 /* IrLMP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IrLMP.cpp; sourceTree = "<group>"; };
+		A9E17C801A91017100676EE6 /* IrLMP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrLMP.h; sourceTree = "<group>"; };
+		A9E17C811A91017100676EE6 /* IrQOS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IrQOS.cpp; sourceTree = "<group>"; };
+		A9E17C821A91017100676EE6 /* IrQOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrQOS.h; sourceTree = "<group>"; };
+		A9E17C841A91017100676EE6 /* CIrLSAP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CIrLSAP.cpp; sourceTree = "<group>"; };
+		A9E17C851A91017100676EE6 /* CIrLSAP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CIrLSAP.h; sourceTree = "<group>"; };
+		A9E17C861A91017100676EE6 /* IrDiscovery.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IrDiscovery.cpp; sourceTree = "<group>"; };
+		A9E17C871A91017100676EE6 /* IrDiscovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrDiscovery.h; sourceTree = "<group>"; };
+		A9E17C881A91017100676EE6 /* IrLSAPConn.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IrLSAPConn.cpp; sourceTree = "<group>"; };
+		A9E17C891A91017100676EE6 /* IrLSAPConn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrLSAPConn.h; sourceTree = "<group>"; };
+		A9E17C8A1A91017100676EE6 /* IrStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IrStream.cpp; sourceTree = "<group>"; };
+		A9E17C8B1A91017100676EE6 /* IrStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrStream.h; sourceTree = "<group>"; };
+		A9E17C8D1A91017100676EE6 /* ttp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ttp.cpp; sourceTree = "<group>"; };
+		A9E17C8E1A91017100676EE6 /* ttp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ttp.h; sourceTree = "<group>"; };
+		A9E17C8F1A91017100676EE6 /* ttp2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ttp2.cpp; sourceTree = "<group>"; };
+		A9E17C901A91017100676EE6 /* ttp3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ttp3.cpp; sourceTree = "<group>"; };
+		A9E17C911A91017100676EE6 /* ttplmp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ttplmp.cpp; sourceTree = "<group>"; };
+		A9E17C921A91017100676EE6 /* ttppdu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ttppdu.cpp; sourceTree = "<group>"; };
+		A9E17C931A91017100676EE6 /* ttppdu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ttppdu.h; sourceTree = "<group>"; };
+		A9E17C951A91017100676EE6 /* CArrayIterator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CArrayIterator.cpp; sourceTree = "<group>"; };
+		A9E17C961A91017100676EE6 /* CArrayIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CArrayIterator.h; sourceTree = "<group>"; };
+		A9E17C971A91017100676EE6 /* CBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CBuffer.cpp; sourceTree = "<group>"; };
+		A9E17C981A91017100676EE6 /* CBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBuffer.h; sourceTree = "<group>"; };
+		A9E17C991A91017100676EE6 /* CBufferSegment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CBufferSegment.cpp; sourceTree = "<group>"; };
+		A9E17C9A1A91017100676EE6 /* CBufferSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBufferSegment.h; sourceTree = "<group>"; };
+		A9E17C9B1A91017100676EE6 /* CDynamicArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CDynamicArray.cpp; sourceTree = "<group>"; };
+		A9E17C9C1A91017100676EE6 /* CDynamicArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDynamicArray.h; sourceTree = "<group>"; };
+		A9E17C9D1A91017100676EE6 /* CItemComparer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CItemComparer.cpp; sourceTree = "<group>"; };
+		A9E17C9E1A91017100676EE6 /* CItemComparer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CItemComparer.h; sourceTree = "<group>"; };
+		A9E17C9F1A91017100676EE6 /* CList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CList.cpp; sourceTree = "<group>"; };
+		A9E17CA01A91017100676EE6 /* CList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CList.h; sourceTree = "<group>"; };
+		A9E17CA11A91017100676EE6 /* CListIterator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CListIterator.cpp; sourceTree = "<group>"; };
+		A9E17CA21A91017100676EE6 /* CListIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CListIterator.h; sourceTree = "<group>"; };
+		A9E17CA31A91017100676EE6 /* CTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CTimer.cpp; sourceTree = "<group>"; };
+		A9E17CA41A91017100676EE6 /* CTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTimer.h; sourceTree = "<group>"; };
+		A9E17CA51A91017100676EE6 /* IrDATimerEventSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IrDATimerEventSource.cpp; sourceTree = "<group>"; };
+		A9E17CA61A91017100676EE6 /* IrDATimerEventSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrDATimerEventSource.h; sourceTree = "<group>"; };
+		A9E17D371A9101EF00676EE6 /* IrDADumpLog */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = IrDADumpLog; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9E17D411A9102A600676EE6 /* dumplog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dumplog.cpp; sourceTree = "<group>"; };
+		A9E17D421A9102A600676EE6 /* kdp_protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kdp_protocol.h; sourceTree = "<group>"; };
+		A9E17D481A9102C000676EE6 /* deltatime */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = deltatime; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9E17D501A9102E600676EE6 /* deltatime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = deltatime.c; sourceTree = "<group>"; };
+		A9E17D541A91030400676EE6 /* Find */ = {isa = PBXFileReference; lastKnownFileType = text; path = Find; sourceTree = "<group>"; };
+		A9E17D551A91030400676EE6 /* Merge */ = {isa = PBXFileReference; lastKnownFileType = text; path = Merge; sourceTree = "<group>"; };
+		A9E17D561A91030400676EE6 /* Spin */ = {isa = PBXFileReference; lastKnownFileType = text; path = Spin; sourceTree = "<group>"; };
+		A9E17D5B1A91036300676EE6 /* IrDADebugLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IrDADebugLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9E17D7F1A9103D300676EE6 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
+		A9E17D801A9103D300676EE6 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
+		A9E17D811A9103D300676EE6 /* Defaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Defaults.plist; sourceTree = "<group>"; };
+		A9E17D841A9103D300676EE6 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = Credits.rtf; sourceTree = "<group>"; };
+		A9E17D861A9103D300676EE6 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = MainMenu.xib; sourceTree = "<group>"; };
+		A9E17D881A9103D300676EE6 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = MyDocument.xib; sourceTree = "<group>"; };
+		A9E17D8A1A9103D300676EE6 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Preferences.xib; sourceTree = "<group>"; };
+		A9E17D8B1A9103D300676EE6 /* GetEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetEntry.h; sourceTree = "<group>"; };
+		A9E17D8C1A9103D300676EE6 /* GetEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetEntry.m; sourceTree = "<group>"; };
+		A9E17D8D1A9103D300676EE6 /* IrDADebugLog.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = IrDADebugLog.plist; sourceTree = "<group>"; };
+		A9E17D8E1A9103D300676EE6 /* LogItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogItem.h; sourceTree = "<group>"; };
+		A9E17D8F1A9103D300676EE6 /* LogItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogItem.m; sourceTree = "<group>"; };
+		A9E17D901A9103D300676EE6 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A9E17D911A9103D300676EE6 /* MyDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDocument.h; sourceTree = "<group>"; };
+		A9E17D921A9103D300676EE6 /* MyDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDocument.m; sourceTree = "<group>"; };
+		A9E17D931A9103D300676EE6 /* Preferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Preferences.h; sourceTree = "<group>"; };
+		A9E17D941A9103D300676EE6 /* Preferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Preferences.m; sourceTree = "<group>"; };
+		A9E17D951A9103D300676EE6 /* ToDo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ToDo; sourceTree = "<group>"; };
+		A9E17DA71A9104E500676EE6 /* IrDAStatus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IrDAStatus.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9E17DE41A91061700676EE6 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
+		A9E17DE51A91061700676EE6 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
+		A9E17DE61A91061700676EE6 /* Defaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Defaults.plist; sourceTree = "<group>"; };
+		A9E17DE91A91061700676EE6 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = MainMenu.xib; sourceTree = "<group>"; };
+		A9E17DEB1A91061700676EE6 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Preferences.xib; sourceTree = "<group>"; };
+		A9E17DEC1A91061700676EE6 /* IrDAActions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrDAActions.h; sourceTree = "<group>"; };
+		A9E17DED1A91061700676EE6 /* IrDAActions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IrDAActions.m; sourceTree = "<group>"; };
+		A9E17DEE1A91061700676EE6 /* IrDAStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrDAStatus.h; sourceTree = "<group>"; };
+		A9E17DEF1A91061700676EE6 /* IrDAStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IrDAStatus.m; sourceTree = "<group>"; };
+		A9E17DF01A91061700676EE6 /* IrDAStatus.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = IrDAStatus.plist; sourceTree = "<group>"; };
+		A9E17DF11A91061700676EE6 /* Preferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Preferences.h; sourceTree = "<group>"; };
+		A9E17DF21A91061700676EE6 /* Preferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Preferences.m; sourceTree = "<group>"; };
 		B50606DD1300DCE900C9FA9C /* usbmacro */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = usbmacro; path = USBProberV2/usbmacro; sourceTree = "<group>"; };
 		DD18E6300AC323A900FAE168 /* IOUSBHubDevice.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = IOUSBHubDevice.h; path = IOUSBFamily/Headers/IOUSBHubDevice.h; sourceTree = "<group>"; };
 		DD18E6360AC3262500FAE168 /* IOUSBHubDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = IOUSBHubDevice.cpp; path = IOUSBFamily/Classes/IOUSBHubDevice.cpp; sourceTree = "<group>"; };
@@ -1220,6 +1612,63 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9C5F5321A9106D7004851CC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A946C7CB1A912EE400B7EB90 /* SystemUIPlugin.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9E17C271A90FEE200676EE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9E17C401A91008800676EE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9E17D341A9101EF00676EE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9296A4F1A9115BF00184BDD /* IOKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9E17D451A9102C000676EE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9E17D581A91036300676EE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9296A561A91161900184BDD /* AppKit.framework in Frameworks */,
+				A9296A541A91160D00184BDD /* IOKit.framework in Frameworks */,
+				A9296A531A91160800184BDD /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9E17DA41A9104E500676EE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9296A521A9115E300184BDD /* Foundation.framework in Frameworks */,
+				A9296A501A9115D700184BDD /* IOKit.framework in Frameworks */,
+				A9296A571A91163500184BDD /* AppKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1454,6 +1903,13 @@
 				3E61A7DC0B5D97AB0001A217 /* Plists */,
 				A9C14F131A87EB8600A642EB /* IOUSBMassStorageClass */,
 				A9AFBB441A87F5CE003C0BEF /* UMCLogger */,
+				A9E17C2C1A90FEE300676EE6 /* AppleUSBIrDA */,
+				A9E17C451A91008800676EE6 /* AppleSCCIrDA */,
+				A9E17C581A91017100676EE6 /* IrDA */,
+				A9E17D381A9101EF00676EE6 /* IrDADumpLog */,
+				A9E17D5C1A91036300676EE6 /* IrDADebugLog */,
+				A9E17DA81A9104E500676EE6 /* IrDAStatus */,
+				A9C5F5361A9106D7004851CC /* IrDAMenu */,
 				3E9D8265033AC7C000000164 /* Frameworks */,
 				19C28FB6FE9D52B211CA2CBB /* Products */,
 			);
@@ -1553,6 +2009,13 @@
 				3EBFD16A1601264400B85B43 /* AppleUSBXHCI.kext */,
 				A9C14F121A87EB8600A642EB /* IOUSBMassStorageClass.kext */,
 				A9AFBB431A87F5CE003C0BEF /* UMCLogger */,
+				A9E17C2B1A90FEE200676EE6 /* AppleUSBIrDA.kext */,
+				A9E17C441A91008800676EE6 /* AppleSCCIrDA.kext */,
+				A9E17D371A9101EF00676EE6 /* IrDADumpLog */,
+				A9E17D481A9102C000676EE6 /* deltatime */,
+				A9E17D5B1A91036300676EE6 /* IrDADebugLog.app */,
+				A9E17DA71A9104E500676EE6 /* IrDAStatus.app */,
+				A9C5F5351A9106D7004851CC /* IrDAMenu.menu */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1719,6 +2182,9 @@
 			isa = PBXGroup;
 			children = (
 				A91767EF1A885EF0003E5F43 /* libutil.dylib */,
+				A946C7C71A912DFA00B7EB90 /* SystemUIPlugin.framework */,
+				A9296A551A91161900184BDD /* AppKit.framework */,
+				A9296A511A9115E300184BDD /* Foundation.framework */,
 				A9802F8A1A882B5300C71941 /* Kernel.framework */,
 				A9CFF8B71A88266500393473 /* IOKit.framework */,
 				F5C2AE73032E5BA501000164 /* Kernel.framework */,
@@ -1969,6 +2435,14 @@
 			name = "Port Status";
 			sourceTree = "<group>";
 		};
+		A9296A351A91076000184BDD /* English.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				A9296A361A91076000184BDD /* menu.strings */,
+			);
+			path = English.lproj;
+			sourceTree = "<group>";
+		};
 		A9AFBB441A87F5CE003C0BEF /* UMCLogger */ = {
 			isa = PBXGroup;
 			children = (
@@ -2025,6 +2499,261 @@
 				A9C14F2D1A87EC2700A642EB /* USBMassStorageClassCBI.cpp */,
 			);
 			name = Classes;
+			sourceTree = "<group>";
+		};
+		A9C5F5361A9106D7004851CC /* IrDAMenu */ = {
+			isa = PBXGroup;
+			children = (
+				A9296A351A91076000184BDD /* English.lproj */,
+				A9296A381A91076000184BDD /* IRDA1IdleCropped.pdf */,
+				A9296A391A91076000184BDD /* IRDA2DiscoveringCropped.pdf */,
+				A9296A3A1A91076000184BDD /* IRDA3ConnectedCropped.pdf */,
+				A9296A3B1A91076000184BDD /* IRDA4BrokenBeamCropped.pdf */,
+				A9296A3C1A91076000184BDD /* IRDA5InvalidCropped.pdf */,
+				A9296A3D1A91076000184BDD /* IRDA6OffCropped.pdf */,
+				A9296A3E1A91076000184BDD /* IrDAExtra.h */,
+				A9296A3F1A91076000184BDD /* IrDAExtra.m */,
+				A9296A401A91076000184BDD /* IrDAMenu.plist */,
+				A9296A411A91076000184BDD /* ToDo */,
+				A9296A421A91076000184BDD /* UtilityRoutines.c */,
+				A9296A431A91076000184BDD /* UtilityRoutines.h */,
+			);
+			path = IrDAMenu;
+			sourceTree = "<group>";
+		};
+		A9E17C2C1A90FEE300676EE6 /* AppleUSBIrDA */ = {
+			isa = PBXGroup;
+			children = (
+				A9E17C391A91003200676EE6 /* AppleUSBIrDA.cpp */,
+				A9E17C3A1A91003200676EE6 /* AppleUSBIrDA.h */,
+				A9E17C3B1A91003200676EE6 /* AppleUSBIrDA.plist */,
+			);
+			path = AppleUSBIrDA;
+			sourceTree = "<group>";
+		};
+		A9E17C451A91008800676EE6 /* AppleSCCIrDA */ = {
+			isa = PBXGroup;
+			children = (
+				A9E17C521A91015C00676EE6 /* AppleSCCIrDA.cpp */,
+				A9E17C531A91015C00676EE6 /* AppleSCCIrDA.h */,
+				A9E17C541A91015C00676EE6 /* AppleSCCIrDA.plist */,
+			);
+			path = AppleSCCIrDA;
+			sourceTree = "<group>";
+		};
+		A9E17C581A91017100676EE6 /* IrDA */ = {
+			isa = PBXGroup;
+			children = (
+				A9E17C591A91017100676EE6 /* AppleIrDA.cpp */,
+				A9E17C5A1A91017100676EE6 /* AppleIrDA.h */,
+				A9E17C5B1A91017100676EE6 /* Debugging */,
+				A9E17C601A91017100676EE6 /* IAS */,
+				A9E17C671A91017100676EE6 /* IO */,
+				A9E17C6B1A91017100676EE6 /* IrComm */,
+				A9E17C6E1A91017100676EE6 /* IrDAComm.cpp */,
+				A9E17C6F1A91017100676EE6 /* IrDAComm.h */,
+				A9E17C701A91017100676EE6 /* IrDATypes.h */,
+				A9E17C711A91017100676EE6 /* IrDAUser.cpp */,
+				A9E17C721A91017100676EE6 /* IrDAUser.h */,
+				A9E17C731A91017100676EE6 /* IrDAUserClient.h */,
+				A9E17C741A91017100676EE6 /* IrGlue.cpp */,
+				A9E17C751A91017100676EE6 /* IrGlue.h */,
+				A9E17C761A91017100676EE6 /* Stack */,
+				A9E17C831A91017100676EE6 /* Streams */,
+				A9E17C8C1A91017100676EE6 /* TinyTP */,
+				A9E17C941A91017100676EE6 /* Utils */,
+			);
+			path = IrDA;
+			sourceTree = "<group>";
+		};
+		A9E17C5B1A91017100676EE6 /* Debugging */ = {
+			isa = PBXGroup;
+			children = (
+				A9E17C5C1A91017100676EE6 /* IrDADebugging.h */,
+				A9E17C5D1A91017100676EE6 /* IrDALog.c */,
+				A9E17C5E1A91017100676EE6 /* IrDALog.h */,
+				A9E17C5F1A91017100676EE6 /* IrDALogPriv.h */,
+			);
+			path = Debugging;
+			sourceTree = "<group>";
+		};
+		A9E17C601A91017100676EE6 /* IAS */ = {
+			isa = PBXGroup;
+			children = (
+				A9E17C611A91017100676EE6 /* IrIASClient.cpp */,
+				A9E17C621A91017100676EE6 /* IrIASClient.h */,
+				A9E17C631A91017100676EE6 /* IrIASServer.cpp */,
+				A9E17C641A91017100676EE6 /* IrIASServer.h */,
+				A9E17C651A91017100676EE6 /* IrIASService.cpp */,
+				A9E17C661A91017100676EE6 /* IrIASService.h */,
+			);
+			path = IAS;
+			sourceTree = "<group>";
+		};
+		A9E17C671A91017100676EE6 /* IO */ = {
+			isa = PBXGroup;
+			children = (
+				A9E17C681A91017100676EE6 /* CIrDevice.cpp */,
+				A9E17C691A91017100676EE6 /* CIrDevice.h */,
+				A9E17C6A1A91017100676EE6 /* IrDAStats.h */,
+			);
+			path = IO;
+			sourceTree = "<group>";
+		};
+		A9E17C6B1A91017100676EE6 /* IrComm */ = {
+			isa = PBXGroup;
+			children = (
+				A9E17C6C1A91017100676EE6 /* IrComm.cpp */,
+				A9E17C6D1A91017100676EE6 /* IrComm.h */,
+			);
+			path = IrComm;
+			sourceTree = "<group>";
+		};
+		A9E17C761A91017100676EE6 /* Stack */ = {
+			isa = PBXGroup;
+			children = (
+				A9E17C771A91017100676EE6 /* IrDscInfo.cpp */,
+				A9E17C781A91017100676EE6 /* IrDscInfo.h */,
+				A9E17C791A91017100676EE6 /* IrEvent.cpp */,
+				A9E17C7A1A91017100676EE6 /* IrEvent.h */,
+				A9E17C7B1A91017100676EE6 /* IrLAP.cpp */,
+				A9E17C7C1A91017100676EE6 /* IrLAP.h */,
+				A9E17C7D1A91017100676EE6 /* IrLAPConn.cpp */,
+				A9E17C7E1A91017100676EE6 /* IrLAPConn.h */,
+				A9E17C7F1A91017100676EE6 /* IrLMP.cpp */,
+				A9E17C801A91017100676EE6 /* IrLMP.h */,
+				A9E17C811A91017100676EE6 /* IrQOS.cpp */,
+				A9E17C821A91017100676EE6 /* IrQOS.h */,
+			);
+			path = Stack;
+			sourceTree = "<group>";
+		};
+		A9E17C831A91017100676EE6 /* Streams */ = {
+			isa = PBXGroup;
+			children = (
+				A9E17C841A91017100676EE6 /* CIrLSAP.cpp */,
+				A9E17C851A91017100676EE6 /* CIrLSAP.h */,
+				A9E17C861A91017100676EE6 /* IrDiscovery.cpp */,
+				A9E17C871A91017100676EE6 /* IrDiscovery.h */,
+				A9E17C881A91017100676EE6 /* IrLSAPConn.cpp */,
+				A9E17C891A91017100676EE6 /* IrLSAPConn.h */,
+				A9E17C8A1A91017100676EE6 /* IrStream.cpp */,
+				A9E17C8B1A91017100676EE6 /* IrStream.h */,
+			);
+			path = Streams;
+			sourceTree = "<group>";
+		};
+		A9E17C8C1A91017100676EE6 /* TinyTP */ = {
+			isa = PBXGroup;
+			children = (
+				A9E17C8D1A91017100676EE6 /* ttp.cpp */,
+				A9E17C8E1A91017100676EE6 /* ttp.h */,
+				A9E17C8F1A91017100676EE6 /* ttp2.cpp */,
+				A9E17C901A91017100676EE6 /* ttp3.cpp */,
+				A9E17C911A91017100676EE6 /* ttplmp.cpp */,
+				A9E17C921A91017100676EE6 /* ttppdu.cpp */,
+				A9E17C931A91017100676EE6 /* ttppdu.h */,
+			);
+			path = TinyTP;
+			sourceTree = "<group>";
+		};
+		A9E17C941A91017100676EE6 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A9E17C951A91017100676EE6 /* CArrayIterator.cpp */,
+				A9E17C961A91017100676EE6 /* CArrayIterator.h */,
+				A9E17C971A91017100676EE6 /* CBuffer.cpp */,
+				A9E17C981A91017100676EE6 /* CBuffer.h */,
+				A9E17C991A91017100676EE6 /* CBufferSegment.cpp */,
+				A9E17C9A1A91017100676EE6 /* CBufferSegment.h */,
+				A9E17C9B1A91017100676EE6 /* CDynamicArray.cpp */,
+				A9E17C9C1A91017100676EE6 /* CDynamicArray.h */,
+				A9E17C9D1A91017100676EE6 /* CItemComparer.cpp */,
+				A9E17C9E1A91017100676EE6 /* CItemComparer.h */,
+				A9E17C9F1A91017100676EE6 /* CList.cpp */,
+				A9E17CA01A91017100676EE6 /* CList.h */,
+				A9E17CA11A91017100676EE6 /* CListIterator.cpp */,
+				A9E17CA21A91017100676EE6 /* CListIterator.h */,
+				A9E17CA31A91017100676EE6 /* CTimer.cpp */,
+				A9E17CA41A91017100676EE6 /* CTimer.h */,
+				A9E17CA51A91017100676EE6 /* IrDATimerEventSource.cpp */,
+				A9E17CA61A91017100676EE6 /* IrDATimerEventSource.h */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		A9E17D381A9101EF00676EE6 /* IrDADumpLog */ = {
+			isa = PBXGroup;
+			children = (
+				A9E17D501A9102E600676EE6 /* deltatime.c */,
+				A9E17D411A9102A600676EE6 /* dumplog.cpp */,
+				A9E17D421A9102A600676EE6 /* kdp_protocol.h */,
+				A9E17D541A91030400676EE6 /* Find */,
+				A9E17D551A91030400676EE6 /* Merge */,
+				A9E17D561A91030400676EE6 /* Spin */,
+			);
+			path = IrDADumpLog;
+			sourceTree = "<group>";
+		};
+		A9E17D5C1A91036300676EE6 /* IrDADebugLog */ = {
+			isa = PBXGroup;
+			children = (
+				A9E17D7F1A9103D300676EE6 /* AppController.h */,
+				A9E17D801A9103D300676EE6 /* AppController.m */,
+				A9E17D811A9103D300676EE6 /* Defaults.plist */,
+				A9E17D821A9103D300676EE6 /* English.lproj */,
+				A9E17D8B1A9103D300676EE6 /* GetEntry.h */,
+				A9E17D8C1A9103D300676EE6 /* GetEntry.m */,
+				A9E17D8D1A9103D300676EE6 /* IrDADebugLog.plist */,
+				A9E17D8E1A9103D300676EE6 /* LogItem.h */,
+				A9E17D8F1A9103D300676EE6 /* LogItem.m */,
+				A9E17D901A9103D300676EE6 /* main.m */,
+				A9E17D911A9103D300676EE6 /* MyDocument.h */,
+				A9E17D921A9103D300676EE6 /* MyDocument.m */,
+				A9E17D931A9103D300676EE6 /* Preferences.h */,
+				A9E17D941A9103D300676EE6 /* Preferences.m */,
+				A9E17D951A9103D300676EE6 /* ToDo */,
+			);
+			path = IrDADebugLog;
+			sourceTree = "<group>";
+		};
+		A9E17D821A9103D300676EE6 /* English.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				A9E17D831A9103D300676EE6 /* Credits.rtf */,
+				A9E17D851A9103D300676EE6 /* MainMenu.xib */,
+				A9E17D871A9103D300676EE6 /* MyDocument.xib */,
+				A9E17D891A9103D300676EE6 /* Preferences.xib */,
+			);
+			path = English.lproj;
+			sourceTree = "<group>";
+		};
+		A9E17DA81A9104E500676EE6 /* IrDAStatus */ = {
+			isa = PBXGroup;
+			children = (
+				A946C7C51A9127C900B7EB90 /* main.m */,
+				A9E17DE41A91061700676EE6 /* AppController.h */,
+				A9E17DE51A91061700676EE6 /* AppController.m */,
+				A9E17DE61A91061700676EE6 /* Defaults.plist */,
+				A9E17DE71A91061700676EE6 /* English.lproj */,
+				A9E17DEC1A91061700676EE6 /* IrDAActions.h */,
+				A9E17DED1A91061700676EE6 /* IrDAActions.m */,
+				A9E17DEE1A91061700676EE6 /* IrDAStatus.h */,
+				A9E17DEF1A91061700676EE6 /* IrDAStatus.m */,
+				A9E17DF01A91061700676EE6 /* IrDAStatus.plist */,
+				A9E17DF11A91061700676EE6 /* Preferences.h */,
+				A9E17DF21A91061700676EE6 /* Preferences.m */,
+			);
+			path = IrDAStatus;
+			sourceTree = "<group>";
+		};
+		A9E17DE71A91061700676EE6 /* English.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				A9E17DE81A91061700676EE6 /* MainMenu.xib */,
+				A9E17DEA1A91061700676EE6 /* Preferences.xib */,
+			);
+			path = English.lproj;
 			sourceTree = "<group>";
 		};
 		F5395F86016D596001573190 /* Strings */ = {
@@ -2378,6 +3107,94 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A9E17C281A90FEE200676EE6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9E17CCB1A91017100676EE6 /* IrDAComm.h in Headers */,
+				A9E17CCD1A91017100676EE6 /* IrDATypes.h in Headers */,
+				A9E17CB51A91017100676EE6 /* IrIASClient.h in Headers */,
+				A9E17CFB1A91017100676EE6 /* IrLSAPConn.h in Headers */,
+				A9E17D191A91017100676EE6 /* CBufferSegment.h in Headers */,
+				A9E17CC71A91017100676EE6 /* IrComm.h in Headers */,
+				A9E17CAB1A91017100676EE6 /* IrDADebugging.h in Headers */,
+				A9E17CD11A91017100676EE6 /* IrDAUser.h in Headers */,
+				A9E17CDF1A91017100676EE6 /* IrEvent.h in Headers */,
+				A9E17CE71A91017100676EE6 /* IrLAPConn.h in Headers */,
+				A9E17CD71A91017100676EE6 /* IrGlue.h in Headers */,
+				A9E17CEB1A91017100676EE6 /* IrLMP.h in Headers */,
+				A9E17D251A91017100676EE6 /* CList.h in Headers */,
+				A9E17D1D1A91017100676EE6 /* CDynamicArray.h in Headers */,
+				A9E17D0D1A91017100676EE6 /* ttppdu.h in Headers */,
+				A9E17CC11A91017100676EE6 /* CIrDevice.h in Headers */,
+				A9E17D111A91017100676EE6 /* CArrayIterator.h in Headers */,
+				A9E17CDB1A91017100676EE6 /* IrDscInfo.h in Headers */,
+				A9E17D311A91017100676EE6 /* IrDATimerEventSource.h in Headers */,
+				A9E17D2D1A91017100676EE6 /* CTimer.h in Headers */,
+				A9E17D291A91017100676EE6 /* CListIterator.h in Headers */,
+				A9E17CAF1A91017100676EE6 /* IrDALog.h in Headers */,
+				A9E17CD31A91017100676EE6 /* IrDAUserClient.h in Headers */,
+				A9E17CC31A91017100676EE6 /* IrDAStats.h in Headers */,
+				A9E17D151A91017100676EE6 /* CBuffer.h in Headers */,
+				A9E17CB11A91017100676EE6 /* IrDALogPriv.h in Headers */,
+				A9E17CFF1A91017100676EE6 /* IrStream.h in Headers */,
+				A9E17C3D1A91003200676EE6 /* AppleUSBIrDA.h in Headers */,
+				A9E17CF31A91017100676EE6 /* CIrLSAP.h in Headers */,
+				A9E17CEF1A91017100676EE6 /* IrQOS.h in Headers */,
+				A9E17D211A91017100676EE6 /* CItemComparer.h in Headers */,
+				A9E17D031A91017100676EE6 /* ttp.h in Headers */,
+				A9E17CE31A91017100676EE6 /* IrLAP.h in Headers */,
+				A9E17CBD1A91017100676EE6 /* IrIASService.h in Headers */,
+				A9E17CA91A91017100676EE6 /* AppleIrDA.h in Headers */,
+				A9E17CF71A91017100676EE6 /* IrDiscovery.h in Headers */,
+				A9E17CB91A91017100676EE6 /* IrIASServer.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9E17C411A91008800676EE6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9E17CCC1A91017100676EE6 /* IrDAComm.h in Headers */,
+				A9E17CCE1A91017100676EE6 /* IrDATypes.h in Headers */,
+				A9E17CB61A91017100676EE6 /* IrIASClient.h in Headers */,
+				A9E17CFC1A91017100676EE6 /* IrLSAPConn.h in Headers */,
+				A9E17D1A1A91017100676EE6 /* CBufferSegment.h in Headers */,
+				A9E17CC81A91017100676EE6 /* IrComm.h in Headers */,
+				A9E17CAC1A91017100676EE6 /* IrDADebugging.h in Headers */,
+				A9E17CD21A91017100676EE6 /* IrDAUser.h in Headers */,
+				A9E17CE01A91017100676EE6 /* IrEvent.h in Headers */,
+				A9E17CE81A91017100676EE6 /* IrLAPConn.h in Headers */,
+				A9E17CD81A91017100676EE6 /* IrGlue.h in Headers */,
+				A9E17CEC1A91017100676EE6 /* IrLMP.h in Headers */,
+				A9E17D261A91017100676EE6 /* CList.h in Headers */,
+				A9E17D1E1A91017100676EE6 /* CDynamicArray.h in Headers */,
+				A9E17D0E1A91017100676EE6 /* ttppdu.h in Headers */,
+				A9E17CC21A91017100676EE6 /* CIrDevice.h in Headers */,
+				A9E17D121A91017100676EE6 /* CArrayIterator.h in Headers */,
+				A9E17CDC1A91017100676EE6 /* IrDscInfo.h in Headers */,
+				A9E17D321A91017100676EE6 /* IrDATimerEventSource.h in Headers */,
+				A9E17D2E1A91017100676EE6 /* CTimer.h in Headers */,
+				A9E17D2A1A91017100676EE6 /* CListIterator.h in Headers */,
+				A9E17CB01A91017100676EE6 /* IrDALog.h in Headers */,
+				A9E17CD41A91017100676EE6 /* IrDAUserClient.h in Headers */,
+				A9E17CC41A91017100676EE6 /* IrDAStats.h in Headers */,
+				A9E17D161A91017100676EE6 /* CBuffer.h in Headers */,
+				A9E17CB21A91017100676EE6 /* IrDALogPriv.h in Headers */,
+				A9E17D001A91017100676EE6 /* IrStream.h in Headers */,
+				A9E17C561A91015C00676EE6 /* AppleSCCIrDA.h in Headers */,
+				A9E17CF41A91017100676EE6 /* CIrLSAP.h in Headers */,
+				A9E17CF01A91017100676EE6 /* IrQOS.h in Headers */,
+				A9E17D221A91017100676EE6 /* CItemComparer.h in Headers */,
+				A9E17D041A91017100676EE6 /* ttp.h in Headers */,
+				A9E17CE41A91017100676EE6 /* IrLAP.h in Headers */,
+				A9E17CBE1A91017100676EE6 /* IrIASService.h in Headers */,
+				A9E17CAA1A91017100676EE6 /* AppleIrDA.h in Headers */,
+				A9E17CF81A91017100676EE6 /* IrDiscovery.h in Headers */,
+				A9E17CBA1A91017100676EE6 /* IrIASServer.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -2455,6 +3272,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A9E17C511A91009800676EE6 /* PBXTargetDependency */,
 				3ED3853716012951008B5CB3 /* PBXTargetDependency */,
 				3EAF8B7F0B5D42870029974F /* PBXTargetDependency */,
 				3EAF8B810B5D42870029974F /* PBXTargetDependency */,
@@ -2467,6 +3285,7 @@
 				3EAF8B850B5D42870029974F /* PBXTargetDependency */,
 				3EAF8B790B5D42870029974F /* PBXTargetDependency */,
 				A9C14F341A87EDA200A642EB /* PBXTargetDependency */,
+				A9E17C381A90FFC700676EE6 /* PBXTargetDependency */,
 				3E99F03D152B625500F97A0C /* PBXTargetDependency */,
 			);
 			name = IOUSBFamily_kexts;
@@ -2793,6 +3612,127 @@
 			productReference = A9C14F121A87EB8600A642EB /* IOUSBMassStorageClass.kext */;
 			productType = "com.apple.product-type.kernel-extension";
 		};
+		A9C5F5341A9106D7004851CC /* IrDAMenu */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9C5F5391A9106D7004851CC /* Build configuration list for PBXNativeTarget "IrDAMenu" */;
+			buildPhases = (
+				A9C5F5331A9106D7004851CC /* Resources */,
+				A9C5F5311A9106D7004851CC /* Sources */,
+				A9C5F5321A9106D7004851CC /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IrDAMenu;
+			productName = IrDAMenu;
+			productReference = A9C5F5351A9106D7004851CC /* IrDAMenu.menu */;
+			productType = "com.apple.product-type.bundle";
+		};
+		A9E17C2A1A90FEE200676EE6 /* AppleUSBIrDA */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9E17C361A90FEE300676EE6 /* Build configuration list for PBXNativeTarget "AppleUSBIrDA" */;
+			buildPhases = (
+				A9E17C261A90FEE200676EE6 /* Sources */,
+				A9E17C271A90FEE200676EE6 /* Frameworks */,
+				A9E17C281A90FEE200676EE6 /* Headers */,
+				A9E17C291A90FEE200676EE6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AppleUSBIrDA;
+			productName = AppleUSBIrDA;
+			productReference = A9E17C2B1A90FEE200676EE6 /* AppleUSBIrDA.kext */;
+			productType = "com.apple.product-type.kernel-extension";
+		};
+		A9E17C431A91008800676EE6 /* AppleSCCIrDA */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9E17C4C1A91008800676EE6 /* Build configuration list for PBXNativeTarget "AppleSCCIrDA" */;
+			buildPhases = (
+				A9E17C3F1A91008800676EE6 /* Sources */,
+				A9E17C401A91008800676EE6 /* Frameworks */,
+				A9E17C411A91008800676EE6 /* Headers */,
+				A9E17C421A91008800676EE6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AppleSCCIrDA;
+			productName = AppleSCCIrDA;
+			productReference = A9E17C441A91008800676EE6 /* AppleSCCIrDA.kext */;
+			productType = "com.apple.product-type.kernel-extension";
+		};
+		A9E17D361A9101EF00676EE6 /* IrDADumpLog */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9E17D3B1A9101EF00676EE6 /* Build configuration list for PBXNativeTarget "IrDADumpLog" */;
+			buildPhases = (
+				A9E17D331A9101EF00676EE6 /* Sources */,
+				A9E17D341A9101EF00676EE6 /* Frameworks */,
+				A9E17D351A9101EF00676EE6 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IrDADumpLog;
+			productName = IrDADumpLog;
+			productReference = A9E17D371A9101EF00676EE6 /* IrDADumpLog */;
+			productType = "com.apple.product-type.tool";
+		};
+		A9E17D471A9102C000676EE6 /* deltatime */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9E17D4C1A9102C000676EE6 /* Build configuration list for PBXNativeTarget "deltatime" */;
+			buildPhases = (
+				A9E17D441A9102C000676EE6 /* Sources */,
+				A9E17D451A9102C000676EE6 /* Frameworks */,
+				A9E17D461A9102C000676EE6 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = deltatime;
+			productName = deltatime;
+			productReference = A9E17D481A9102C000676EE6 /* deltatime */;
+			productType = "com.apple.product-type.tool";
+		};
+		A9E17D5A1A91036300676EE6 /* IrDADebugLog */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9E17D751A91036400676EE6 /* Build configuration list for PBXNativeTarget "IrDADebugLog" */;
+			buildPhases = (
+				A9E17D591A91036300676EE6 /* Resources */,
+				A9E17D571A91036300676EE6 /* Sources */,
+				A9E17D581A91036300676EE6 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IrDADebugLog;
+			productName = IrDADebugLog;
+			productReference = A9E17D5B1A91036300676EE6 /* IrDADebugLog.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A9E17DA61A9104E500676EE6 /* IrDAStatus */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9E17DC11A9104E600676EE6 /* Build configuration list for PBXNativeTarget "IrDAStatus" */;
+			buildPhases = (
+				A9E17DA51A9104E500676EE6 /* Resources */,
+				A9E17DA31A9104E500676EE6 /* Sources */,
+				A9E17DA41A9104E500676EE6 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IrDAStatus;
+			productName = IrDAStatus;
+			productReference = A9E17DA71A9104E500676EE6 /* IrDAStatus.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2805,6 +3745,27 @@
 						CreatedOnToolsVersion = 6.1.1;
 					};
 					A9C14F111A87EB8600A642EB = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					A9C5F5341A9106D7004851CC = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					A9E17C2A1A90FEE200676EE6 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					A9E17C431A91008800676EE6 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					A9E17D361A9101EF00676EE6 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					A9E17D471A9102C000676EE6 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					A9E17D5A1A91036300676EE6 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					A9E17DA61A9104E500676EE6 = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
 				};
@@ -2820,6 +3781,7 @@
 				German,
 				Spanish,
 				en,
+				Base,
 			);
 			mainGroup = 089C166AFE841209C02AAC07 /* IOUSBFamily */;
 			projectDirPath = "";
@@ -2832,10 +3794,14 @@
 				3E99F0DF152B6C4200F97A0C /* --- standalone --- */,
 				3EAF8AE80B5D42870029974F /* IOUSBLib_standalone */,
 				3E99F078152B6A1D00F97A0C /* USB Prober_standalone */,
+				A9E17D5A1A91036300676EE6 /* IrDADebugLog */,
+				A9E17DA61A9104E500676EE6 /* IrDAStatus */,
 				3EAF8A030B5D42860029974F /* installhdrs */,
 				301DB0920EF8920B009BF777 /* usbtracer_standalone */,
 				3EB33C171330EAF700688D55 /* reenumerate_standalone */,
 				A9AFBB421A87F5CE003C0BEF /* UMCLogger */,
+				A9E17D361A9101EF00676EE6 /* IrDADumpLog */,
+				A9E17D471A9102C000676EE6 /* deltatime */,
 				3E99F0E4152B6C5800F97A0C /* --- convenience --- */,
 				3EBFD14A1601264400B85B43 /* AppleUSBXHCI */,
 				3EAF8A420B5D42860029974F /* AppleUSBEHCI */,
@@ -2850,6 +3816,9 @@
 				3EAF8A920B5D42860029974F /* IOUSBHIDDriverSafeBoot */,
 				3EAF8B070B5D42870029974F /* KLog */,
 				A9C14F111A87EB8600A642EB /* IOUSBMassStorageClass */,
+				A9E17C2A1A90FEE200676EE6 /* AppleUSBIrDA */,
+				A9E17C431A91008800676EE6 /* AppleSCCIrDA */,
+				A9C5F5341A9106D7004851CC /* IrDAMenu */,
 				3E99F0EA152B6EA600F97A0C /* USB Prober App */,
 				3E99F106152B6FE700F97A0C /* IOUSBLib */,
 			);
@@ -2998,6 +3967,58 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9C5F5331A9106D7004851CC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9296A491A91076000184BDD /* IRDA5InvalidCropped.pdf in Resources */,
+				A9296A471A91076000184BDD /* IRDA3ConnectedCropped.pdf in Resources */,
+				A9296A481A91076000184BDD /* IRDA4BrokenBeamCropped.pdf in Resources */,
+				A9296A451A91076000184BDD /* IRDA1IdleCropped.pdf in Resources */,
+				A9296A4A1A91076000184BDD /* IRDA6OffCropped.pdf in Resources */,
+				A9296A441A91076000184BDD /* menu.strings in Resources */,
+				A9296A461A91076000184BDD /* IRDA2DiscoveringCropped.pdf in Resources */,
+				A9296A4D1A91076000184BDD /* ToDo in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9E17C291A90FEE200676EE6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9E17C421A91008800676EE6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9E17D591A91036300676EE6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9E17D9A1A9103D300676EE6 /* MyDocument.xib in Resources */,
+				A9E17DA21A9103D300676EE6 /* ToDo in Resources */,
+				A9E17D971A9103D300676EE6 /* Defaults.plist in Resources */,
+				A9E17D981A9103D300676EE6 /* Credits.rtf in Resources */,
+				A9E17D991A9103D300676EE6 /* MainMenu.xib in Resources */,
+				A9E17D9B1A9103D300676EE6 /* Preferences.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9E17DA51A9104E500676EE6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9E17DF41A91061700676EE6 /* Defaults.plist in Resources */,
+				A9E17DF61A91061700676EE6 /* Preferences.xib in Resources */,
+				A9E17DF51A91061700676EE6 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3380,6 +4401,140 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A9C5F5311A9106D7004851CC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9296A4B1A91076000184BDD /* IrDAExtra.m in Sources */,
+				A9296A4E1A91076000184BDD /* UtilityRoutines.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9E17C261A90FEE200676EE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9E17CF91A91017100676EE6 /* IrLSAPConn.cpp in Sources */,
+				A9E17CE11A91017100676EE6 /* IrLAP.cpp in Sources */,
+				A9E17CCF1A91017100676EE6 /* IrDAUser.cpp in Sources */,
+				A9E17CF11A91017100676EE6 /* CIrLSAP.cpp in Sources */,
+				A9E17CBF1A91017100676EE6 /* CIrDevice.cpp in Sources */,
+				A9E17CE51A91017100676EE6 /* IrLAPConn.cpp in Sources */,
+				A9E17CFD1A91017100676EE6 /* IrStream.cpp in Sources */,
+				A9E17D171A91017100676EE6 /* CBufferSegment.cpp in Sources */,
+				A9E17CB71A91017100676EE6 /* IrIASServer.cpp in Sources */,
+				A9E17D1B1A91017100676EE6 /* CDynamicArray.cpp in Sources */,
+				A9E17D051A91017100676EE6 /* ttp2.cpp in Sources */,
+				A9E17D011A91017100676EE6 /* ttp.cpp in Sources */,
+				A9E17CC51A91017100676EE6 /* IrComm.cpp in Sources */,
+				A9E17CED1A91017100676EE6 /* IrQOS.cpp in Sources */,
+				A9E17D0B1A91017100676EE6 /* ttppdu.cpp in Sources */,
+				A9E17CAD1A91017100676EE6 /* IrDALog.c in Sources */,
+				A9E17CD51A91017100676EE6 /* IrGlue.cpp in Sources */,
+				A9E17CA71A91017100676EE6 /* AppleIrDA.cpp in Sources */,
+				A9E17CDD1A91017100676EE6 /* IrEvent.cpp in Sources */,
+				A9E17D131A91017100676EE6 /* CBuffer.cpp in Sources */,
+				A9E17CC91A91017100676EE6 /* IrDAComm.cpp in Sources */,
+				A9E17D2B1A91017100676EE6 /* CTimer.cpp in Sources */,
+				A9E17C3C1A91003200676EE6 /* AppleUSBIrDA.cpp in Sources */,
+				A9E17CF51A91017100676EE6 /* IrDiscovery.cpp in Sources */,
+				A9E17CBB1A91017100676EE6 /* IrIASService.cpp in Sources */,
+				A9E17D2F1A91017100676EE6 /* IrDATimerEventSource.cpp in Sources */,
+				A9E17D271A91017100676EE6 /* CListIterator.cpp in Sources */,
+				A9E17D1F1A91017100676EE6 /* CItemComparer.cpp in Sources */,
+				A9E17D231A91017100676EE6 /* CList.cpp in Sources */,
+				A9E17D071A91017100676EE6 /* ttp3.cpp in Sources */,
+				A9E17CB31A91017100676EE6 /* IrIASClient.cpp in Sources */,
+				A9E17CE91A91017100676EE6 /* IrLMP.cpp in Sources */,
+				A9E17D091A91017100676EE6 /* ttplmp.cpp in Sources */,
+				A9E17D0F1A91017100676EE6 /* CArrayIterator.cpp in Sources */,
+				A9E17CD91A91017100676EE6 /* IrDscInfo.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9E17C3F1A91008800676EE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9E17CFA1A91017100676EE6 /* IrLSAPConn.cpp in Sources */,
+				A9E17CE21A91017100676EE6 /* IrLAP.cpp in Sources */,
+				A9E17CD01A91017100676EE6 /* IrDAUser.cpp in Sources */,
+				A9E17CF21A91017100676EE6 /* CIrLSAP.cpp in Sources */,
+				A9E17CC01A91017100676EE6 /* CIrDevice.cpp in Sources */,
+				A9E17CE61A91017100676EE6 /* IrLAPConn.cpp in Sources */,
+				A9E17CFE1A91017100676EE6 /* IrStream.cpp in Sources */,
+				A9E17D181A91017100676EE6 /* CBufferSegment.cpp in Sources */,
+				A9E17CB81A91017100676EE6 /* IrIASServer.cpp in Sources */,
+				A9E17D1C1A91017100676EE6 /* CDynamicArray.cpp in Sources */,
+				A9E17D061A91017100676EE6 /* ttp2.cpp in Sources */,
+				A9E17D021A91017100676EE6 /* ttp.cpp in Sources */,
+				A9E17CC61A91017100676EE6 /* IrComm.cpp in Sources */,
+				A9E17CEE1A91017100676EE6 /* IrQOS.cpp in Sources */,
+				A9E17D0C1A91017100676EE6 /* ttppdu.cpp in Sources */,
+				A9E17CAE1A91017100676EE6 /* IrDALog.c in Sources */,
+				A9E17CD61A91017100676EE6 /* IrGlue.cpp in Sources */,
+				A9E17CA81A91017100676EE6 /* AppleIrDA.cpp in Sources */,
+				A9E17CDE1A91017100676EE6 /* IrEvent.cpp in Sources */,
+				A9E17D141A91017100676EE6 /* CBuffer.cpp in Sources */,
+				A9E17CCA1A91017100676EE6 /* IrDAComm.cpp in Sources */,
+				A9E17D2C1A91017100676EE6 /* CTimer.cpp in Sources */,
+				A9E17C551A91015C00676EE6 /* AppleSCCIrDA.cpp in Sources */,
+				A9E17CF61A91017100676EE6 /* IrDiscovery.cpp in Sources */,
+				A9E17CBC1A91017100676EE6 /* IrIASService.cpp in Sources */,
+				A9E17D301A91017100676EE6 /* IrDATimerEventSource.cpp in Sources */,
+				A9E17D281A91017100676EE6 /* CListIterator.cpp in Sources */,
+				A9E17D201A91017100676EE6 /* CItemComparer.cpp in Sources */,
+				A9E17D241A91017100676EE6 /* CList.cpp in Sources */,
+				A9E17D081A91017100676EE6 /* ttp3.cpp in Sources */,
+				A9E17CB41A91017100676EE6 /* IrIASClient.cpp in Sources */,
+				A9E17CEA1A91017100676EE6 /* IrLMP.cpp in Sources */,
+				A9E17D0A1A91017100676EE6 /* ttplmp.cpp in Sources */,
+				A9E17D101A91017100676EE6 /* CArrayIterator.cpp in Sources */,
+				A9E17CDA1A91017100676EE6 /* IrDscInfo.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9E17D331A9101EF00676EE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9E17D431A9102A600676EE6 /* dumplog.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9E17D441A9102C000676EE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9E17D511A9102E600676EE6 /* deltatime.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9E17D571A91036300676EE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9E17D961A9103D300676EE6 /* AppController.m in Sources */,
+				A9E17D9C1A9103D300676EE6 /* GetEntry.m in Sources */,
+				A9E17DA11A9103D300676EE6 /* Preferences.m in Sources */,
+				A9E17D9F1A9103D300676EE6 /* main.m in Sources */,
+				A9E17D9E1A9103D300676EE6 /* LogItem.m in Sources */,
+				A9E17DA01A9103D300676EE6 /* MyDocument.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9E17DA31A9104E500676EE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A946C7C61A9127C900B7EB90 /* main.m in Sources */,
+				A9E17DF31A91061700676EE6 /* AppController.m in Sources */,
+				A9E17DF71A91061700676EE6 /* IrDAActions.m in Sources */,
+				A9E17DFA1A91061700676EE6 /* Preferences.m in Sources */,
+				A9E17DF81A91061700676EE6 /* IrDAStatus.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -3503,6 +4658,11 @@
 			target = 3EBFD14A1601264400B85B43 /* AppleUSBXHCI */;
 			targetProxy = 3ED3853616012951008B5CB3 /* PBXContainerItemProxy */;
 		};
+		A9296A341A91073500184BDD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9C5F5341A9106D7004851CC /* IrDAMenu */;
+			targetProxy = A9296A331A91073500184BDD /* PBXContainerItemProxy */;
+		};
 		A976246A1A867771002AC2FD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3EAF8B070B5D42870029974F /* KLog */;
@@ -3527,6 +4687,36 @@
 			isa = PBXTargetDependency;
 			target = A9C14F111A87EB8600A642EB /* IOUSBMassStorageClass */;
 			targetProxy = A9C14F331A87EDA200A642EB /* PBXContainerItemProxy */;
+		};
+		A9E17C381A90FFC700676EE6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9E17C2A1A90FEE200676EE6 /* AppleUSBIrDA */;
+			targetProxy = A9E17C371A90FFC700676EE6 /* PBXContainerItemProxy */;
+		};
+		A9E17C511A91009800676EE6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9E17C431A91008800676EE6 /* AppleSCCIrDA */;
+			targetProxy = A9E17C501A91009800676EE6 /* PBXContainerItemProxy */;
+		};
+		A9E17D401A91020B00676EE6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9E17D361A9101EF00676EE6 /* IrDADumpLog */;
+			targetProxy = A9E17D3F1A91020B00676EE6 /* PBXContainerItemProxy */;
+		};
+		A9E17D531A9102F500676EE6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9E17D471A9102C000676EE6 /* deltatime */;
+			targetProxy = A9E17D521A9102F500676EE6 /* PBXContainerItemProxy */;
+		};
+		A9E17D7E1A9103B600676EE6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9E17D5A1A91036300676EE6 /* IrDADebugLog */;
+			targetProxy = A9E17D7D1A9103B600676EE6 /* PBXContainerItemProxy */;
+		};
+		A9E17DCA1A91051700676EE6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9E17DA61A9104E500676EE6 /* IrDAStatus */;
+			targetProxy = A9E17DC91A91051700676EE6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3617,6 +4807,62 @@
 				3ED3F24504F3CC01001BF1E8 /* English */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A9296A361A91076000184BDD /* menu.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A9296A371A91076000184BDD /* English */,
+			);
+			name = menu.strings;
+			sourceTree = "<group>";
+		};
+		A9E17D831A9103D300676EE6 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A9E17D841A9103D300676EE6 /* English */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		A9E17D851A9103D300676EE6 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A9E17D861A9103D300676EE6 /* English */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		A9E17D871A9103D300676EE6 /* MyDocument.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A9E17D881A9103D300676EE6 /* English */,
+			);
+			name = MyDocument.xib;
+			sourceTree = "<group>";
+		};
+		A9E17D891A9103D300676EE6 /* Preferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A9E17D8A1A9103D300676EE6 /* English */,
+			);
+			name = Preferences.xib;
+			sourceTree = "<group>";
+		};
+		A9E17DE81A91061700676EE6 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A9E17DE91A91061700676EE6 /* English */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		A9E17DEA1A91061700676EE6 /* Preferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A9E17DEB1A91061700676EE6 /* English */,
+			);
+			name = Preferences.xib;
 			sourceTree = "<group>";
 		};
 		F5395F93016D5A6B01573190 /* InfoPlist.strings */ = {
@@ -3732,6 +4978,7 @@
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_X86_VECTOR_INSTRUCTIONS = sse2;
 				CODE_SIGN_IDENTITY = "Developer ID Application: Andy Vandijck (GSF3NR4NQ5)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -3765,6 +5012,10 @@
 				INSTALL_OWNER = root;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MODULE_VERSION = 710.4.14;
+				OTHER_CFLAGS = (
+					"-march=k8",
+					"-mtune=k8",
+				);
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -5331,6 +6582,744 @@
 			};
 			name = kprintf;
 		};
+		A9C5F53A1A9106D7004851CC /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1.4.5b4;
+				DYLIB_COMPATIBILITY_VERSION = 1.0.0b1;
+				DYLIB_CURRENT_VERSION = 1.4.5b4;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADERSINCLUDE = "$(SDK_DIR)/usr/include";
+				INFOPLIST_FILE = IrDAMenu/IrDAMenu.plist;
+				INSTALL_PATH = " /System/Library/CoreServices/Menu Extras";
+				MODULE_VERSION = 1.4.5b4;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = menu;
+			};
+			name = Deployment;
+		};
+		A9C5F53B1A9106D7004851CC /* Logging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1.4.5b4;
+				DYLIB_COMPATIBILITY_VERSION = 1.0.0b1;
+				DYLIB_CURRENT_VERSION = 1.4.5b4;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADERSINCLUDE = "$(SDK_DIR)/usr/include";
+				INFOPLIST_FILE = IrDAMenu/IrDAMenu.plist;
+				INSTALL_PATH = " /System/Library/CoreServices/Menu Extras";
+				MODULE_VERSION = 1.4.5b4;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = menu;
+			};
+			name = Logging;
+		};
+		A9C5F53C1A9106D7004851CC /* kprintf */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1.4.5b4;
+				DYLIB_COMPATIBILITY_VERSION = 1.0.0b1;
+				DYLIB_CURRENT_VERSION = 1.4.5b4;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADERSINCLUDE = "$(SDK_DIR)/usr/include";
+				INFOPLIST_FILE = IrDAMenu/IrDAMenu.plist;
+				INSTALL_PATH = " /System/Library/CoreServices/Menu Extras";
+				MODULE_VERSION = 1.4.5b4;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = menu;
+			};
+			name = kprintf;
+		};
+		A9E17C331A90FEE300676EE6 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1.4.5b4;
+				DYLIB_COMPATIBILITY_VERSION = 1.0.0b1;
+				DYLIB_CURRENT_VERSION = 1.4.5b4;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = AppleUSBIrDA/AppleUSBIrDA.plist;
+				MODULE_NAME = com.apple.driver.AppleUSBIrDA;
+				MODULE_VERSION = 1.4.5b4;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Deployment;
+		};
+		A9E17C341A90FEE300676EE6 /* Logging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1.4.5b4;
+				DYLIB_COMPATIBILITY_VERSION = 1.0.0b1;
+				DYLIB_CURRENT_VERSION = 1.4.5b4;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = AppleUSBIrDA/AppleUSBIrDA.plist;
+				MODULE_NAME = com.apple.driver.AppleUSBIrDA;
+				MODULE_VERSION = 1.4.5b4;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Logging;
+		};
+		A9E17C351A90FEE300676EE6 /* kprintf */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1.4.5b4;
+				DYLIB_COMPATIBILITY_VERSION = 1.0.0b1;
+				DYLIB_CURRENT_VERSION = 1.4.5b4;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = AppleUSBIrDA/AppleUSBIrDA.plist;
+				MODULE_NAME = com.apple.driver.AppleUSBIrDA;
+				MODULE_VERSION = 1.4.5b4;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = kext;
+			};
+			name = kprintf;
+		};
+		A9E17C4D1A91008800676EE6 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 1.4.0b1;
+				DYLIB_COMPATIBILITY_VERSION = 1.0.0b1;
+				DYLIB_CURRENT_VERSION = 1.4.0b1;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = AppleSCCIrDA/AppleSCCIrDA.plist;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULE_NAME = com.apple.driver.AppleSCCIrDA;
+				MODULE_VERSION = 1.4.0b1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Deployment;
+		};
+		A9E17C4E1A91008800676EE6 /* Logging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 1.4.0b1;
+				DYLIB_COMPATIBILITY_VERSION = 1.0.0b1;
+				DYLIB_CURRENT_VERSION = 1.4.0b1;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = AppleSCCIrDA/AppleSCCIrDA.plist;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULE_NAME = com.apple.driver.AppleSCCIrDA;
+				MODULE_VERSION = 1.4.0b1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = kext;
+			};
+			name = Logging;
+		};
+		A9E17C4F1A91008800676EE6 /* kprintf */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 1.4.0b1;
+				DYLIB_COMPATIBILITY_VERSION = 1.0.0b1;
+				DYLIB_CURRENT_VERSION = 1.4.0b1;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = AppleSCCIrDA/AppleSCCIrDA.plist;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULE_NAME = com.apple.driver.AppleSCCIrDA;
+				MODULE_VERSION = 1.4.0b1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = kext;
+			};
+			name = kprintf;
+		};
+		A9E17D3C1A9101EF00676EE6 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADERSINCLUDE = "$(SDK_DIR)/usr/include";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Deployment;
+		};
+		A9E17D3D1A9101EF00676EE6 /* Logging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADERSINCLUDE = "$(SDK_DIR)/usr/include";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Logging;
+		};
+		A9E17D3E1A9101EF00676EE6 /* kprintf */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADERSINCLUDE = "$(SDK_DIR)/usr/include";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = kprintf;
+		};
+		A9E17D4D1A9102C000676EE6 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADERSINCLUDE = "$(SDK_DIR)/usr/include";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Deployment;
+		};
+		A9E17D4E1A9102C000676EE6 /* Logging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADERSINCLUDE = "$(SDK_DIR)/usr/include";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Logging;
+		};
+		A9E17D4F1A9102C000676EE6 /* kprintf */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADERSINCLUDE = "$(SDK_DIR)/usr/include";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = kprintf;
+		};
+		A9E17D761A91036400676EE6 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1.4.5b2;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1.0.0b1;
+				DYLIB_CURRENT_VERSION = 1.4.5b2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADERSINCLUDE = "$(SDK_DIR)/usr/include";
+				INFOPLIST_FILE = IrDADebugLog/IrDADebugLog.plist;
+				MODULE_VERSION = 1.4.5b2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Deployment;
+		};
+		A9E17D771A91036400676EE6 /* Logging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1.4.5b2;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1.0.0b1;
+				DYLIB_CURRENT_VERSION = 1.4.5b2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADERSINCLUDE = "$(SDK_DIR)/usr/include";
+				INFOPLIST_FILE = IrDADebugLog/IrDADebugLog.plist;
+				MODULE_VERSION = 1.4.5b2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Logging;
+		};
+		A9E17D781A91036400676EE6 /* kprintf */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1.4.5b2;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1.0.0b1;
+				DYLIB_CURRENT_VERSION = 1.4.5b2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADERSINCLUDE = "$(SDK_DIR)/usr/include";
+				INFOPLIST_FILE = IrDADebugLog/IrDADebugLog.plist;
+				MODULE_VERSION = 1.4.5b2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = kprintf;
+		};
+		A9E17DC21A9104E600676EE6 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 1.4.5b2;
+				DYLIB_COMPATIBILITY_VERSION = 1.0.0b1;
+				DYLIB_CURRENT_VERSION = 1.4.5b2;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADERSINCLUDE = "$(SDK_DIR)/usr/include";
+				INFOPLIST_FILE = IrDAStatus/IrDAStatus.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULE_VERSION = 1.4.5b2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Deployment;
+		};
+		A9E17DC31A9104E600676EE6 /* Logging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 1.4.5b2;
+				DYLIB_COMPATIBILITY_VERSION = 1.0.0b1;
+				DYLIB_CURRENT_VERSION = 1.4.5b2;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADERSINCLUDE = "$(SDK_DIR)/usr/include";
+				INFOPLIST_FILE = IrDAStatus/IrDAStatus.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULE_VERSION = 1.4.5b2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Logging;
+		};
+		A9E17DC41A9104E600676EE6 /* kprintf */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 1.4.5b2;
+				DYLIB_COMPATIBILITY_VERSION = 1.0.0b1;
+				DYLIB_CURRENT_VERSION = 1.4.5b2;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_KERNEL_DEVELOPMENT = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADERSINCLUDE = "$(SDK_DIR)/usr/include";
+				INFOPLIST_FILE = IrDAStatus/IrDAStatus.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULE_VERSION = 1.4.5b2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = kprintf;
+		};
 		DDDEF9CC08886330003A7655 /* Logging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -5339,6 +7328,7 @@
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_X86_VECTOR_INSTRUCTIONS = sse2;
 				CODE_SIGN_IDENTITY = "Developer ID Application: Andy Vandijck (GSF3NR4NQ5)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -5370,6 +7360,10 @@
 				INSTALL_OWNER = root;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MODULE_VERSION = 710.4.14;
+				OTHER_CFLAGS = (
+					"-march=k8",
+					"-mtune=k8",
+				);
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -5386,6 +7380,7 @@
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_X86_VECTOR_INSTRUCTIONS = sse2;
 				CODE_SIGN_IDENTITY = "Developer ID Application: Andy Vandijck (GSF3NR4NQ5)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -5422,6 +7417,10 @@
 				LLVM_LTO = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MODULE_VERSION = 710.4.14;
+				OTHER_CFLAGS = (
+					"-march=k8",
+					"-mtune=k8",
+				);
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -5699,6 +7698,76 @@
 				A9C14F1B1A87EB8700A642EB /* Deployment */,
 				A9C14F1C1A87EB8700A642EB /* Logging */,
 				A9C14F1D1A87EB8700A642EB /* kprintf */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Deployment;
+		};
+		A9C5F5391A9106D7004851CC /* Build configuration list for PBXNativeTarget "IrDAMenu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9C5F53A1A9106D7004851CC /* Deployment */,
+				A9C5F53B1A9106D7004851CC /* Logging */,
+				A9C5F53C1A9106D7004851CC /* kprintf */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Deployment;
+		};
+		A9E17C361A90FEE300676EE6 /* Build configuration list for PBXNativeTarget "AppleUSBIrDA" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9E17C331A90FEE300676EE6 /* Deployment */,
+				A9E17C341A90FEE300676EE6 /* Logging */,
+				A9E17C351A90FEE300676EE6 /* kprintf */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Deployment;
+		};
+		A9E17C4C1A91008800676EE6 /* Build configuration list for PBXNativeTarget "AppleSCCIrDA" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9E17C4D1A91008800676EE6 /* Deployment */,
+				A9E17C4E1A91008800676EE6 /* Logging */,
+				A9E17C4F1A91008800676EE6 /* kprintf */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Deployment;
+		};
+		A9E17D3B1A9101EF00676EE6 /* Build configuration list for PBXNativeTarget "IrDADumpLog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9E17D3C1A9101EF00676EE6 /* Deployment */,
+				A9E17D3D1A9101EF00676EE6 /* Logging */,
+				A9E17D3E1A9101EF00676EE6 /* kprintf */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Deployment;
+		};
+		A9E17D4C1A9102C000676EE6 /* Build configuration list for PBXNativeTarget "deltatime" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9E17D4D1A9102C000676EE6 /* Deployment */,
+				A9E17D4E1A9102C000676EE6 /* Logging */,
+				A9E17D4F1A9102C000676EE6 /* kprintf */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Deployment;
+		};
+		A9E17D751A91036400676EE6 /* Build configuration list for PBXNativeTarget "IrDADebugLog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9E17D761A91036400676EE6 /* Deployment */,
+				A9E17D771A91036400676EE6 /* Logging */,
+				A9E17D781A91036400676EE6 /* kprintf */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Deployment;
+		};
+		A9E17DC11A9104E600676EE6 /* Build configuration list for PBXNativeTarget "IrDAStatus" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9E17DC21A9104E600676EE6 /* Deployment */,
+				A9E17DC31A9104E600676EE6 /* Logging */,
+				A9E17DC41A9104E600676EE6 /* kprintf */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;

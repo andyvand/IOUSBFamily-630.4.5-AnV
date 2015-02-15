@@ -51,6 +51,8 @@ enum {
 	kMaxExtendedDataEntriesSupported = 20
 };
 
+typedef void (*IOServiceInterestCallback)(void *refcon, io_service_t service, uint32_t messageType, void *messageArgument);
+
 //================================================================================================
 //
 //   Class Declaration for IOUSBDeviceUserClientV2
@@ -146,7 +148,7 @@ public:
     virtual IOReturn                    DeviceRequestOut(UInt8 bmRequestType,  UInt8 bRequest, UInt16 wValue, UInt16 wIndex, mach_vm_size_t size, mach_vm_address_t buffer, UInt32 noDataTimeout, UInt32 completionTimeout, IOUSBCompletion * completion);
     virtual IOReturn                    DeviceRequestOut(UInt8 bmRequestType,  UInt8 bRequest, UInt16 wValue, UInt16 wIndex, UInt32 noDataTimeout, UInt32 completionTimeout, const void *requestBuffer, uint32_t size);
 	virtual	IOReturn					DeviceRequestOut(UInt8 bmRequestType,  UInt8 bRequest, UInt16 wValue, UInt16 wIndex, UInt32 noDataTimeout, UInt32 completionTimeout, IOMemoryDescriptor *mem);
-		
+
   	static	IOReturn					_SetAsyncPort(IOUSBDeviceUserClientV2 * target, void * reference, IOExternalMethodArguments * arguments);  
     virtual IOReturn                    SetAsyncPort(mach_port_t port);
 	
@@ -180,8 +182,25 @@ public:
 	static	IOReturn					_GetExtraPowerAllocated(IOUSBDeviceUserClientV2 * target, void * reference, IOExternalMethodArguments * arguments);
     virtual IOReturn					GetExtraPowerAllocated(UInt32 type, uint64_t *powerAllocated);
 	
-	static	IOReturn					_GetBandwidthAvailableForDevice(IOUSBDeviceUserClientV2 * target, void * reference, IOExternalMethodArguments * arguments);
-	
+	static	IOReturn					_SetConfigurationV2(IOUSBDeviceUserClientV2 * target, void * reference, IOExternalMethodArguments * arguments);
+
+    static	IOReturn					_GetBandwidthAvailableForDevice(IOUSBDeviceUserClientV2 * target, void * reference, IOExternalMethodArguments * arguments);
+
+    virtual IOReturn                    SetConfigurationV2(UInt8 configIndex, bool startInterfaceMatching, bool issueRemoteWakeup);
+  
+    static IOReturn                     _deviceUnregisterForNotification(IOUSBDeviceUserClientV2 * target,
+                                                                         void *reference,
+                                                                         IOExternalMethodArguments *arguments);
+
+    static	IOReturn					_RegisterForNotification(IOUSBDeviceUserClientV2 *target,
+                                                                 void *reference,
+                                                                 IOExternalMethodArguments *arguments);
+
+    virtual IOReturn                    RegisterForNotification(const io_string_t path,
+                                                                const io_name_t interestType,
+                                                                IOServiceInterestCallback callback,
+                                                                void *refCon);
+
     // bookkeeping methods
     virtual void                        DecrementOutstandingIO(void);
     virtual void                        IncrementOutstandingIO(void);
@@ -206,6 +225,10 @@ public:
     static IOReturn						GetGatedOutstandingIO(OSObject *target, void *arg0, void *arg1, void *arg2, void *arg3);
     static IOReturn						ClientCloseEntry(OSObject *target, void *arg0 = 0, void *arg1 = 0, void *arg2 = 0, void *arg3 = 0);
 	static IOReturn						closeGated(OSObject *target, void *param1, void *param2, void *param3, void *param4);
+
+    virtual IOReturn deviceUnregisterNotification(IOService *target, IOOptionBits options);
+    virtual IOReturn RegisterForNotification(const io_string_t path, const io_name_t interestType,
+                                             IOServiceMatchingNotificationHandler callback, void *refCon);
 
     // padding methods
     //

@@ -165,7 +165,7 @@ typedef struct ErrataList64EntryStruct  ErrataList64Entry, *ErrataList64EntryPtr
 
 struct SleepCurrentPerModelStruct
 {
-    char				model[14];
+    char				model[15];
 	UInt32				totalExtraWakeCurrent;			// Above the 500mA available to each port
     UInt32				maxWakeCurrentPerPort;			// Any one port can not exceed this
     UInt32 				totalExtraSleepCurrent;			// Above the 500mA available to each port

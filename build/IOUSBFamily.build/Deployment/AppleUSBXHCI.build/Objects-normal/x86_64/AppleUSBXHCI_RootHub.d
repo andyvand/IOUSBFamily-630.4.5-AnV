@@ -292,9 +292,9 @@ dependencies: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/sys/buf.h \
   /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBXHCI/Classes/../../IOUSBFamily/Headers/IOUSBHubPolicyMaker.h \
   /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBXHCI/Classes/../../IOUSBFamily/Headers/../../IOUSBUserClient/Headers/IOUSBUserClient.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBXHCI/Classes/../../IOUSBFamily/Headers/../../IOUSBUserClient/Headers/../../IOUSBFamily/Headers/IOUSBInterface.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOUserClient.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/OSMessageNotification.h \
+  /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBXHCI/Classes/../../IOUSBFamily/Headers/../../IOUSBUserClient/Headers/../../IOUSBFamily/Headers/IOUSBInterface.h \
   /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBXHCI/Headers/AppleUSBXHCIUIM.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOFilterInterruptEventSource.h \
   /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBXHCI/Headers/../../IOUSBFamily/Headers/USBTracepoints.h \

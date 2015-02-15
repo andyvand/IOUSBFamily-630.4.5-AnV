@@ -38,7 +38,7 @@
 #include "../../IOUSBFamily/Headers/IOUSBLib.h"
 #include "../../IOUSBFamily/Headers/IOUSBControllerV2.h"
 #include "../../IOUSBFamily/Headers/IOUSBDevice.h"
-#include "../../IOUSBFamily/Headers/IOUSBUserClient.h"
+#include "../../IOUSBUserClient/Headers/IOUSBUserClient.h"
 
 #if !TARGET_OS_EMBEDDED
 #endif

@@ -1,0 +1,21 @@
+/* These are the strings used to build the menu */
+
+/* First Menu Item */
+"IrDA: Idle"		= "IrDA: Idle";
+"IrDA: Discovering"	= "IrDA: Discovering";
+"IrDA: Connected ("	= "IrDA: Connected (";
+")"					= ")";
+"IrDA: Broken Beam"	= "IrDA: Broken Beam";
+"IrDA: Invalid"		= "IrDA: Invalid";
+"IrDA: Off"			= "IrDA: Off";
+
+/* Second Menu Item */
+"Turn IrDA On" = "Turn IrDA On";
+"Turn IrDA Off" = "Turn IrDA Off";
+
+/* Fourth Menu Item */
+"Use Sound Effects" = "Use Sound Effects";
+
+/* Sixth Menu Item */
+"Open Network Preferences..." = "Open Network Preferences...";
+

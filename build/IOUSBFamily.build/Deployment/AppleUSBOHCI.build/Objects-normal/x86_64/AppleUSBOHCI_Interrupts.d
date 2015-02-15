@@ -238,6 +238,8 @@ dependencies: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOInterruptController.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/Headers/IOKit/acpi/IOACPITypes.h \
   /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Classes/../../IOUSBFamily/Headers/../../IOUSBUserClient/Headers/IOUSBUserClient.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOUserClient.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/OSMessageNotification.h \
   /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Classes/../../IOUSBFamily/Headers/../../IOUSBUserClient/Headers/../../IOUSBFamily/Headers/IOUSBDevice.h \
   /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Classes/../../IOUSBFamily/Headers/IOUSBPipe.h \
   /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Classes/../../IOUSBFamily/Headers/IOUSBControllerV2.h \
@@ -247,8 +249,6 @@ dependencies: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOInterruptEventSource.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOTimerEventSource.h \
   /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Classes/../../IOUSBFamily/Headers/../../IOUSBUserClient/Headers/../../IOUSBFamily/Headers/IOUSBInterface.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/IOUserClient.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Kernel.framework/PrivateHeaders/IOKit/OSMessageNotification.h \
   /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Classes/../../IOUSBFamily/Headers/IOUSBRootHubDevice.h \
   /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Classes/../../IOUSBFamily/Headers/IOUSBHubDevice.h \
   /Users/joris/IOUSBFamily-630.4.5-AnV/AppleUSBOHCI/Classes/../../IOUSBFamily/Headers/IOUSBControllerV3.h \

@@ -16,4 +16,4 @@ dependencies: \
   /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBLib/Classes/../../IOUSBFamily/Headers/IOUSBDevice.h \
   /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBLib/Headers/../../IOUSBFamily/Headers/IOUSBPipe.h \
   /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBLib/Headers/../../IOUSBFamily/Headers/IOUSBPipeV2.h \
-  /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBLib/Classes/../../IOUSBFamily/Headers/IOUSBUserClient.h
+  /Users/joris/IOUSBFamily-630.4.5-AnV/IOUSBLib/Classes/../../IOUSBUserClient/Headers/IOUSBUserClient.h

@@ -1,0 +1,1 @@
+ const unsigned char AppleSCCIrDAVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:AppleSCCIrDA  PROJECT:IOUSBFamily-1.4.0b1" "\n"; const double AppleSCCIrDAVersionNumber __attribute__ ((used)) = (double)1.4;

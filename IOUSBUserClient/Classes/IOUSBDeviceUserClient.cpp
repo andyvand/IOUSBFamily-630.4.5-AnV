@@ -28,8 +28,11 @@
 //================================================================================================
 //
 #include <IOKit/IOKitKeys.h>
+#include <IOKit/IOLib.h>
+#include <IOKit/IOService.h>
 
 #include "../../IOUSBFamily/Headers/USB.h"
+
 #include "IOUSBDeviceUserClient.h"
 #include "USBTracepoints.h"
 
@@ -227,8 +230,72 @@ IOUSBDeviceUserClientV2::sMethods[kIOUSBLibDeviceUserClientNumCommands] = {
 		0, 0,
 		1, 0
     },
+    {    //    kUSBDeviceUserClientSetConfigurationV2
+        (IOExternalMethodAction) &IOUSBDeviceUserClientV2::_SetConfigurationV2,
+        1, 0,
+        0, 0
+    },
+    {    //    kUSBDeviceUserClientRegisterForNotification
+        (IOExternalMethodAction) &IOUSBDeviceUserClientV2::_RegisterForNotification,
+        1, 0,
+        0, 0
+    },
+    // kUSBDeviceUserClientUnregisterNotification
+    // kUSBDeviceUserClientAcknowledgeNotification
 };
 
+typedef struct notifyRegInfo {
+    mach_port_t port;
+    io_object_t handle;
+} notifyRegInfo_st;
+
+IOReturn IOUSBDeviceUserClientV2::_deviceUnregisterForNotification(IOUSBDeviceUserClientV2 * target, void * reference, IOExternalMethodArguments * arguments)
+{
+#pragma unused (reference)
+    
+    target->retain();
+    IOReturn kr = target->RegisterForNotification((const char *)arguments->scalarInput[0], (const char *)arguments->scalarInput[1], (IOServiceInterestCallback)arguments->scalarInput[2], (void *)arguments->scalarInput[3]);
+    target->release();
+    
+    return kr;
+}
+
+IOReturn IOUSBDeviceUserClientV2::deviceUnregisterNotification(IOService *target, IOOptionBits options)
+{
+    if (fOwner == NULL)
+    {
+        return kIOReturnNoDevice;
+    }
+
+    fOwner->deRegisterInterestedDriver(target);
+
+    return kIOReturnSuccess;
+}
+
+IOReturn IOUSBDeviceUserClientV2::_RegisterForNotification(IOUSBDeviceUserClientV2 * target, void * reference, IOExternalMethodArguments * arguments)
+{
+#pragma unused (reference)
+
+    target->retain();
+    IOReturn kr = target->RegisterForNotification((const char *)arguments->scalarInput[0], (const char *)arguments->scalarInput[1], (IOServiceInterestCallback)arguments->scalarInput[2], (void *)arguments->scalarInput[3]);
+    target->release();
+    
+    return kr;
+}
+
+IOReturn IOUSBDeviceUserClientV2::RegisterForNotification(const io_string_t path, const io_name_t interestType,
+                                                          IOServiceMatchingNotificationHandler callback, void *refCon)
+{
+    if (fOwner == NULL)
+    {
+        return kIOReturnNoDevice;
+    }
+
+    fOwner->registerInterest((const OSSymbol *)interestType, (IOServiceInterestHandler)callback, refCon);
+    fOwner->addMatchingNotification((const OSSymbol *)interestType, fOwner->serviceMatching(path), callback, refCon);
+    
+    return kIOReturnSuccess;
+}
 
 #pragma mark -
  
@@ -265,7 +332,7 @@ IOUSBDeviceUserClientV2::_SetAsyncPort(IOUSBDeviceUserClientV2 * target, void * 
 IOReturn IOUSBDeviceUserClientV2::SetAsyncPort(mach_port_t port)
 {
 	USBLog(7,"+IOUSBDeviceUserClientV2::SetAsyncPort");
-	
+
 	if (fWakePort != MACH_PORT_NULL)
 	{
 		super::releaseNotificationPort(fWakePort);
@@ -1211,6 +1278,41 @@ IOUSBDeviceUserClientV2::DeviceRequestOut(UInt8 bmRequestType,  UInt8 bRequest, 
 
 
 #pragma mark Configuration
+
+IOReturn IOUSBDeviceUserClientV2::_SetConfigurationV2(IOUSBDeviceUserClientV2 * target, void * reference, IOExternalMethodArguments * arguments)
+{
+#pragma unused (reference)
+    USBLog(7, "+%s[%p]::_SetConfiguration", target->getName(), target);
+    
+    target->retain();
+    IOReturn kr = target->SetConfigurationV2((UInt8)arguments->scalarInput[0], (bool)arguments->scalarInput[1], (bool)arguments->scalarInput[2]);
+    target->release();
+    
+    return kr;
+}
+
+IOReturn IOUSBDeviceUserClientV2::SetConfigurationV2(UInt8 configIndex, bool startInterfaceMatching, bool issueRemoteWakeup)
+{
+    IOReturn	ret;
+    
+    USBLog(7, "+IOUSBDeviceUserClientV2[%p]::SetConfigurationV2 to %d",  this, configIndex);
+    IncrementOutstandingIO();
+    
+    if (fOwner && !isInactive())
+        ret = fOwner->SetConfiguration(this, configIndex, startInterfaceMatching, issueRemoteWakeup);
+    else
+        ret = kIOReturnNotAttached;
+    
+    if (ret)
+    {
+        USBLog(3, "IOUSBDeviceUserClientV2[%p]::SetConfigurationV2 - returning 0x%x (%s)", this, ret, USBStringFromReturn(ret));
+    }
+    
+    DecrementOutstandingIO();
+    return ret;
+
+    return SetConfiguration(configIndex);
+}
 
 IOReturn IOUSBDeviceUserClientV2::_SetConfiguration(IOUSBDeviceUserClientV2 * target, void * reference, IOExternalMethodArguments * arguments)
 {
